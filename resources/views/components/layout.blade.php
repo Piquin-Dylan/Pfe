@@ -1466,7 +1466,7 @@
         </style>
     @endif
 </head>
-<body>
+<body class="bg-[var(--color-mint-500)]">
 <h1 class="hidden">Pfe - SportTeams</h1>
 <header>
     <div>
