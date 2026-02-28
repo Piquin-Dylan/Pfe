@@ -7,5 +7,20 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+}
+
+body {
+    background: linear-gradient(
+        233deg,
+        rgba(255, 255, 255, 0) 4.47%,
+        rgba(30, 28, 28, 0.4) 96.18%
+    ),
+    linear-gradient(
+        127deg,
+        rgba(0, 0, 0, 0) 10.05%,
+        rgba(0, 0, 0, 0.2) 90.34%
+    ),
+    #0D1220;
 }
