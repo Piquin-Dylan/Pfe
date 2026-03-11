@@ -24,9 +24,16 @@
         px-4 py-4 text-center max-w-[250px] w-2xs;
     }
 
+    .btn-form {
+        @apply text-[16px] bg-[#B2AFDF] text-[#ffffff]
+        border rounded-lg
+        px-20 py-4 text-center max-w-[250px] w-2xs;
+    }
+
     .title_section {
         @apply text-[20px] font-black text-white max-w-[500px] lg:text-[24px]
     }
+
     .subtitle_section {
         @apply text-[16px] text-white pt-4 font-light max-w-[500px] lg:text-[18px]
     }
