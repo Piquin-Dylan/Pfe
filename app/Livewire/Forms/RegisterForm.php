@@ -3,6 +3,8 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Users;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -21,6 +23,7 @@ class RegisterForm extends Form
 
     #[Validate('required', message: 'Le champs email est requis')]
     #[Validate('email', message: 'Veuillez entrer une adresse mail correcte')]
+    #[Validate('unique:users', message: 'Cette adresse mail existe déjà.')]
     public string $email = "";
 
     #[Validate('required', message: 'Le champs mot de passe est requis')]
@@ -30,6 +33,7 @@ class RegisterForm extends Form
     public function submit(): void
     {
         $this->validate();
+
 
         Users::create([
             'firstName' => $this->firstName,
