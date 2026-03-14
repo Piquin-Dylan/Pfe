@@ -10,7 +10,7 @@ new class extends Component {
 
     public function save(): void
     {
-        $this->form->save();
+        $this->form->submit();
     }
 
 

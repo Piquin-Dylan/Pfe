@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Users;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -26,8 +27,17 @@ class RegisterForm extends Form
     public string $password = "";
 
 
-    public function save(): void
+    public function submit(): void
     {
         $this->validate();
+
+        Users::create([
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
+
+        $this->reset(['firstName', 'lastName', 'email', 'password']);
     }
 }
