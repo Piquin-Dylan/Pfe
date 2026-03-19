@@ -1,9 +1,15 @@
 <?php
 
+use App\Livewire\Forms\CreateTeamForm;
 use Livewire\Component;
 
 new class extends Component {
-    //
+    public CreateTeamForm $form;
+
+    public function save(): void
+    {
+        $this->form->submit();
+    }
 };
 
 
@@ -15,14 +21,14 @@ new class extends Component {
                 <div class="sm:flex sm:flex-row sm:flex-wrap ">
                     <x-form.input
                         label_name="Nom de l'équipe"
-                        for_label="name_team"
+                        for_label="name"
                         placeholder="Ex : Standard"
                         type="text"
-                        id="name_team"
-                        name="name_team"
-                        wire:model.live="form.firstName">
+                        id="name"
+                        name="name"
+                        wire:model.live="form.name" required>
                         <div>
-                            @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
+                            @error('form.name') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                     <x-form.input
@@ -32,21 +38,21 @@ new class extends Component {
                         type="text"
                         id="ville"
                         name="ville"
-                        wire:model.live="form.lastName">
+                        wire:model.live="form.ville" required>
                         <div>
-                            @error('form.lastName') <span class="error">{{ $message }}</span> @enderror
+                            @error('form.ville') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                     <x-form.input
                         label_name="Division de l'équipe"
                         for_label="division"
-                        placeholder="Ex : jean.dupont@gmail.com"
+                        placeholder=""
                         type="text"
                         id="division"
                         name="division"
-                        wire:model.live="form.email">
+                        wire:model.live="form.division" required>
                         <div>
-                            @error('form.email') <span class="error">{{ $message }}</span> @enderror
+                            @error('form.division') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                     <x-form.input
@@ -56,9 +62,9 @@ new class extends Component {
                         type="file"
                         id="logo"
                         name="logo"
-                        wire:model.live="form.password">
+                        wire:model.live="form.logo" required>
                         <div>
-                            @error('form.password') <span class="error">{{ $message }}</span> @enderror
+                            @error('form.logo') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                 </div>

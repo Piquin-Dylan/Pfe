@@ -12,5 +12,5 @@ Route::get('/connexion', function () {
     return view('client.connexion');
 });
 Route::get('/create', function () {
-    return view('client.creation_equipe');
+    return view('client.create_team');
 });
