@@ -15,7 +15,6 @@ new class extends Component {
 
 };
 ?>
-
 <section>
     <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
         <form wire:submit.prevent="save">
@@ -27,7 +26,7 @@ new class extends Component {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    wire:model.live="form.firstName">
+                    wire:model.live="form.name">
                     <div>
                         @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
                     </div>
