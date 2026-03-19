@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Team;
+use http\Client\Curl\User;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -19,14 +21,32 @@ class CreateTeamForm extends Form
     #[Validate('max:30', message: 'La vivision doit comporter maximum 30 caractères')]
     public string $division = "";
 
-    #[Validate('required', message: 'Le champs logo  est requis')]
-    public $logo;
+    /*    #[Validate('required', message: 'Le champs logo  est requis')]
+        public $logo;*/
 
     public string $message = "";
 
 
+    public function update()
+    {
+
+        $user = User::find($this->user);
+    }
+
+
     public function submit(): void
     {
+        $user = auth()->user()->getAuthIdentifier();
         $this->validate();
+
+
+        Team::create([
+            'user_id' => $user,
+            'name' => $this->name,
+            'ville' => $this->ville,
+            'division' => $this->division,
+        ]);
+
+
     }
 }

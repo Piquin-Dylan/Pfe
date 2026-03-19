@@ -20,53 +20,53 @@ new class extends Component {
             <form wire:submit.prevent="save">
                 <div class="sm:flex sm:flex-row sm:flex-wrap ">
                     <x-form.input
-                        label_name="Nom de l'équipe"
-                        for_label="name"
-                        placeholder="Ex : Standard"
-                        type="text"
-                        id="name"
-                        name="name"
-                        wire:model.live="form.name" required>
+                            label_name="Nom de l'équipe"
+                            for_label="name"
+                            placeholder="Ex : Standard"
+                            type="text"
+                            id="name"
+                            name="name"
+                            wire:model.live="form.name" required>
                         <div>
                             @error('form.name') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                     <x-form.input
-                        label_name="Ville de l'équipe"
-                        for_label="ville"
-                        placeholder="Dupont"
-                        type="text"
-                        id="ville"
-                        name="ville"
-                        wire:model.live="form.ville" required>
+                            label_name="Ville de l'équipe"
+                            for_label="ville"
+                            placeholder="Dupont"
+                            type="text"
+                            id="ville"
+                            name="ville"
+                            wire:model.live="form.ville" required>
                         <div>
                             @error('form.ville') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
                     <x-form.input
-                        label_name="Division de l'équipe"
-                        for_label="division"
-                        placeholder=""
-                        type="text"
-                        id="division"
-                        name="division"
-                        wire:model.live="form.division" required>
+                            label_name="Division de l'équipe"
+                            for_label="division"
+                            placeholder=""
+                            type="text"
+                            id="division"
+                            name="division"
+                            wire:model.live="form.division" required>
                         <div>
                             @error('form.division') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </x-form.input>
-                    <x-form.input
-                        label_name="Logo du club"
-                        for_label="logo"
-                        placeholder=""
-                        type="file"
-                        id="logo"
-                        name="logo"
-                        wire:model.live="form.logo" required>
-                        <div>
-                            @error('form.logo') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
+                    {{--     <x-form.input
+                                 label_name="Logo du club"
+                                 for_label="logo"
+                                 placeholder=""
+                                 type="file"
+                                 id="logo"
+                                 name="logo"
+                                 wire:model.live="form.logo" required>
+                             <div>
+                                 @error('form.logo') <span class="error">{{ $message }}</span> @enderror
+                             </div>
+                         </x-form.input>--}}
                 </div>
                 <x-form.textarea label_name="Description" label_for="description" name="description"
                                  id="description" rows="10" col="10" placeholder=""></x-form.textarea>
