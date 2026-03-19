@@ -13,9 +13,10 @@ new class extends Component {
         $this->form->submit();
     }
 
-
 };
 ?>
+<?php dd(auth()->user()->getAuthIdentifier()); ?>
+
 <section>
     <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
         <form wire:submit.prevent="save">

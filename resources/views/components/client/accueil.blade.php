@@ -1,5 +1,5 @@
 <x-layout>
-<x-client.section_heros></x-client.section_heros>
-<x-client.section_details></x-client.section_details>
+<x-client.components.section_heros></x-client.components.section_heros>
+<x-client.components.section_details></x-client.components.section_details>
     <livewire-form></livewire-form>
 </x-layout>

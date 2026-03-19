@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Users;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -35,13 +37,17 @@ class RegisterForm extends Form
         $this->validate();
 
 
-        Users::create([
+        User::create([
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'email' => $this->email,
-            'password' => $this->password,
-        ]);
+            'password' => Hash::make($this->password, [
+                'rounds' => "12"
+            ])]);
+
 
         $this->reset(['firstName', 'lastName', 'email', 'password']);
     }
+
+
 }

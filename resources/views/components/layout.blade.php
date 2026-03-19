@@ -1494,8 +1494,8 @@
                 class=" flex  sm:flex flex-col sm:flex-row sm:justify-end sm:p-5 justify-center items-center gap-5">
                 <li><a title="vers la page d'accueil" href="">Accueil</a></li>
                 <li><a title="vers la page de contact" href="">Contact</a></li>
-                <li><a title="vers la page d'inscription" href="">Inscription</a></li>
-                <li><a title="vers la page de connexion" href="">Connexion</a></li>
+                <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>
+                <li><a title="vers la page de connexion" href="/connexion">Connexion</a></li>
                 <li><a title="vers la page de création d'équipe" href="">Créer une équipe</a></li>
                 <li><a title="vers la page rejoindre une équipe" href="">Rejoindre une équipe</a></li>
 
