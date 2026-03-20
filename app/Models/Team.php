@@ -17,6 +17,7 @@ class Team extends Model
         'name',
         'ville',
         'division',
+        'code',
 
     ];
 
