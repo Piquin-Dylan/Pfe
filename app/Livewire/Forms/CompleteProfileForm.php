@@ -20,6 +20,9 @@ class CompleteProfileForm extends Form
     #[Validate('int', message: 'Veuillez mettre un numéros de maillot correct')]
     public string $maillot = "";
 
+    #[Validate('required', message: 'Le champs code est requis')]
+    public string $code = "";
+
 
     public function submit(): void
     {

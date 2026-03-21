@@ -26,7 +26,7 @@ new class extends Component {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    wire:model.live="form.name">
+                    wire:model.live="form.firstName">
                     <div>
                         @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
                     </div>
