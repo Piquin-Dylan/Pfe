@@ -9,21 +9,7 @@ new class extends Component {
     public string $code = "";
 
 
-    public function submit(): void
-    {
 
-        $this->validate();
-
-        //On fait une requête pour verifier si le code qu'on écrit dans le champs input code correspond avec la column code de la table team
-        if (DB::table('team')->where('code', $this->code)->exists()) {
-            $this->redirect('/');
-        } else {
-            $this->redirect('/inscription');
-
-        }
-
-
-    }
 };
 ?>
 
