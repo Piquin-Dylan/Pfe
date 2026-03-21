@@ -29,11 +29,11 @@ class CreateTeamForm extends Form
     public string $message = "";
 
 
-    public function update()
-    {
+    /*    public function update()
+        {
 
-        $user = User::find($this->user);
-    }
+            $user = User::find($this->user);
+        }*/
 
 
     public function submit(): void
@@ -42,7 +42,7 @@ class CreateTeamForm extends Form
         $code = Str::password(16, true, true, false);
         $this->validate();
 
-        
+
         Team::create([
             'user_id' => $user,
             'name' => $this->name,
