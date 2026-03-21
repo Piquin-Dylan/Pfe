@@ -14,3 +14,6 @@ Route::get('/connexion', function () {
 Route::get('/create', function () {
     return view('client.create_team');
 });
+Route::get('/join', function () {
+    return view('client.join_team');
+});
