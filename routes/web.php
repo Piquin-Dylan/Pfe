@@ -23,3 +23,6 @@ Route::get('/profile', function () {
 Route::get('/hub', function () {
     return view('client.hub');
 });
+Route::get('/logout', function () {
+    return view('client.hub');
+});
