@@ -20,3 +20,6 @@ Route::get('/join', function () {
 Route::get('/profile', function () {
     return view('client.form_profile');
 });
+Route::get('/hub', function () {
+    return view('client.hub');
+});
