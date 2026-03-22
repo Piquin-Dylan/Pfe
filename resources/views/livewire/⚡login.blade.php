@@ -16,7 +16,7 @@ new class extends Component {
 
         if (Auth::attempt(["email" => $this->form->email, "password" => $this->form->password
         ])) {
-            return $this->redirect('/inscription');
+            return $this->redirect('/hub');
         }
         return $this->redirect('/');
     }

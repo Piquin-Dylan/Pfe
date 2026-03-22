@@ -11,6 +11,8 @@ new class extends Component {
     public function save(): void
     {
         $this->form->submit();
+
+        $this->redirect('/hub');
     }
 
 };
