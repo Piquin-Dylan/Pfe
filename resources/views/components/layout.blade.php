@@ -1491,7 +1491,7 @@
             <h2 class="hidden">Navigation principale</h2>
             <ul
                 :class="{ 'hidden': !open }"
-                class=" flex  sm:flex flex-col sm:flex-row sm:justify-end sm:p-5 justify-center items-center gap-5">
+                class=" text-white flex  sm:flex flex-col sm:flex-row sm:justify-end sm:p-5 justify-center items-center gap-5">
                 <li><a title="vers la page d'accueil" href="">Accueil</a></li>
                 <li><a title="vers la page de contact" href="">Contact</a></li>
                 <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>

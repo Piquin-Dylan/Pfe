@@ -18,7 +18,10 @@ new class extends Component {
 };
 ?>
 <section>
-    <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
+
+    <div class=" pt-12 lg:pr-[150px]  lg:pl-[150px]">
+        <x-title_subtitle_form title="Inscription"
+                               subtitle="Inscrivez vous pour créer votre première  équipe de football"></x-title_subtitle_form>
         <form wire:submit.prevent="save">
             <div class="sm:flex sm:flex-row sm:flex-wrap ">
                 <x-form.input
@@ -72,8 +75,9 @@ new class extends Component {
 
 
             </div>
-            <div class="flex justify-center">
-                <button class="text-white" type="submit">Inscription</button>
+            <div class="flex justify-center gap-2 items-center flex-col">
+                <x-form.button text="Inscription" type="submit"></x-form.button>
+                <span class="  text-white  flex justify-center">Vous avez déjà un compte ?<a class="font-bold" href="/connexion"> Connectez-vous !</a> </span>
             </div>
         </form>
 
