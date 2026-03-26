@@ -37,6 +37,10 @@
     .subtitle_section {
         @apply text-[16px] text-white pt-4 font-light max-w-[500px] lg:text-[18px]
     }
+
+    .card {
+        @apply bg-[#B2AFDF]
+    }
 }
 
 body {
@@ -53,4 +57,28 @@ body {
     #0D1220;
 }
 
+.card_hub {
+    background-color: #353342;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    max-width: 400px;
+    min-width: 350px;
+}
 
+.btn_deconnexion {
+    font-size: 20px;
+    background-color: #fa0303;
+    color: white;
+    padding: 8px 16px;
+    border: 1px solid white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn_deconnexion:hover{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
