@@ -19,6 +19,7 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
+        'image',
         'rouds',
         'rounds',
     ];
@@ -34,8 +35,6 @@ class User extends Authenticatable
 
         return $this->hasMany(Team::class);
     }
-
-
 
 
 }

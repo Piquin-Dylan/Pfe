@@ -3,8 +3,11 @@
 use App\Livewire\Forms\RegisterForm;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
+
 
     public RegisterForm $form;
 
@@ -72,12 +75,25 @@ new class extends Component {
                         @error('form.password') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </x-form.input>
+                <x-form.input
+                    label_name="Photo de profile"
+                    for_label="image"
+                    placeholder=""
+                    type="file"
+                    id="image"
+                    name="image"
+                    wire:model.live="form.image">
+                    <div>
+                        @error('form.image') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                </x-form.input>
 
 
             </div>
             <div class="flex justify-center gap-2 items-center flex-col">
                 <x-form.button text="Inscription" type="submit"></x-form.button>
-                <span class="  text-white  flex justify-center">Vous avez déjà un compte ?<a class="font-bold" href="/connexion"> Connectez-vous !</a> </span>
+                <span class="  text-white  flex justify-center">Vous avez déjà un compte ?<a class="font-bold"
+                                                                                             href="/connexion"> Connectez-vous !</a> </span>
             </div>
         </form>
 

@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\WithFileUploads;
 
 class RegisterForm extends Form
 {
+
     #[Validate('required', message: 'Le champs prénom est requis')]
     #[Validate('min:3', message: 'Le prénom doit comporter minimum 3 caractères')]
     #[Validate('max:20', message: 'Le prénom doit comporter maximum 20 caractères')]
@@ -32,21 +34,27 @@ class RegisterForm extends Form
     public string $password = "";
 
 
+    public  $image;
+
+
     public function submit(): void
     {
         $this->validate();
 
-
+        $path = $this->image->store(path: 'photos');
         User::create([
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'email' => $this->email,
             'password' => Hash::make($this->password, [
-                'rounds' => "12"
-            ])]);
+                'rounds' => "12",
+
+            ]),
+            'image' => $path,
+        ]);
 
 
-        $this->reset(['firstName', 'lastName', 'email', 'password']);
+        $this->reset(['firstName', 'lastName', 'email', 'password', 'image']);
     }
 
 
