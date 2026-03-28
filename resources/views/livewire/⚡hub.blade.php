@@ -37,6 +37,7 @@ new class extends Component {
                 <div class="flex justify-center gap-2 p-3">
                     <span class="title_section"> {{Auth::user()->firstName}}</span>
                     <span class="title_section"> {{Auth::user()->lastName}}</span>
+                    <img src="{{asset(Auth::user()->image)}}">
 
                 </div>
                 <form wire:submit="logout" method="POST">

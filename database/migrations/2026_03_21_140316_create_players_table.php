@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('firstName');
             $table->string('position');
             $table->integer('maillot');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
