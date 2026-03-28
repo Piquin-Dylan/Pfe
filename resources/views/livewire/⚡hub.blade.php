@@ -25,6 +25,15 @@ new class extends Component {
 
         //on récupére les équipes de l'utilisateur actuellement connecter
         $this->teams = Auth::user()->team()->get();
+        $current_user = Auth::user()->getAuthIdentifier();
+
+        //   $this->team_user = DB::table('team')->select('team_id')->where('team.id', $test)->get();
+        $this->users = DB::table('users')
+            ->join('players', 'users.id', '=', 'players.user_id')
+            ->join('team', 'team.id', '=', 'players.team_id')
+            ->where('players.user_id', $current_user)
+            ->select('team.name', 'players.team_id')
+            ->get();
 
 
     }
@@ -58,6 +67,14 @@ new class extends Component {
                     <span class="text-white">{{$team->division}}</span>
                     <span class="text-white">{{$team->ville}}</span>
                     <span class="text-white">{{$team->code}}</span>
+                </div>
+            @endforeach
+        </div>
+            <div class="lg:flex lg:flex-row">
+            @foreach($this->users as $user)
+                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
+
+                    <span class="text-white">{{$user->name}}</span>
                 </div>
             @endforeach
         </div>
