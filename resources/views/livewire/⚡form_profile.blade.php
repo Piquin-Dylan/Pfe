@@ -14,11 +14,13 @@ new class extends Component {
         $this->validate();
 
         $team = DB::table('team')->select('id')->where('code', $this->form->code)->value('id');
+        $user = Auth::user()->getAuthIdentifier();
         //On fait une requête pour verifier si le code qu'on écrit dans le champs input code correspond avec la column code de la table team
         if (DB::table('team')->where('code', $this->form->code)->exists()) {
 
             Player::create([
                 "team_id" => $team,
+                "user_id" => $user,
                 "name" => $this->form->name,
                 "firstName" => $this->form->firstName,
                 "position" => $this->form->poste,
