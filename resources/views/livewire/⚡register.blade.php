@@ -15,6 +15,7 @@ new class extends Component {
     {
         $this->form->submit();
 
+
         $this->redirect('/hub');
     }
 

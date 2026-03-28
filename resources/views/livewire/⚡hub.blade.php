@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -20,6 +21,8 @@ new class extends Component {
 
     public function mount(): void
     {
+
+
         //on récupére les équipes de l'utilisateur actuellement connecter
         $this->teams = Auth::user()->team()->get();
 
@@ -48,15 +51,15 @@ new class extends Component {
         @endauth
 
         <div class="lg:flex lg:flex-row">
-        @foreach($this->teams as $team)
-            <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
+            @foreach($this->teams as $team)
+                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
 
-                <span class="text-white">{{$team->name}}</span>
-                <span class="text-white">{{$team->division}}</span>
-                <span class="text-white">{{$team->ville}}</span>
-                <span class="text-white">{{$team->code}}</span>
-            </div>
-        @endforeach
+                    <span class="text-white">{{$team->name}}</span>
+                    <span class="text-white">{{$team->division}}</span>
+                    <span class="text-white">{{$team->ville}}</span>
+                    <span class="text-white">{{$team->code}}</span>
+                </div>
+            @endforeach
         </div>
 
     </section>
