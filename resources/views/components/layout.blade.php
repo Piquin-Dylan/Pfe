@@ -1495,9 +1495,9 @@
                 <li><a title="vers la page d'accueil" href="">Accueil</a></li>
                 <li><a title="vers la page de contact" href="">Contact</a></li>
                 <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>
-                <li><a title="vers la page de connexion" href="/connexion">Connexion</a></li>
-                <li><a title="vers la page de création d'équipe" href="">Créer une équipe</a></li>
-                <li><a title="vers la page rejoindre une équipe" href="">Rejoindre une équipe</a></li>
+                <li><a title="vers la page de connexion" href="/login">Connexion</a></li>
+                <li><a title="vers la page de création d'équipe" href="/create">Créer une équipe</a></li>
+                <li><a title="vers la page rejoindre une équipe" href="/profile">Rejoindre une équipe</a></li>
 
             </ul>
         </nav>

@@ -16,7 +16,7 @@ new class extends Component {
 
         $request->session()->regenerateToken();
 
-        return redirect('/connexion');
+        return redirect('/login');
     }
 
     public function mount(): void
