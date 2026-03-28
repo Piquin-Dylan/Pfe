@@ -26,7 +26,7 @@ new class extends Component {
                 "position" => $this->form->poste,
                 "maillot" => $this->form->maillot
             ]);
-            /*  $this->redirect('/');*/
+            $this->redirect('/hub');
         }
     }
 };
