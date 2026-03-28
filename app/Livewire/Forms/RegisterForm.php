@@ -34,7 +34,7 @@ class RegisterForm extends Form
     public string $password = "";
 
 
-    public  $image;
+    public $image;
 
 
     public function submit(): void
@@ -42,7 +42,7 @@ class RegisterForm extends Form
         $this->validate();
 
         $path = $this->image->store(path: 'photos');
-        User::create([
+        $user = User::create([
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'email' => $this->email,
@@ -53,8 +53,7 @@ class RegisterForm extends Form
             'image' => $path,
         ]);
 
-
-        $this->reset(['firstName', 'lastName', 'email', 'password', 'image']);
+        Auth::login($user);
     }
 
 
