@@ -52,9 +52,12 @@ new class extends Component {
                     <img src="{{asset(Auth::user()->image)}}">
 
                 </div>
-                <form wire:submit="logout" method="POST">
-                    <button class="btn_deconnexion" type="submit">Deconnexion</button>
-                </form>
+                <div>
+                    <form wire:submit="logout" method="POST">
+                        <button class="btn_deconnexion" type="submit">Deconnexion</button>
+                    </form>
+                    <x-modal></x-modal>
+                </div>
                 <span class="title_section">Mes équipes</span>
             </div>
         @endauth
@@ -70,7 +73,7 @@ new class extends Component {
                 </div>
             @endforeach
         </div>
-            <div class="lg:flex lg:flex-row">
+        <div class="lg:flex lg:flex-row">
             @foreach($this->users as $user)
                 <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
 

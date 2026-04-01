@@ -77,8 +77,29 @@ body {
     cursor: pointer;
 }
 
-.btn_deconnexion:hover{
+.btn_deconnexion:hover {
     background-color: white;
     color: red;
     border: 1px solid red;
+}
+
+.modal {
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    width: 600px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+}
+
+.background_modal {
+    background: linear-gradient(
+        to right,
+        #2b3448 0%,
+        #1E293B 40%,
+        #0F172A 100%
+    );
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 8px;
 }
