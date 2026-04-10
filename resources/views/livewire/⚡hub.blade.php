@@ -25,6 +25,8 @@ new class extends Component {
 
         //on récupére les équipes de l'utilisateur actuellement connecter
         $this->teams = Auth::user()->team()->get();
+        //potentiel amélioration des rêquete en utilisant les modéles éloquent
+        //$this->players = Auth::user()->team()->with('players')->get();
         $current_user = Auth::user()->getAuthIdentifier();
 
         //   $this->team_user = DB::table('team')->select('team_id')->where('team.id', $test)->get();
@@ -36,6 +38,14 @@ new class extends Component {
             ->get();
 
 
+        ///requete pour afficher tout les joueurs qui appartient au club du user connecter
+        /// Todo améliorer les requête en utilisant plus cett méthode         $this->teams = Auth::user()->team()->get();
+        /*    $this->players = DB::table('users')
+                ->join('team', 'users.id', '=', 'team.user_id')
+                ->join('players', 'team.id', '=', 'players.team_id')
+                ->where('team.user_id', $current_user)
+                ->select('players.name', 'players.position', 'team.id')
+                ->get();*/
     }
 }
 ?>
@@ -72,6 +82,7 @@ new class extends Component {
                     <span class="text-white">{{$team->code}}</span>
                 </div>
             @endforeach
+
         </div>
         <div class="lg:flex lg:flex-row">
             @foreach($this->users as $user)
@@ -80,6 +91,16 @@ new class extends Component {
                     <span class="text-white">{{$user->name}}</span>
                 </div>
             @endforeach
+
+
+
+          {{--  permet de pouvoir afficher les noms des joueurs--}}
+          {{--  @foreach($this->players as $player)
+                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
+
+                    <span class="text-white">{{$player->name}}</span>
+                </div>
+            @endforeach--}}
         </div>
 
     </section>
