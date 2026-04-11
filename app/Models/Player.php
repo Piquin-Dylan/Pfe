@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Player extends Model
 {
@@ -20,6 +21,7 @@ class Player extends Model
         'position',
         'maillot',
     ];
+
 
 
     public function team(): BelongsTo
