@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Player;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -7,17 +8,10 @@ use Livewire\Component;
 
 new class extends Component {
 
+    public string $searchPlayer = "";
+    public $teams;
+    public $users;
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/login');
-    }
 
     public function mount(): void
     {
@@ -38,14 +32,38 @@ new class extends Component {
             ->get();
 
 
+    }
+
+
+    //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
+    public function getPlayersProperty()
+    {
+        $current_user = Auth::id();
+
         ///requete pour afficher tout les joueurs qui appartient au club du user connecter
         /// Todo améliorer les requête en utilisant plus cett méthode         $this->teams = Auth::user()->team()->get();
-        /*    $this->players = DB::table('users')
-                ->join('team', 'users.id', '=', 'team.user_id')
-                ->join('players', 'team.id', '=', 'players.team_id')
-                ->where('team.user_id', $current_user)
-                ->select('players.name', 'players.position', 'team.id')
-                ->get();*/
+        return DB::table('users')
+            ->join('team', 'users.id', '=', 'team.user_id')
+            ->join('players', 'team.id', '=', 'players.team_id')
+            ->where('team.user_id', $current_user)
+            ->when($this->searchPlayer, function ($query) {
+                $query->where('players.name', 'like', '%' . $this->searchPlayer . '%');
+            })
+            ->select('players.name', 'players.position', 'team.id')
+            ->get();
+    }
+
+
+    //Permet de pouvoir déconnecter un utilisateur qui est sur le hub en appuyant sur le bouton deconnexion
+    public function logout(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
 ?>
@@ -92,15 +110,14 @@ new class extends Component {
                 </div>
             @endforeach
 
-
-
-          {{--  permet de pouvoir afficher les noms des joueurs--}}
-          {{--  @foreach($this->players as $player)
+            <input wire:model.live.debounce="searchPlayer" placeholder="rechercher un joueur">
+            {{--  permet de pouvoir afficher les noms des joueurs--}}
+            @foreach($this->players as $player)
                 <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
 
                     <span class="text-white">{{$player->name}}</span>
                 </div>
-            @endforeach--}}
+            @endforeach
         </div>
 
     </section>
