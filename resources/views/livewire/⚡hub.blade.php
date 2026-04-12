@@ -121,4 +121,26 @@ new class extends Component {
         </div>
 
     </section>
+
+    <div x-data="{ currentTab : 'first' }">
+
+        <div class="flex gap-5 justify-center pt-6 pb-16">
+            <button class="btn-primary" @click="currentTab = 'first'">Entrainement</button>
+            <button class="btn-secondary" @click="currentTab = 'second' ">Match</button>
+        </div>
+        <div x-show=" currentTab === 'first' " class="flex flex-col gap-20 lg:flex-row ">
+            <form action="">
+                <label for="">Coach</label>
+                <input type="text">
+            </form>
+        </div>
+
+        <div x-show=" currentTab === 'second' " class="flex flex-col g-5 items-center">
+            <form action="">
+                <label for="">Entraineur</label>
+                <input type="text">
+            </form>
+        </div>
+    </div>
+
 </div>
