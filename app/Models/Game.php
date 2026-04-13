@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Game extends Model
+{
+    use HasFactory;
+
+    protected $table = "matches";
+
+    protected $fillable = [
+        'team_id',
+        'user_id',
+        'date_match',
+        'address',
+        'hours',
+        'image_home',
+        'image_away',
+    ];
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function User(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}
