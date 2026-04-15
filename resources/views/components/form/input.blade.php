@@ -6,23 +6,6 @@
     "name",
     "id",
 ])
-{{--@php
-    $wireModel = $attributes->wire('model');
-    $wireTarget = null;
-
-    if ($loading !== false) {
-    if ($loading === true) {
-    $loading = true;
-    } elseif ($wireModel?->directive) {
-    $loading = $wireModel->hasModifier('live');
-    $wireTarget = $loading ? $wireModel->value() : null;
-    } else {
-    $wireTarget = $loading;
-    $loading = (bool) $loading;
-    }
-    }
-@endphp--}}
-
 
 <div class="flex flex-col p-6 justify-center sm:flex-1">
 
@@ -32,13 +15,13 @@
     </label>
 
     <input
-            {{ $attributes->merge([
-                'class' => 'bg-white p-4 rounded-2xl text-black text-[18px]'
-            ]) }}
-            type="{{ $type }}"
-            placeholder="{{ $placeholder }}"
-            name="{{ $name }}"
-            id="{{ $id }}">
+        type="{{ $type }}"
+        placeholder="{{ $placeholder }}"
+        name="{{ $name }}"
+        id="{{ $id }}"
+        {{ $attributes }}
+        class="bg-white p-4 rounded-2xl text-black text-[18px]"
+    >
     @error('form.' . $name)
     <small class="text-red-500 pt-2">
         {{ $message }}
