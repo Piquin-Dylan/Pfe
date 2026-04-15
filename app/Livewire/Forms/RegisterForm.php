@@ -34,6 +34,7 @@ class RegisterForm extends Form
     public string $password = "";
 
 
+
     public $image;
 
 
