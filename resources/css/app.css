@@ -103,3 +103,11 @@ body {
     border-radius: 8px;
     padding: 8px;
 }
+
+
+.btn-form:hover {
+    background-color: white;
+    color: #B2AFDF;
+    border: 1px solid #B2AFDF;
+    font-weight: 700;
+}

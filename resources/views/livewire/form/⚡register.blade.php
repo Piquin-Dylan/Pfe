@@ -23,7 +23,8 @@ new class extends Component {
 ?>
 <section>
 
-    <div class=" pt-12 lg:pr-[150px]  lg:pl-[150px]">
+    <div class="flex">
+    <div class=" pt-12 w-[1400px]">
         <x-title_subtitle_form title="Inscription"
                                subtitle="Inscrivez vous pour créer votre première  équipe de football"></x-title_subtitle_form>
         <form wire:submit.prevent="save">
@@ -93,11 +94,15 @@ new class extends Component {
             </div>
             <div class="flex justify-center gap-2 items-center flex-col">
                 <x-form.button text="Inscription" type="submit"></x-form.button>
-                <span class="  text-white  flex justify-center">Vous avez déjà un compte ?<a class="font-bold"
-                                                                                             href="/connexion"> Connectez-vous !</a> </span>
+                <span class="  text-white  flex justify-center">Vous avez déjà un compte ? <a class="font-bold"
+                                                                                             href="/connexion">  Connectez-vous !</a> </span>
             </div>
         </form>
 
+    </div>
+    <div>
+        <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
+    </div>
     </div>
 </section>
 

@@ -15,7 +15,8 @@ new class extends Component {
 
 <div>
     <section>
-        <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
+        <div>
+        <div class="w-[1400px]">
             <form wire:submit="submit">
                 <div class="sm:flex sm:flex-row sm:flex-wrap ">
                     <x-form.input
@@ -35,6 +36,8 @@ new class extends Component {
                     <button class="text-white" type="submit">Rejoindre l'équipe</button>
                 </div>
             </form>
+        </div>
+
         </div>
     </section>
 </div>
