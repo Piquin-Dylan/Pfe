@@ -1,3 +1,3 @@
-<x-layout>
+<x-layout_form>
     <livewire:form.join_team></livewire:join_team>
-</x-layout>
+</x-layout_form>

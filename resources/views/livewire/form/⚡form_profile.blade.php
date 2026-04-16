@@ -34,80 +34,85 @@ new class extends Component {
 
 <div>
     <section>
-        <div class="pt-12 pb-50 lg:pr-[150px]  lg:pl-[150px]">
-            <x-title_subtitle_form title="Rejoingnez votre équipe de football"
-                                   subtitle="Compléter votre profile et  entrer le code pour rejoindre votre équipe"></x-title_subtitle_form>
-            <form wire:submit.prevent="save">
-                <div class="sm:flex sm:flex-row sm:flex-wrap ">
-                    <x-form.input
-                        label_name="Nom de famille"
-                        for_label="name"
-                        placeholder=""
-                        type="text"
-                        id="name"
-                        name="name"
-                        wire:model.live="form.name" required>
-                        <div>
-                            @error('form.name') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                    <x-form.input
-                        label_name="Prénom"
-                        for_label="firstName"
-                        placeholder="Dupont"
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        wire:model.live="form.firstName" required>
-                        <div>
-                            @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                    <x-form.input
-                        label_name="Poste sur le terrain"
-                        for_label="poste"
-                        placeholder=""
-                        type="text"
-                        id="poste"
-                        name="poste"
-                        wire:model.live="form.poste" required>
-                        <div>
-                            @error('form.poste') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                    <x-form.input
-                        label_name="Numéros de maillot"
-                        for_label="maillot"
-                        placeholder=""
-                        type="text"
-                        id="maillot"
-                        name="maillot"
-                        wire:model.live="form.maillot" required>
-                        <div>
-                            @error('form.maillot') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                    <x-form.input
-                        label_name="Code de l'équipe"
-                        for_label="code"
-                        placeholder=""
-                        type="text"
-                        id="code"
-                        name="code"
-                        wire:model="form.code">
-                        <div>
-                            @error('form.code') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                </div>
-                <div class="flex justify-center gap-2 items-center flex-col">
-                    <x-form.button title="Rejoindre une équipe"
-                                   text="Rejoindre une équipe" type="submits"></x-form.button>
-                    <span class="  text-white  flex justify-center">Pas encore d'équipe
+        <div class="flex">
+            <div class="mt-12  w-[1400px]">
+                <x-title_subtitle_form title="Rejoingnez votre équipe de football"
+                                       subtitle="Compléter votre profile et  entrer le code pour rejoindre votre équipe"></x-title_subtitle_form>
+                <form wire:submit.prevent="save">
+                    <div class="sm:flex sm:flex-row sm:flex-wrap ">
+                        <x-form.input
+                            label_name="Nom de famille"
+                            for_label="name"
+                            placeholder=""
+                            type="text"
+                            id="name"
+                            name="name"
+                            wire:model.live="form.name" required>
+                            <div>
+                                @error('form.name') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
+                        <x-form.input
+                            label_name="Prénom"
+                            for_label="firstName"
+                            placeholder="Dupont"
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            wire:model.live="form.firstName" required>
+                            <div>
+                                @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
+                        <x-form.input
+                            label_name="Poste sur le terrain"
+                            for_label="poste"
+                            placeholder=""
+                            type="text"
+                            id="poste"
+                            name="poste"
+                            wire:model.live="form.poste" required>
+                            <div>
+                                @error('form.poste') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
+                        <x-form.input
+                            label_name="Numéros de maillot"
+                            for_label="maillot"
+                            placeholder=""
+                            type="text"
+                            id="maillot"
+                            name="maillot"
+                            wire:model.live="form.maillot" required>
+                            <div>
+                                @error('form.maillot') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
+                        <x-form.input
+                            label_name="Code de l'équipe"
+                            for_label="code"
+                            placeholder=""
+                            type="text"
+                            id="code"
+                            name="code"
+                            wire:model="form.code">
+                            <div>
+                                @error('form.code') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
+                    </div>
+                    <div class="flex justify-center gap-2 items-center flex-col">
+                        <x-form.button title="Rejoindre une équipe"
+                                       text="Rejoindre une équipe" type="submits"></x-form.button>
+                        <span class="  text-white  flex justify-center">Pas encore d'équipe
                         <a class="font-bold" href="/connexion">  Créer votre équipe</a> </span>
-                </div>
-            </form>
+                    </div>
+                </form>
 
+            </div>
+            <div>
+                <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
+            </div>
         </div>
     </section>
 </div>
