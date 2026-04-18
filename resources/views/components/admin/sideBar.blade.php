@@ -1497,7 +1497,7 @@
                     <li><a title="vers la page d'accueil" href="">Accueil</a></li>
                     <li><a title="vers la page de contact" href="">Match</a></li>
                     <li><a title="vers la page d'inscription" href="/inscription">Entrainement</a></li>
-                    <li><a title="vers la page de connexion" href="/login">Equipe</a></li>
+                    <li><a title="vers la page de connexion" href="/team">Equipe</a></li>
                     <li><a title="vers la page de connexion" href="/login">Calendrier</a></li>
 
                 </div>

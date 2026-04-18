@@ -15,9 +15,7 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('client.hub');
 });
-Route::get('/dashboard/{id}', function () {
-    return view('admin.dashboard');
-});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/create', function () {
@@ -35,4 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/update', function () {
         return view('client/auth/update_profile');
     });
+
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/team', function () {
+        return view('admin.team');
+    });
 });
+
+
+
+

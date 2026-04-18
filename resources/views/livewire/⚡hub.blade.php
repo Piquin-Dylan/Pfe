@@ -96,7 +96,7 @@ new class extends Component {
         <div class="lg:flex lg:flex-row">
             @foreach($this->teams as $team)
                 <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-                    <a href="/dashboard/{{\Illuminate\Support\Facades\Auth::user()->id}}">
+                    <a href="/dashboard">
                         <span class="text-white">{{$team->name}}</span>
                         <span class="text-white">{{$team->division}}</span>
                         <span class="text-white">{{$team->ville}}</span>
