@@ -55,9 +55,6 @@ new class extends Component {
     }
 
 
-
-
-
     //Permet de pouvoir déconnecter un utilisateur qui est sur le hub en appuyant sur le bouton deconnexion
     public function logout(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
     {
@@ -99,11 +96,12 @@ new class extends Component {
         <div class="lg:flex lg:flex-row">
             @foreach($this->teams as $team)
                 <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-
-                    <span class="text-white">{{$team->name}}</span>
-                    <span class="text-white">{{$team->division}}</span>
-                    <span class="text-white">{{$team->ville}}</span>
-                    <span class="text-white">{{$team->code}}</span>
+                    <a href="/dashboard/{{\Illuminate\Support\Facades\Auth::user()->id}}">
+                        <span class="text-white">{{$team->name}}</span>
+                        <span class="text-white">{{$team->division}}</span>
+                        <span class="text-white">{{$team->ville}}</span>
+                        <span class="text-white">{{$team->code}}</span>
+                    </a>
                 </div>
             @endforeach
 

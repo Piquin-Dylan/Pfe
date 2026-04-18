@@ -15,7 +15,7 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('client.hub');
 });
-Route::get('/dashboard', function () {
+Route::get('/dashboard/{id}', function () {
     return view('admin.dashboard');
 });
 
