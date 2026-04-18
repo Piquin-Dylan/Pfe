@@ -1491,15 +1491,14 @@
             <h2 class="hidden">Navigation principale</h2>
             <ul
                 :class="{ 'hidden lg:flex': !open, 'flex': open }"
-                class="fixed inset-0 z-40 bg-[#192443] text-white items-center justify-center
-           lg:static lg:bg-transparent lg:justify-end lg:pr-10">
-                <div class="flex flex-col lg:flex-row items-center gap-6 text-2xl font-semibold">
+                class="fixed inset-0 z-40 bg-[#192443]   text-white items-center justify-center
+             sm:h-screen px-4 sm:fixed sm:w-64  ">
+                <div class="flex flex-col sm:flex-col items-center gap-6 text-2xl font-semibold">
                     <li><a title="vers la page d'accueil" href="">Accueil</a></li>
-                <li><a title="vers la page de contact" href="">Contact</a></li>
-                <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>
-                <li><a title="vers la page de connexion" href="/login">Connexion</a></li>
-                <li><a title="vers la page de création d'équipe" href="/create">Créer une équipe</a></li>
-                <li><a title="vers la page rejoindre une équipe" href="/profile">Rejoindre une équipe</a></li>
+                    <li><a title="vers la page de contact" href="">Match</a></li>
+                    <li><a title="vers la page d'inscription" href="/inscription">Entrainement</a></li>
+                    <li><a title="vers la page de connexion" href="/login">Equipe</a></li>
+                    <li><a title="vers la page de connexion" href="/login">Calendrier</a></li>
                 </div>
             </ul>
         </nav>
