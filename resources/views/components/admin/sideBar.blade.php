@@ -1491,8 +1491,9 @@
             <h2 class="hidden">Navigation principale</h2>
             <ul
                 :class="{ 'hidden lg:flex': !open, 'flex': open }"
-                class="fixed inset-0 z-40 bg-[#192443]   text-white items-center justify-center
-             sm:h-screen px-4 sm:fixed sm:w-64  ">
+                class="fixed top-0 left-0 h-full w-64 z-40 bg-[#192443]
+           text-white flex-col items-center justify-center
+           sm:flex">
                 <div class="flex flex-col sm:flex-col items-center gap-6 text-2xl font-semibold">
                     <li><a title="vers la page d'accueil" href="">Accueil</a></li>
                     <li><a title="vers la page de contact" href="">Match</a></li>
@@ -1506,9 +1507,7 @@
     </div>
 
 </header>
-<main>
-    {{ $slot  }}
-</main>
+
 @livewireScripts
 </body>
 </html>
