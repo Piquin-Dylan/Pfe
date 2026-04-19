@@ -122,4 +122,10 @@ body {
     color: white;
     width: 180px;
     text-align: center;
+    cursor: pointer;
+}
+
+.filter_position.active {
+    background: #192443;
+    color: white;
 }
