@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600;700&display=swap');
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -58,7 +59,7 @@ body {
 }
 
 .card_hub {
-    background-color: #353342;
+    background-color: #AEB6D8;
     border: 1px solid white;
     border-radius: 8px;
     padding: 16px;
@@ -110,4 +111,21 @@ body {
     color: #B2AFDF;
     border: 1px solid #B2AFDF;
     font-weight: 700;
+}
+
+.filter_position {
+    background-color: #353342;
+    border: 1px solid white;
+    font-size: 18px;
+    padding: 16px;
+    border-radius: 12px;
+    color: white;
+    width: 180px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.filter_position.active {
+    background: #192443;
+    color: white;
 }
