@@ -4,8 +4,84 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07b486f11a5ed203566064b4e08727f0",
+    "content-hash": "690482957329c9aae042fcba388072b3",
     "packages": [
+        {
+            "name": "act-training/livewire-calendar",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ACT-Training/livewire-calendar.git",
+                "reference": "cc1072d9b67febc0b711b93490512bc6319dfaaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ACT-Training/livewire-calendar/zipball/cc1072d9b67febc0b711b93490512bc6319dfaaf",
+                "reference": "cc1072d9b67febc0b711b93490512bc6319dfaaf",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^v3.2.6|^4.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/boost": "^2.2",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^9.0",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0",
+                "pestphp/pest-plugin-livewire": "^3.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LivewireCalendar": "ACTTraining\\LivewireCalendar\\Facades\\LivewireCalendar"
+                    },
+                    "providers": [
+                        "ACTTraining\\LivewireCalendar\\LivewireCalendarServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ACTTraining\\LivewireCalendar\\": "src/",
+                    "ACTTraining\\LivewireCalendar\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Barrett",
+                    "email": "simonbarrett@acttraining.org.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Livewire wrapper for FullCalendar.",
+            "homepage": "https://github.com/act-training/livewire-calendar",
+            "keywords": [
+                "ACT Training",
+                "laravel",
+                "livewire-calendar"
+            ],
+            "support": {
+                "issues": "https://github.com/ACT-Training/livewire-calendar/issues",
+                "source": "https://github.com/ACT-Training/livewire-calendar/tree/0.3.0"
+            },
+            "time": "2026-03-07T12:23:50+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.14.8",
@@ -3369,6 +3445,67 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.2"
             },
             "time": "2025-12-14T04:43:48+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.93.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "0d097bce95b2bf6802fb1d83e1e753b0f5a948e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/0d097bce95b2bf6802fb1d83e1e753b0f5a948e7",
+                "reference": "0d097bce95b2bf6802fb1d83e1e753b0f5a948e7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^8.0|^9.2|^10.0|^11.0",
+                "pestphp/pest": "^2.1|^3.1|^4.0",
+                "phpunit/php-code-coverage": "^10.0|^11.0|^12.0",
+                "phpunit/phpunit": "^10.5|^11.5|^12.5",
+                "spatie/pest-plugin-test-time": "^2.2|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.93.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-21T12:49:54+00:00"
         },
         {
             "name": "symfony/clock",
