@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/team', function () {
         return view('admin.team');
     });
+    Route::get('/calendrier', function () {
+        return view('admin.calendrier');
+    });
+
 });
 
 
