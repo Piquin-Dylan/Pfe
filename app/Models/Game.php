@@ -18,8 +18,8 @@ class Game extends Model
         'date_match',
         'address',
         'hours',
-        'image_home',
-        'image_away',
+        'name_home',
+        'name_away',
     ];
 
     public function team(): BelongsTo
@@ -27,7 +27,7 @@ class Game extends Model
         return $this->belongsTo(Team::class);
     }
 
-    public function User(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

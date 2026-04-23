@@ -17,8 +17,11 @@ return new class extends Migration {
             $table->date('date_match');
             $table->string('address');
             $table->string('hours');
-            $table->string('image_home');
-            $table->string('image_away');
+            $table->string('name_home');
+            $table->string('name_away');
+
+            /* $table->string('image_home');
+             $table->string('image_away');*/
             $table->timestamps();
         });
     }

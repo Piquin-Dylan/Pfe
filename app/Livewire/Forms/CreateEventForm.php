@@ -5,13 +5,13 @@ namespace App\Livewire\Forms;
 use App\Models\Game;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CreateEventForm extends Form
 {
 
-    public $teams;
 
     #[Validate('required', message: 'Le champs date est requis')]
     public string $date = "";
@@ -20,10 +20,7 @@ class CreateEventForm extends Form
     public string $place = "";
 
     #[Validate('required', message: 'Le champs heure de convocation est requis')]
-    public string $hours_first = "";
-
-    #[Validate('required', message: 'Le champs heure du match est requis')]
-    public string $hours_second = "";
+    public string $hours = "";
 
     #[Validate('required', message: 'Le champs nom équipe a domicile est requis')]
     public string $name_home = "";
@@ -32,17 +29,25 @@ class CreateEventForm extends Form
     public string $name_away = "";
 
 
-    public function submit()
+    public function submit(): void
     {
         $this->validate();
 
 
-
-     /*   $this->teams = Auth::user()->team()->get();
         $current_user = Auth::user()->getAuthIdentifier();
-            Game::create([
-                'team_id' => $this->teams,
-            ]);*/
+        $teams_id = DB::table('team')->where('user_id', $current_user)->value('id');
+
+
+        Game::create([
+            'team_id' => $teams_id,
+            'user_id' => $current_user,
+            'date_match' => $this->date,
+            'address' => $this->place,
+            'hours' => $this->hours,
+            'name_home' => $this->name_home,
+            'name_away' => $this->name_away,
+        ]);
+
 
     }
 }

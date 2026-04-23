@@ -9,30 +9,16 @@ new class extends Component {
     public function save(): void
     {
         $this->form->validate();
+        $this->form->submit();
+
+
     }
 };
 ?>
 
 <div>
-    <div x-data="{ currentTab : 'first' }">
-
-        <div class="flex gap-5 justify-center pt-6 pb-16">
-            <button class="btn-primary" @click="currentTab = 'first'">Entrainement</button>
-            <button class="btn-secondary" @click="currentTab = 'second' ">Match</button>
-        </div>
-        <div x-show=" currentTab === 'first' " class="flex flex-col gap-20 lg:flex-row ">
-            <form action="">
-                <label for="">Coach</label>
-                <input type="text">
-            </form>
-        </div>
-
-        <div x-show=" currentTab === 'second' " class="flex flex-col g-5 items-center">
 
 
-        </div>
-
-    </div>
     <form wire:submit.prevent="save">
         <div class="sm:flex sm:flex-row sm:flex-wrap ">
             <x-form.input
@@ -63,26 +49,14 @@ new class extends Component {
         <div class="sm:flex sm:flex-row sm:flex-wrap ">
             <x-form.input
                 label_name="Heure arrivé"
-                for_label="hours_first"
+                for_label="hours"
                 placeholder="Entrez l'heure d'arriver"
                 type="text"
-                id="hours_first"
-                name="hours_first"
-                wire:model.live="form.hours_first">
+                id="hours"
+                name="hours"
+                wire:model.live="form.hours">
                 <div>
-                    @error('form.hours_first') <span class="error">{{ $message }}</span> @enderror
-                </div>
-            </x-form.input>
-            <x-form.input
-                label_name="Heure début du match"
-                for_label="hours_second"
-                placeholder="Entrez l'heure du match"
-                type="text"
-                id="hours_second"
-                name="hours_second"
-                wire:model.live="form.hours_second">
-                <div>
-                    @error('form.hours_second') <span class="error">{{ $message }}</span> @enderror
+                    @error('form.hours') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </x-form.input>
         </div>
@@ -100,19 +74,19 @@ new class extends Component {
                 </div>
             </x-form.input>
             <x-form.input
-                label_name="Heure début du match"
-                for_label="hours_second"
+                label_name="Nom de l'équipe a l'extérieur"
+                for_label="name_away"
                 placeholder="Entrez l'heure du match"
                 type="text"
-                id="hours_second"
-                name="hours_second"
-                wire:model.live="form.hours_second">
+                id="name_away"
+                name="name_away"
+                wire:model.live="form.name_away">
                 <div>
-                    @error('form.hours_second') <span class="error">{{ $message }}</span> @enderror
+                    @error('form.name_away') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </x-form.input>
         </div>
-        <x-form.button text="Création du match" type="submit"></x-form.button>
+        <x-form.button text="Création du match" type="submit">Créer match</x-form.button>
 
     </form>
 </div>
