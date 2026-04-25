@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class Train extends Model
 {
     use HasFactory;
+    use Notifiable;
 
     protected $table = "trains";
 
