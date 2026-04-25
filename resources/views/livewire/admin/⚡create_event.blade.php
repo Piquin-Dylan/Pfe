@@ -18,8 +18,8 @@ new class extends Component {
 
 <div>
 
-
-    <form wire:submit.prevent="save">
+    <x-drawer>
+    <form class="w-full" wire:submit.prevent="save">
         <div class="sm:flex sm:flex-row sm:flex-wrap ">
             <x-form.input
                 label_name="Date"
@@ -89,4 +89,6 @@ new class extends Component {
         <x-form.button text="Création du match" type="submit">Créer match</x-form.button>
 
     </form>
+    </x-drawer>
+
 </div>
