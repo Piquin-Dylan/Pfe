@@ -4,8 +4,12 @@ namespace App\Livewire\Forms;
 
 use App\Models\Game;
 use App\Models\Train;
+use App\Models\User;
+use App\Notifications\NewMatchNotification;
+use App\Notifications\NewTrainNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -34,7 +38,7 @@ class CreateTrainForm extends Form
         $current_user = Auth::user()->getAuthIdentifier();
         $teams_id = DB::table('team')->where('user_id', $current_user)->value('id');
 
-        Train::create([
+        $train = Train::create([
             'team_id' => $teams_id,
             'user_id' => $current_user,
             'date_train' => $this->date,
@@ -42,5 +46,15 @@ class CreateTrainForm extends Form
             'hours_start' => $this->hours_start,
             'hours_end' => $this->hours_end,
         ]);
+
+        $players_list = DB::table('players')
+            ->where('team_id', $teams_id)
+            ->pluck('user_id');
+        $users = User::whereIn('users.id', $players_list)->get();
+
+
+        Notification::send($users, new NewTrainNotification($train));
+
+
     }
 }

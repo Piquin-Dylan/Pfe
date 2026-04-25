@@ -7,18 +7,18 @@ use App\Models\Train;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class NewMatchNotification extends Notification
+class NewTrainNotification extends Notification
 {
     use Queueable;
 
-    public Game $match;
+    public Train $train;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Game $match)
+    public function __construct(Train $train)
     {
-        $this->match = $match;
+        $this->train = $train;
     }
 
     /**
@@ -40,15 +40,12 @@ class NewMatchNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'match_created',
-            'match_id' => $this->match->id,
-            'date_match' => $this->match->date_match,
-            'address' => $this->match->address,
-            'hours' => $this->match->hours,
-            'name_home' => $this->match->name_home,
-            'name_away' => $this->match->name_away,
+            'type' => 'train_created',
+            'match_id' => $this->train->id,
+            'date_match' => $this->train->date_match,
+            'address' => $this->train->address,
+            'hours_start' => $this->train->hours_start,
+            'hours_end' => $this->train->hours_end,
         ];
     }
-
-
 }
