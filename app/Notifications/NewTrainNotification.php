@@ -41,8 +41,8 @@ class NewTrainNotification extends Notification
     {
         return [
             'type' => 'train_created',
-            'match_id' => $this->train->id,
-            'date_match' => $this->train->date_match,
+            'train_id' => $this->train->id,
+            'date_train' => $this->train->date_train,
             'address' => $this->train->address,
             'hours_start' => $this->train->hours_start,
             'hours_end' => $this->train->hours_end,

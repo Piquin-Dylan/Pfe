@@ -18,6 +18,7 @@ new class extends Component {
 
 <div>
     @foreach($notifications as $notification)
-        <div class="flex justify-center">{{ $notification->data['date_match'] ?? ""}}</div>
+        <div class="flex justify-center">{{ $notification->data['date_train'] ?? ""}}</div>
+        <div class="flex justify-center">{{ $notification->data['hours_start'] ?? ""}}</div>
     @endforeach
 </div>
