@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Player;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
@@ -20,22 +21,27 @@ new class extends Component {
     {
         $current_user = Auth::id();
 
-        ///requete pour afficher tout les joueurs qui appartient au club du user connecter
-        /// Todo améliorer les requête en utilisant plus cett méthode         $this->teams = Auth::user()->team()->get();
-        return DB::table('users')
-            ->join('team', 'users.id', '=', 'team.user_id')
-            ->join('players', 'team.id', '=', 'players.team_id')
-            ->where('team.user_id', $current_user)
+
+        return Player::where(function ($query) use ($current_user) {
+            $query->whereHas('team', function ($q) use ($current_user) {
+                $q->where('user_id', $current_user);
+            });
+
+            if (Auth::user()->player) {
+                $teamId = Auth::user()->player->team->id;
+
+                $query->orWhere('team_id', $teamId);
+            }
+        })
             ->when($this->searchPlayer, function ($query) {
-                $query->where('players.name', 'like', '%' . $this->searchPlayer . '%');
-            })->when($this->filters != "tout", function ($query) {
+                $query->where('name', 'like', '%' . $this->searchPlayer . '%');
+            })
+            ->when($this->filters != "tout", function ($query) {
                 $query->where('players.position', '=', $this->filters);
             })
-            ->select('players.name', 'players.position', 'team.id')
-            ->get();
+            ->with('team:id,user_id')
+            ->get(['name', 'position', 'team_id']);
     }
-
-
 };
 ?>
 
