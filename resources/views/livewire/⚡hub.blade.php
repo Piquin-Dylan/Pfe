@@ -19,7 +19,7 @@ new class extends Component {
 
 
         //on récupére les équipes de l'utilisateur actuellement connecter
-        $this->teams = Auth::user()->team()->get();
+        //  $this->teams = Auth::user()->team()->get();
         //potentiel amélioration des rêquete en utilisant les modéles éloquent
         //$this->players = Auth::user()->team()->with('players')->get();
         $current_user = Auth::user()->getAuthIdentifier();
@@ -31,27 +31,34 @@ new class extends Component {
             ->where('players.user_id', $current_user)
             ->select('team.name', 'players.team_id')
             ->get();
-
-
     }
 
 
     //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
-    public function getPlayersProperty()
+    public function getPlayersProperty(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Player_C
     {
         $current_user = Auth::id();
 
         ///requete pour afficher tout les joueurs qui appartient au club du user connecter
         /// Todo améliorer les requête en utilisant plus cett méthode         $this->teams = Auth::user()->team()->get();
-        return DB::table('users')
-            ->join('team', 'users.id', '=', 'team.user_id')
-            ->join('players', 'team.id', '=', 'players.team_id')
-            ->where('team.user_id', $current_user)
+        /*  return DB::table('users')
+              ->join('team', 'users.id', '=', 'team.user_id')
+              ->join('players', 'team.id', '=', 'players.team_id')
+              ->where('team.user_id', $current_user)
+              ->when($this->searchPlayer, function ($query) {
+                  $query->where('players.name', 'like', '%' . $this->searchPlayer . '%');
+              })
+              ->select('players.name', 'players.position', 'team.id')
+              ->get();*/
+
+        return Player::whereHas('team', function ($query) use ($current_user) {
+            $query->where('user_id', $current_user);
+        })
             ->when($this->searchPlayer, function ($query) {
-                $query->where('players.name', 'like', '%' . $this->searchPlayer . '%');
+                $query->where('name', 'like', '%' . $this->searchPlayer . '%');
             })
-            ->select('players.name', 'players.position', 'team.id')
-            ->get();
+            ->with('team:id,user_id')
+            ->get(['name', 'position', 'team_id']);
     }
 
 
@@ -94,16 +101,16 @@ new class extends Component {
         @endauth
 
         <div class="lg:flex lg:flex-row">
-            @foreach($this->teams as $team)
-                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-                    <a href="/dashboard">
-                        <span class="text-white">{{$team->name}}</span>
-                        <span class="text-white">{{$team->division}}</span>
-                        <span class="text-white">{{$team->ville}}</span>
-                        <span class="text-white">{{$team->code}}</span>
-                    </a>
-                </div>
-            @endforeach
+            {{--         @foreach($this->teams as $team)
+                         <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
+                             <a href="/dashboard">
+                                 <span class="text-white">{{$team->name}}</span>
+                                 <span class="text-white">{{$team->division}}</span>
+                                 <span class="text-white">{{$team->ville}}</span>
+                                 <span class="text-white">{{$team->code}}</span>
+                             </a>
+                         </div>
+                     @endforeach--}}
 
         </div>
         <div class="lg:flex lg:flex-row">

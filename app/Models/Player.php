@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use phpDocumentor\Reflection\Types\Self_;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Player extends Model
 {
@@ -22,10 +22,21 @@ class Player extends Model
         'maillot',
     ];
 
-
-
+    //  Le joueur appartient à une équipe
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    //  Le joueur appartient  à un user
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //  Le joueur peut participer  à plusieurs matchs
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class);
     }
 }

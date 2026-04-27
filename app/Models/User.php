@@ -2,27 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory;
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     protected $table = 'users';
 
     protected $fillable = [
-        'user_id',
         'firstName',
         'lastName',
         'email',
         'password',
         'image',
-        'rouds',
         'rounds',
     ];
 
@@ -31,21 +28,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-
-    public function team(): HasMany
+    // 👨‍🏫 Un user (coach) peut avoir plusieurs équipes
+    public function teams(): HasMany
     {
         return $this->hasMany(Team::class);
     }
 
-    public function player(): HasMany
+    //  Un user est associé a un joueur player
+    public function player(): HasOne
     {
-        return $this->hasMany(Player::class);
+        return $this->hasOne(Player::class);
     }
-
-    public function Game(): HasMany
-    {
-        return $this->hasMany(Game::class);
-    }
-
-
 }
