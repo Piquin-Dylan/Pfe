@@ -43,8 +43,12 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/calendrier', function () {
         return view('admin.calendrier');
-    }); Route::get('/message', function () {
+    });
+    Route::get('/message', function () {
         return view('admin.message');
+    });
+    Route::get('/match', function () {
+        return view('admin.match');
     });
 
 });

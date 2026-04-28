@@ -16,10 +16,11 @@ new class extends Component {
 
     public function mount(): void
     {
+        $current_user = Auth::id();
 
 
         //on récupére les équipes de l'utilisateur actuellement connecter
-        //  $this->teams = Auth::user()->team()->get();
+        $this->teams = \App\Models\Team::where('user_id', $current_user)->select('id')->value('id');
         //potentiel amélioration des rêquete en utilisant les modéles éloquent
         //$this->players = Auth::user()->team()->with('players')->get();
         $current_user = Auth::user()->getAuthIdentifier();
