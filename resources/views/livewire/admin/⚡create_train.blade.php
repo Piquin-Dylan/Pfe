@@ -9,12 +9,23 @@ new class extends Component {
     {
         $this->form->validate();
         $this->form->submit();
+        session()->flash('status', 'Le match a été créer avec succès');
+
     }
 };
 ?>
 
 <div>
     <form class="w-full" wire:submit.prevent="save">
+        @if (session()->has('status'))
+            <div
+                x-data="{ show: true }"
+                x-init="setTimeout(() => show = false, 4000)"
+                x-show="show"
+                class=" text-green-500 text-2xl p-4 mt-8 mb-4">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="sm:flex sm:flex-row sm:flex-wrap ">
             <x-form.input
                 label_name="Date"
