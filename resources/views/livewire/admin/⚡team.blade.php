@@ -45,7 +45,7 @@ new class extends Component {
 };
 ?>
 
-<div class="grow lg:ml-64 ">
+<div class="grow  ">
     <h2 class="title_section p-5">Mon équipe</h2>
     <div class=" pr-5 pl-5">
         <input class="bg-white p-4 rounded-2xl w-full" wire:model.live.debounce="searchPlayer"
