@@ -11,55 +11,14 @@ new class extends Component {
 
     public string $searchPlayer = "";
     public $teams;
-    public $users;
 
 
     public function mount(): void
     {
         $current_user = Auth::id();
+        $this->teams = \App\Models\Team::where('user_id', $current_user)->get();
 
 
-        //on récupére les équipes de l'utilisateur actuellement connecter
-        $this->teams = \App\Models\Team::where('user_id', $current_user)->select('id')->value('id');
-        //potentiel amélioration des rêquete en utilisant les modéles éloquent
-        //$this->players = Auth::user()->team()->with('players')->get();
-        $current_user = Auth::user()->getAuthIdentifier();
-
-        //   $this->team_user = DB::table('team')->select('team_id')->where('team.id', $test)->get();
-        $this->users = DB::table('users')
-            ->join('players', 'users.id', '=', 'players.user_id')
-            ->join('team', 'team.id', '=', 'players.team_id')
-            ->where('players.user_id', $current_user)
-            ->select('team.name', 'players.team_id')
-            ->get();
-    }
-
-
-    //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
-    public function getPlayersProperty(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Player_C
-    {
-        $current_user = Auth::id();
-
-        ///requete pour afficher tout les joueurs qui appartient au club du user connecter
-        /// Todo améliorer les requête en utilisant plus cett méthode         $this->teams = Auth::user()->team()->get();
-        /*  return DB::table('users')
-              ->join('team', 'users.id', '=', 'team.user_id')
-              ->join('players', 'team.id', '=', 'players.team_id')
-              ->where('team.user_id', $current_user)
-              ->when($this->searchPlayer, function ($query) {
-                  $query->where('players.name', 'like', '%' . $this->searchPlayer . '%');
-              })
-              ->select('players.name', 'players.position', 'team.id')
-              ->get();*/
-
-        return Player::whereHas('team', function ($query) use ($current_user) {
-            $query->where('user_id', $current_user);
-        })
-            ->when($this->searchPlayer, function ($query) {
-                $query->where('name', 'like', '%' . $this->searchPlayer . '%');
-            })
-            ->with('team:id,user_id')
-            ->get(['name', 'position', 'team_id']);
     }
 
 
@@ -102,35 +61,19 @@ new class extends Component {
         @endauth
 
         <div class="lg:flex lg:flex-row">
-            {{--         @foreach($this->teams as $team)
-                         <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-                             <a href="/dashboard">
-                                 <span class="text-white">{{$team->name}}</span>
-                                 <span class="text-white">{{$team->division}}</span>
-                                 <span class="text-white">{{$team->ville}}</span>
-                                 <span class="text-white">{{$team->code}}</span>
-                             </a>
-                         </div>
-                     @endforeach--}}
-
-        </div>
-        <div class="lg:flex lg:flex-row">
-            @foreach($this->users as $user)
+            @foreach($this->teams as $team)
                 <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-
-                    <span class="text-white">{{$user->name}}</span>
+                    <a href="/dashboard">
+                        <span class="text-white">{{$team->name}}</span>
+                        <span class="text-white">{{$team->division}}</span>
+                        <span class="text-white">{{$team->ville}}</span>
+                        <span class="text-white">{{$team->code}}</span>
+                    </a>
                 </div>
             @endforeach
 
-            <input wire:model.live.debounce="searchPlayer" placeholder="rechercher un joueur">
-            {{--  permet de pouvoir afficher les noms des joueurs--}}
-            @foreach($this->players as $player)
-                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-
-                    <span class="text-white">{{$player->name}}</span>
-                </div>
-            @endforeach
         </div>
+
 
     </section>
 </div>
