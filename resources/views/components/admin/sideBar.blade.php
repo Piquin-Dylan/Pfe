@@ -1469,45 +1469,73 @@
 </head>
 <body x-data="{ open: false }" :class="{ 'overflow-hidden': open }">
 <h1 class="hidden">Pfe - SportTeams</h1>
-<header class="bg-[#192443]">
-    <div class="">
-        <nav class="relative">
-            <div class="">
-                <button class=" relative z-50 sm:hidden" @click="open = !open">
-                    <svg x-show="!open" class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         width="56"
-                         height="56" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                              d="M5 7h14M5 12h14M5 17h14"/>
-                    </svg>
-                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="56"
-                         height="56"
-                         strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
+<body x-data="{ open: false }" class="bg-[#0F172A] text-white">
 
-            <h2 class="hidden">Navigation principale</h2>
-            <ul
-                :class="{ 'hidden lg:flex': !open, 'flex': open }"
-                class="fixed top-0 left-0 h-full w-64 z-40 bg-[#192443]
-           text-white flex-col items-center justify-center
-           sm:flex">
-                <div class="flex flex-col sm:flex-col items-center gap-6 text-2xl font-semibold">
-                    <li><a title="vers la page d'accueil" href="">Accueil</a></li>
-                    <li><a title="vers la page de contact" href="">Match</a></li>
-                    <li><a title="vers la page d'inscription" href="/inscription">Entrainement</a></li>
-                    <li><a title="vers la page de connexion" href="/team">Equipe</a></li>
-                    <li><a title="vers la page de connexion" href="/calendrier">Calendrier</a></li>
+<div class="flex min-h-screen">
 
-                </div>
+    <!-- SIDEBAR -->
+    <aside
+        :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
+        class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0"
+    >
+        <nav class="h-full flex flex-col items-center justify-center">
+            <ul class="flex flex-col gap-6 text-2xl font-semibold">
+                <li><a href="">Accueil</a></li>
+                <li><a href="">Match</a></li>
+                <li><a href="/inscription">Entrainement</a></li>
+                <li><a href="/team">Equipe</a></li>
+                <li><a href="/calendrier">Calendrier</a></li>
             </ul>
         </nav>
+    </aside>
+
+    <!-- OVERLAY MOBILE -->
+    <div
+        x-show="open"
+        @click="open = false"
+        class="fixed inset-0 bg-black/50 z-30 lg:hidden"
+    ></div>
+
+    <!-- CONTENU -->
+    <div class="flex-1 flex flex-col lg:ml-64">
+
+        <!-- HEADER (TON CODE PROPRE) -->
+        <header class="bg-[#192443] h-16 flex items-center px-4 border-b border-white/10">
+
+            <button class="relative z-50 lg:hidden" @click="open = !open">
+
+                <!-- MENU -->
+                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                     viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                          d="M5 7h14M5 12h14M5 17h14"/>
+                </svg>
+
+                <!-- CLOSE -->
+                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                     viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                          d="M6 18 18 6M6 6l12 12"/>
+                </svg>
+
+            </button>
+
+            <div class="ml-4 font-semibold text-lg">
+                Dashboard
+            </div>
+
+        </header>
+
+        <!-- MAIN -->
+        <main class="flex-1 p-6 overflow-y-auto">
+            {{ $slot }}
+        </main>
+
     </div>
 
-</header>
+</div>
+
+</body>
 
 @livewireScripts
-</body>
 </html>

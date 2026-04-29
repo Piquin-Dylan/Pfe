@@ -46,6 +46,9 @@ class NewTrainNotification extends Notification
             'address' => $this->train->address,
             'hours_start' => $this->train->hours_start,
             'hours_end' => $this->train->hours_end,
+            'message' => "L'entraîneur a créé un entraînement le " .
+                \Carbon\Carbon::parse($this->train->date_train)->format('d/m/Y') .
+                " à {$this->train->hours_start} jusque {$this->train->hours_end}"
         ];
     }
 }
