@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Player extends Model
 {
@@ -38,5 +39,10 @@ class Player extends Model
     public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class);
+    }
+
+    public function trains(): BelongsToMany
+    {
+        return $this->belongsToMany(Train::class);
     }
 }
