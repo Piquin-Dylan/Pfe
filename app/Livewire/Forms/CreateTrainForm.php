@@ -47,10 +47,26 @@ class CreateTrainForm extends Form
             'hours_end' => $this->hours_end,
         ]);
 
+
         $players_list = DB::table('players')
             ->where('team_id', $teams_id)
             ->pluck('user_id');
         $users = User::whereIn('users.id', $players_list)->get();
+
+        $players = DB::table('players')
+            ->where('team_id', $teams_id)
+            ->pluck('id');
+
+
+        //De la ligne 61 a la ligne 68 se code permet de gérer le fait quand un événement entrainement est créer sa ajoute dans la table pivot le train_id le player_id ainsi que le status
+        $players_array = [];
+
+        foreach ($players as $player) {
+            $players_array[$player] = ['status' => 'pending'];
+        }
+
+
+        $train->players()->attach($players_array);
 
 
         Notification::send($users, new NewTrainNotification($train));
