@@ -49,8 +49,14 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/match', function () {
         return view('admin.match');
-    });    Route::get('/train', function () {
+    });
+    Route::get('/train', function () {
         return view('admin.train');
+    });
+    Route::get('/train/{id}', function ($id) {
+        return view('admin.show_train',[
+            'id'=>$id
+        ]);
     });
 
 });

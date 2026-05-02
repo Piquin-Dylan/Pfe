@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Player;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
@@ -9,6 +10,8 @@ new class extends Component {
     public string $searchPlayer = "";
 
     public string $filters = 'tout';
+
+    public Collection $playersWithStatus;
 
 
     public function filter($string): void
@@ -22,8 +25,10 @@ new class extends Component {
         $current_user = Auth::id();
 
 
+
         return Player::where(function ($query) use ($current_user) {
-            $query->whereHas('team', function ($q) use ($current_user) {
+
+                $query->whereHas('team', function ($q) use ($current_user) {
                 $q->where('user_id', $current_user);
             });
 
@@ -32,6 +37,7 @@ new class extends Component {
 
                 $query->orWhere('team_id', $teamId);
             }
+
         })
             ->when($this->searchPlayer, function ($query) {
                 $query->where('name', 'like', '%' . $this->searchPlayer . '%');
@@ -41,7 +47,9 @@ new class extends Component {
             })
             ->with('team:id,user_id')
             ->get(['name', 'position', 'team_id']);
+
     }
+
 };
 ?>
 
@@ -75,19 +83,31 @@ new class extends Component {
     </div>
 
     <div class="flex justify-center gap-16 flex-wrap">
-        @foreach($this->players as $player)
+        @php
+            $players = $playersWithStatus ?? $this->players;
+        @endphp
+
+        @foreach($players as $player)
 
             <div class="relative">
-            <span class="text-white absolute font-bold text-xl left-8 top-8">
-                {{$player->name}}
-            </span>
+        <span class="text-white absolute font-bold text-xl left-8 top-8">
+            {{ $player->name }}
+        </span>
 
                 <img class="w-[250px] pb-6"
-                     src="{{asset('Component_card_player.svg')}}"
+                     src="{{ asset('Component_card_player.svg') }}"
                      alt="">
+
+                @if(isset($player->pivot))
+                    <span class="title_section">
+                {{ $player->pivot->status }}
+            </span>
+                @endif
             </div>
 
         @endforeach
+
+
     </div>
 
 </div>

@@ -62,7 +62,7 @@ class CreateTrainForm extends Form
         $players_array = [];
 
         foreach ($players as $player) {
-            $players_array[$player] = ['status' => 'pending'];
+            $players_array[$player] = ['status' => 'en attente'];
         }
 
 
