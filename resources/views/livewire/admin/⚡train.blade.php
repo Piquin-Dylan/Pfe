@@ -16,10 +16,10 @@ new class extends Component {
 
         if (Auth::user()->player) {
             $player = Player::where('user_id', $current_user)->select('team_id')->value('team_id');
-            $this->trains = Train::where('team_id', $player)->get('id');
+            $this->trains = Train::where('team_id', $player)->orderby('date_train', 'asc')->get('id');
         } else {
             $team = Team::where('user_id', $current_user)->select('id')->value('id');
-            $this->trains = Train::where('team_id', $team)->get();
+            $this->trains = Train::where('team_id', $team)->orderby('date_train', 'asc')->get();
         }
     }
 };
