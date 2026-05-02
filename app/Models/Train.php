@@ -36,6 +36,6 @@ class Train extends Model
 
     public function players(): BelongsToMany
     {
-        return $this->belongsToMany(Player::class);
+        return $this->belongsToMany(Player::class)->withPivot('status');
     }
 }

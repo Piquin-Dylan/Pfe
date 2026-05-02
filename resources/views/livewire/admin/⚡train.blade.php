@@ -27,20 +27,20 @@ new class extends Component {
 
 <div>
     <div class="lg:flex lg:justify-center lg:items-center lg:flex-row lg:flex-wrap lg:gap-12">
-    @foreach($trains as $train)
-        <div class="text-2xl text-white flex flex-col justify-center lg:w-112 lg:g-12">
-            <div class="flex flex-row gap-8 mt-8 mb-8">
-            <span class="text-center bg-gray-700 rounded-2xl p-4">{{ \Carbon\Carbon::parse($train->date_train)->locale('fr')->translatedFormat('d F') }}  </span>
-                <div class="">
-                <span>Entrainement collectif</span>
-                <div class="">
-                <span class="mr-4">{{\Carbon\Carbon::parse($train->hours_start)->format('H\hi')}} - {{\Carbon\Carbon::parse($train->hours_start)->format('H\hi')}} </span>
-                <span class="">{{$train->address}} </span>
-                    <a href="#">Voir</a>
+        @foreach($trains as $train)
+            <div class="text-2xl text-white flex flex-col justify-center lg:w-112 lg:g-12">
+                <div class="flex flex-row gap-8 mt-8 mb-8">
+                    <span class="text-center bg-gray-700 rounded-2xl p-4">{{ \Carbon\Carbon::parse($train->date_train)->locale('fr')->translatedFormat('d F') }}  </span>
+                    <div class="">
+                        <span>Entrainement collectif</span>
+                        <div class="">
+                            <span class="mr-4">{{\Carbon\Carbon::parse($train->hours_start)->format('H\hi')}} - {{\Carbon\Carbon::parse($train->hours_start)->format('H\hi')}} </span>
+                            <span class="">{{$train->address}} </span>
+                            <a href="train/{{{$train->id}}}">Voir</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
-    @endforeach
+        @endforeach
     </div>
 </div>
