@@ -19,9 +19,9 @@ return new class extends Migration {
             $table->string('hours');
             $table->string('name_home');
             $table->string('name_away');
+            $table->string('photo_home');
+            $table->string('photo_away');
 
-            /* $table->string('image_home');
-             $table->string('image_away');*/
             $table->timestamps();
         });
     }

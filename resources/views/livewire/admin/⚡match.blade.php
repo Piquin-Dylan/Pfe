@@ -16,10 +16,10 @@ new class extends Component {
 
         if (Auth::user()->player) {
             $player = \App\Models\Player::where('user_id', $current_user)->select('team_id')->value('team_id');
-            $this->games = Game::where('team_id', $player)->select('id')->get('id');
+            $this->games = Game::where('team_id', $player)->get();
         } else {
             $team = \App\Models\Team::where('user_id', $current_user)->select('id')->value('id');
-            $this->games = Game::where('team_id', $team)->select('id', 'date_match')->get();
+            $this->games = Game::where('team_id', $team)->get();
         }
     }
 };
@@ -30,6 +30,8 @@ new class extends Component {
     @foreach($games as $game)
 
         <div class="text-5xl text-white flex justify-center">{{$game->id}}</div>
+        <img alt="" src="{{asset($game->photo_home)}}">
+        <img alt="" src="{{asset($game->photo_away)}}">
     @endforeach
 
 </div>

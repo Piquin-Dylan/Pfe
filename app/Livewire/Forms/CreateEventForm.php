@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\WithFileUploads;
 
 class CreateEventForm extends Form
 {
+    use WithFileUploads;
 
 
     #[Validate('required', message: 'Le champs date est requis')]
@@ -32,10 +34,19 @@ class CreateEventForm extends Form
     public string $name_away = "";
 
 
+    #[Validate('required|image', message: 'Le champs photo a domicile est requis')]
+    public $photo_home = "";
+
+
+    #[Validate('required|image', message: "Le champs photo a l'extérieur est requis")]
+    public $photo_away = "";
+
     public function submit(): void
     {
         $this->validate();
 
+        $photoHomePath = $this->photo_home->store('photos', 'public');
+        $photoAwayPath = $this->photo_away->store('photos', 'public');
 
         $current_user = Auth::user()->getAuthIdentifier();
         $teams_id = DB::table('team')->where('user_id', $current_user)->value('id');
@@ -48,6 +59,8 @@ class CreateEventForm extends Form
             'hours' => $this->hours,
             'name_home' => $this->name_home,
             'name_away' => $this->name_away,
+            'photo_home' => $photoHomePath,
+            'photo_away' => $photoAwayPath,
         ]);
 
         $players_list = DB::table('players')

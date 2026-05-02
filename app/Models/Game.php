@@ -21,6 +21,8 @@ class Game extends Model
         'hours',
         'name_home',
         'name_away',
+        'photo_home',
+        'photo_away',
     ];
 
     // ️ un  match appartient à une équipe

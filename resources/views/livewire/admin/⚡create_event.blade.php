@@ -2,8 +2,10 @@
 
 use App\Livewire\Forms\CreateEventForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
     public CreateEventForm $form;
 
     public function save(): void
@@ -92,6 +94,30 @@ new class extends Component {
                     wire:model.live="form.name_away">
                     <div>
                         @error('form.name_away') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                </x-form.input>
+                <x-form.input
+                    label_name="Photo de l'équipe a domicile"
+                    for_label="photo_home"
+                    placeholder=""
+                    type="file"
+                    id="photo_home"
+                    name="photo_home"
+                    wire:model.live="form.photo_home">
+                    <div>
+                        @error('form.photo_home') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                </x-form.input>
+                <x-form.input
+                    label_name="Photo de l'équipe a l'extérieur"
+                    for_label="photo_away"
+                    placeholder=""
+                    type="file"
+                    id="photo_away"
+                    name="photo_away"
+                    wire:model.live="form.photo_away">
+                    <div>
+                        @error('form.photo_away') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </x-form.input>
             </div>
