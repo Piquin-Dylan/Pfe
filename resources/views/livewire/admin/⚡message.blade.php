@@ -40,16 +40,26 @@ new class extends Component {
 
         @foreach($notifications as $notification)
 
-            <div
-                class="flex items-center mt-6 mb-6 flex-col min-w-full  justify-between bg-gradient-to-r from-[#1E293B] to-[#0F172A] border border-white rounded-2xl p-5 w-full max-w-3xl shadow-lg">
-                <span class="text-white lg:text-2xl"> {{ $notification->data['message'] ?? "" }} </span>
-                <div class="mt-4 flex gap-6">
-                        <span
-                            wire:click="changeStatus('present',{{ $notification->data['train_id'] ?? ""}})">Présent</span>
-                    <span
-                        wire:click="changeStatus('absent',{{ $notification->data['train_id'] ?? ""}})">Absent</span>
+            <div class="mx-6 mb-8 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-2xl p-6 flex flex-col gap-5 text-white transition hover:translate-y-[-2px] hover:border-white/20 max-w-3xl w-full">
 
+                <div class="text-lg lg:text-xl font-semibold tracking-wide">
+                    {{ $notification->data['message'] ?? "" }}
                 </div>
+
+                <div class="flex gap-4">
+                    <button
+                        wire:click="changeStatus('present',{{ $notification->data['train_id'] ?? ""}})"
+                        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-semibold transition hover:scale-[1.03] hover:brightness-110">
+                        Présent
+                    </button>
+
+                    <button
+                        wire:click="changeStatus('absent',{{ $notification->data['train_id'] ?? ""}})"
+                        class="px-5 py-2.5  bg-white/5 border border-white/10 text-gray-300 text-sm font-semibold rounded-xl transition hover:bg-white/10 hover:text-white">
+                        Absent
+                    </button>
+                </div>
+
             </div>
 
         @endforeach

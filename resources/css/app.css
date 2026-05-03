@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600;700&display=swap');
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -28,7 +29,7 @@
     .btn-form {
         @apply text-[16px] bg-[#B2AFDF] text-[#ffffff]
         border rounded-lg
-        px-20 py-4 text-center max-w-[250px] w-2xs;
+        px-20 py-4 text-center max-w-[300px] w-2xs;
     }
 
     .title_section {
@@ -42,6 +43,8 @@
     .card {
         @apply bg-[#B2AFDF]
     }
+
+
 }
 
 body {
@@ -59,14 +62,11 @@ body {
 }
 
 .card_hub {
-    background-color: #AEB6D8;
-    border: 1px solid white;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    max-width: 400px;
-    min-width: 350px;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
 }
+
 
 .btn_deconnexion {
     font-size: 20px;

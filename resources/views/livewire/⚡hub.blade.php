@@ -54,8 +54,6 @@ new class extends Component {
                 <div class="flex justify-center gap-2 p-3">
                     <span class="title_section"> {{Auth::user()->firstName}}</span>
                     <span class="title_section"> {{Auth::user()->lastName}}</span>
-                    <img src="{{asset(Auth::user()->image)}}">
-
                 </div>
                 <div>
                     <form wire:submit="logout" method="POST">
@@ -69,14 +67,33 @@ new class extends Component {
 
         <div class="lg:flex lg:flex-row">
             @foreach($this->teams as $team)
-                <div class=" card_hub flex items-center flex-col gap-8 flex-wrap ">
-                    <a href="/dashboard">
-                        <span class="text-white">{{$team->name}}</span>
-                        <span class="text-white">{{$team->division}}</span>
-                        <span class="text-white">{{$team->ville}}</span>
-                        <span class="text-white">{{$team->code}}</span>
-                        <img src="{{asset($team->logo)}}" alt="">
+                <div
+                    class=" mt-6 mb-6 mx-6 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white rounded-2xl p-6 flex flex-col items-center gap-6 transition hover:translate-y-[-5px] ">
+
+                    <div class="flex items-center gap-5">
+                        <img class="max-w-36 drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]" src="{{asset($team->logo)}}"
+                             alt="">
+
+                        <span class="text-white text-3xl font-semibold tracking-wide">
+            {{$team->name}}
+        </span>
+                    </div>
+
+                    <div
+                        class="w-full border border-white/10 bg-white/5 rounded-xl px-5 py-3 backdrop-blur-sm text-center">
+        <span class="text-gray-200 text-sm tracking-wide">
+            Code pour rejoindre l'équipe
+        </span>
+                        <div class="text-white font-mono text-lg tracking-widest mt-1">
+                            {{$team->code}}
+                        </div>
+                    </div>
+
+                    <a href="/dashboard"
+                       class="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold transition hover:scale-[1.02] hover:brightness-110">
+                        Mon dashboard
                     </a>
+
                 </div>
             @endforeach
 
