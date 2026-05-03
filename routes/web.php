@@ -50,6 +50,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/match', function () {
         return view('admin.match');
     });
+    Route::get('/match/{id}', function ($id) {
+        return view('admin.show_match',[
+            'id'=>$id
+        ]);
+    });
     Route::get('/train', function () {
         return view('admin.train');
     });

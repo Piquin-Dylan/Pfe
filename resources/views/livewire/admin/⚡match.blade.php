@@ -45,7 +45,7 @@ new class extends Component {
 
         </div>
         <div class="flex justify-center items-center gap-4 mb-10">
-            <x-button>Convocation</x-button>
+            <a class="btn-form" href="match/{{$game->id}}">Convocation</a>
             <x-button>Score du match</x-button>
         </div>
     @endforeach
