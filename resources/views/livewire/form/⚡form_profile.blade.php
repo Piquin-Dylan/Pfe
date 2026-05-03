@@ -100,6 +100,7 @@ new class extends Component {
                                 @error('form.code') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </x-form.input>
+
                     </div>
                     <div class="flex justify-center gap-2 items-center flex-col">
                         <x-form.button title="Rejoindre une équipe"

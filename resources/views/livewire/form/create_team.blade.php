@@ -2,8 +2,11 @@
 
 use App\Livewire\Forms\CreateTeamForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
+
     public CreateTeamForm $form;
 
     public function save(): void
@@ -59,18 +62,18 @@ new class extends Component {
                                 @error('form.division') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </x-form.input>
-                        {{--     <x-form.input
-                                     label_name="Logo du club"
-                                     for_label="logo"
-                                     placeholder=""
-                                     type="file"
-                                     id="logo"
-                                     name="logo"
-                                     wire:model.live="form.logo" required>
-                                 <div>
-                                     @error('form.logo') <span class="error">{{ $message }}</span> @enderror
-                                 </div>
-                             </x-form.input>--}}
+                        <x-form.input
+                            label_name="Logo du club"
+                            for_label="logo"
+                            placeholder=""
+                            type="file"
+                            id="logo"
+                            name="logo"
+                            wire:model.live="form.logo" required>
+                            <div>
+                                @error('form.logo') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </x-form.input>
                     </div>
                     <x-form.textarea label_name="Description" label_for="description" name="description"
                                      id="description" rows="10" col="10" placeholder=""></x-form.textarea>

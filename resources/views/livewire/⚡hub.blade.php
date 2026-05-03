@@ -75,6 +75,7 @@ new class extends Component {
                         <span class="text-white">{{$team->division}}</span>
                         <span class="text-white">{{$team->ville}}</span>
                         <span class="text-white">{{$team->code}}</span>
+                        <img src="{{asset($team->logo)}}" alt="">
                     </a>
                 </div>
             @endforeach

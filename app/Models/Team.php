@@ -19,7 +19,7 @@ class Team extends Model
         'ville',
         'division',
         'code',
-
+        'logo',
     ];
 
     public function user(): BelongsTo
