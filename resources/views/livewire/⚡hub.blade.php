@@ -16,7 +16,14 @@ new class extends Component {
     public function mount(): void
     {
         $current_user = Auth::id();
-        $this->teams = \App\Models\Team::where('user_id', $current_user)->get();
+
+
+        if (Auth::user()->player) {
+            $this->teams = Auth::user()->player->team()->get();
+
+        } else {
+            $this->teams = \App\Models\Team::where('user_id', $current_user)->get();
+        }
 
 
     }
@@ -54,7 +61,7 @@ new class extends Component {
                     <form wire:submit="logout" method="POST">
                         <button class="btn_deconnexion" type="submit">Deconnexion</button>
                     </form>
-                    <x-modal></x-modal>
+
                 </div>
                 <span class="title_section">Mes équipes</span>
             </div>
