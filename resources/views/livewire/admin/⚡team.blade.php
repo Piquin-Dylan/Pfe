@@ -13,6 +13,10 @@ new class extends Component {
 
     public Collection $playersWithStatus;
 
+    public int $count = 0;
+
+    public $checked = [];
+
 
     public function filter($string): void
     {
@@ -25,10 +29,9 @@ new class extends Component {
         $current_user = Auth::id();
 
 
-
         return Player::where(function ($query) use ($current_user) {
 
-                $query->whereHas('team', function ($q) use ($current_user) {
+            $query->whereHas('team', function ($q) use ($current_user) {
                 $q->where('user_id', $current_user);
             });
 
@@ -46,8 +49,7 @@ new class extends Component {
                 $query->where('players.position', '=', $this->filters);
             })
             ->with('team:id,user_id')
-            ->get(['name', 'position', 'team_id']);
-
+            ->get();
     }
 
 };
@@ -81,6 +83,7 @@ new class extends Component {
                 wire:click="filter('gardien')">Gardien</span>
         </div>
     </div>
+    <span class="text-white">Nombres de joueur convoqué : {{count($checked)}} / 20  </span>
 
     <div class="flex justify-center gap-16 flex-wrap">
         @php
@@ -89,25 +92,29 @@ new class extends Component {
 
         @foreach($players as $player)
 
-            <div class="relative">
+            <label>
+                <input wire:model.live="checked" type="checkbox" name="option" value="{{$player->id}}">
+
+                <div class="relative">
         <span class="text-white absolute font-bold text-xl left-8 top-8">
             {{ $player->name }}
         </span>
 
-                <img class="w-[250px] pb-6"
-                     src="{{ asset('Component_card_player.svg') }}"
-                     alt="">
+                    <img class="w-[250px] pb-6"
+                         src="{{ asset('Component_card_player.svg') }}"
+                         alt="">
 
-                @if(isset($player->pivot))
-                    <span class="title_section">
+                    @if(isset($player->pivot))
+                        <span class="title_section">
                 {{ $player->pivot->status }}
             </span>
-                @endif
-            </div>
-
+                    @endif
+                </div>
+            </label>
         @endforeach
 
 
     </div>
+
 
 </div>
