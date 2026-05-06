@@ -17,6 +17,8 @@ new class extends Component {
 
     public $checked = [];
 
+    public int $newValue = 16;
+
 
     public function filter($string): void
     {
@@ -83,7 +85,11 @@ new class extends Component {
                 wire:click="filter('gardien')">Gardien</span>
         </div>
     </div>
-    <span class="text-white">Nombres de joueur convoqué : {{count($checked)}} / 20  </span>
+    <span class="text-white">Nombres de joueur convoqué : {{count($checked)}} /  {{$newValue}}  </span>
+    <input wire:model.live="newValue" type="text">
+    @php
+        dump($newValue)
+    @endphp
 
     <div class="flex justify-center gap-16 flex-wrap">
         @php
