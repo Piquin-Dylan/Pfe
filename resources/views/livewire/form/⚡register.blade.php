@@ -23,12 +23,17 @@ new class extends Component {
 ?>
 <section>
 
-    <div class="flex">
-    <div class=" pt-12 w-[1400px]">
-        <x-title_subtitle_form title="Inscription"
-                               subtitle="Inscrivez vous pour créer votre première  équipe de football"></x-title_subtitle_form>
-        <form wire:submit.prevent="save">
-            <div class="sm:flex sm:flex-row sm:flex-wrap ">
+    <x-layout_forms
+        title_form="Inscription"
+        subtitle_form="Inscrivez vous pour créer votre équipe de football"
+        text="Vous avez déjà un compte ?"
+        action="Connexion"
+        redirection="login">
+
+        <form wire:submit.prevent="save" class="space-y-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
                 <x-form.input
                     label_name="Prénom"
                     for_label="firstName"
@@ -38,11 +43,14 @@ new class extends Component {
                     name="firstName"
                     wire:model.live="form.firstName">
                     <div>
-                        @error('form.firstName') <span class="error">{{ $message }}</span> @enderror
+                        @error('form.firstName')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </x-form.input>
+
                 <x-form.input
-                    label_name="Nom de famille"
+                    label_name="Nom"
                     for_label="lastName"
                     placeholder="Dupont"
                     type="text"
@@ -50,59 +58,60 @@ new class extends Component {
                     name="lastName"
                     wire:model.live="form.lastName">
                     <div>
-                        @error('form.lastName') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                </x-form.input>
-                <x-form.input
-                    label_name="Adress email"
-                    for_label="email"
-                    placeholder="Ex : jean.dupont@gmail.com"
-                    type="email"
-                    id="email"
-                    name="email"
-                    wire:model.live="form.email">
-                    <div>
-                        @error('form.email') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                </x-form.input>
-                <x-form.input
-                    label_name="Mot de passe"
-                    for_label="password"
-                    placeholder=""
-                    type="password"
-                    id="password"
-                    name="password"
-                    wire:model.live="form.password">
-                    <div>
-                        @error('form.password') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                </x-form.input>
-                <x-form.input
-                    label_name="Photo de profile"
-                    for_label="image"
-                    placeholder=""
-                    type="file"
-                    id="image"
-                    name="image"
-                    wire:model.live="form.image">
-                    <div>
-                        @error('form.image') <span class="error">{{ $message }}</span> @enderror
+                        @error('form.lastName')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </x-form.input>
 
+            </div>
 
+            <x-form.input
+                label_name="Adresse email"
+                for_label="email"
+                placeholder="jean.dupont@gmail.com"
+                type="email"
+                id="email"
+                name="email"
+                wire:model.live="form.email">
+                <div>
+                    @error('form.email')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+            </x-form.input>
+
+            <x-form.input
+                label_name="Mot de passe"
+                for_label="password"
+                placeholder=""
+                type="password"
+                id="password"
+                name="password"
+                wire:model.live="form.password">
+                <div>
+                    @error('form.password')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+            </x-form.input>
+            <div>
+                <input type="file"
+                       class="input-dark file:bg-transparent file:text-white file:border-none w-full"
+                       wire:model.live="form.image">
+
+                @error('form.image')
+                <span class="error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="flex justify-center gap-2 items-center flex-col">
-                <x-form.button text="Inscription" type="submit"></x-form.button>
-                <span class="  text-white  flex justify-center">Vous avez déjà un compte ? <a class="font-bold"
-                                                                                             href="/connexion">  Connectez-vous !</a> </span>
-            </div>
+
+            <button type="submit"
+                    class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
+                Inscription
+            </button>
+
         </form>
 
-    </div>
-    <div>
-        <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
-    </div>
-    </div>
-</section>
+    </x-layout_forms>
 
+</section>

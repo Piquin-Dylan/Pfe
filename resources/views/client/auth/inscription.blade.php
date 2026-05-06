@@ -1,3 +1,3 @@
-<x-layout_form>
+<x-layout>
     <livewire:form.register></livewire:register>
-</x-layout_form>
+</x-layout>

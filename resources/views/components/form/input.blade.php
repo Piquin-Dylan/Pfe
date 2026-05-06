@@ -7,7 +7,7 @@
     "id",
 ])
 
-<div class="flex flex-col p-6 justify-center sm:flex-1">
+<div class="flex flex-col pt-3 justify-center sm:flex-1">
 
     <label class="pb-2 font-bold text-[20px] text-white" for="{{ $for_label }}">
         {{ $label_name }}
@@ -20,7 +20,7 @@
         name="{{ $name }}"
         id="{{ $id }}"
         {{ $attributes }}
-        class="bg-white p-4 rounded-2xl text-black text-[18px]"
+        class="input-dark"
     >
     @error('form.' . $name)
     <small class="text-red-500 pt-2">

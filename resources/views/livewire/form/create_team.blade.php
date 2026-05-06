@@ -21,71 +21,113 @@ new class extends Component {
 
 ?>
 <div>
-    <section>
+
+    <x-layout_forms
+        title_form="Créer votre équipe"
+        subtitle_form="Lancez-vous et créez votre première équipe de football !"
+        text="Vous voulez rejoindre une équipe ?"
+        action="Rejoindre une équipe"
+        redirection="profile">
+
+        <form wire:submit.prevent="save" class="space-y-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <x-form.input
+                    label_name="Nom de l'équipe"
+                    for_label="name"
+                    placeholder="Ex : Standard"
+                    type="text"
+                    id="name"
+                    name="name"
+                    wire:model.live="form.name">
+
+                    @error('form.name')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+
+                </x-form.input>
+
+                <x-form.input
+                    label_name="Ville de l'équipe"
+                    for_label="ville"
+                    placeholder="Ex : Liège"
+                    type="text"
+                    id="ville"
+                    name="ville"
+                    wire:model.live="form.ville">
+
+                    @error('form.ville')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+
+                </x-form.input>
+
+            </div>
+
+            <x-form.input
+                label_name="Division de l'équipe"
+                for_label="division"
+                placeholder="Ex : D1"
+                type="text"
+                id="division"
+                name="division"
+                wire:model.live="form.division">
+
+                @error('form.division')
+                <span class="error">{{ $message }}</span>
+                @enderror
+
+            </x-form.input>
+
+            <div>
+                <label class="block mb-1 text-sm font-medium text-white/80">
+                    Logo du club
+                </label>
+
+                <input type="file"
+                       wire:model.live="form.logo"
+                       class="input-dark w-full">
+
+                @error('form.logo')
+                <span class="error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <x-form.textarea
+                label_name="Description"
+                label_for="description"
+                name="description"
+                id="description"
+                rows="5"
+                col="6"
+                placeholder="Description de votre équipe...">
+
+                @error('form.description')
+                <span class="error">{{ $message }}</span>
+                @enderror
+
+            </x-form.textarea>
+
+            <button type="submit"
+                    class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
+                Créer mon équipe
+            </button>
+
+        </form>
+
+    </x-layout_forms>
+
+
+    {{--<section>
         <div>
             <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
-                <form wire:submit.prevent="save">
-                    <div class="sm:flex sm:flex-row sm:flex-wrap ">
-                        <x-form.input
-                            label_name="Nom de l'équipe"
-                            for_label="name"
-                            placeholder="Ex : Standard"
-                            type="text"
-                            id="name"
-                            name="name"
-                            wire:model.live="form.name" required>
-                            <div>
-                                @error('form.name') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </x-form.input>
-                        <x-form.input
-                            label_name="Ville de l'équipe"
-                            for_label="ville"
-                            placeholder="Dupont"
-                            type="text"
-                            id="ville"
-                            name="ville"
-                            wire:model.live="form.ville" required>
-                            <div>
-                                @error('form.ville') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </x-form.input>
-                        <x-form.input
-                            label_name="Division de l'équipe"
-                            for_label="division"
-                            placeholder=""
-                            type="text"
-                            id="division"
-                            name="division"
-                            wire:model.live="form.division" required>
-                            <div>
-                                @error('form.division') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </x-form.input>
-                        <x-form.input
-                            label_name="Logo du club"
-                            for_label="logo"
-                            placeholder=""
-                            type="file"
-                            id="logo"
-                            name="logo"
-                            wire:model.live="form.logo" required>
-                            <div>
-                                @error('form.logo') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </x-form.input>
-                    </div>
-                    <x-form.textarea label_name="Description" label_for="description" name="description"
-                                     id="description" rows="10" col="10" placeholder=""></x-form.textarea>
-                    <div class="flex justify-center">
-                        <button class="text-white" type="submit">Créer mon équipe</button>
-                    </div>
-                </form>
+
             </div>
             <div>
                 <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
             </div>
         </div>
-    </section>
+    </section>--}}
 
 </div>

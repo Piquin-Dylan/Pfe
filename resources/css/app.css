@@ -129,3 +129,23 @@ body {
     background: #192443;
     color: white;
 }
+.input-dark {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-dark::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+.input-dark:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168,85,247,0.4);
+    background: rgba(255,255,255,0.08);
+}

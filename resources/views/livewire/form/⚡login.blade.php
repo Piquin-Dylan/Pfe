@@ -25,49 +25,42 @@ new class extends Component {
 ?>
 
 <section>
-    <div class="flex">
-        <div class=" pt-12 w-[1400px]">
-            <x-title_subtitle_form title="Connexion"
-                                   subtitle="Connectez-vous pour accéder à votre équipe de football."></x-title_subtitle_form>
-            <form wire:submit="save">
-                <div class="sm:flex sm:flex-row sm:flex-wrap ">
-                    <x-form.input
-                        label_name="Adress email"
-                        for_label="email"
-                        placeholder="Ex : jean.dupont@gmail.com"
-                        type="email"
-                        id="email"
-                        name="email"
-                        wire:model="form.email">
-                        <div>
-                            @error('form.email') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
-                    <x-form.input
-                        label_name="Mot de passe"
-                        for_label="password"
-                        placeholder=""
-                        type="password"
-                        id="password"
-                        name="password"
-                        wire:model="form.password">
-                        <div>
-                            @error('form.password') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </x-form.input>
 
+    <x-layout_forms title_form="Connexion" subtitle_form="Connectez-vous pour accéder à votre hub" button="Connexion"
+                    text="Vous n'avez pas encore de compte ?"
+                    action="Inscription" redirection="inscription">
 
+        <form wire:submit.prevent="save">
+            <x-form.input
+
+                label_name="Adress email"
+                for_label="email"
+                placeholder="Ex : jean.dupont@gmail.com"
+                type="email"
+                id="email"
+                name="email"
+                wire:model="form.email">
+                <div>
+                    @error('form.email') <span class="error">{{ $message }}</span> @enderror
                 </div>
-                <div class="flex justify-center gap-2 items-center flex-col">
-                    <x-form.button type="submit" text="Connexion"></x-form.button>
-                    <span class="  text-white  flex justify-center">Pas encore de compte ?<a class="font-bold"
-                                                                                             href="/connexion">  Créer un compte</a> </span>
+            </x-form.input>
+            <x-form.input
+                label_name="Mot de passe"
+                for_label="password"
+                placeholder=""
+                type="password"
+                id="password"
+                name="password"
+                wire:model="form.password">
+                <div>
+                    @error('form.password') <span class="error">{{ $message }}</span> @enderror
                 </div>
-            </form>
-        </div>
-        <div>
-            <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
-        </div>
+            </x-form.input>
+            <button type="submit"
+                    class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
+                Connexion
+            </button>
+        </form>
+    </x-layout_forms>
 
-    </div>
 </section>
