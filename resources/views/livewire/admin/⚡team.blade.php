@@ -17,9 +17,7 @@ new class extends Component {
 
     public int $count = 0;
 
-    public $checked = [];
-
-    public int $newValue = 16;
+    public array $checked = [];
 
 
     public function filter($string): void
@@ -87,11 +85,7 @@ new class extends Component {
                 wire:click="filter('gardien')">Gardien</span>
         </div>
     </div>
-    @if($this->isMatch === true)
 
-    <span class="text-white">Nombres de joueur convoqué : {{count($checked)}} /  {{$newValue}}  </span>
-    <input wire:model.live="newValue" type="text">
-    @endif
 
     <div class="flex justify-center gap-16 flex-wrap">
         @php
@@ -100,13 +94,7 @@ new class extends Component {
 
         @foreach($players as $player)
 
-
-
-
             <label>
-                @if($this->isMatch === true)
-                <input wire:model.live="checked" type="checkbox" name="option" value="{{$player->id}}">
-                @endif
 
                 <div class="relative">
         <span class="text-white absolute font-bold text-xl left-8 top-8">
