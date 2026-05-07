@@ -2,6 +2,7 @@
 
 use App\Models\Game;
 use App\Models\Player;
+use App\Models\User;
 use Livewire\Component;
 
 new class extends Component {
@@ -55,6 +56,13 @@ new class extends Component {
     public function saveConvocation(): void
     {
         $this->games->players()->sync($this->checked);
+
+        $players_list = DB::table('players')
+            ->whereIn('players.id', $this->checked)
+            ->pluck('user_id');
+
+        $users = User::whereIn('users.id', $players_list)->get();
+        Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
     }
 
 };
@@ -143,6 +151,9 @@ new class extends Component {
     <div class="text-white text-center pb-6">
         Nombre de joueurs convoqués :
         {{ count($checked) }} / {{$newValue}}
+        @php
+            dump($checked)
+        @endphp
     </div>
 
     <div class="flex justify-center pb-8">
@@ -167,8 +178,11 @@ new class extends Component {
 
                 <div class="relative">
 
+                  {{--  <span class="text-white absolute font-bold text-xl left-8 top-8">
+                        {{ $player->firstName }}
+                    </span>--}}
                     <span class="text-white absolute font-bold text-xl left-8 top-8">
-                        {{ $player->name }}
+                        {{ $player->id}}
                     </span>
 
                     <img

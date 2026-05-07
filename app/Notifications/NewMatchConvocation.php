@@ -3,11 +3,12 @@
 namespace App\Notifications;
 
 use App\Models\Game;
-use App\Models\Train;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewMatchNotification extends Notification
+class NewMatchConvocation extends Notification
 {
     use Queueable;
 
@@ -40,15 +41,13 @@ class NewMatchNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'match_created',
+            'type' => 'convocation_match',
             'match_id' => $this->match->id,
             'date_match' => $this->match->date_match,
             'address' => $this->match->address,
             'hours' => $this->match->hours,
             'name_home' => $this->match->name_home,
             'name_away' => $this->match->name_away,
-            'message' => "L'entraîneur a créé un match pour  le {$this->match->date_match} à {$this->match->hours}"];
+            'message' => "Vous avez été sélectionner pour le match du  {$this->match->date_match} à {$this->match->hours}"];
     }
-
-
 }
