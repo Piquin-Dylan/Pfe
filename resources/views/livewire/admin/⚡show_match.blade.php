@@ -143,60 +143,65 @@ new class extends Component {
                 wire:click="filter('gardien')">
                 Gardien
             </span>
-
         </div>
 
     </div>
 
-    <div class="text-white text-center pb-6">
-        Nombre de joueurs convoqués :
-        {{ count($checked) }} / {{$newValue}}
-        @php
-            dump($checked)
-        @endphp
-    </div>
+    <div x-data="{ currentTab: 'first' }">
+        @include('livewire.components.navigation_match')
+        <div x-show="currentTab === 'first'">
+            <div class="text-white text-center pb-6">
+                Nombre de joueurs convoqués :
+                {{ count($checked) }} / {{ $newValue }}
+            </div>
 
-    <div class="flex justify-center pb-8">
-        <button
-            wire:click="saveConvocation"
-            class="btn-form">
-            Enregistrer les convocations
-        </button>
-    </div>
+            <div class="flex justify-center pb-8">
+                <button
+                    wire:click="saveConvocation"
+                    class="btn-form">
+                    Enregistrer les convocations
+                </button>
+            </div>
 
-    <div class="flex justify-center gap-16 flex-wrap">
+            <div class="flex justify-center gap-16 flex-wrap">
+                @foreach($this->players as $player)
+                    <label>
+                        <input
+                            wire:model.live="checked"
+                            type="checkbox"
+                            value="{{ $player->id }}">
 
-        @foreach($this->players as $player)
+                        <div class="relative">
+                        <span class="text-white absolute font-bold text-xl left-8 top-8">
+                            {{ $player->id }}
+                        </span>
 
-            <label>
+                            <img
+                                class="w-[250px] pb-6"
+                                src="{{ asset('Component_card_player.svg') }}"
+                                alt="">
+                        </div>
+                    </label>
+                @endforeach
+            </div>
+        </div>
 
-                <input
-                    wire:model.live="checked"
-                    type="checkbox"
-                    value="{{$player->id}}"
-                >
+        <div x-show="currentTab === 'second'">
+            @foreach($this->players as $player)
 
                 <div class="relative">
-
-                  {{--  <span class="text-white absolute font-bold text-xl left-8 top-8">
-                        {{ $player->firstName }}
-                    </span>--}}
-                    <span class="text-white absolute font-bold text-xl left-8 top-8">
-                        {{ $player->id}}
-                    </span>
-
+                        <span class="text-white absolute font-bold text-xl left-8 top-8">
+                            {{ $player->id }}
+                        </span>
                     <img
                         class="w-[250px] pb-6"
                         src="{{ asset('Component_card_player.svg') }}"
-                        alt=""
-                    >
-
+                        alt="">
                 </div>
+            @endforeach
+        </div>
 
-            </label>
-
-        @endforeach
-
+        <div x-show="currentTab === 'third'">
+        </div>
     </div>
-
 </div>
