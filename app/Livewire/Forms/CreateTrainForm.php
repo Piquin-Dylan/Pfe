@@ -66,6 +66,7 @@ class CreateTrainForm extends Form
         }
 
 
+
         $train->players()->attach($players_array);
 
 

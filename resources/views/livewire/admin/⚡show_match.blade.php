@@ -55,7 +55,13 @@ new class extends Component {
 
     public function saveConvocation(): void
     {
-        $this->games->players()->sync($this->checked);
+        $players_array = [];
+
+        foreach ($this->checked as $player) {
+            $players_array[$player] = ['status' => 'en attente'];
+        }
+        $this->games->players()->sync($players_array);
+
 
         $players_list = DB::table('players')
             ->whereIn('players.id', $this->checked)
@@ -63,6 +69,7 @@ new class extends Component {
 
         $users = User::whereIn('users.id', $players_list)->get();
         Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
+
     }
 
 };
@@ -160,11 +167,14 @@ new class extends Component {
                     wire:click="saveConvocation"
                     class="btn-form">
                     Enregistrer les convocations
+
+
                 </button>
             </div>
 
             <div class="flex justify-center gap-16 flex-wrap">
                 @foreach($this->players as $player)
+
                     <label>
                         <input
                             wire:model.live="checked"
@@ -187,16 +197,17 @@ new class extends Component {
         </div>
 
         <div x-show="currentTab === 'second'">
-            @foreach($this->players as $player)
+            @foreach($this->games->players as $player)
 
                 <div class="relative">
                         <span class="text-white absolute font-bold text-xl left-8 top-8">
-                            {{ $player->id }}
+                            {{ $player->name }}
                         </span>
                     <img
                         class="w-[250px] pb-6"
                         src="{{ asset('Component_card_player.svg') }}"
                         alt="">
+                    <span>{{$player->pivot->status}}</span>
                 </div>
             @endforeach
         </div>

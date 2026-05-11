@@ -40,6 +40,6 @@ class Game extends Model
     //  Les joueurs qui participent au match (many-to-many)
     public function players(): BelongsToMany
     {
-        return $this->belongsToMany(Player::class,'player_game','match_id','player_id');
+        return $this->belongsToMany(Player::class, 'player_game', 'match_id', 'player_id')->withPivot('status');
     }
 }

@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('game_player', function (Blueprint $table) {
+        Schema::create('player_game', function (Blueprint $table) {
             $table->id();
             $table->foreignId('player_id');
             $table->foreignId('match_id');
+            $table->string('status');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('game_player');
+        Schema::dropIfExists('player_game');
     }
 };
