@@ -17,8 +17,11 @@ new class extends Component {
         if (Auth::attempt(["email" => $this->form->email, "password" => $this->form->password
         ])) {
             return $this->redirect('/hub');
+        } else {
+
+            session()->flash('status', "Le mot de passe ou l'adresse email est incorrect");
         }
-        return $this->redirect('/');
+
     }
 
 }
@@ -30,10 +33,18 @@ new class extends Component {
                     text="Vous n'avez pas encore de compte ?"
                     action="Inscription" redirection="inscription">
 
+        @if  (session()->has('status'))
+            <div
+                x-data="{ show: true }"
+                x-show="show"
+                class=" text-red-500 text-center text-xl p-4 mt-8 mb-4">
+                {{ session('status') }}
+            </div>
+        @endif
         <form wire:submit.prevent="save">
             <x-form.input
 
-                label_name="Adress email"
+                label_name="Adresse mail"
                 for_label="email"
                 placeholder="Ex : jean.dupont@gmail.com"
                 type="email"
@@ -52,6 +63,7 @@ new class extends Component {
                 id="password"
                 name="password"
                 wire:model="form.password">
+
                 <div>
                     @error('form.password') <span class="error">{{ $message }}</span> @enderror
                 </div>
