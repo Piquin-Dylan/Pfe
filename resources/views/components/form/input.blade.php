@@ -7,7 +7,7 @@
     "id",
 ])
 
-<div class="flex flex-col pt-3 justify-center sm:flex-1">
+<div class=" mb-4 flex flex-col pt-3 justify-center sm:flex-1">
 
     <label class="pb-2 font-bold text-[20px] text-white" for="{{ $for_label }}">
         {{ $label_name }}

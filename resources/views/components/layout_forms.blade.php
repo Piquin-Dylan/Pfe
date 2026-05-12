@@ -8,9 +8,9 @@
 )
 
 
-<div class="relative  flex items-center justify-center min-h-screen px-6">
+<div class="  relative  flex items-center justify-center min-h-screen px-6 py-6">
 
-    <div class="w-full max-w-xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-10 shadow-2xl">
+    <div class="p-3  w-full max-w-xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl lg:p-10 shadow-2xl">
 
         <div class="mb-8 text-white text-center">
                 <span class="text-3xl font-bold">
