@@ -15,15 +15,19 @@
 }
 @layer components {
     .btn-primary {
-        @apply text-[18px] bg-[#353342] text-white
-        border border-white rounded-lg
-        px-4 py-4 text-center max-w-[250px] w-2xs ;
+        @apply text-[18px] bg-violet-600 text-white
+        border border-violet-500 rounded-lg
+        px-4 py-4 text-center max-w-[250px] w-2xs
+        hover:bg-transparent hover:text-violet-300 hover:border-violet-400
+        transition-all duration-300 cursor-pointer;
     }
 
     .btn-secondary {
-        @apply text-[16px] bg-white text-[#353342]
-        border border-[#353342] rounded-lg
-        px-4 py-4 text-center max-w-[250px] w-2xs;
+        @apply text-[16px] bg-transparent text-violet-300
+        border border-violet-400 rounded-lg
+        px-4 py-4 text-center max-w-[250px] w-2xs
+        hover:bg-violet-600 hover:text-white hover:border-violet-500
+        transition-all duration-300 cursor-pointer;
     }
 
     .btn-form {

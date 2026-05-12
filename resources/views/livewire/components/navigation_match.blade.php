@@ -4,7 +4,7 @@
         :class="currentTab === 'first'
                 ? 'text-white border-b-2 border-white'
                 : 'text-white/70 border-b-2 border-transparent hover:text-white'"
-        class="pb-2 font-semibold transition-all duration-200">
+        class="pb-2 font-semibold transition-all duration-200 cursor-pointer">
         Convocation
     </button>
 
@@ -13,7 +13,7 @@
         :class="currentTab === 'second'
                 ? 'text-white border-b-2 border-white'
                 : 'text-white/70 border-b-2 border-transparent hover:text-white'"
-        class="pb-2 font-semibold transition-all duration-200">
+        class="pb-2 font-semibold transition-all duration-200 cursor-pointer">
         Feuille de match
     </button>
 
@@ -22,7 +22,7 @@
         :class="currentTab === 'third'
                 ? 'text-white border-b-2 border-white'
                 : 'text-white/70 border-b-2 border-transparent hover:text-white'"
-        class="pb-2 font-semibold transition-all duration-200">
+        class="pb-2 font-semibold transition-all duration-200 cursor-pointer">
         Composition
     </button>
 </div>
