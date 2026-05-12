@@ -67,6 +67,7 @@ new class extends Component {
 
         <div class="lg:flex lg:flex-row">
             @foreach($this->teams as $team)
+                <a href="/dashboard">
                 <div
                     class=" mt-6 mb-6 mx-6 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white rounded-2xl p-6 flex flex-col items-center gap-6 transition hover:translate-y-[-5px] ">
 
@@ -95,6 +96,7 @@ new class extends Component {
                     </a>
 
                 </div>
+                </a>
             @endforeach
 
         </div>

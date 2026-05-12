@@ -167,52 +167,82 @@ new class extends Component {
                     wire:click="saveConvocation"
                     class="btn-form">
                     Enregistrer les convocations
-
-
                 </button>
             </div>
 
             <div class="flex justify-center gap-16 flex-wrap">
                 @foreach($this->players as $player)
+                    <label class="cursor-pointer group flex flex-col items-center">
+                        <div
+                            class="relative transition-all duration-300 ease-in-out
+                       group-hover:scale-105 group-hover:-translate-y-2
+                       group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]"
+                        >
+                <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
+                    {{ $player->id }}
+                </span>
 
-                    <label>
-                        <input
-                            wire:model.live="checked"
-                            type="checkbox"
-                            value="{{ $player->id }}">
-
-                        <div class="relative">
-                        <span class="text-white absolute font-bold text-xl left-8 top-8">
-                            {{ $player->id }}
-                        </span>
+                            <div
+                                class="absolute inset-0 rounded-2xl border-4 border-transparent
+                           peer-checked:border-indigo-500
+                           transition-all duration-300"
+                            ></div>
 
                             <img
-                                class="w-[250px] pb-6"
+                                class="w-[250px] pb-6 transition-all duration-300
+                           group-hover:brightness-110"
                                 src="{{ asset('Component_card_player.svg') }}"
                                 alt="">
                         </div>
+
+                        <input
+                            wire:model.live="checked"
+                            type="checkbox"
+                            value="{{ $player->id }}"
+                            class="mt-4 h-6 w-6 accent-indigo-500">
                     </label>
                 @endforeach
             </div>
         </div>
 
-        <div x-show="currentTab === 'second'">
+        <div x-show="currentTab === 'second'" class="flex flex-wrap justify-center gap-8">
             @foreach($this->games->players as $player)
-
                 <div class="relative">
-                        <span class="text-white absolute font-bold text-xl left-8 top-8">
-                            {{ $player->name }}
-                        </span>
+            <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
+                {{ $player->name }}
+            </span>
+
                     <img
-                        class="w-[250px] pb-6"
+                        class="w-[250px] pb-4"
                         src="{{ asset('Component_card_player.svg') }}"
-                        alt="">
-                    <span>{{$player->pivot->status}}</span>
+                        alt=""
+                    >
+
+                    <div class="flex justify-center">
+                <span
+                    @class([
+                        'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border',
+                        'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
+                        'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
+                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
+                    ])
+                >
+                    {{ $player->pivot->status }}
+                </span>
+                    </div>
                 </div>
             @endforeach
         </div>
-
         <div x-show="currentTab === 'third'">
+            @foreach($this->games->players as $player)
+                @if($player->pivot->status === "present")
+                    <span class="text-white">
+                {{$player->firstName}}
+            </span>
+                @endif
+
+            @endforeach
+
         </div>
     </div>
 </div>
