@@ -1493,8 +1493,8 @@
                 :class="{ 'hidden lg:flex': !open, 'flex': open }"
                 class="fixed inset-0 z-40 bg-[#192443] text-white items-center justify-center
            lg:static lg:bg-transparent lg:justify-end lg:pr-10">
-                <div class="flex flex-col lg:flex-row items-center gap-6 text-2xl font-semibold">
-                    <li><a title="vers la page d'accueil" href="">Accueil</a></li>
+                <div class="flex flex-col lg:flex-row items-center gap-6 text-shadow-xs sticky lg:p-6 font-semibold">
+                    <li><a title="vers la page d'accueil" href="/">Accueil</a></li>
                 <li><a title="vers la page de contact" href="">Contact</a></li>
                 <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>
                 <li><a title="vers la page de connexion" href="/login">Connexion</a></li>

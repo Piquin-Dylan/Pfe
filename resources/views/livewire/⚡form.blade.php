@@ -31,11 +31,11 @@ new class extends Component {
 <section>
     <h2 class="hidden ">Formulaire de contact</h2>
 
-    <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
+    <div class="pt-30 pb-50 px-6 ">
         <form wire:submit.prevent="save">
             <h2 class="title_section ">Formulaire de contact</h2>
 
-            <div class="sm:flex sm:flex-row sm:flex-wrap ">
+            <div class="sm:flex sm:gap-5 sm:flex-row sm:flex-wrap ">
                 <x-form.input
                     label_name="Nom complet :"
                     for_label="name"
