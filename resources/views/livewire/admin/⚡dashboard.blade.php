@@ -19,4 +19,7 @@ new class extends Component {
     <form class="flex justify-center" wire:submit="logout" method="POST">
         <button class="btn_deconnexion" type="submit">Deconnexion</button>
     </form>
+
+
+
 </div>

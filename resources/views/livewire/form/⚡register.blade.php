@@ -65,36 +65,38 @@ new class extends Component {
                 </x-form.input>
 
             </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-            <x-form.input
-                label_name="Adresse email"
-                for_label="email"
-                placeholder="jean.dupont@gmail.com"
-                type="email"
-                id="email"
-                name="email"
-                wire:model.live="form.email">
-                <div>
-                    @error('form.email')
-                    <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-            </x-form.input>
+                <x-form.input
+                    label_name="Adresse email"
+                    for_label="email"
+                    placeholder="jean.dupont@gmail.com"
+                    type="email"
+                    id="email"
+                    name="email"
+                    wire:model.live="form.email">
+                    <div>
+                        @error('form.email')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </x-form.input>
 
-            <x-form.input
-                label_name="Mot de passe"
-                for_label="password"
-                placeholder=""
-                type="password"
-                id="password"
-                name="password"
-                wire:model.live="form.password">
-                <div>
-                    @error('form.password')
-                    <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-            </x-form.input>
+                <x-form.input
+                    label_name="Mot de passe"
+                    for_label="password"
+                    placeholder=""
+                    type="password"
+                    id="password"
+                    name="password"
+                    wire:model.live="form.password">
+                    <div>
+                        @error('form.password')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </x-form.input>
+            </div>
             <div>
                 <input type="file"
                        class="input-dark file:bg-transparent file:text-white file:border-none w-full"
@@ -106,7 +108,7 @@ new class extends Component {
             </div>
 
             <button type="submit"
-                    class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
+                    class="w-full text-white btn-primary">
                 Inscription
             </button>
 

@@ -17,6 +17,7 @@
     "dependencies": {
         "@fullcalendar/core": "^6.1.20",
         "@fullcalendar/daygrid": "^6.1.20",
-        "alpinejs": "^3.15.8"
+        "alpinejs": "^3.15.8",
+        "driver.js": "^1.4.0"
     }
 }
