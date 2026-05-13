@@ -77,13 +77,13 @@ new class extends Component {
 
 <div>
 
-    <h3 class="title_section">
+    <h3 class="title_section " id="tuto">
         Match du
         {{ \Carbon\Carbon::parse($games->date_match)->locale('fr')->translatedFormat('d F') }}
         : {{$games->address}}
     </h3>
 
-    <div class="flex justify-center items-center gap-12 pt-4 pb-8">
+    <div class="flex justify-center items-center gap-12 pt-4 pb-8" id="affiche">
 
         <div class="text-center">
             <img class="w-24 lg:w-42 mb-6" alt="" src="{{asset($games->photo_home)}}">
@@ -242,6 +242,7 @@ new class extends Component {
                 @endif
 
             @endforeach
+
 
         </div>
     </div>

@@ -78,37 +78,38 @@ new class extends Component {
                     </x-form.input>
 
                 </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                <x-form.input
-                    label_name="Poste"
-                    for_label="poste"
-                    placeholder="Attaquant"
-                    type="text"
-                    id="poste"
-                    name="poste"
-                    wire:model.live="form.poste">
+                    <x-form.input
+                        label_name="Poste"
+                        for_label="poste"
+                        placeholder="Attaquant"
+                        type="text"
+                        id="poste"
+                        name="poste"
+                        wire:model.live="form.poste">
 
-                    @error('form.poste')
-                    <span class="error">{{ $message }}</span>
-                    @enderror
+                        @error('form.poste')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
 
-                </x-form.input>
+                    </x-form.input>
 
-                <x-form.input
-                    label_name="Numéro de maillot"
-                    for_label="maillot"
-                    placeholder="10"
-                    type="text"
-                    id="maillot"
-                    name="maillot"
-                    wire:model.live="form.maillot">
+                    <x-form.input
+                        label_name="Numéro de maillot"
+                        for_label="maillot"
+                        placeholder="10"
+                        type="text"
+                        id="maillot"
+                        name="maillot"
+                        wire:model.live="form.maillot">
 
-                    @error('form.maillot')
-                    <span class="error">{{ $message }}</span>
-                    @enderror
+                        @error('form.maillot')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
 
-                </x-form.input>
-
+                    </x-form.input>
+                </div>
                 <x-form.input
                     label_name="Code équipe"
                     for_label="code"

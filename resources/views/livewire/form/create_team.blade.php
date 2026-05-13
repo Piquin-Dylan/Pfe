@@ -65,36 +65,40 @@ new class extends Component {
 
             </div>
 
-            <x-form.input
-                label_name="Division de l'équipe"
-                for_label="division"
-                placeholder="Ex : D1"
-                type="text"
-                id="division"
-                name="division"
-                wire:model.live="form.division">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                @error('form.division')
-                <span class="error">{{ $message }}</span>
-                @enderror
+                <x-form.input
+                    label_name="Division de l'équipe"
+                    for_label="division"
+                    placeholder="Ex : D1"
+                    type="text"
+                    id="division"
+                    name="division"
+                    wire:model.live="form.division">
 
-            </x-form.input>
+                    @error('form.division')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
 
-            <div>
-                <label class="block mb-1 text-sm font-medium text-white/80">
-                    Logo du club
-                </label>
+                </x-form.input>
+                <x-form.input
+                    label_name="Logo du club"
+                    for_label="logo"
+                    placeholder=""
+                    type="file"
+                    id="logo"
+                    name="logo"
+                    wire:model.live="form.logo">
 
-                <input type="file"
-                       wire:model.live="form.logo"
-                       class="input-dark w-full">
+                    @error('form.logo')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
 
-                @error('form.logo')
-                <span class="error">{{ $message }}</span>
-                @enderror
+                </x-form.input>
+
             </div>
 
-            <x-form.textarea
+            {{--<x-form.textarea
                 label_name="Description"
                 label_for="description"
                 name="description"
@@ -108,7 +112,7 @@ new class extends Component {
                 @enderror
 
             </x-form.textarea>
-
+--}}
             <button type="submit"
                     class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
                 Créer mon équipe
