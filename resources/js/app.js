@@ -1,3 +1,5 @@
+/*
+
 import {driver} from "driver.js";
 import "driver.js/dist/driver.css";
 
@@ -56,3 +58,25 @@ const driverObj = driver({
 });
 
 driverObj.drive();
+
+
+*/
+import {Calendar} from '@fullcalendar/core'
+import dayGridPlugin from '@fullcalendar/daygrid'
+
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarEl = document.getElementById('calendar')
+    if (!calendarEl) return
+
+    const calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        events: [
+            {title: 'Petit test', start: new Date().toISOString().slice(0, 10)},
+        ],
+        height: 'auto',
+    })
+
+    calendar.render()
+})
