@@ -15,6 +15,9 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('client.hub');
 });
+Route::get('/calendar-test', function () {
+    return view('calendar-test');
+});
 
 
 Route::middleware('auth')->group(function () {
