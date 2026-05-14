@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Game;
+use App\Models\Train;
 
 Route::get('/', function () {
     return view('client.accueil');
@@ -15,8 +17,28 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('client.hub');
 });
-Route::get('/calendar-test', function () {
-    return view('calendar-test');
+
+
+Route::get('/calendar/events', function () {
+    $games = Game::all()->map(function ($game) {
+        return [
+            'title' => '⚽ ' . 'Match',
+            'start' => $game->date_match,
+            'color' => '#ef4444',
+        ];
+    });
+
+    $trains = Train::all()->map(function ($train) {
+        return [
+            'title' => '🏃 Entraînement',
+            'start' => $train->date_train,
+            'color' => '#22c55e', // vert
+        ];
+    });
+
+    $events = $games->concat($trains)->values();
+
+    return response()->json($events);
 });
 
 
@@ -44,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/team', function () {
         return view('admin.team');
     });
+    Route::get('/calendar-test', function () {
+        return view('calendar-test');
+    });
     Route::get('/calendrier', function () {
         return view('admin.calendrier');
     });
@@ -54,16 +79,16 @@ Route::middleware('auth')->group(function () {
         return view('admin.match');
     });
     Route::get('/match/{id}', function ($id) {
-        return view('admin.show_match',[
-            'id'=>$id
+        return view('admin.show_match', [
+            'id' => $id
         ]);
     });
     Route::get('/train', function () {
         return view('admin.train');
     });
     Route::get('/train/{id}', function ($id) {
-        return view('admin.show_train',[
-            'id'=>$id
+        return view('admin.show_train', [
+            'id' => $id
         ]);
     });
 

@@ -9,6 +9,7 @@ new class extends Component {
     {
         $this->form->validate();
         $this->form->submit();
+        $this->dispatch('refresh-calendar');
         session()->flash('status', 'Le match a été créer avec succès');
 
     }

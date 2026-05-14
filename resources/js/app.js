@@ -61,22 +61,63 @@ driverObj.drive();
 
 
 */
+
 import {Calendar} from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import frLocale from '@fullcalendar/core/locales/fr'
 
 document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar')
+
     if (!calendarEl) return
 
     const calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin],
-        initialView: 'dayGridMonth',
-        locale: 'fr',
-        events: [
-            {title: 'Petit test', start: new Date().toISOString().slice(0, 10)},
+        plugins: [
+            dayGridPlugin,
+            timeGridPlugin,
+            interactionPlugin,
         ],
+
+        locale: frLocale,
+        initialView: 'dayGridMonth',
         height: 'auto',
+
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        },
+
+        buttonText: {
+            today: "Aujourd'hui",
+            month: 'Mois',
+            week: 'Semaine',
+            day: 'Jour',
+        },
+
+        events: '/calendar/events',
+
+        editable: false,
+        selectable: true,
+        navLinks: true,
+        dayMaxEvents: true,
+
+        eventClick(info) {
+            console.log('Événement cliqué :', info.event.title)
+        },
+
+        dateClick(info) {
+            console.log('Date cliquée :', info.dateStr)
+        },
     })
 
+    window.calendar = calendar
+
     calendar.render()
+
+    window.addEventListener('refresh-calendar', () => {
+        window.calendar.refetchEvents()
+    })
 })
