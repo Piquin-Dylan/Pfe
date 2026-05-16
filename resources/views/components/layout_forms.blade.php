@@ -7,7 +7,7 @@
 ])
 
 <div class="relative flex items-center justify-center min-h-screen px-4 py-4">
-    <div class="w-full max-w-5xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+    <div class="w-full max-w-5xl  bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
         <div class="p-4 lg:p-6">
 
             <div class="mb-4 text-white text-center">

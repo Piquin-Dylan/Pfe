@@ -1,16 +1,29 @@
+@props([
+    "event",
+])
+
 <div x-data="{ open: false }">
 
-    <button class="btn_deconnexion" x-on:click="open = ! open">Ouvrir</button>
+    <button class="btn_deconnexion" x-on:click="open = ! open">
+        {{ $event }}
+    </button>
 
-    <div x-show="open"
+    <div
+        x-show="open"
         :class="{ 'hidden lg:flex': !open, 'flex': open }"
-        class=" w-full fixed top-0 left-0 h-full scroll-auto z-40 bg-[#192443]
-           text-white flex-col items-center justify-center
-           sm:flex">
-        <button class="btn_deconnexion" x-on:click="open = ! open">Fermer</button>
+        class="fixed inset-0 z-40
+               bg-[#192443]
+               text-white
+               flex flex-col items-center
+               overflow-y-auto
+               ">
+        <button
+            class="btn_deconnexion mb-6"
+            x-on:click="open = ! open">
+            Fermer
+        </button>
 
-        {{$slot}}
-
+        {{ $slot }}
     </div>
 
 </div>

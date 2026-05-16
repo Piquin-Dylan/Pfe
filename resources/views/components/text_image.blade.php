@@ -77,7 +77,8 @@
                    hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
                    transition-all duration-300"
         >
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('stats.svg') }}" alt="">
             </div>
 
@@ -105,7 +106,8 @@
                    hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
                    transition-all duration-300"
         >
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('calendar.svg') }}" alt="">
             </div>
 
@@ -133,7 +135,8 @@
                    hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
                    transition-all duration-300"
         >
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('person.svg') }}" alt="">
             </div>
 
@@ -161,7 +164,8 @@
                    hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
                    transition-all duration-300"
         >
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('ball.svg') }}" alt="">
             </div>
 
@@ -202,9 +206,13 @@
                 &times;
             </button>
 
+            {{--
+                        Todo changer les div et mettrent des balises dialog
+            --}}
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <div class="w-20 h-20 mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+                    <div
+                        class="w-20 h-20 mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                         <img :src="features[activeFeature].icon" width="60" alt="">
                     </div>
 
@@ -230,8 +238,7 @@
                         <img
                             src="{{ asset('dashboard-preview.png') }}"
                             alt="Aperçu du dashboard"
-                            class="max-h-[500px] object-contain rounded-xl"
-                        >
+                            class="max-h-[500px] object-contain rounded-xl">
                     </div>
                 </div>
             </div>

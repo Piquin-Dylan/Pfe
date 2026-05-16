@@ -25,6 +25,9 @@ Route::get('/calendar/events', function () {
             'title' => '⚽ ' . 'Match',
             'start' => $game->date_match,
             'color' => '#ef4444',
+            'address' => $game->address,
+            'hours' => $game->hours,
+            'id' => $game->id,
         ];
     });
 
@@ -32,7 +35,12 @@ Route::get('/calendar/events', function () {
         return [
             'title' => '🏃 Entraînement',
             'start' => $train->date_train,
-            'color' => '#22c55e', // vert
+            'color' => '#22c55e',
+            'address' => $train->address,
+            'hours_start' => $train->hours_start,
+            'hours_end' => $train->hours_end,
+            'id' => $train->id,
+
         ];
     });
 
@@ -66,9 +74,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/team', function () {
         return view('admin.team');
     });
-    Route::get('/calendar-test', function () {
-        return view('calendar-test');
-    });
+    /* Route::get('/calendar-test', function () {
+         return view('calendar-test');
+     });*/
     Route::get('/calendrier', function () {
         return view('admin.calendrier');
     });
@@ -79,10 +87,14 @@ Route::middleware('auth')->group(function () {
         return view('admin.match');
     });
     Route::get('/match/{id}', function ($id) {
+        if (Auth::user()->player) {
+            return redirect('/match');
+        }
+
         return view('admin.show_match', [
-            'id' => $id
+            'id' => $id,
         ]);
-    });
+    })->middleware('auth');
     Route::get('/train', function () {
         return view('admin.train');
     });

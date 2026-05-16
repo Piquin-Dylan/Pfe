@@ -45,8 +45,11 @@ new class extends Component {
 
         </div>
         <div class="flex justify-center items-center gap-4 mb-10">
-            <a class="btn-form" href="match/{{$game->id}}">Convocation</a>
-            <x-button>Score du match</x-button>
+            @unless(Auth::user()->player)
+                <a class="btn-form" href="match/{{$game->id}}">Convocation</a>
+                <x-button>Score du match</x-button>
+            @endunless
+
         </div>
     @endforeach
 

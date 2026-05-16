@@ -133,23 +133,93 @@ body {
     background: #192443;
     color: white;
 }
+
 .input-dark {
     width: 100%;
     padding: 12px 14px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: white;
     outline: none;
     transition: all 0.2s ease;
 }
 
 .input-dark::placeholder {
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .input-dark:focus {
     border-color: #a855f7;
-    box-shadow: 0 0 0 2px rgba(168,85,247,0.4);
-    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+#calendar {
+    @apply mx-4 my-6 max-w-[900px] bg-white text-black rounded-xl p-2 overflow-x-auto;
+}
+
+#calendar .fc {
+    @apply text-xs;
+}
+
+#calendar .fc-header-toolbar {
+    @apply flex flex-col items-start gap-2;
+}
+
+#calendar .fc-toolbar-title {
+    @apply text-xl;
+}
+
+#calendar .fc-button {
+    @apply px-2 py-1 text-xs;
+}
+
+#calendar .fc-daygrid-day-frame {
+    @apply min-h-[45px];
+}
+
+#calendar .fc-event {
+    @apply px-1 py-0.5 text-[9px];
+}
+
+#calendar .fc-col-header-cell-cushion,
+#calendar .fc-daygrid-day-number {
+    @apply text-[11px];
+}
+
+@media (min-width: 768px) {
+    #calendar {
+        @apply mx-auto my-10 p-4;
+    }
+
+    #calendar .fc {
+        @apply text-sm;
+    }
+
+    #calendar .fc-header-toolbar {
+        @apply flex-row items-center justify-between;
+    }
+
+    #calendar .fc-toolbar-title {
+        @apply text-3xl;
+    }
+
+    #calendar .fc-button {
+        @apply px-3 py-2 text-sm;
+    }
+
+    #calendar .fc-daygrid-day-frame {
+        @apply min-h-[80px];
+    }
+
+    #calendar .fc-event {
+        @apply text-xs;
+    }
+
+    #calendar .fc-col-header-cell-cushion,
+    #calendar .fc-daygrid-day-number {
+        @apply text-sm;
+    }
 }

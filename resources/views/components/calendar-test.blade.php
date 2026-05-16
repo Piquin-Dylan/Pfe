@@ -8,10 +8,10 @@
 </head>
 
 <body style="background:#111; color:white; font-family:sans-serif;">
-<h1 style="text-align:center;"></h1>
 
-<div id="calendar"
-     style="max-width:900px; margin:40px auto; background:white; color:black; border-radius:10px; padding:10px;">
-</div>
+<div
+    id="calendar"
+    class="max-w-[900px] mx-auto my-10 bg-white text-black rounded-[10px] p-[10px]"
+></div>
 </body>
 </html>

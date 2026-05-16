@@ -105,7 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
         dayMaxEvents: true,
 
         eventClick(info) {
-            console.log('Événement cliqué :', info.event.title)
+            const modal = document.getElementById('dialog');
+            console.log(info.event.id)
+            Alpine.$data(modal).openEvent(info.event);
         },
 
         dateClick(info) {
