@@ -7,11 +7,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
 
-    <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
@@ -1473,7 +1471,6 @@
 
 <div class="flex min-h-screen">
 
-    <!-- SIDEBAR -->
     <aside
         :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
         class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0"
@@ -1489,29 +1486,24 @@
         </nav>
     </aside>
 
-    <!-- OVERLAY MOBILE -->
     <div
         x-show="open"
         @click="open = false"
         class="fixed inset-0 bg-black/50 z-30 lg:hidden"
     ></div>
 
-    <!-- CONTENU -->
     <div class="flex-1 flex flex-col lg:ml-64">
 
-        <!-- HEADER (TON CODE PROPRE) -->
         <header class="bg-[#192443] h-16 flex items-center px-4 border-b border-white/10">
 
             <button class="relative z-50 lg:hidden" @click="open = !open">
 
-                <!-- MENU -->
                 <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
                      viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                           d="M5 7h14M5 12h14M5 17h14"/>
                 </svg>
 
-                <!-- CLOSE -->
                 <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
                      viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
@@ -1523,10 +1515,30 @@
             <div class="ml-4 font-semibold text-lg">
                 Dashboard
             </div>
+            <div class="ml-4 relative inline-flex">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-6 h-6"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="white"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+
+                <span
+                    class="absolute -top-2 -right-2 min-w-5 h-5 px-1
+               flex items-center justify-center
+               rounded-full bg-red-500 text-white
+               text-[10px] font-bold leading-none
+               shadow-md">
+            {{Auth::user()->unreadNotifications()->count()}}
+    </span>
+            </div>
 
         </header>
 
-        <!-- MAIN -->
         <main class="flex-1 p-6 overflow-y-auto">
             {{ $slot }}
         </main>

@@ -3,6 +3,7 @@
 use App\Models\Game;
 use App\Models\Player;
 use App\Models\Train;
+use Illuminate\Notifications\DatabaseNotification;
 use Livewire\Component;
 
 new class extends Component {
@@ -18,7 +19,7 @@ new class extends Component {
 
     }
 
-    public function changeStatus($string, $type, $id): void
+    public function changeStatus($string, $type, $id, $notificationId): void
     {
         $current_user = Auth::user()->getAuthIdentifier();
 
@@ -28,13 +29,14 @@ new class extends Component {
 
         if ($type === 'train') {
             $train = Train::findOrFail($id);
-            //$this->notifications->markAsRead();
+                DatabaseNotification::find($notificationId)->markAsRead();
+
             $train->players()->updateExistingPivot($playerId, [
                 'status' => $string,
             ]);
         } else {
             $match = Game::findOrFail($id);
-           // $this->notifications->markAsRead();
+            DatabaseNotification::find($notificationId)->markAsRead();
             $match->players()->updateExistingPivot($playerId, [
                 'status' => $string,
             ]);
@@ -60,7 +62,7 @@ new class extends Component {
             @endphp
 
             <div
-                    class="relative mx-6 mb-8 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-blue-500/40 rounded-2xl p-6 flex flex-col gap-5 text-white transition hover:translate-y-[-2px] hover:border-blue-400/60 max-w-3xl w-full"
+                class="relative mx-6 mb-8 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-blue-500/40 rounded-2xl p-6 flex flex-col gap-5 text-white transition hover:translate-y-[-2px] hover:border-blue-400/60 max-w-3xl w-full"
             >
 
                 <div class="absolute top-4 right-4 flex items-center gap-2">
@@ -80,15 +82,15 @@ new class extends Component {
 
                 <div class="flex gap-4">
                     <button
-                            wire:click="changeStatus('present', '{{ $type }}', {{ $id }})"
-                            class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-semibold transition hover:scale-[1.03] hover:brightness-110"
+                        wire:click="changeStatus('present', '{{ $type }}', {{ $id }},'{{$notification->id}}')"
+                        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-semibold transition hover:scale-[1.03] hover:brightness-110"
                     >
                         Présent
                     </button>
 
                     <button
-                            wire:click="changeStatus('absent', '{{ $type }}', {{ $id }})"
-                            class="px-5 py-2.5 bg-white/5 border border-white/10 text-gray-300 text-sm font-semibold rounded-xl transition hover:bg-white/10 hover:text-white"
+                        wire:click="changeStatus('absent', '{{ $type }}', {{ $id }},'{{$notification->id}}')"
+                        class="px-5 py-2.5 bg-white/5 border border-white/10 text-gray-300 text-sm font-semibold rounded-xl transition hover:bg-white/10 hover:text-white"
                     >
                         Absent
                     </button>
