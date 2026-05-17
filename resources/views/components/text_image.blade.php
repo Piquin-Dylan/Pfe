@@ -216,10 +216,7 @@
                         <img :src="features[activeFeature].icon" width="60" alt="">
                     </div>
 
-                    <h3
-                        x-text="features[activeFeature].title"
-                        class="text-3xl font-bold text-white mb-4"
-                    ></h3>
+
 
                     <p
                         x-text="features[activeFeature].description"

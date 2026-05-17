@@ -28,12 +28,11 @@ new class extends Component {
 ?>
 
 
-<section>
-    <h2 class="hidden ">Formulaire de contact</h2>
+<section class="pt-30 pb-50 px-6">
+    <h2 class="title_section">Formulaire de contact</h2>
 
-    <div class="pt-30 pb-50 px-6 ">
+    <div class=" ">
         <form wire:submit.prevent="save">
-            <h2 class="title_section ">Formulaire de contact</h2>
 
             <div class="sm:flex sm:gap-5 sm:flex-row sm:flex-wrap ">
                 <x-form.input

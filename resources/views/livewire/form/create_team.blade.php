@@ -20,7 +20,8 @@ new class extends Component {
 
 
 ?>
-<div>
+<section>
+    <h2 class="sr-only">Formulaire - Créer votre équipe</h2>
 
     <x-layout_forms
         title_form="Créer votre équipe"
@@ -134,4 +135,4 @@ new class extends Component {
         </div>
     </section>--}}
 
-</div>
+</section>

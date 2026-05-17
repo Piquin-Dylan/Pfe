@@ -1516,6 +1516,7 @@
                 Dashboard
             </div>
             <div class="ml-4 relative inline-flex">
+                <a href="/message">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="w-6 h-6"
                      viewBox="0 0 24 24"
@@ -1535,6 +1536,7 @@
                shadow-md">
             {{Auth::user()->unreadNotifications()->count()}}
     </span>
+                </a>
             </div>
 
         </header>

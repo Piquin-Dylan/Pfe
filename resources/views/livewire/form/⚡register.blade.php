@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 <section>
-
+    <h2 class="sr-only">Formulaire - Inscription</h2>
     <x-layout_forms
         title_form="Inscription"
         subtitle_form="Inscrivez vous pour créer votre équipe de football"

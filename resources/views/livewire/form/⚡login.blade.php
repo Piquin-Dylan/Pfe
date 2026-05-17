@@ -28,7 +28,7 @@ new class extends Component {
 ?>
 
 <section>
-
+    <h2 class="sr-only">Formulaire - Connexion</h2>
     <x-layout_forms title_form="Connexion" subtitle_form="Connectez-vous pour accéder à votre hub" button="Connexion"
                     text="Vous n'avez pas encore de compte ?"
                     action="Inscription" redirection="inscription">

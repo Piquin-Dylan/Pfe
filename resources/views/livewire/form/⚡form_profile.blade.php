@@ -32,8 +32,8 @@ new class extends Component {
 };
 ?>
 
-<div>
-    <section>
+<section>
+    <h2 class="sr-only">Formulaire - Compléter votre profile</h2>
 
         <x-layout_forms
             title_form="Compléter votre profile"
@@ -134,5 +134,4 @@ new class extends Component {
 
         </x-layout_forms>
 
-    </section>
-</div>
+</section>
