@@ -13,6 +13,8 @@ use Livewire\WithFileUploads;
 
 class RegisterForm extends Form
 {
+    use WithFileUploads;
+
 
     #[Validate('required', message: 'Le champs prénom est requis')]
     #[Validate('min:3', message: 'Le prénom doit comporter minimum 3 caractères')]
@@ -42,7 +44,8 @@ class RegisterForm extends Form
     {
         $this->validate();
 
-        $path = $this->image->store(path: 'photos');
+        $photo = $this->image->store('photos', 'public');
+
         $user = User::create([
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
@@ -51,7 +54,7 @@ class RegisterForm extends Form
                 'rounds' => "12",
 
             ]),
-            'image' => $path,
+            'image' => $photo,
         ]);
 
         Auth::login($user);
