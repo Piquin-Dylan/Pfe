@@ -20,6 +20,8 @@ new class extends Component {
     public string $match_composition = "4-4-2";
 
 
+
+
     public function mount($id): void
 
     {
@@ -239,7 +241,7 @@ new class extends Component {
         </div>
         <div x-show="currentTab === 'third'">
 
-            <select wire:model="match_composition" class="bg-white">
+            <select wire:model.live="match_composition" class="bg-white">
                 @foreach(config('player_compositions') as $formationName=> $composition)
 
                     <option value="{{$formationName}}">{{$formationName}}</option>
@@ -289,6 +291,8 @@ new class extends Component {
                             <span x-text="selectedPlayer?.poste"></span>
 
                             <ul class="mt-2 space-y-1">
+                                <input class="bg-white p-4 rounded-2xl w-full" wire:model.live.debounce="searchPlayer"
+                                       placeholder="rechercher un joueur">
                                 @foreach($this->games->players as $player)
                                     <li
                                         x-show="selectedPlayer?.poste === '{{ $player->position }}'"
@@ -298,8 +302,6 @@ new class extends Component {
                                 @endforeach
                             </ul>
                         </div>
-
-
                     </div>
                 </div>
             </div>

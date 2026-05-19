@@ -35,103 +35,131 @@ new class extends Component {
 <section>
     <h2 class="sr-only">Formulaire - Compléter votre profile</h2>
 
-        <x-layout_forms
-            title_form="Compléter votre profile"
-            subtitle_form="Compléter toute les infos utile pour le coach"
-            text="Vous n'avez pas encore créer d'équipe ?"
-            action="Créer mon équipe"
-            redirection="create"
-        >
+    <x-layout_forms
+        title_form="Compléter votre profile"
+        subtitle_form="Compléter toute les infos utile pour le coach"
+        text="Vous n'avez pas encore créer d'équipe ?"
+        action="Créer mon équipe"
+        redirection="create"
+    >
 
-            <form wire:submit.prevent="save" class="space-y-5">
+        <form wire:submit.prevent="save" class="space-y-5">
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                    <x-form.input
-                        label_name="Nom"
-                        for_label="name"
-                        placeholder="Dupont"
-                        type="text"
-                        id="name"
-                        name="name"
-                        wire:model.live="form.name">
-
-                        @error('form.name')
-                        <span class="error">{{ $message }}</span>
-                        @enderror
-
-                    </x-form.input>
-
-                    <x-form.input
-                        label_name="Prénom"
-                        for_label="firstName"
-                        placeholder="Jean"
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        wire:model.live="form.firstName">
-
-                        @error('form.firstName')
-                        <span class="error">{{ $message }}</span>
-                        @enderror
-
-                    </x-form.input>
-
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                    <x-form.input
-                        label_name="Poste"
-                        for_label="poste"
-                        placeholder="Attaquant"
-                        type="text"
-                        id="poste"
-                        name="poste"
-                        wire:model.live="form.poste">
-
-                        @error('form.poste')
-                        <span class="error">{{ $message }}</span>
-                        @enderror
-
-                    </x-form.input>
-
-                    <x-form.input
-                        label_name="Numéro de maillot"
-                        for_label="maillot"
-                        placeholder="10"
-                        type="text"
-                        id="maillot"
-                        name="maillot"
-                        wire:model.live="form.maillot">
-
-                        @error('form.maillot')
-                        <span class="error">{{ $message }}</span>
-                        @enderror
-
-                    </x-form.input>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <x-form.input
-                    label_name="Code équipe"
-                    for_label="code"
-                    placeholder="ABC123"
+                    label_name="Nom"
+                    for_label="name"
+                    placeholder="Dupont"
                     type="text"
-                    id="code"
-                    name="code"
-                    wire:model.live="form.code">
-
-                    @error('form.code')
+                    id="name"
+                    name="name"
+                    wire:model.live="form.name"
+                >
+                    @error('form.name')
                     <span class="error">{{ $message }}</span>
                     @enderror
-
                 </x-form.input>
 
-                <button type="submit"
-                        class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30">
-                    Rejoindre mon équipe
-                </button>
+                <x-form.input
+                    label_name="Prénom"
+                    for_label="firstName"
+                    placeholder="Jean"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    wire:model.live="form.firstName"
+                >
+                    @error('form.firstName')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </x-form.input>
+            </div>
 
-            </form>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="pt-3">
+                    <label
+                        for="post"
+                        class="block pb-2 font-bold text-[20px] text-white"
+                    >
+                        Sélectionner votre poste
+                    </label>
 
-        </x-layout_forms>
+                    <div class="relative">
+                        <select
+                            name="post"
+                            id="post"
+                            wire:model.live="form.poste"
+                            class="w-full px-4 py-3 pr-10 rounded-xl
+                           bg-white/5 border border-white/10
+                           text-white
+                           backdrop-blur-sm
+                           appearance-none
+                           focus:outline-none
+                           focus:ring-2
+                           focus:ring-purple-500
+                           focus:border-transparent"
+                        >
+                            <option value="" class="bg-[#1f2333] text-gray-400">
+                                Sélectionner votre poste
+                            </option>
+                            <option value="Gardien" class="bg-[#1f2333]">Gardien</option>
+                            <option value="DC" class="bg-[#1f2333]">DC</option>
+                            <option value="DD" class="bg-[#1f2333]">DD</option>
+                            <option value="DG" class="bg-[#1f2333]">DG</option>
+                            <option value="MC" class="bg-[#1f2333]">MC</option>
+                            <option value="MCD" class="bg-[#1f2333]">MCD</option>
+                            <option value="MCG" class="bg-[#1f2333]">MCG</option>
+                            <option value="MOC" class="bg-[#1f2333]">MOC</option>
+                            <option value="BU" class="bg-[#1f2333]">BU</option>
+                            <option value="AD" class="bg-[#1f2333]">AD</option>
+                            <option value="AG" class="bg-[#1f2333]">AG</option>
+                        </select>
+
+                    </div>
+
+                    @error('form.poste')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <x-form.input
+                    label_name="Numéro de maillot"
+                    for_label="maillot"
+                    placeholder="10"
+                    type="text"
+                    id="maillot"
+                    name="maillot"
+                    wire:model.live="form.maillot"
+                >
+                    @error('form.maillot')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </x-form.input>
+            </div>
+
+            <x-form.input
+                label_name="Code équipe"
+                for_label="code"
+                placeholder="ABC123"
+                type="text"
+                id="code"
+                name="code"
+                wire:model.live="form.code"
+            >
+                @error('form.code')
+                <span class="error">{{ $message }}</span>
+                @enderror
+            </x-form.input>
+
+            <button
+                type="submit"
+                class="w-full text-white py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-[1.02] transition duration-200 shadow-lg shadow-purple-500/30"
+            >
+                Rejoindre mon équipe
+            </button>
+
+        </form>
+
+    </x-layout_forms>
 
 </section>
