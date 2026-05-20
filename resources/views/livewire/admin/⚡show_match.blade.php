@@ -94,24 +94,36 @@ new class extends Component {
         : {{$games->address}}
     </h3>
 
-    <div class="flex justify-center items-center gap-12 pt-4 pb-8" id="affiche">
+    <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8" id="affiche">
 
-        <div class="text-center">
-            <img class="w-24 lg:w-42 mb-6" alt="" src="{{asset($games->photo_home)}}">
-            <span class="text-center text-white text-2xl ">
-                {{$games->name_home}}
-            </span>
+        <div class="flex flex-col items-center text-center min-w-0">
+            <img
+                class="w-24 lg:w-42 mb-6"
+                alt=""
+                src="{{ asset($games->photo_home) }}"
+            >
+
+            <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
+            {{ $games->name_home }}
+        </span>
         </div>
 
-        <span class="text-2xl text-white flex justify-center">
-            {{$games->hours}}
+        <div class="flex items-center justify-center h-full">
+        <span class="text-2xl text-white font-semibold whitespace-nowrap">
+            {{ $games->hours }}
         </span>
+        </div>
 
-        <div class="text-center">
-            <img class="w-24 lg:w-42 mb-6" alt="" src="{{asset($games->photo_away)}}">
-            <span class="text-center text-white text-2xl ">
-                {{$games->name_away}}
-            </span>
+        <div class="flex flex-col items-center text-center min-w-0">
+            <img
+                class="w-24 lg:w-42 mb-6"
+                alt=""
+                src="{{ asset($games->photo_away) }}"
+            >
+
+            <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
+            {{ $games->name_away }}
+        </span>
         </div>
 
     </div>

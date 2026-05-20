@@ -26,31 +26,58 @@ new class extends Component {
 ?>
 
 <div>
-
     @foreach($games as $game)
 
-        <h3 class="title_section">Match
-            du {{\Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F')}}
-            : {{$game->address}}</h3>
-        <div class="flex justify-center items-center gap-12 pt-4 pb-8">
-            <div class="text-center">
-                <img class="w-24 lg:w-42 mb-6" alt="" src="{{asset($game->photo_home)}}">
-                <span class="text-center text-white text-2xl ">{{$game->name_home}}</span>
+        <h3 class="title_section">
+            Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F') }}
+            : {{ $game->address }}
+        </h3>
+
+        <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
+
+            <div class="flex flex-col items-center text-center min-w-0">
+                <img
+                    class="w-24 lg:w-42 mb-6"
+                    alt=""
+                    src="{{ asset($game->photo_home) }}"
+                >
+
+                <span class="text-white text-xl max-w-[220px] break-words leading-tight">
+                    {{ $game->name_home }}
+                </span>
             </div>
-            <span class="text-2xl text-white flex justify-center">{{$game->hours}}</span>
-            <div class="text-center">
-                <img class="w-24 lg:w-42 mb-6" alt="" src="{{asset($game->photo_away)}}">
-                <span class="text-center text-white text-2xl ">{{$game->name_away}}</span>
+
+            <div class="flex items-center justify-center h-full">
+                <span class="text-2xl text-white font-semibold whitespace-nowrap">
+                    {{ $game->hours }}
+                </span>
+            </div>
+
+            <div class="flex flex-col items-center text-center min-w-0">
+                <img
+                    class="w-24 lg:w-42 mb-6"
+                    alt=""
+                    src="{{ asset($game->photo_away) }}"
+                >
+
+                <span class="text-white text-xl max-w-[220px] break-words leading-tight">
+                    {{ $game->name_away }}
+                </span>
             </div>
 
         </div>
+
         <div class="flex justify-center items-center gap-4 mb-10">
             @unless(Auth::user()->player)
-                <a class="btn-form" href="match/{{$game->id}}">Convocation</a>
-                <x-button>Score du match</x-button>
+                <a class="btn-primary" href="match/{{ $game->id }}">
+                    Convocation
+                </a>
+
+                <a class="btn-secondary">
+                    Score du match
+                </a>
             @endunless
-
         </div>
-    @endforeach
 
+    @endforeach
 </div>
