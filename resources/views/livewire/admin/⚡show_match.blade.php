@@ -19,6 +19,8 @@ new class extends Component {
 
     public string $match_composition = "4-4-2";
 
+    public array $player_position = [];
+
 
     public function mount($id): void
 
@@ -74,6 +76,11 @@ new class extends Component {
         $users = User::whereIn('users.id', $players_list)->get();
         Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
 
+    }
+
+    public function assignPlayerToPosition($poste, $idPlayer)
+    {
+        $this->player_position[$poste] = $idPlayer;
     }
 
 };
@@ -254,20 +261,35 @@ new class extends Component {
             >
     <span class="text-white">
         @foreach(config('player_compositions.' . $this->match_composition) as $player)
+            @php
+                $displayName = $player['poste'];
+
+                if (isset($this->player_position[$player['poste']])) {
+                    $playerId = $this->player_position[$player['poste']];
+
+                    $selectedPlayer = $this->games->players->firstWhere('id', $playerId);
+
+                    if ($selectedPlayer) {
+                        $displayName = $selectedPlayer->firstName;
+                    }
+                }
+            @endphp
+
             <div
                 @click="selectedPlayer = {
-                    poste: '{{ $player['poste'] }}',
-                    x: '{{ $player['x'] }}',
-                    y: '{{ $player['y'] }}'
-                }"
+            poste: '{{ $player['poste'] }}',
+            x: '{{ $player['x'] }}',
+            y: '{{ $player['y'] }}'
+        }"
                 class="cursor-pointer"
             >
-                <x-player_position
-                    x="{{ $player['x'] }}"
-                    y="{{ $player['y'] }}"
-                    poste="{{ $player['poste'] }}"
-                />
-            </div>
+        <x-player_position
+            x="{{ $player['x'] }}"
+            y="{{ $player['y'] }}"
+            poste="{{ $displayName }}">
+
+        </x-player_position>
+    </div>
         @endforeach
     </span>
 
@@ -293,10 +315,12 @@ new class extends Component {
                                        placeholder="rechercher un joueur">
                                 @foreach($this->games->players as $player)
                                     <li
-                                        x-show="selectedPlayer?.poste === '{{ $player->position }}'"
+                                        x-show="selectedPlayer?.poste === '{{ $player->position}}'"
                                         x-cloak>
                                         @if($player->pivot->status === "present")
-                                            {{ $player->firstName }}
+                                            <input
+                                                @click="$wire.assignPlayerToPosition(selectedPlayer?.poste,{{$player->pivot->player_id}})"
+                                                type="checkbox">{{$player->firstName}}
                                         @endif
                                     </li>
                                 @endforeach
