@@ -28,10 +28,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // 👨‍🏫 Un user (coach) peut avoir plusieurs équipes
-    public function teams(): HasMany
+    public function team(): HasOne
     {
-        return $this->hasMany(Team::class);
+        return $this->hasOne(Team::class);
     }
 
     //  Un user est associé a un joueur player

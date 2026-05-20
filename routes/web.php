@@ -6,7 +6,7 @@ use App\Models\Train;
 
 Route::get('/', function () {
     return view('client.accueil');
-});
+})->name('accueil');
 Route::get('/register', function () {
     return view('client/auth.inscription');
 })->name('register');
@@ -53,39 +53,39 @@ Route::get('/calendar/events', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/create', function () {
         return view('client/auth.create_team');
-    });
+    })->name('create');
     Route::get('/join', function () {
         return view('client/auth.join_team');
-    });
+    })->name('join');
     Route::get('/profile', function () {
         return view('client/auth.form_profile');
-    });
+    })->name('profile');
     Route::get('/hub', function () {
         return view('client.hub');
-    });
+    })->name('hub');
     Route::get('/update', function () {
         return view('client/auth/update_profile');
     });
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->name('dashboard');
 
     Route::get('/team', function () {
         return view('admin.team');
-    });
+    })->name('team');
     /* Route::get('/calendar-test', function () {
          return view('calendar-test');
      });*/
     Route::get('/calendrier', function () {
         return view('admin.calendrier');
-    });
+    })->name('calendrier');
     Route::get('/message', function () {
         return view('admin.message');
-    });
+    })->name('message');
     Route::get('/match', function () {
         return view('admin.match');
-    });
+    })->name('match');
     Route::get('/match/{id}', function ($id) {
         if (Auth::user()->player) {
             return redirect('/matchF');
@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
     })->middleware('auth');
     Route::get('/train', function () {
         return view('admin.train');
-    });
+    })->name('train');
     Route::get('/train/{id}', function ($id) {
         return view('admin.show_train', [
             'id' => $id

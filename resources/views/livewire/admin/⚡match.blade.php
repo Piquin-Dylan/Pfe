@@ -26,58 +26,72 @@ new class extends Component {
 ?>
 
 <div>
-    @foreach($games as $game)
+    @if($games->isEmpty())
+        <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">
+                Aucun match n'a encore été créer pour le moment
+            </h3>
 
-        <h3 class="title_section">
-            Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F') }}
-            : {{ $game->address }}
-        </h3>
+            <p class="text-gray-300 mb-6">
+                créer dés maintenant votre premier match dans la page calendrier
+            </p>
 
-        <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
+                <a href="{{route('calendrier')}}" class="btn-primary">Créer mon premier match</a>
+        </div>
+    @else
+        @foreach($games as $game)
 
-            <div class="flex flex-col items-center text-center min-w-0">
-                <img
-                    class="w-24 lg:w-42 mb-6"
-                    alt=""
-                    src="{{ asset($game->photo_home) }}"
-                >
+            <h3 class="title_section">
+                Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F') }}
+                : {{ $game->address }}
+            </h3>
 
-                <span class="text-white text-xl max-w-[220px] break-words leading-tight">
+            <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
+
+                <div class="flex flex-col items-center text-center min-w-0">
+                    <img
+                        class="w-24 lg:w-42 mb-6"
+                        alt=""
+                        src="{{ asset($game->photo_home) }}"
+                    >
+
+                    <span class="text-white text-xl max-w-[220px] break-words leading-tight">
                     {{ $game->name_home }}
                 </span>
-            </div>
+                </div>
 
-            <div class="flex items-center justify-center h-full">
+                <div class="flex items-center justify-center h-full">
                 <span class="text-2xl text-white font-semibold whitespace-nowrap">
                     {{ $game->hours }}
                 </span>
-            </div>
+                </div>
 
-            <div class="flex flex-col items-center text-center min-w-0">
-                <img
-                    class="w-24 lg:w-42 mb-6"
-                    alt=""
-                    src="{{ asset($game->photo_away) }}"
-                >
+                <div class="flex flex-col items-center text-center min-w-0">
+                    <img
+                        class="w-24 lg:w-42 mb-6"
+                        alt=""
+                        src="{{ asset($game->photo_away) }}"
+                    >
 
-                <span class="text-white text-xl max-w-[220px] break-words leading-tight">
+                    <span class="text-white text-xl max-w-[220px] break-words leading-tight">
                     {{ $game->name_away }}
                 </span>
+                </div>
+
             </div>
 
-        </div>
+            <div class="flex justify-center items-center gap-4 mb-10">
+                @unless(Auth::user()->player)
+                    <a class="btn-primary" href="match/{{ $game->id }}">
+                        Convocation
+                    </a>
 
-        <div class="flex justify-center items-center gap-4 mb-10">
-            @unless(Auth::user()->player)
-                <a class="btn-primary" href="match/{{ $game->id }}">
-                    Convocation
-                </a>
+                    <a class="btn-secondary">
+                        Score du match
+                    </a>
+                @endunless
+            </div>
 
-                <a class="btn-secondary">
-                    Score du match
-                </a>
-            @endunless
-        </div>
-
-    @endforeach
+        @endforeach
+    @endif
 </div>
