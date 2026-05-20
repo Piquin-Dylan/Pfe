@@ -11,6 +11,13 @@ new class extends Component {
 
     public string $filters = 'tout';
 
+    public array $poste = [
+        'attaquant' => ['BU', 'AG', 'AD'],
+        'milieux' => ['MCD', 'MC', 'MCG'],
+        'defenseur' => ['DG', 'DC', 'DD'],
+        'gardien' => ['G'],
+    ];
+
     public Collection $playersWithStatus;
 
     public bool $isMatch = false;
@@ -47,45 +54,24 @@ new class extends Component {
             ->when($this->searchPlayer, function ($query) {
                 $query->where('name', 'like', '%' . $this->searchPlayer . '%');
             })
-            ->when($this->filters != "tout", function ($query) {
-                $query->where('players.position', '=', $this->filters);
+            ->when($this->filters != 'tout', function ($query) {
+                $query->whereIn('players.position', $this->poste[$this->filters]);
             })
-            ->with('team:id,user_id')
+            ->with('team:id,user_id', 'trains')
             ->get();
     }
 
 };
 ?>
 
-<div class="grow  ">
+<div class="grow">
     <h2 class="title_section p-5">Mon équipe</h2>
     <div class=" pr-5 pl-5">
         <input class="bg-white p-4 rounded-2xl w-full" wire:model.live.debounce="searchPlayer"
                placeholder="rechercher un joueur">
     </div>
 
-    <div class="lg:flex lg:gap-8 lg:justify-center lg:pb-8">
-        <div class="flex flex-row justify-center items-center gap-5 lg:gap-12 pt-6 sm:flex-row">
-           <span
-                   class="filter_position {{ $this->filters === 'tout' ? 'active' : '' }}"
-                   wire:click="filter('tout')">Tout</span>
-            <span
-                    class="filter_position {{ $this->filters === 'attaquant' ? 'active' : '' }}"
-                    wire:click="filter('attaquant')">Attaquant</span>
-            <span
-                    class="filter_position {{ $this->filters === 'milieux' ? 'active' : '' }}"
-                    wire:click="filter('milieux')">Milieux</span>
-        </div>
-        <div class="flex flex-row justify-center items-center pt-6 pb-6 gap-5 lg:pb-0 lg:gap-12">
-<span
-        class="filter_position {{ $this->filters === 'defenseur' ? 'active' : '' }}"
-        wire:click="filter('defenseur')">Défenseur</span>
-            <span
-                    class="filter_position {{ $this->filters === 'gardien' ? 'active' : '' }}"
-                    wire:click="filter('gardien')">Gardien</span>
-        </div>
-    </div>
-
+    <x-admin.filter_position></x-admin.filter_position>
 
     <div class="flex justify-center gap-16 flex-wrap">
         @php
@@ -119,8 +105,6 @@ new class extends Component {
                 @endif
             </div>
         @endforeach
-
-
     </div>
 
 
