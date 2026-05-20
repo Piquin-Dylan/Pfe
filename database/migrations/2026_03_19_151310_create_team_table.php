@@ -12,12 +12,12 @@ return new class extends Migration {
     {
         Schema::create('team', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('name');
             $table->string('ville');
             $table->string('division');
             $table->string('code');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

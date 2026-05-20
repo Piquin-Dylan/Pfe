@@ -12,7 +12,18 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'name'     => fake()->company() . ' FC',
+            'ville'    => fake()->city(),
+            'division' => fake()->randomElement([
+                'D1',
+                'D2',
+                'D3',
+                'Provinciale 1',
+                'Provinciale 2',
+            ]),
+            'code'     => strtoupper(fake()->bothify('???###')),
+            'logo'     => null,
+            'user_id'  => null, // tu pourras l'assigner ensuite
         ];
     }
 }
