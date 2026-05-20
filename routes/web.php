@@ -7,16 +7,16 @@ use App\Models\Train;
 Route::get('/', function () {
     return view('client.accueil');
 });
-Route::get('/inscription', function () {
+Route::get('/register', function () {
     return view('client/auth.inscription');
-});
+})->name('register');
 Route::get('/login', function () {
     return view('client/auth.login');
 })->name('login');
 
 Route::get('/logout', function () {
     return view('client.hub');
-});
+})->name('hub');
 
 
 Route::get('/calendar/events', function () {

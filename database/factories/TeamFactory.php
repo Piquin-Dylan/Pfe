@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory
@@ -22,8 +23,8 @@ class TeamFactory extends Factory
                 'Provinciale 2',
             ]),
             'code'     => strtoupper(fake()->bothify('???###')),
-            'logo'     => null,
-            'user_id'  => null, // tu pourras l'assigner ensuite
+            'logo'     => 'logo_club.png',
+            'user_id'  => User::class,
         ];
     }
 }
