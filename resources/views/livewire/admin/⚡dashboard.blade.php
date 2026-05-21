@@ -15,11 +15,10 @@ new class extends Component {
 
 <div>
 
-    <h1 class="text-white flex justify-center">Bonjour coach {{Auth::user()->firstName}}</h1>
+{{--
+    <span class="text-white flex justify-center">{{Auth::user()->firstName}}</span>
+--}}
     <form class="flex justify-center" wire:submit="logout" method="POST">
         <button class="btn_deconnexion" type="submit">Deconnexion</button>
     </form>
-
-
-
 </div>
