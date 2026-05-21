@@ -1473,19 +1473,56 @@
 
     <aside
         :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
-        class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0"
-    >
-        <nav class="h-full flex flex-col items-center justify-center">
-            <ul class="flex flex-col gap-6 text-2xl font-semibold">
-                <li><a href="/dashboard">Accueil</a></li>
-                <li><a href="/match">Match</a></li>
-                <li><a href="/train">Entrainement</a></li>
-                <li><a href="/team">Equipe</a></li>
-                <li><a href="/calendrier">Calendrier</a></li>
+        class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0">
+
+        <nav class="h-full flex flex-col items-center justify-center ">
+            <ul class="flex flex-col gap-6 text-2xl font-semibold text-white w-full px-6">
+
+                <li>
+                    <a href="/dashboard"
+                       class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('dashboard') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/match"
+                       class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('match') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                        Match
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/train"
+                       class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('train') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                        Entrainement
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/team"
+                       class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('team') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                        Equipe
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/calendrier"
+                       class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('calendrier') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                        Calendrier
+                    </a>
+                </li>
+
+                @livewire('admin.dashboard')
+
             </ul>
         </nav>
     </aside>
-
     <div
         x-show="open"
         @click="open = false"
@@ -1512,24 +1549,34 @@
 
             </button>
 
-            <div class="ml-4 font-semibold text-lg">
-                Dashboard
+            <div class="ml-4 flex items-center w-full text-white">
+
+                <div class="font-semibold text-lg">
+                    <a href="{{ route('dashboard') }}">SportTeams</a>
+                </div>
+
+                <div class="flex-1 flex justify-center">
+        <span>
+            Code pour rejoindre l'équipe :
+            {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+        </span>
+                </div>
             </div>
             <div class="ml-4 relative inline-flex">
                 <a href="/message">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-6 h-6"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="white"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-6 h-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="white"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
 
-                <span
-                    class="absolute -top-2 -right-2 min-w-5 h-5 px-1
+                    <span
+                        class="absolute -top-2 -right-2 min-w-5 h-5 px-1
                flex items-center justify-center
                rounded-full bg-red-500 text-white
                text-[10px] font-bold leading-none
@@ -1550,6 +1597,5 @@
 </div>
 
 </body>
-
 @livewireScripts
 </html>
