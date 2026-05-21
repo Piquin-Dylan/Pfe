@@ -51,42 +51,94 @@ Route::get('/calendar/events', function () {
 
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/create', function () {
         return view('client/auth.create_team');
     })->name('create');
+
     Route::get('/join', function () {
         return view('client/auth.join_team');
     })->name('join');
+
     Route::get('/profile', function () {
         return view('client/auth.form_profile');
     })->name('profile');
+
     Route::get('/hub', function () {
         return view('client.hub');
     })->name('hub');
+
     Route::get('/update', function () {
         return view('client/auth/update_profile');
     });
 
+
     Route::get('/dashboard', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.dashboard');
+
     })->name('dashboard');
 
+
     Route::get('/team', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.team');
+
     })->name('team');
+
+
     /* Route::get('/calendar-test', function () {
          return view('calendar-test');
      });*/
+
+
     Route::get('/calendrier', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.calendrier');
+
     })->name('calendrier');
+
+
     Route::get('/message', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.message');
+
     })->name('message');
+
+
     Route::get('/match', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.match');
+
     })->name('match');
+
+
     Route::get('/match/{id}', function ($id) {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         if (Auth::user()->player) {
             return redirect('/matchF');
         }
@@ -94,18 +146,31 @@ Route::middleware('auth')->group(function () {
         return view('admin.show_match', [
             'id' => $id,
         ]);
-    })->middleware('auth');
+
+    });
+
+
     Route::get('/train', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.train');
+
     })->name('train');
+
+
     Route::get('/train/{id}', function ($id) {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
         return view('admin.show_train', [
             'id' => $id
         ]);
+
     });
 
 });
-
-
-
-
