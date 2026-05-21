@@ -34,6 +34,9 @@
 
             <li><a title="vers la page de création d'équipe" href="{{route('create')}}">Créer une équipe</a></li>
             <li><a title="vers la page rejoindre une équipe" href="{{route('join')}}">Rejoindre une équipe</a></li>
+            @auth
+                <livewire:logout></livewire:logout>
+            @endauth
         </div>
     </ul>
 </nav>
