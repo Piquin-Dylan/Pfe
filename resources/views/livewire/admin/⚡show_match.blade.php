@@ -10,6 +10,7 @@ new class extends Component {
     public Game $games;
 
     public array $checked = [];
+    public array $checkedSecondConvocation = [];
 
     public string $searchPlayer = "";
 
@@ -22,11 +23,25 @@ new class extends Component {
     public array $player_position = [];
 
 
+    public int $count_player = 0;
+
+
     public function mount($id): void
 
     {
         $this->games = Game::findOrFail($id);
+        $this->countPresentPlayers();
+
     }
+
+    public function countPresentPlayers(): void
+    {
+        foreach ($this->games->players as $player)
+            if ($player->pivot->status === 'present') {
+                $this->count_player++;
+            }
+    }
+
 
     public function filter($string): void
     {
@@ -47,6 +62,7 @@ new class extends Component {
                 $teamId = Auth::user()->player->team->id;
 
                 $query->orWhere('team_id', $teamId);
+
             }
 
         })
@@ -71,6 +87,25 @@ new class extends Component {
 
         $players_list = DB::table('players')
             ->whereIn('players.id', $this->checked)
+            ->pluck('user_id');
+
+        $users = User::whereIn('users.id', $players_list)->get();
+        Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
+
+    }
+
+    public function saveSecondConvocation(): void
+    {
+        $players_array = [];
+
+        foreach ($this->checkedSecondConvocation as $player) {
+            $players_array[$player] = ['status' => 'en attente'];
+        }
+        $this->games->players()->attach($players_array);
+
+
+        $players_list = DB::table('players')
+            ->whereIn('players.id', $this->checkedSecondConvocation)
             ->pluck('user_id');
 
         $users = User::whereIn('users.id', $players_list)->get();
@@ -180,168 +215,271 @@ new class extends Component {
     <div x-data="{ currentTab: 'first' }">
         @include('livewire.components.navigation_match')
         <div x-show="currentTab === 'first'">
+
             <div class="text-white text-center pb-6">
                 Nombre de joueurs convoqués :
+
+                @if(count($checked) >= $newValue)
+
+                    <span class="text-red-400 font-bold">
                 {{ count($checked) }} / {{ $newValue }}
+            </span>
+
+                @else
+
+                    {{ count($checked) }} / {{ $newValue }}
+
+                @endif
             </div>
 
             <div class="flex justify-center pb-8">
-                <button
-                    wire:click="saveConvocation"
-                    class="btn-form">
-                    Enregistrer les convocations
-                </button>
+                @if($this->games->players->isEmpty())
+
+                    <button
+                        wire:click="saveConvocation"
+                        @disabled(count($checked) > $newValue)
+                        class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Enregistrer les convocations
+                    </button>
+
+                @else
+
+                    <button
+                        disabled
+                        class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
+        cursor-not-allowed border border-gray-500/30"
+                    >
+                        Convocation déjà enregistrée
+                    </button>
+
+                @endif
             </div>
 
             <div class="flex justify-center gap-16 flex-wrap">
+
                 @foreach($this->players as $player)
+
                     <label class="cursor-pointer group flex flex-col items-center">
+
                         <div
-                            class="relative transition-all duration-300 ease-in-out
-                       group-hover:scale-105 group-hover:-translate-y-2
-                       group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]"
+                            class="relative"
                         >
-                <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
-                    {{ $player->firstName }}
-                </span>
+
+                    <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
+                        {{ $player->firstName }}
+                    </span>
 
                             <div
                                 class="absolute inset-0 rounded-2xl border-4 border-transparent
-                           peer-checked:border-indigo-500
-                           transition-all duration-300"
+                        peer-checked:border-indigo-500
+                        transition-all duration-300"
                             ></div>
 
                             <img
                                 class="w-[250px] pb-6 transition-all duration-300
-                           group-hover:brightness-110"
+                        group-hover:brightness-110"
                                 src="{{ asset('Component_card_player.svg') }}"
-                                alt="">
+                                alt=""
+                            >
+
                         </div>
+
 
                         <input
                             wire:model.live="checked"
                             type="checkbox"
                             value="{{ $player->id }}"
-                            class="mt-4 h-6 w-6 accent-indigo-500">
+
+                            @disabled(
+                                count($checked) >= $newValue
+                                && !in_array($player->id, $checked)
+                            )class="mt-4 h-6 w-6 accent-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed"/>
+
+
                     </label>
+
                 @endforeach
+
             </div>
-        </div>
 
-        <div x-show="currentTab === 'second'" class="flex flex-wrap justify-center gap-8">
-            @foreach($this->games->players as $player)
-                <div class="relative">
-            <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
-                {{ $player->name }}
-            </span>
 
-                    <img
-                        class="w-[250px] pb-4"
-                        src="{{ asset('Component_card_player.svg') }}"
-                        alt=""
-                    >
-
-                    <div class="flex justify-center">
-                <span
-                    @class([
-                        'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border',
-                        'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
-                        'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
-                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
-                    ])
-                >
-                    {{ $player->pivot->status }}
-                </span>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <div x-show="currentTab === 'third'">
-
-            <select wire:model.live="match_composition" class="bg-white">
-                @foreach(config('player_compositions') as $formationName=> $composition)
-
-                    <option value="{{$formationName}}">{{$formationName}}</option>
-                @endforeach
-
-            </select>
-
-            <div
-                class="relative w-full h-[600px] rounded-xl overflow-hidden bg-cover bg-center"
-                x-data="{ selectedPlayer: null }"
-                {{-- style="background-image: url('{{ asset('football-field-soccer-field-background-green-lawn-court-create-game_64749-2031.avif') }}');" --}}
-            >
-    <span class="text-white">
-        @foreach(config('player_compositions.' . $this->match_composition) as $player)
-            @php
-                $displayName = $player['poste'];
-
-                if (isset($this->player_position[$player['poste']])) {
-                    $playerId = $this->player_position[$player['poste']];
-
-                    $selectedPlayer = $this->games->players->firstWhere('id', $playerId);
-
-                    if ($selectedPlayer) {
-                        $displayName = $selectedPlayer->firstName;
-                    }
-                }
-            @endphp
-
-            <div
-                @click="selectedPlayer = {
-            poste: '{{ $player['poste'] }}',
-            x: '{{ $player['x'] }}',
-            y: '{{ $player['y'] }}'
-        }"
-                class="cursor-pointer"
-            >
-        <x-player_position
-            x="{{ $player['x'] }}"
-            y="{{ $player['y'] }}"
-            poste="{{ $displayName }}">
-
-        </x-player_position>
-    </div>
-        @endforeach
-    </span>
+            <div class="fixed bottom-6 right-6 z-50">
 
                 <div
-                    x-show="selectedPlayer"
-                    x-transition
-                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-                    style="display: none;">
-                    <div
-                        class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative"
-                        @click.away="selectedPlayer = null">
-                        <button
-                            @click="selectedPlayer = null"
-                            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">✕
-                        </button>
+                    class="bg-[#23294A] border border-violet-500/30
+            shadow-2xl rounded-2xl px-6 py-4 backdrop-blur-md"
+                >
 
-                        <div class="text-gray-700">
-                            <strong>Ajouter un joueur au poste de :</strong>
-                            <span x-text="selectedPlayer?.poste"></span>
+                    <div class="flex items-center gap-4">
 
-                            <ul class="mt-2 space-y-1">
-                                <input class="bg-white p-4 rounded-2xl w-full" wire:model.live.debounce="searchPlayer"
-                                       placeholder="rechercher un joueur">
-                                @foreach($this->games->players as $player)
-                                    <li
-                                        x-show="selectedPlayer?.poste === '{{ $player->position}}'"
-                                        x-cloak>
-                                        @if($player->pivot->status === "present")
-                                            <input
-                                                @click="$wire.assignPlayerToPosition(selectedPlayer?.poste,{{$player->pivot->player_id}})"
-                                                type="checkbox">{{$player->firstName}}
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <div class="flex flex-col">
+
+                    <span class="text-violet-300 text-sm uppercase tracking-wider">
+                        Joueurs sélectionnés
+                    </span>
+
+                            <span class="text-white text-2xl font-bold">
+                        {{ count($checked) }} / {{ $newValue }}
+                    </span>
+
                         </div>
+
+                        @if(count($checked) >= $newValue)
+
+                            <div class="animate-pulse">
+
+                        <span
+                            class="bg-red-500/20 text-red-400 border border-red-500/40
+                            px-3 py-1 rounded-full text-sm font-bold uppercase"
+                        >
+                            Nombre de joueur max atteinte
+                        </span>
+
+                            </div>
+
+                        @endif
+
                     </div>
+
                 </div>
+
             </div>
 
         </div>
+
+        <div x-data="{ openModal: false }">
+
+            <div x-show="currentTab === 'second'" class="flex flex-wrap justify-center gap-8">
+
+                <div class="w-full flex flex-col items-center pb-10 gap-6">
+
+                    <div class="bg-[#23294A] border border-violet-500/30 rounded-2xl px-8 py-4 shadow-lg">
+                        <div class="text-center">
+                            <p class="text-violet-300 text-lg font-medium uppercase tracking-wider">
+                                Nombre de joueurs présents
+                            </p>
+
+                            <span class="text-white text-5xl font-bold">
+                            {{ $this->count_player }}
+                        </span>
+                        </div>
+                    </div>
+
+                    <button
+                        @click="openModal = true"
+                        class="btn-primary">
+                        Reconvoquer les joueurs
+                    </button>
+
+                </div>
+
+                @php
+                    $playerId = $this->games->players->pluck('id');
+
+                    $playersNotConvoked = \App\Models\Player::whereNotIn('players.id', $playerId)
+                        ->where('team_id', $this->games->players->first()?->team_id)
+                        ->get();
+                @endphp
+
+                @foreach($this->games->players as $player)
+
+                    <div class="relative">
+                    <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
+                        {{ $player->firstName }}
+                    </span>
+
+                        <img
+                            class="w-[250px] pb-4"
+                            src="{{ asset('Component_card_player.svg') }}"
+                            alt=""
+                        >
+
+                        <div class="flex justify-center">
+                        <span
+                            @class([
+                                'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border',
+                                'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
+                                'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
+                                'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
+                            ])
+                        >
+                            {{ $player->pivot->status }}
+                        </span>
+                        </div>
+                    </div>
+
+                @endforeach
+
+                <div
+                    x-show="openModal"
+                    x-transition
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+                    style="display: none;"
+                >
+
+                    <div
+                        @click.away="openModal = false"
+                        class="bg-[#23294A] border border-violet-500/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl"
+                    >
+
+                        <div class="flex justify-between items-center pb-8">
+                            <h2 class="text-white text-3xl font-bold">
+                                Reconvoquer des joueurs
+                            </h2>
+
+                            <button
+                                @click="openModal = false"
+                                class="text-white text-2xl hover:text-violet-400 transition">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+
+                            @foreach($playersNotConvoked as $player)
+
+                                <label
+                                    class="flex items-center justify-between bg-[#1B2340]
+                                border border-violet-500/20 rounded-2xl px-6 py-4
+                                hover:border-violet-500/50 transition cursor-pointer"
+                                >
+
+                                    <div class="flex flex-col">
+                                    <span class="text-white text-lg font-semibold">
+                                        {{ $player->firstName }}
+                                    </span>
+
+                                        <span class="text-violet-300 text-sm uppercase tracking-wider">
+                                        {{ $player->position }}
+                                    </span>
+                                    </div>
+
+                                    <input
+                                        wire:model.live="checkedSecondConvocation"
+                                        type="checkbox"
+                                        value="{{ $player->id }}"
+                                        class="h-6 w-6 accent-violet-500">
+
+                                </label>
+
+                            @endforeach
+                            <div class="pt-8 flex justify-end">
+                                <button
+                                    wire:click="saveSecondConvocation"
+                                    class="btn-primary">
+                                    Valider la reconvocation
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <x-admin.show-match.composition></x-admin.show-match.composition>
     </div>
 </div>
