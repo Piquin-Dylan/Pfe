@@ -114,11 +114,13 @@ new class extends Component {
 
             </x-form.textarea>
 --}}
-            <button type="submit"
-                    class="w-full text-white btn-primary">
-                Créer mon équipe
-            </button>
+            <div class="flex justify-center items-center">
 
+                <button type="submit"
+                        class="w-full text-white btn-primary">
+                    Créer mon équipe
+                </button>
+            </div>
         </form>
 
     </x-layout_forms>

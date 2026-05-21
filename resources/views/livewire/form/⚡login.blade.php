@@ -68,10 +68,13 @@ new class extends Component {
                     @error('form.password') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </x-form.input>
+            <div class="flex justify-center items-center">
+
             <button type="submit"
                     class="w-full text-white btn-primary ">
                 Connexion
             </button>
+            </div>
         </form>
     </x-layout_forms>
 

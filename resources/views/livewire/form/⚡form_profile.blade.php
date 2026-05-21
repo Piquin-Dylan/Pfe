@@ -151,13 +151,14 @@ new class extends Component {
                 @enderror
             </x-form.input>
 
-            <button
-                type="submit"
-                class="w-full text-white btn-primary"
-            >
-                Rejoindre mon équipe
-            </button>
+            <div class="flex justify-center items-center">
 
+                <button
+                    type="submit"
+                    class="w-full text-white btn-primary">
+                    Rejoindre mon équipe
+                </button>
+            </div>
         </form>
 
     </x-layout_forms>

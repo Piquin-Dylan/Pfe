@@ -105,10 +105,12 @@ new class extends Component {
                 @enderror
             </div>
 
+            <div class="flex justify-center items-center">
             <button type="submit"
                     class="w-full text-white btn-primary">
                 Inscription
             </button>
+            </div>
 
         </form>
 
