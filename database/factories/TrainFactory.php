@@ -16,7 +16,7 @@ class TrainFactory extends Factory
         return [
             'team_id' => Team::class,
             'user_id' => User::class,
-            'date_train' => fake()->date(),
+            'date_train' => fake()->dateTimeBetween('now', '+1 months'),
             'address' => fake()->address,
             'hours_start' => fake()->time('H:i'),
             'hours_end' => fake()->time('H:i'),

@@ -31,9 +31,11 @@
     }
 
     .btn-form {
-        @apply text-[16px] bg-[#B2AFDF] text-[#ffffff]
-        border rounded-lg
-        px-20 py-4 text-center max-w-[300px] w-2xs;
+        @apply text-[18px] bg-violet-600 text-white
+        border border-violet-500 rounded-lg
+        px-4 py-4 text-center max-w-[300px] w-2xs
+        hover:bg-transparent hover:text-white hover:border-violet-400
+        transition-all duration-300 cursor-pointer;
     }
 
     .title_section {

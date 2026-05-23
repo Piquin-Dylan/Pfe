@@ -21,9 +21,7 @@ new class extends Component {
 
     <x-drawer event="Création d'un entrainement">
         <x-layout_forms title_form="Création d'un match" subtitle_form="Créer votre événement match"
-                        button="Connexion"
-                        text="Vous n'avez pas encore de compte ?"
-                        action="Inscription" redirection="inscription">
+                        button="Connexion">
             <form class="w-full" wire:submit.prevent="save">
                 @if (session()->has('status'))
                     <div
@@ -37,7 +35,6 @@ new class extends Component {
                 @endif
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {{-- Date --}}
                     <x-form.input
                         label_name="Date"
                         for_label="date"
@@ -53,7 +50,6 @@ new class extends Component {
                         </div>
                     </x-form.input>
 
-                    {{-- Lieu --}}
                     <x-form.input
                         label_name="Lieu de l'entraînement"
                         for_label="places"
@@ -69,7 +65,6 @@ new class extends Component {
                         </div>
                     </x-form.input>
 
-                    {{-- Heure de début --}}
                     <x-form.input
                         label_name="Heure de début de l'entraînement"
                         for_label="hours_start"
@@ -84,7 +79,6 @@ new class extends Component {
                         </div>
                     </x-form.input>
 
-                    {{-- Heure de fin --}}
                     <x-form.input
                         label_name="Heure de fin de l'entraînement"
                         for_label="hours_end"

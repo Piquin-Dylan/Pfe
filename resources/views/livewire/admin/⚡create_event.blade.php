@@ -33,9 +33,7 @@ new class extends Component {
         @endif
 
         <x-layout_forms title_form="Création d'un match" subtitle_form="Créer votre événement match"
-                        button="Connexion"
-                        text="Vous n'avez pas encore de compte ?"
-                        action="Inscription" redirection="inscription">
+                        button="Connexion"         >
             <form class="w-full" wire:submit.prevent="save">
                 <div class="sm:flex sm:flex-row sm:flex-wrap gap-5 ">
                     <x-form.input

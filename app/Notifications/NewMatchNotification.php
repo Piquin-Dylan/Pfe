@@ -47,8 +47,9 @@ class NewMatchNotification extends Notification
             'hours' => $this->match->hours,
             'name_home' => $this->match->name_home,
             'name_away' => $this->match->name_away,
-            'message' => "L'entraîneur a créé un match pour  le {$this->match->date_match} à {$this->match->hours}"];
+            'message' => "L'entraîneur a créé un match le " .
+                \Carbon\Carbon::parse($this->match->date_match)->format('d/m/Y') .
+                " à {$this->match->hours}"
+        ];
     }
-
-
 }

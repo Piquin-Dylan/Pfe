@@ -17,7 +17,7 @@ class GameFactory extends Factory
         return [
             'team_id' => Team::class,
             'user_id' => User::class,
-            'date_match' => fake()->date(),
+            'date_match' => fake()->dateTimeBetween('now', '+3 months'),
             'address' => fake()->address,
             'hours' => fake()->time('H:i'),
             'name_home' => fake()->company() . ' FC',
