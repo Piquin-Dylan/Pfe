@@ -5,7 +5,7 @@
 <div x-data="{ open: false }">
 
     <button
-        class="btn-primary"
+        class="btn-form"
         @click="open = true"
     >
         {{ $event }}
@@ -31,10 +31,9 @@
                    p-6 overflow-y-auto"
         >
             <button
-                class="btn-primary mb-6"
-                @click="open = false"
-            >
-                Fermer
+                class="mb-6 text-3xl"
+                @click="open = false">
+                X
             </button>
 
             {{ $slot }}
