@@ -21,6 +21,20 @@ new class extends Component {
             $team = \App\Models\Team::where('user_id', $current_user)->select('id')->value('id');
             $this->games = Game::where('team_id', $team)->orderBy('date_match', 'asc')->get();
         }
+
+
+        //code sur le tuto
+        if (Auth::user()->tutorial()->where('tutorial_name', 'match_list')->exists()) {
+            $this->showTutorial = false;
+        } else {
+            $this->showTutorial = true;
+            \App\Models\Tutorial::create([
+                'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
+                'tutorial_name' => "match_list",
+                'seen' => true
+            ]);
+            $this->dispatch('start-match-list-tutorial');
+        }
     }
 };
 ?>
@@ -36,23 +50,23 @@ new class extends Component {
                 créer dés maintenant votre premier match dans la page calendrier
             </p>
 
-                <a href="{{route('calendrier')}}" class="btn-primary">Créer mon premier match</a>
+            <a href="{{route('calendrier')}}" class="btn-primary">Créer mon premier match</a>
         </div>
     @else
         @foreach($games as $game)
 
-            <h3 class="title_section">
+            <h2 id="address" class="title_section">
                 Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F') }}
                 : {{ $game->address }}
-            </h3>
+            </h2>
 
-            <div class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
+            <div id="affiche" class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
 
                 <div class="flex flex-col items-center text-center min-w-0">
                     <img
-                        class="w-24 lg:w-42 mb-6"
-                        alt=""
-                        src="{{ asset($game->photo_home) }}"
+                            class="w-24 lg:w-42 mb-6"
+                            alt=""
+                            src="{{ asset($game->photo_home) }}"
                     >
 
                     <span class="text-white text-xl max-w-[220px] break-words leading-tight">
@@ -68,9 +82,9 @@ new class extends Component {
 
                 <div class="flex flex-col items-center text-center min-w-0">
                     <img
-                        class="w-24 lg:w-42 mb-6"
-                        alt=""
-                        src="{{ asset($game->photo_away) }}"
+                            class="w-24 lg:w-42 mb-6"
+                            alt=""
+                            src="{{ asset($game->photo_away) }}"
                     >
 
                     <span class="text-white text-xl max-w-[220px] break-words leading-tight">
@@ -82,7 +96,7 @@ new class extends Component {
 
             <div class="flex justify-center items-center gap-4 mb-10">
                 @unless(Auth::user()->player)
-                    <a class="btn-primary" href="match/{{ $game->id }}">
+                    <a id="cta_convocation" class="btn-primary" href="match/{{ $game->id }}">
                         Convocation
                     </a>
 

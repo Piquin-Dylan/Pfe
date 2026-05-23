@@ -5,6 +5,7 @@ use App\Models\Player;
 use App\Models\User;
 use Livewire\Component;
 
+
 new class extends Component {
 
     public Game $games;
@@ -26,11 +27,27 @@ new class extends Component {
     public int $count_player = 0;
 
 
+    public bool $showTutorial = true;
+
+
     public function mount($id): void
 
     {
         $this->games = Game::findOrFail($id);
         $this->countPresentPlayers();
+
+
+        if (Auth::user()->tutorial()->where('tutorial_name', 'match_convocation')->exists()) {
+            $this->showTutorial = false;
+        } else {
+            $this->showTutorial = true;
+            \App\Models\Tutorial::create([
+                'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
+                'tutorial_name' => "match_convocation",
+                'seen' => true
+            ]);
+            $this->dispatch('start-match-tutorial');
+        }
 
     }
 
@@ -122,7 +139,6 @@ new class extends Component {
 ?>
 
 <div>
-
     <h3 class="title_section " id="tuto">
         Match du
         {{ \Carbon\Carbon::parse($games->date_match)->locale('fr')->translatedFormat('d F') }}
@@ -133,9 +149,9 @@ new class extends Component {
 
         <div class="flex flex-col items-center text-center min-w-0">
             <img
-                class="w-24 lg:w-42 mb-6"
-                alt=""
-                src="{{ asset($games->photo_home) }}"
+                    class="w-24 lg:w-42 mb-6"
+                    alt=""
+                    src="{{ asset($games->photo_home) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -151,9 +167,9 @@ new class extends Component {
 
         <div class="flex flex-col items-center text-center min-w-0">
             <img
-                class="w-24 lg:w-42 mb-6"
-                alt=""
-                src="{{ asset($games->photo_away) }}"
+                    class="w-24 lg:w-42 mb-6"
+                    alt=""
+                    src="{{ asset($games->photo_away) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -165,9 +181,9 @@ new class extends Component {
 
     <div class="pr-5 pl-5">
         <input
-            class="bg-white p-4 rounded-2xl w-full"
-            wire:model.live.debounce="searchPlayer"
-            placeholder="rechercher un joueur"
+                class="bg-white p-4 rounded-2xl w-full"
+                wire:model.live.debounce="searchPlayer"
+                placeholder="rechercher un joueur"
         >
     </div>
 
@@ -176,20 +192,20 @@ new class extends Component {
         <div class="flex flex-row justify-center items-center gap-5 lg:gap-12 pt-6 sm:flex-row">
 
             <span
-                class="filter_position {{ $filters === 'tout' ? 'active' : '' }}"
-                wire:click="filter('tout')">
+                    class="filter_position {{ $filters === 'tout' ? 'active' : '' }}"
+                    wire:click="filter('tout')">
                 Tout
             </span>
 
             <span
-                class="filter_position {{ $filters === 'attaquant' ? 'active' : '' }}"
-                wire:click="filter('attaquant')">
+                    class="filter_position {{ $filters === 'attaquant' ? 'active' : '' }}"
+                    wire:click="filter('attaquant')">
                 Attaquant
             </span>
 
             <span
-                class="filter_position {{ $filters === 'milieux' ? 'active' : '' }}"
-                wire:click="filter('milieux')">
+                    class="filter_position {{ $filters === 'milieux' ? 'active' : '' }}"
+                    wire:click="filter('milieux')">
                 Milieux
             </span>
 
@@ -198,14 +214,14 @@ new class extends Component {
         <div class="flex flex-row justify-center items-center pt-6 pb-6 gap-5 lg:pb-0 lg:gap-12">
 
             <span
-                class="filter_position {{ $filters === 'defenseur' ? 'active' : '' }}"
-                wire:click="filter('defenseur')">
+                    class="filter_position {{ $filters === 'defenseur' ? 'active' : '' }}"
+                    wire:click="filter('defenseur')">
                 Défenseur
             </span>
 
             <span
-                class="filter_position {{ $filters === 'gardien' ? 'active' : '' }}"
-                wire:click="filter('gardien')">
+                    class="filter_position {{ $filters === 'gardien' ? 'active' : '' }}"
+                    wire:click="filter('gardien')">
                 Gardien
             </span>
         </div>
@@ -236,9 +252,9 @@ new class extends Component {
                 @if($this->games->players->isEmpty())
 
                     <button
-                        wire:click="saveConvocation"
-                        @disabled(count($checked) > $newValue)
-                        class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                            wire:click="saveConvocation"
+                            @disabled(count($checked) > $newValue)
+                            class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Enregistrer les convocations
                     </button>
@@ -246,8 +262,8 @@ new class extends Component {
                 @else
 
                     <button
-                        disabled
-                        class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
+                            disabled
+                            class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
         cursor-not-allowed border border-gray-500/30"
                     >
                         Convocation déjà enregistrée
@@ -263,7 +279,7 @@ new class extends Component {
                     <label class="cursor-pointer group flex flex-col items-center">
 
                         <div
-                            class="relative"
+                                class="relative"
                         >
 
                     <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
@@ -271,30 +287,30 @@ new class extends Component {
                     </span>
 
                             <div
-                                class="absolute inset-0 rounded-2xl border-4 border-transparent
+                                    class="absolute inset-0 rounded-2xl border-4 border-transparent
                         peer-checked:border-indigo-500
                         transition-all duration-300"
                             ></div>
 
                             <img
-                                class="w-[250px] pb-6 transition-all duration-300
+                                    class="w-[250px] pb-6 transition-all duration-300
                         group-hover:brightness-110"
-                                src="{{ asset('Component_card_player.svg') }}"
-                                alt=""
+                                    src="{{ asset('Component_card_player.svg') }}"
+                                    alt=""
                             >
 
                         </div>
 
 
                         <input
-                            wire:model.live="checked"
-                            type="checkbox"
-                            value="{{ $player->id }}"
+                                wire:model.live="checked"
+                                type="checkbox"
+                                value="{{ $player->id }}"
 
-                            @disabled(
-                                count($checked) >= $newValue
-                                && !in_array($player->id, $checked)
-                            )class="mt-4 h-6 w-6 accent-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed"/>
+                                @disabled(
+                                    count($checked) >= $newValue
+                                    && !in_array($player->id, $checked)
+                                )class="mt-4 h-6 w-6 accent-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed"/>
 
 
                     </label>
@@ -307,7 +323,7 @@ new class extends Component {
             <div class="fixed bottom-6 right-6 z-50">
 
                 <div
-                    class="bg-[#23294A] border border-violet-500/30
+                        class="bg-[#23294A] border border-violet-500/30
             shadow-2xl rounded-2xl px-6 py-4 backdrop-blur-md"
                 >
 
@@ -330,7 +346,7 @@ new class extends Component {
                             <div class="animate-pulse">
 
                         <span
-                            class="bg-red-500/20 text-red-400 border border-red-500/40
+                                class="bg-red-500/20 text-red-400 border border-red-500/40
                             px-3 py-1 rounded-full text-sm font-bold uppercase"
                         >
                             Nombre de joueur max atteinte
@@ -367,8 +383,8 @@ new class extends Component {
                     </div>
 
                     <button
-                        @click="openModal = true"
-                        class="btn-primary">
+                            @click="openModal = true"
+                            class="btn-primary">
                         Reconvoquer les joueurs
                     </button>
 
@@ -390,9 +406,9 @@ new class extends Component {
                     </span>
 
                         <img
-                            class="w-[250px] pb-4"
-                            src="{{ asset('Component_card_player.svg') }}"
-                            alt=""
+                                class="w-[250px] pb-4"
+                                src="{{ asset('Component_card_player.svg') }}"
+                                alt=""
                         >
 
                         <div class="flex justify-center">
@@ -412,15 +428,15 @@ new class extends Component {
                 @endforeach
 
                 <div
-                    x-show="openModal"
-                    x-transition
-                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-                    style="display: none;"
+                        x-show="openModal"
+                        x-transition
+                        class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+                        style="display: none;"
                 >
 
                     <div
-                        @click.away="openModal = false"
-                        class="bg-[#23294A] border border-violet-500/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl"
+                            @click.away="openModal = false"
+                            class="bg-[#23294A] border border-violet-500/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl"
                     >
 
                         <div class="flex justify-between items-center pb-8">
@@ -429,8 +445,8 @@ new class extends Component {
                             </h2>
 
                             <button
-                                @click="openModal = false"
-                                class="text-white text-2xl hover:text-violet-400 transition">
+                                    @click="openModal = false"
+                                    class="text-white text-2xl hover:text-violet-400 transition">
                                 ✕
                             </button>
                         </div>
@@ -440,7 +456,7 @@ new class extends Component {
                             @foreach($playersNotConvoked as $player)
 
                                 <label
-                                    class="flex items-center justify-between bg-[#1B2340]
+                                        class="flex items-center justify-between bg-[#1B2340]
                                 border border-violet-500/20 rounded-2xl px-6 py-4
                                 hover:border-violet-500/50 transition cursor-pointer"
                                 >
@@ -456,10 +472,10 @@ new class extends Component {
                                     </div>
 
                                     <input
-                                        wire:model.live="checkedSecondConvocation"
-                                        type="checkbox"
-                                        value="{{ $player->id }}"
-                                        class="h-6 w-6 accent-violet-500">
+                                            wire:model.live="checkedSecondConvocation"
+                                            type="checkbox"
+                                            value="{{ $player->id }}"
+                                            class="h-6 w-6 accent-violet-500">
 
                                 </label>
 
@@ -482,4 +498,5 @@ new class extends Component {
         </div>
         <x-admin.show-match.composition></x-admin.show-match.composition>
     </div>
+
 </div>
