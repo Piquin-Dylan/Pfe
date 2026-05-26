@@ -5,19 +5,19 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 new class extends Component {
+
     use WithFileUploads;
 
     public CreateTeamForm $form;
 
     public function save(): void
     {
+        $this->form->validate();
         $this->form->submit();
+
         $this->redirect('/hub');
-
-
     }
 };
-
 
 ?>
 <section>
@@ -82,6 +82,7 @@ new class extends Component {
                     @enderror
 
                 </x-form.input>
+
                 <x-form.input
                     label_name="Logo du club"
                     for_label="logo"
@@ -96,24 +97,12 @@ new class extends Component {
                     @enderror
 
                 </x-form.input>
+                @if($form->logo)
+                    <img src="{{ $form->logo->temporaryUrl() }}" alt="">
+                @endif
 
             </div>
 
-            {{--<x-form.textarea
-                label_name="Description"
-                label_for="description"
-                name="description"
-                id="description"
-                rows="5"
-                col="6"
-                placeholder="Description de votre équipe...">
-
-                @error('form.description')
-                <span class="error">{{ $message }}</span>
-                @enderror
-
-            </x-form.textarea>
---}}
             <div class="flex justify-center items-center">
 
                 <button type="submit"
@@ -121,20 +110,9 @@ new class extends Component {
                     Créer mon équipe
                 </button>
             </div>
+
         </form>
 
     </x-layout_forms>
-
-
-    {{--<section>
-        <div>
-            <div class="pt-50 pb-50 lg:pr-[150px]  lg:pl-[150px]">
-
-            </div>
-            <div>
-                <img class="max-w-full h-auto" src="{{asset('photo_form. 2026, 20_36_38.png')}}" alt="">
-            </div>
-        </div>
-    </section>--}}
 
 </section>

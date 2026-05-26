@@ -3,7 +3,7 @@
 use App\Livewire\Forms\RegisterForm;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithFileUploads;
 
 new class extends Component {
     use WithFileUploads;
@@ -15,8 +15,8 @@ new class extends Component {
     {
         $this->form->submit();
         $this->redirect('/hub');
-    }
 
+    }
 };
 ?>
 <section>
@@ -39,7 +39,7 @@ new class extends Component {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    wire:model.live="form.firstName">
+                    wire:model="form.firstName">
                     <div>
                         @error('form.firstName')
                         <span class="error">{{ $message }}</span>
@@ -54,7 +54,7 @@ new class extends Component {
                     type="text"
                     id="lastName"
                     name="lastName"
-                    wire:model.live="form.lastName">
+                    wire:model="form.lastName">
                     <div>
                         @error('form.lastName')
                         <span class="error">{{ $message }}</span>
@@ -72,7 +72,7 @@ new class extends Component {
                     type="email"
                     id="email"
                     name="email"
-                    wire:model.live="form.email">
+                    wire:model="form.email">
                     <div>
                         @error('form.email')
                         <span class="error">{{ $message }}</span>
@@ -87,7 +87,7 @@ new class extends Component {
                     type="password"
                     id="password"
                     name="password"
-                    wire:model.live="form.password">
+                    wire:model="form.password">
                     <div>
                         @error('form.password')
                         <span class="error">{{ $message }}</span>
@@ -96,20 +96,38 @@ new class extends Component {
                 </x-form.input>
             </div>
             <div>
-                <input type="file"
-                       class="input-dark file:bg-transparent file:text-white file:border-none w-full"
-                       wire:model.live="form.image">
 
-                @error('form.image')
-                <span class="error">{{ $message }}</span>
-                @enderror
+                <x-form.input
+                    label_name="image"
+                    for_label="photo"
+                    placeholder=""
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    wire:model="form.image">
+                    <div>
+                        @error('form.image')
+                        <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </x-form.input>
+                @if($form->image)
+                    <img src="{{ $form->image->temporaryUrl() }}" alt="">
+                @endif
+                {{-- <input type="file"
+                        class="input-dark file:bg-transparent file:text-white file:border-none w-full"
+                        wire:model="form.image">
+
+                 @error('form.image')
+                 <span class="error">{{ $message }}</span>
+                 @enderror--}}
             </div>
 
             <div class="flex justify-center items-center">
-            <button type="submit"
-                    class="w-full text-white btn-primary">
-                Inscription
-            </button>
+                <button type="submit"
+                        class="w-full text-white btn-primary">
+                    Inscription
+                </button>
             </div>
 
         </form>

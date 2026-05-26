@@ -12,9 +12,9 @@ new class extends Component {
     #[NoReturn]
     public function mount()
     {
-        $this->player = Auth::user()->team->players()->count();
+       /* $this->player = Auth::user()->team->players()->count();
         $this->match = Auth::user()->games()->count();
-        $this->train = Auth::user()->trains()->count();
+        $this->train = Auth::user()->trains()->count();*/
     }
 };
 ?>

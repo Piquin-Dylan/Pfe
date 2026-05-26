@@ -86,9 +86,14 @@ new class extends Component {
                             <div class="flex items-center gap-4">
 
                                 <img
-                                    class="w-24 drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                                    class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
                                     src="{{ asset($team->logo) }}"
-                                    alt="{{ $team->name }}">
+                                    srcset="{{ asset($team->logo) }} 96w,{{ asset($team->logo) }} 192w,{{ asset($team->logo) }} 384w "
+                                    sizes="(max-width: 640px) 64px, 96px"
+                                    alt="{{ $team->name }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
 
                                 <span class="text-white text-2xl font-semibold tracking-wide">
                                     {{ $team->name }}

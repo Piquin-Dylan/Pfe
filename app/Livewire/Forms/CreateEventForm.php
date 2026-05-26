@@ -34,11 +34,11 @@ class CreateEventForm extends Form
     public string $name_away = "";
 
 
-    #[Validate('required|image', message: 'Le champs photo a domicile est requis')]
+    #[Validate('required|image|max:2048')]
     public $photo_home = "";
 
 
-    #[Validate('required|image', message: "Le champs photo a l'extérieur est requis")]
+    #[Validate('required|image|max:2048')]
     public $photo_away = "";
 
     public function submit(): void

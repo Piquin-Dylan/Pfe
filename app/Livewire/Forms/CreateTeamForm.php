@@ -10,9 +10,7 @@ use Livewire\WithFileUploads;
 
 class CreateTeamForm extends Form
 {
-
     use WithFileUploads;
-
 
     #[Validate('required', message: 'Le champs nom est requis')]
     public string $name = "";
@@ -22,21 +20,28 @@ class CreateTeamForm extends Form
     public string $ville = "";
 
     #[Validate('required', message: 'Le champs division est requis')]
-    #[Validate('max:30', message: 'La vivision doit comporter maximum 30 caractères')]
+    #[Validate('max:30', message: 'La division doit comporter maximum 30 caractères')]
     public string $division = "";
 
-    #[Validate('required|image', message: 'Le champs logo  est requis')]
+    #[Validate('required|image|max:2048')]
     public $logo = "";
-
     public string $message = "";
 
     public function submit(): void
     {
-        $user = auth()->user()->getAuthIdentifier();
-        $code = Str::password(16, true, true, false);
         $this->validate();
 
-        $photoLogo = $this->logo->store('photos', 'public');
+        $photo = null;
+
+        if ($this->logo) {
+
+            $photo = $this->logo->store('photos', 'public');
+
+        }
+
+        $user = auth()->id();
+
+        $code = Str::password(16, true, true, false);
 
         Team::create([
             'user_id' => $user,
@@ -44,9 +49,7 @@ class CreateTeamForm extends Form
             'ville' => $this->ville,
             'division' => $this->division,
             'code' => $code,
-            'logo' => $photoLogo,
+            'logo' => $photo,
         ]);
-
-
     }
 }
