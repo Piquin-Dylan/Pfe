@@ -75,33 +75,61 @@ new class extends Component {
             <div id="affiche" class="grid grid-cols-[1fr_auto_1fr] items-start gap-6 pt-4 pb-8">
 
                 <div class="flex flex-col items-center text-center min-w-0">
-                    <img
-                        class="w-24 lg:w-42 mb-6"
-                        alt=""
-                        src="{{ asset($game->photo_home) }}">
+                    <div class="flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 mb-6">
+                        <img
+                            class="w-full h-full object-contain"
+                            alt="Logo équipe domicile"
+                            src="{{ asset($game->photo_home) }}"
+                            srcset="
+                                {{ asset($game->photo_home) }} 128w,
+                                {{ asset($game->photo_home) }} 256w,
+                                {{ asset($game->photo_home) }} 512w
+                            "
+                            sizes="(max-width: 640px) 112px,
+                                   (max-width: 1024px) 144px,
+                                   160px"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
 
                     <span class="text-white text-xl max-w-[220px] break-words leading-tight">
-                    {{ $game->name_home }}
-                </span>
+                        {{ $game->name_home }}
+                    </span>
                 </div>
 
                 <div class="flex items-center justify-center h-full">
-              <span class="text-2xl text-white font-semibold whitespace-nowrap">
-                  @if($game->score_home !== null && $game->score_away !== null)
-                      <span class="text-2xl">{{ $game->score_home }} - {{ $game->score_away }}</span>
-                  @else
-                      {{ $game->hours }}
-                  @endif
-
-</span>
+                    <span class="text-2xl text-white font-semibold whitespace-nowrap">
+                        @if($game->score_home !== null && $game->score_away !== null)
+                            <span class="text-2xl">{{ $game->score_home }} - {{ $game->score_away }}</span>
+                        @else
+                            {{ $game->hours }}
+                        @endif
+                    </span>
                 </div>
 
                 <div class="flex flex-col items-center text-center min-w-0">
-                    <img class="w-24 lg:w-42 mb-6" alt="" src="{{ asset($game->photo_away) }}">
+                    <div class="flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 mb-6">
+                        <img
+                            class="w-full h-full object-contain"
+                            alt="Logo équipe extérieur"
+                            src="{{ asset($game->photo_away) }}"
+                            srcset="
+                                {{ asset($game->photo_away) }} 128w,
+                                {{ asset($game->photo_away) }} 256w,
+                                {{ asset($game->photo_away) }} 512w
+                            "
+                            sizes="(max-width: 640px) 112px,
+                                   (max-width: 1024px) 144px,
+                                   160px"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
 
                     <span class="text-white text-xl max-w-[220px] break-words leading-tight">
-                    {{ $game->name_away }}
-                </span>
+                        {{ $game->name_away }}
+                    </span>
                 </div>
 
             </div>
@@ -119,8 +147,7 @@ new class extends Component {
         setTimeout(() => {
             showToast = false
         }, 3000)
-    "
-            >
+    ">
                 <div class="flex justify-center items-center gap-4 mb-10">
 
                     @unless(Auth::user()->player)
@@ -158,35 +185,50 @@ new class extends Component {
                             <div class="flex flex-col items-center gap-4 sm:gap-6">
 
                                 <img
-                                    class="w-28 sm:w-40 lg:w-20"
+                                    class="w-24 h-24 sm:w-32 sm:h-32 lg:w-28 lg:h-28 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
                                     src="{{ asset($game->photo_home) }}"
-                                    alt="">
+                                    srcset="{{ asset($game->photo_home) }} 96w,{{ asset($game->photo_home) }} 192w,{{ asset($game->photo_home) }} 384w"
+                                    sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 112px"
+                                    alt="Logo équipe domicile"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
 
                                 <span class="text-center text-lg font-bold text-white sm:text-xl lg:text-2xl">
-                        {{ $game->name_home }}
-                    </span>
+                                    {{ $game->name_home }}
+                                </span>
                             </div>
+
                             <div class="flex items-center gap-3 sm:gap-6 lg:gap-8">
                                 <input wire:model="score_home" type="number" min="0"
                                        class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-18 sm:w-18 sm:text-4xl lg:h-20 lg:w-20 lg:text-5xl">
+
                                 <span class="text-3xl font-black text-white sm:text-4xl lg:text-5xl">
-                        -
-                    </span>
+                                    -
+                                </span>
+
                                 <input wire:model="score_away" type="number" min="0"
                                        class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-18 sm:w-18 sm:text-4xl lg:h-20 lg:w-20 lg:text-5xl">
                             </div>
+
                             <div class="flex flex-col items-center gap-4 sm:gap-6">
                                 <img
-                                    class="w-16 sm:w-15 lg:w-20"
+                                    class="w-24 h-24 sm:w-32 sm:h-32 lg:w-28 lg:h-28 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
                                     src="{{ asset($game->photo_away) }}"
-                                    alt="">
+                                    srcset="{{ asset($game->photo_away) }} 96w,{{ asset($game->photo_away) }} 192w,{{ asset($game->photo_away) }} 384w"
+                                    sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 112px"
+                                    alt="Logo équipe extérieur"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+
                                 <span class="text-center text-lg font-bold text-white sm:text-xl lg:text-2xl">
-                        {{ $game->name_away }}
-                    </span>
+                                    {{ $game->name_away }}
+                                </span>
                             </div>
                         </div>
-                        <div class="flex justify-center">
 
+                        <div class="flex justify-center">
                             <button wire:click="updateScore({{$game->id}})" class="btn-form">
                                 Confirmer
                             </button>

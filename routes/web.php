@@ -19,10 +19,15 @@ Route::get('/logout', function () {
 })->name('hub');
 
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/calendar/events', function () {
-    $games = Game::all()->map(function ($game) {
+
+    $user = Auth::id();
+
+    $games = Game::where('user_id', $user)->get()->map(function ($game) {
         return [
-            'title' => '⚽ ' . 'Match',
+            'title' => '⚽ Match',
             'start' => $game->date_match,
             'color' => '#ef4444',
             'address' => $game->address,
@@ -31,7 +36,7 @@ Route::get('/calendar/events', function () {
         ];
     });
 
-    $trains = Train::all()->map(function ($train) {
+    $trains = Train::where('user_id', $user)->get()->map(function ($train) {
         return [
             'title' => '🏃 Entraînement',
             'start' => $train->date_train,
@@ -40,7 +45,6 @@ Route::get('/calendar/events', function () {
             'hours_start' => $train->hours_start,
             'hours_end' => $train->hours_end,
             'id' => $train->id,
-
         ];
     });
 
