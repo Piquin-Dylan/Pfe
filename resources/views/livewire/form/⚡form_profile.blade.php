@@ -102,17 +102,37 @@ new class extends Component {
                             <option value="" class="bg-[#1f2333] text-gray-400">
                                 Sélectionner votre poste
                             </option>
-                            <option value="Gardien" class="bg-[#1f2333]">Gardien</option>
+                            <option value="Gardien" class="bg-[#1f2333]">G</option>
                             <option value="DC" class="bg-[#1f2333]">DC</option>
+                            <option value="DCG" class="bg-[#1f2333]">DCG</option>
+                            <option value="DCD" class="bg-[#1f2333]">DCD</option>
+
                             <option value="DD" class="bg-[#1f2333]">DD</option>
                             <option value="DG" class="bg-[#1f2333]">DG</option>
+
                             <option value="MC" class="bg-[#1f2333]">MC</option>
-                            <option value="MCD" class="bg-[#1f2333]">MCD</option>
                             <option value="MCG" class="bg-[#1f2333]">MCG</option>
+                            <option value="MCD" class="bg-[#1f2333]">MCD</option>
+
                             <option value="MOC" class="bg-[#1f2333]">MOC</option>
+                            <option value="MCDG" class="bg-[#1f2333]">MCDG</option>
+                            <option value="MCDD" class="bg-[#1f2333]">MCDD</option>
+
                             <option value="BU" class="bg-[#1f2333]">BU</option>
+                            <option value="BUG" class="bg-[#1f2333]">BUG</option>
+                            <option value="BUD" class="bg-[#1f2333]">BUD</option>
+
                             <option value="AD" class="bg-[#1f2333]">AD</option>
                             <option value="AG" class="bg-[#1f2333]">AG</option>
+
+                            <option value="MG" class="bg-[#1f2333]">MG</option>
+                            <option value="MD" class="bg-[#1f2333]">MD</option>
+
+                            <option value="MDC" class="bg-[#1f2333]">MDC</option>
+
+                            <option value="PistonG" class="bg-[#1f2333]">PistonG</option>
+                            <option value="PistonD" class="bg-[#1f2333]">PistonD</option>
+
                         </select>
 
                     </div>

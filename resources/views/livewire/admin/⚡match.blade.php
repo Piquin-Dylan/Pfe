@@ -46,6 +46,7 @@ new class extends Component {
             'score_home' => $this->score_home,
             'score_away' => $this->score_away
         ]);
+        $this->dispatch('score-updated');
     }
 };
 ?>
@@ -87,7 +88,7 @@ new class extends Component {
                 <div class="flex items-center justify-center h-full">
               <span class="text-2xl text-white font-semibold whitespace-nowrap">
                   @if($game->score_home !== null && $game->score_away !== null)
-                      <span>{{ $game->score_home }} - {{ $game->score_away }}</span>
+                      <span class="text-2xl">{{ $game->score_home }} - {{ $game->score_away }}</span>
                   @else
                       {{ $game->hours }}
                   @endif
@@ -105,8 +106,21 @@ new class extends Component {
 
             </div>
 
-            <div x-data="{ openScoreModal: false }">
+            <div
+                x-data="{openScoreModal: false,
+       showToast: false
+    }"
 
+                x-on:score-updated.window="
+        openScoreModal = false;
+
+        showToast = true;
+
+        setTimeout(() => {
+            showToast = false
+        }, 3000)
+    "
+            >
                 <div class="flex justify-center items-center gap-4 mb-10">
 
                     @unless(Auth::user()->player)
@@ -128,8 +142,7 @@ new class extends Component {
 
                     <div
                         @click.away="openScoreModal = false"
-                        class="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/20 bg-[#141B34] px-4 py-6 sm:px-8 sm:py-8 shadow-[0_0_80px_rgba(79,70,229,0.15)]">
-
+                        class="relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/20 bg-[#141B34] px-4 py-6 sm:px-8 sm:py-8 shadow-[0_0_80px_rgba(79,70,229,0.15)]">
                         <button
                             @click="openScoreModal = false"
                             class="absolute right-4 top-4 text-3xl font-light text-white transition hover:scale-110 sm:text-5xl">
@@ -141,8 +154,7 @@ new class extends Component {
                         </h2>
 
                         <div
-                            class="flex flex-col items-center justify-center gap-10 pb-10 lg:flex-row lg:gap-16 sm:pb-14">
-
+                            class="flex items-center justify-center gap-6 sm:gap-10 pb-10 sm:pb-14">
                             <div class="flex flex-col items-center gap-4 sm:gap-6">
 
                                 <img
@@ -156,12 +168,12 @@ new class extends Component {
                             </div>
                             <div class="flex items-center gap-3 sm:gap-6 lg:gap-8">
                                 <input wire:model="score_home" type="number" min="0"
-                                       class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-28 sm:w-28 sm:text-4xl lg:h-32 lg:w-32 lg:text-5xl">
+                                       class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-18 sm:w-18 sm:text-4xl lg:h-20 lg:w-20 lg:text-5xl">
                                 <span class="text-3xl font-black text-white sm:text-4xl lg:text-5xl">
                         -
                     </span>
                                 <input wire:model="score_away" type="number" min="0"
-                                       class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-28 sm:w-28 sm:text-4xl lg:h-32 lg:w-32 lg:text-5xl">
+                                       class="h-20 w-20 rounded-full border-4 border-transparent bg-white text-center text-3xl font-black outline-none transition focus:border-violet-500 sm:h-18 sm:w-18 sm:text-4xl lg:h-20 lg:w-20 lg:text-5xl">
                             </div>
                             <div class="flex flex-col items-center gap-4 sm:gap-6">
                                 <img

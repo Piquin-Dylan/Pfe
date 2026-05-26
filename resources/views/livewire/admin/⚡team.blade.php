@@ -49,7 +49,6 @@ new class extends Component {
 
                 $query->orWhere('team_id', $teamId);
             }
-
         })
             ->when($this->searchPlayer, function ($query) {
                 $query->where('name', 'like', '%' . $this->searchPlayer . '%');

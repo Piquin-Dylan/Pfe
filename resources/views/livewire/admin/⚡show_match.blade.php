@@ -179,55 +179,6 @@ new class extends Component {
 
     </div>
 
-    <div class="pr-5 pl-5">
-        <input
-                class="bg-white p-4 rounded-2xl w-full"
-                wire:model.live.debounce="searchPlayer"
-                placeholder="rechercher un joueur"
-        >
-    </div>
-
-    <div class="lg:flex lg:gap-8 lg:justify-center lg:pb-8">
-
-        <div class="flex flex-row justify-center items-center gap-5 lg:gap-12 pt-6 sm:flex-row">
-
-            <span
-                    class="filter_position {{ $filters === 'tout' ? 'active' : '' }}"
-                    wire:click="filter('tout')">
-                Tout
-            </span>
-
-            <span
-                    class="filter_position {{ $filters === 'attaquant' ? 'active' : '' }}"
-                    wire:click="filter('attaquant')">
-                Attaquant
-            </span>
-
-            <span
-                    class="filter_position {{ $filters === 'milieux' ? 'active' : '' }}"
-                    wire:click="filter('milieux')">
-                Milieux
-            </span>
-
-        </div>
-
-        <div class="flex flex-row justify-center items-center pt-6 pb-6 gap-5 lg:pb-0 lg:gap-12">
-
-            <span
-                    class="filter_position {{ $filters === 'defenseur' ? 'active' : '' }}"
-                    wire:click="filter('defenseur')">
-                Défenseur
-            </span>
-
-            <span
-                    class="filter_position {{ $filters === 'gardien' ? 'active' : '' }}"
-                    wire:click="filter('gardien')">
-                Gardien
-            </span>
-        </div>
-
-    </div>
-
     <div x-data="{ currentTab: 'first' }">
         @include('livewire.components.navigation_match')
         <div x-show="currentTab === 'first'">
