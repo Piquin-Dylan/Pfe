@@ -149,9 +149,9 @@ new class extends Component {
 
         <div class="flex flex-col items-center text-center min-w-0">
             <img
-                    class="w-24 lg:w-42 mb-6"
-                    alt=""
-                    src="{{ asset($games->photo_home) }}"
+                class="w-24 lg:w-42 mb-6"
+                alt=""
+                src="{{ asset($games->photo_home) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -167,9 +167,9 @@ new class extends Component {
 
         <div class="flex flex-col items-center text-center min-w-0">
             <img
-                    class="w-24 lg:w-42 mb-6"
-                    alt=""
-                    src="{{ asset($games->photo_away) }}"
+                class="w-24 lg:w-42 mb-6"
+                alt=""
+                src="{{ asset($games->photo_away) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -203,9 +203,9 @@ new class extends Component {
                 @if($this->games->players->isEmpty())
 
                     <button
-                            wire:click="saveConvocation"
-                            @disabled(count($checked) > $newValue)
-                            class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                        wire:click="saveConvocation"
+                        @disabled(count($checked) > $newValue)
+                        class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Enregistrer les convocations
                     </button>
@@ -213,8 +213,8 @@ new class extends Component {
                 @else
 
                     <button
-                            disabled
-                            class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
+                        disabled
+                        class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
         cursor-not-allowed border border-gray-500/30"
                     >
                         Convocation déjà enregistrée
@@ -230,7 +230,7 @@ new class extends Component {
                     <label class="cursor-pointer group flex flex-col items-center">
 
                         <div
-                                class="relative"
+                            class="relative"
                         >
 
                     <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
@@ -238,30 +238,30 @@ new class extends Component {
                     </span>
 
                             <div
-                                    class="absolute inset-0 rounded-2xl border-4 border-transparent
+                                class="absolute inset-0 rounded-2xl border-4 border-transparent
                         peer-checked:border-indigo-500
                         transition-all duration-300"
                             ></div>
 
                             <img
-                                    class="w-[250px] pb-6 transition-all duration-300
+                                class="w-[250px] pb-6 transition-all duration-300
                         group-hover:brightness-110"
-                                    src="{{ asset('Component_card_player.svg') }}"
-                                    alt=""
+                                src="{{ asset('Component_card_player.svg') }}"
+                                alt=""
                             >
 
                         </div>
 
 
                         <input
-                                wire:model.live="checked"
-                                type="checkbox"
-                                value="{{ $player->id }}"
+                            wire:model.live="checked"
+                            type="checkbox"
+                            value="{{ $player->id }}"
 
-                                @disabled(
-                                    count($checked) >= $newValue
-                                    && !in_array($player->id, $checked)
-                                )class="mt-4 h-6 w-6 accent-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed"/>
+                            @disabled(
+                                count($checked) >= $newValue
+                                && !in_array($player->id, $checked)
+                            )class="mt-4 h-6 w-6 accent-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed"/>
 
 
                     </label>
@@ -274,7 +274,7 @@ new class extends Component {
             <div class="fixed bottom-6 right-6 z-50">
 
                 <div
-                        class="bg-[#23294A] border border-violet-500/30
+                    class="bg-[#23294A] border border-violet-500/30
             shadow-2xl rounded-2xl px-6 py-4 backdrop-blur-md"
                 >
 
@@ -297,7 +297,7 @@ new class extends Component {
                             <div class="animate-pulse">
 
                         <span
-                                class="bg-red-500/20 text-red-400 border border-red-500/40
+                            class="bg-red-500/20 text-red-400 border border-red-500/40
                             px-3 py-1 rounded-full text-sm font-bold uppercase"
                         >
                             Nombre de joueur max atteinte
@@ -334,8 +334,8 @@ new class extends Component {
                     </div>
 
                     <button
-                            @click="openModal = true"
-                            class="btn-primary">
+                        @click="openModal = true"
+                        class="btn-primary">
                         Reconvoquer les joueurs
                     </button>
 
@@ -357,9 +357,9 @@ new class extends Component {
                     </span>
 
                         <img
-                                class="w-[250px] pb-4"
-                                src="{{ asset('Component_card_player.svg') }}"
-                                alt=""
+                            class="w-[250px] pb-4"
+                            src="{{ asset('Component_card_player.svg') }}"
+                            alt=""
                         >
 
                         <div class="flex justify-center">
@@ -379,65 +379,69 @@ new class extends Component {
                 @endforeach
 
                 <div
-                        x-show="openModal"
-                        x-transition
-                        class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-                        style="display: none;"
+                    x-show="openModal"
+                    x-transition
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+                    style="display: none;"
                 >
 
                     <div
-                            @click.away="openModal = false"
-                            class="bg-[#23294A] border border-violet-500/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl"
+                        @click.away="openModal = false"
+                        class="bg-[#23294A] border border-violet-500/30 rounded-3xl w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col"
                     >
 
-                        <div class="flex justify-between items-center pb-8">
-                            <h2 class="text-white text-3xl font-bold">
+                        <div class="flex justify-between items-center p-6 sm:p-8 border-b border-violet-500/20">
+                            <h2 class="text-white text-2xl sm:text-3xl font-bold">
                                 Reconvoquer des joueurs
                             </h2>
 
                             <button
-                                    @click="openModal = false"
-                                    class="text-white text-2xl hover:text-violet-400 transition">
+                                @click="openModal = false"
+                                class="text-white text-2xl hover:text-violet-400 transition"
+                            >
                                 ✕
                             </button>
                         </div>
 
-                        <div class="flex flex-col gap-4">
+                        <div class="overflow-y-auto p-4 sm:p-6 flex flex-col gap-4">
 
                             @foreach($playersNotConvoked as $player)
 
                                 <label
-                                        class="flex items-center justify-between bg-[#1B2340]
-                                border border-violet-500/20 rounded-2xl px-6 py-4
-                                hover:border-violet-500/50 transition cursor-pointer"
+                                    class="flex items-center justify-between bg-[#1B2340]
+                    border border-violet-500/20 rounded-2xl px-4 sm:px-6 py-4
+                    hover:border-violet-500/50 transition cursor-pointer"
                                 >
 
-                                    <div class="flex flex-col">
-                                    <span class="text-white text-lg font-semibold">
-                                        {{ $player->firstName }}
-                                    </span>
+                                    <div class="flex flex-col min-w-0">
+                        <span class="text-white text-lg font-semibold truncate">
+                            {{ $player->firstName }}
+                        </span>
 
                                         <span class="text-violet-300 text-sm uppercase tracking-wider">
-                                        {{ $player->position }}
-                                    </span>
+                            {{ $player->position }}
+                        </span>
                                     </div>
 
                                     <input
-                                            wire:model.live="checkedSecondConvocation"
-                                            type="checkbox"
-                                            value="{{ $player->id }}"
-                                            class="h-6 w-6 accent-violet-500">
+                                        wire:model.live="checkedSecondConvocation"
+                                        type="checkbox"
+                                        value="{{ $player->id }}"
+                                        class="h-6 w-6 accent-violet-500 shrink-0"
+                                    >
 
                                 </label>
 
                             @endforeach
-                            <div class="pt-8 flex justify-end">
+
+                            <div class="pt-6 flex justify-end">
                                 <button
                                     wire:click="saveSecondConvocation"
-                                    class="btn-primary">
+                                    class="btn-primary w-full sm:w-auto">
                                     Valider la reconvocation
                                 </button>
                             </div>
+
                         </div>
 
                     </div>
