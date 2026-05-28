@@ -59,9 +59,10 @@ new class extends Component {
 ?>
 
 <div>
-    <h2 class="mt-4 mb-4 title_section lg:mt-12 lg:mb-4">Messages</h2>
-
     <section class="ml-6 mr-6 lg:items-center lg:flex-col">
+        <h2 class="mt-4 mb-4 title_section lg:mt-12 lg:mb-4">Messages</h2>
+        @livewire('communication-form')
+
         @foreach($notifications as $notification)
 
             @php
@@ -116,5 +117,5 @@ new class extends Component {
 
             </div>
         @endforeach
-           </section>
+    </section>
 </div>

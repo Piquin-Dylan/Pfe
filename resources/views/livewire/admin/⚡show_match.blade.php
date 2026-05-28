@@ -229,27 +229,36 @@ new class extends Component {
 
                     <label class="cursor-pointer group flex flex-col items-center">
 
-                        <div
-                            class="relative"
-                        >
-
-                    <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
-                        {{ $player->firstName }}
-                    </span>
-
+                        <div class="relative w-[250px]">
+                    <span
+                        class="absolute z-30 text-white font-bold text-xl
+                       left-2 top-6">{{ $player->firstName }}</span>
+                            <span
+                                class="absolute z-30 text-white font-bold text-xl
+                       left-2 top-80">{{ $player->position }}</span>
+                            <img class="absolute z-20 inset-0  w-full h-full  object-cover"
+                                 style="
+                    clip-path: polygon(
+                        13% 15%,
+                        52% 15%,
+                        60% 7%,
+                        86% 7%,
+                        92% 12%,
+                        92% 88%,
+                        85% 94%,
+                        50% 94%,
+                        42% 84%,
+                        13% 84%
+                    );
+                " src="{{ asset('1000017766.jpg') }}" alt="">
                             <div
-                                class="absolute inset-0 rounded-2xl border-4 border-transparent
-                        peer-checked:border-indigo-500
-                        transition-all duration-300"
-                            ></div>
-
+                                class="absolute z-30 bottom-[60px] right-[28px]  w-[55px] h-[55px  rounded-full  bg-[#A6463A]  flex items-center justify-center text-white text-4xl font-bold">
+                                {{$player->maillot}}
+                            </div>
                             <img
-                                class="w-[250px] pb-6 transition-all duration-300
-                        group-hover:brightness-110"
+                                class="relative z-10 w-full"
                                 src="{{ asset('Component_card_player.svg') }}"
-                                alt=""
-                            >
-
+                                alt="">
                         </div>
 
 
@@ -351,16 +360,36 @@ new class extends Component {
 
                 @foreach($this->games->players as $player)
 
-                    <div class="relative">
-                    <span class="text-white absolute font-bold text-xl left-8 top-8 z-10">
-                        {{ $player->firstName }}
-                    </span>
-
+                    <div class="relative w-[250px]">
+                    <span
+                        class="absolute z-30 text-white font-bold text-xl
+                       left-2 top-6">{{ $player->firstName }}</span>
+                        <span
+                            class="absolute z-30 text-white font-bold text-xl
+                       left-2 top-80">{{ $player->position }}</span>
+                        <img class="absolute z-20 inset-0  w-full h-[380px]  object-cover"
+                             style="
+                    clip-path: polygon(
+                        13% 15%,
+                        52% 15%,
+                        60% 7%,
+                        86% 7%,
+                        92% 12%,
+                        92% 88%,
+                        85% 94%,
+                        50% 94%,
+                        42% 84%,
+                        13% 84%
+                    );
+                " src="{{ asset($player->photo) }}" alt="">
+                        <div
+                            class="absolute z-30 bottom-[60px] right-[28px]  w-[55px] h-[55px  rounded-full  bg-[#A6463A]  flex items-center justify-center text-white text-4xl font-bold">
+                            {{$player->maillot}}
+                        </div>
                         <img
-                            class="w-[250px] pb-4"
+                            class="relative z-10 w-full"
                             src="{{ asset('Component_card_player.svg') }}"
-                            alt=""
-                        >
+                            alt="">
 
                         <div class="flex justify-center">
                         <span
