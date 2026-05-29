@@ -1531,17 +1531,17 @@
 
     <div class="flex-1 flex flex-col lg:ml-64">
 
-        <header class="bg-[#192443] h-16 flex items-center px-4 border-b border-white/10">
+        <header class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
 
-            <button class="relative z-50 lg:hidden" @click="open = !open">
+            <button class="relative z-50 lg:hidden shrink-0" @click="open = !open">
 
-                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
                      viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                           d="M5 7h14M5 12h14M5 17h14"/>
                 </svg>
 
-                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
                      viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                           d="M6 18 18 6M6 6l12 12"/>
@@ -1549,23 +1549,33 @@
 
             </button>
 
-            <div class="ml-4 flex items-center w-full text-white">
+            <div class="ml-2 lg:ml-4 flex items-center w-full text-white">
 
-                <div class="font-semibold text-lg">
+                <div class="font-semibold text-lg hidden lg:block">
                     <a href="{{ route('dashboard') }}">SportTeams</a>
                 </div>
 
                 <div class="flex-1 flex justify-center">
-        <span>
-            Code pour rejoindre l'équipe :
-            {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
-        </span>
+
+                <span class="text-[11px] sm:text-sm lg:text-base text-center break-all lg:break-normal">
+                    <span class="lg:hidden">
+                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+                    </span>
+
+                    <span class="hidden lg:inline">
+                        Code pour rejoindre l'équipe :
+                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+                    </span>
+                </span>
+
                 </div>
+
             </div>
-            <div class="ml-4 relative inline-flex">
+
+            <div class="ml-2 lg:ml-4 relative inline-flex shrink-0">
                 <a href="/message">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-6 h-6"
+                         class="w-5 h-5 lg:w-6 lg:h-6"
                          viewBox="0 0 24 24"
                          fill="none"
                          stroke="white"
@@ -1577,23 +1587,21 @@
 
                     <span
                         class="absolute -top-2 -right-2 min-w-5 h-5 px-1
-               flex items-center justify-center
-               rounded-full bg-red-500 text-white
-               text-[10px] font-bold leading-none
-               shadow-md">
-            {{Auth::user()->unreadNotifications()->count()}}
-    </span>
+                    flex items-center justify-center
+                    rounded-full bg-red-500 text-white
+                    text-[10px] font-bold leading-none shadow-md">
+                    {{ Auth::user()->unreadNotifications()->count() }}
+                </span>
                 </a>
             </div>
 
         </header>
 
-        <main class="flex-1 p-6 overflow-y-auto">
+        <main class="flex-1 p-3 sm:p-6 overflow-y-auto">
             {{ $slot }}
         </main>
 
     </div>
-
 </div>
 
 </body>

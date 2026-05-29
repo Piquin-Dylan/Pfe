@@ -28,15 +28,17 @@
             x-transition:leave-end="translate-x-full"
             class="absolute top-0 right-0 h-full w-full lg:w-[50vw]
                    bg-[#192443] text-white shadow-2xl
-                   p-6 overflow-y-auto"
+                   px-6 pt-16 pb-6 overflow-y-auto"
         >
+
             <button
-                class="mb-6 text-3xl"
+                class="absolute top-4 right-4 sm:top-6 sm:right-6 text-3xl font-light transition hover:scale-110"
                 @click="open = false">
-                X
+                ×
             </button>
 
             {{ $slot }}
+
         </div>
     </div>
 

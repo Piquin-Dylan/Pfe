@@ -47,7 +47,7 @@ new class extends Component {
 ?>
 
 <div>
-    <div class="flex gap-4 justify-center">
+    <div class="flex flex-col flex-wrap gap-4 justify-center items-center sm:flex-row">
         <livewire:admin.create_event></livewire:admin.create_event>
         <livewire:admin.create_train></livewire:admin.create_train>
     </div>
