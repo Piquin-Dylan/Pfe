@@ -13,10 +13,10 @@
         "act-training/livewire-calendar": "^0.3.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^4.1"
+        "livewire/livewire": "^4.1",
+        "fakerphp/faker": "^1.23"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
         "fruitcake/laravel-debugbar": "^4.2",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
