@@ -8,17 +8,21 @@ new class extends Component {
 
     public function mount(): void
     {
-        $this->game = Auth::user()->team
-            ->games()
-            ->where('date_match', '>=', now())
-            ->orderBy('date_match', 'asc')
-            ->first();
+        $team = Auth::user()->player
+            ? Auth::user()->player->team
+            : Auth::user()->team;
 
-        $this->train = Auth::user()->team
-            ->trains()
-            ->where('date_train', '>=', now())
-            ->orderBy('date_train', 'asc')
-            ->first();
+        if ($team) {
+            $this->game = $team->games()
+                ->where('date_match', '>=', now())
+                ->orderBy('date_match')
+                ->first();
+
+            $this->train = $team->trains()
+                ->where('date_train', '>=', now())
+                ->orderBy('date_train')
+                ->first();
+        }
     }
 };
 ?>
@@ -71,6 +75,24 @@ new class extends Component {
             </div>
 
         </div>
+    @else
+        <div
+            class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
+
+            <span class="text-blue-400 text-lg font-semibold">
+                Aucun match programmé
+            </span>
+
+            <p class="text-gray-300 mt-3">
+                Créez un match depuis le calendrier.
+            </p>
+
+            <a href="{{ route('calendrier') }}"
+               class="mt-5 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition">
+                Créer un match
+            </a>
+
+        </div>
     @endif
 
     @if($train)
@@ -82,7 +104,8 @@ new class extends Component {
 
             <div class="flex flex-col items-center justify-center mt-6">
 
-                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 flex flex-col items-center justify-center">
+                <div
+                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 flex flex-col items-center justify-center">
 
                     <span class="text-3xl sm:text-4xl font-bold leading-none">
                         {{ \Carbon\Carbon::parse($train->date_train)->format('d') }}
@@ -113,6 +136,24 @@ new class extends Component {
                 </span>
 
             </div>
+
+        </div>
+    @else
+        <div
+            class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
+
+            <span class="text-green-400 text-lg font-semibold">
+                Aucun entraînement programmé
+            </span>
+
+            <p class="text-gray-300 mt-3">
+                Créez un entraînement depuis le calendrier.
+            </p>
+
+            <a href="{{ route('calendrier') }}"
+               class="mt-5 px-4 py-2 rounded-xl bg-green-500 hover:bg-green-600 transition">
+                Créer un entraînement
+            </a>
 
         </div>
     @endif
