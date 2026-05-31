@@ -127,7 +127,7 @@ new class extends Component {
                                 <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
-n
+                            n
                         </x-form.input>
 
                     </div>

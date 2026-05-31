@@ -1,4 +1,4 @@
-<section class="mt-16 mb-16 lg:mr-8 lg-ml-8  lg:mt-32 lg:mb-32">
+<section class=" lg:mr-8 lg-ml-8  lg:py-20 lg:px-8">
     <h2 class="title_section pl-4 pr-4 mb-12">Présentation fonctionnalité création de compos</h2>
 <div
 

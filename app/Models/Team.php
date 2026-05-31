@@ -37,4 +37,9 @@ class Team extends Model
         return $this->hasMany(Game::class);
     }
 
+    public function trains(): HasMany
+    {
+        return $this->hasMany(Train::class);
+    }
+
 }

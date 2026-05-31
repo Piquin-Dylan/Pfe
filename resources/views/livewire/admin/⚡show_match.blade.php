@@ -205,7 +205,7 @@ new class extends Component {
                     <button
                         wire:click="saveConvocation"
                         @disabled(count($checked) > $newValue)
-                        class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="btn-form disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Enregistrer les convocations
                     </button>
@@ -426,8 +426,7 @@ new class extends Component {
 
                             <button
                                 @click="openModal = false"
-                                class="text-white text-2xl hover:text-violet-400 transition"
-                            >
+                                class="text-white text-2xl hover:text-violet-400 transition">
                                 ✕
                             </button>
                         </div>
@@ -439,8 +438,7 @@ new class extends Component {
                                 <label
                                     class="flex items-center justify-between bg-[#1B2340]
                     border border-violet-500/20 rounded-2xl px-4 sm:px-6 py-4
-                    hover:border-violet-500/50 transition cursor-pointer"
-                                >
+                    hover:border-violet-500/50 transition cursor-pointer">
 
                                     <div class="flex flex-col min-w-0">
                         <span class="text-white text-lg font-semibold truncate">
@@ -451,13 +449,11 @@ new class extends Component {
                             {{ $player->position }}
                         </span>
                                     </div>
-
                                     <input
                                         wire:model.live="checkedSecondConvocation"
                                         type="checkbox"
                                         value="{{ $player->id }}"
-                                        class="h-6 w-6 accent-violet-500 shrink-0"
-                                    >
+                                        class="h-6 w-6 accent-violet-500 shrink-0">
 
                                 </label>
 

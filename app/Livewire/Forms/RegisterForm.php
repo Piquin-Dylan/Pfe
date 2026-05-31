@@ -29,9 +29,15 @@ class RegisterForm extends Form
     #[Validate('unique:users', message: 'Cette adresse mail existe déjà.')]
     public string $email = "";
 
-    #[Validate('required', message: 'Le champs mot de passe est requis')]
-    public string $password = "";
-
+    #[Validate(
+        'required|min:8|max:255',
+        message: [
+            'required' => 'Le champ mot de passe est requis',
+            'min' => 'Le mot de passe doit contenir au moins 8 caractères',
+            'max' => 'Le mot de passe est trop long'
+        ]
+    )]
+    public string $password = '';
     #[Validate('nullable|image|max:2048')]
     public $image = null;
 
