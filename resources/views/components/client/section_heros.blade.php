@@ -1,5 +1,5 @@
 <section
-    class="px-4 py-12 lg:pb-20 lg:pt-40 overflow-hidden lg:px-8">
+    class="px-4 py-12 lg:pb-20 pt-40 overflow-hidden lg:px-8">
     <h2 class="sr-only">
         Section présentation
     </h2>

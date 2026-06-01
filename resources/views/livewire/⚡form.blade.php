@@ -28,7 +28,7 @@ new class extends Component {
 ?>
 
 
-<section class="py-20 px-6 lg:px-8">
+<section id="form-contact" class="py-20 px-6 lg:px-8">
     <h2 class="title_section">Formulaire de contact</h2>
 
     <div class=" ">
