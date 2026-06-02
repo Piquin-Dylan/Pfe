@@ -1526,15 +1526,14 @@
     <div
         x-show="open"
         @click="open = false"
-        class="fixed inset-0 bg-black/50 z-30 lg:hidden"
+        class="fixed inset-0  z-30 lg:hidden"
     ></div>
 
     <div class="flex-1 flex flex-col lg:ml-64">
 
         <header class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
 
-            <button class="relative z-50 lg:hidden shrink-0" @click="open = !open">
-
+            <button class="relative z-50 lg:hidden shrink-0 text-white" @click="open = !open">
                 <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
                      viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"

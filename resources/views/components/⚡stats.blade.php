@@ -33,21 +33,21 @@ new class extends Component {
         :image="asset('person.svg')"
         :value="$player"
         title="Joueurs dans l’équipe"
-        voir="Voir les joueurs →"
+        voir="Voir les joueurs "
         link="{{route('team')}}"/>
 
     <x-admin.dashboard.stats_card
         :image="asset('ball.svg')"
         :value="$match"
         title="Matchs créés"
-        voir="Voir les matchs →"
+        voir="Voir les matchs "
         link="{{route('match')}}"/>
 
     <x-admin.dashboard.stats_card
         :image="asset('calendar.svg')"
         :value="$train"
         title="Entraînements créés"
-        voir="Voir les entraînements →"
+        voir="Voir les entraînements "
         link="{{route('train')}}"/>
 
 </div>
