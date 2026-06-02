@@ -132,6 +132,13 @@ new class extends Component {
 
     public function assignPlayerToPosition($poste, $idPlayer)
     {
+        $alreadyAssigned = collect($this->player_position)
+            ->contains($idPlayer);
+
+        if ($alreadyAssigned && ($this->player_position[$poste] ?? null) !== $idPlayer) {
+            return;
+        }
+
         $this->player_position[$poste] = $idPlayer;
     }
 

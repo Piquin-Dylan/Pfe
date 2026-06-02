@@ -75,13 +75,27 @@
 
                     <div class="space-y-3">
                         @foreach($this->games->players as $player)
+                            @php
+                                $alreadyAssigned = in_array(
+                                    $player->id,
+                                    array_values($this->player_position ?? [])
+                                );
+                            @endphp
+
                             <div
                                 x-show="selectedPlayer === '{{ $player->position }}'"
-                                x-cloak>
+                                x-cloak
+                            >
                                 @if($player->pivot->status === "present")
                                     <div
-                                        @click="$wire.assignPlayerToPosition(selectedPlayer,{{ $player->pivot->player_id }})"
-                                        class="flex items-center justify-between rounded-2xl border border-purple-500/20 bg-[#25284B] p-4 cursor-pointer transition hover:bg-[#2D315D]">
+                                        @if(!$alreadyAssigned)
+                                            @click="$wire.assignPlayerToPosition(selectedPlayer,{{ $player->pivot->player_id }})"
+                                        @endif
+                                        class="flex items-center justify-between rounded-2xl p-4 transition
+                {{ $alreadyAssigned
+                    ? 'border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed'
+                    : 'border border-purple-500/10 bg-[#222547] cursor-pointer hover:bg-[#2A2E57]'
+                }}">
                                         <div>
                                             <p class="text-white font-semibold">
                                                 {{ $player->firstName }}
@@ -92,7 +106,20 @@
                                             </p>
                                         </div>
 
-                                        <div class="h-4 w-4 rounded-full bg-green-400"></div>
+                                        @if($alreadyAssigned)
+                                            <span
+                                                class="inline-flex items-center gap-2 rounded-full
+                               bg-purple-500/10 px-3 py-1
+                               text-xs font-medium text-purple-300">
+
+                        <span class="h-2 w-2 rounded-full bg-purple-400"></span>
+
+                        Déjà placé
+                    </span>
+                                        @else
+                                            <div class="h-4 w-4 rounded-full border border-gray-400"></div>
+                                        @endif
+
                                     </div>
                                 @endif
                             </div>

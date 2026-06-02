@@ -27,14 +27,19 @@ new class extends Component {
 };
 ?>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
+<div class=  " pb-8 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
 
     @if($game)
-        <div class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white">
+        <a href="/match/{{ $game->id }}"
+           class="group block bg-gradient-to-br from-[#0f172a] to-[#020617]
+              border border-white/10 rounded-3xl p-5 text-white
+              transition-all duration-300
+              hover:-translate-y-1
+              hover:border-blue-400/40">
 
-            <span class="text-xs uppercase tracking-widest text-blue-400">
-                Prochain match
-            </span>
+        <span class="text-xs uppercase tracking-widest text-blue-400">
+            Prochain match
+        </span>
 
             <div class="mt-4 flex items-center justify-between gap-3">
 
@@ -46,13 +51,13 @@ new class extends Component {
                     >
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
-                        {{ $game->name_home }}
-                    </span>
+                    {{ $game->name_home }}
+                </span>
                 </div>
 
                 <span class="text-xl sm:text-3xl font-bold text-blue-400">
-                    VS
-                </span>
+                VS
+            </span>
 
                 <div class="flex flex-col items-center flex-1">
                     <img
@@ -62,8 +67,8 @@ new class extends Component {
                     >
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
-                        {{ $game->name_away }}
-                    </span>
+                    {{ $game->name_away }}
+                </span>
                 </div>
 
             </div>
@@ -74,14 +79,36 @@ new class extends Component {
                 <p class="text-gray-300">{{ $game->address }}</p>
             </div>
 
-        </div>
+            <div class="mt-5 flex justify-center">
+            <span
+                class="inline-flex items-center gap-2 text-blue-400 font-semibold
+                       transition-all duration-300
+                       group-hover:text-blue-300
+                       group-hover:translate-x-1">
+
+                Voir les détails
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9 5l7 7-7 7"/>
+                </svg>
+            </span>
+            </div>
+
+        </a>
     @else
         <div
             class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
 
-            <span class="text-blue-400 text-lg font-semibold">
-                Aucun match programmé
-            </span>
+        <span class="text-blue-400 text-lg font-semibold">
+            Aucun match programmé
+        </span>
 
             <p class="text-gray-300 mt-3">
                 Créez un match depuis le calendrier.
@@ -96,55 +123,82 @@ new class extends Component {
     @endif
 
     @if($train)
-        <div class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white">
+        <a href="/train/{{ $train->id }}"
+           class="group block bg-gradient-to-br from-[#0f172a] to-[#020617]
+              border border-white/10 rounded-3xl p-5 text-white
+              transition-all duration-300
+              hover:-translate-y-1
+              hover:border-green-400/40">
 
-            <span class="text-xs uppercase tracking-widest text-green-400">
-                Prochain entraînement
-            </span>
+        <span class="text-xs uppercase tracking-widest text-green-400">
+            Prochain entraînement
+        </span>
 
             <div class="flex flex-col items-center justify-center mt-6">
 
                 <div
                     class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 flex flex-col items-center justify-center">
 
-                    <span class="text-3xl sm:text-4xl font-bold leading-none">
-                        {{ \Carbon\Carbon::parse($train->date_train)->format('d') }}
-                    </span>
+                <span class="text-3xl sm:text-4xl font-bold leading-none">
+                    {{ \Carbon\Carbon::parse($train->date_train)->format('d') }}
+                </span>
 
                     <span class="mt-1 text-xs uppercase text-gray-300">
-                        {{ \Carbon\Carbon::parse($train->date_train)->locale('fr')->translatedFormat('F') }}
-                    </span>
+                    {{ \Carbon\Carbon::parse($train->date_train)->locale('fr')->translatedFormat('F') }}
+                </span>
 
                 </div>
 
                 <span class="mt-5 text-lg sm:text-2xl font-semibold text-center">
-                    Entraînement collectif
-                </span>
+                Entraînement collectif
+            </span>
 
             </div>
 
             <div class="mt-6 flex flex-col gap-2 text-center">
 
-                <span class="text-base sm:text-lg">
-                    {{ \Carbon\Carbon::parse($train->hours_start)->format('H\hi') }}
-                    -
-                    {{ \Carbon\Carbon::parse($train->hours_end)->format('H\hi') }}
-                </span>
+            <span class="text-base sm:text-lg">
+                {{ \Carbon\Carbon::parse($train->hours_start)->format('H\hi') }}
+                -
+                {{ \Carbon\Carbon::parse($train->hours_end)->format('H\hi') }}
+            </span>
 
                 <span class="text-gray-300 break-words">
-                    {{ $train->address }}
-                </span>
+                {{ $train->address }}
+            </span>
 
             </div>
 
-        </div>
+            <div class="mt-6 flex justify-center">
+            <span
+                class="inline-flex items-center gap-2 text-green-400 font-semibold
+                       transition-all duration-300
+                       group-hover:text-green-300
+                       group-hover:translate-x-1">
+
+                Voir les détails
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9 5l7 7-7 7"/>
+                </svg>
+            </span>
+            </div>
+
+        </a>
     @else
         <div
             class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
 
-            <span class="text-green-400 text-lg font-semibold">
-                Aucun entraînement programmé
-            </span>
+        <span class="text-green-400 text-lg font-semibold">
+            Aucun entraînement programmé
+        </span>
 
             <p class="text-gray-300 mt-3">
                 Créez un entraînement depuis le calendrier.
