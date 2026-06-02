@@ -25,7 +25,6 @@ class CreateTeamForm extends Form
 
     #[Validate('required|image|max:2048')]
     public $logo = "";
-    public string $message = "";
 
     public function submit(): void
     {

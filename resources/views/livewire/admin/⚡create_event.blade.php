@@ -31,8 +31,8 @@ new class extends Component {
                 title_form="Création d'un match"
                 subtitle_form="Créer votre événement match"
                 button="Connexion"
+                containerClass=""
             >
-
                 <form class="w-full" wire:submit.prevent="save">
 
                     <div class="sm:flex sm:flex-row sm:flex-wrap gap-5">

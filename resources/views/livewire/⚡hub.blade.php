@@ -29,7 +29,8 @@ new class extends Component {
 ?>
 
 <div>
-    <section class="lg:flex lg:gap-10 lg:pt-8 lg:px-8 px-4 pb-10">
+    <section class="lg:flex lg:gap-10 pt-28 lg:px-8 px-4 pb-10">
+        <h2 class="sr-only">Hub</h2>
 
         <div class="flex-1 mt-10 lg:mt-0">
 
@@ -38,9 +39,9 @@ new class extends Component {
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
                     <div>
-                        <h1 class="text-white text-2xl lg:text-3xl font-bold mb-3">
+                        <h3 class="text-white text-2xl lg:text-3xl font-bold mb-3">
                             Mes équipes
-                        </h1>
+                        </h3>
 
                         <p class="text-gray-400 text-lg lg:text-xl">
                             Gérez vos équipes ou rejoignez une équipe existante.

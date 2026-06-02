@@ -137,9 +137,9 @@
 
         <div class="mb-6">
 
-            <h2 class="text-white text-2xl font-bold">
+            <span class="text-white text-2xl font-bold">
                 Joueurs
-            </h2>
+            </span>
 
             <p
                 class="text-sm text-purple-400 mt-1"

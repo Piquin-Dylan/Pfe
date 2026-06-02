@@ -1,12 +1,13 @@
 <footer class="text-white  mt-16">
+    <h2 class="sr-only">Navigation de bas de page</h2>
     <div class="max-w-7xl mx-auto px-6 py-12">
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
             <div class="text-center md:text-left">
-                <h2 class="text-4xl font-black mb-4 lg:text-center">
+                <h3 class="text-4xl font-black mb-4 lg:text-center">
                     SportTeams
-                </h2>
+                </h3>
 
                 <p class="text-gray-300 leading-8 max-w-md mx-auto md:mx-0 lg:text-center">
                     Gérez votre équipe de football en toute simplicité.

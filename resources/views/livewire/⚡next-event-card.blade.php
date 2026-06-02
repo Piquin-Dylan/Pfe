@@ -27,7 +27,7 @@ new class extends Component {
 };
 ?>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
 
     @if($game)
         <div class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white">

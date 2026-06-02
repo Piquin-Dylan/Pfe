@@ -27,7 +27,7 @@ new class extends Component {
 };
 ?>
 
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:pb-20">
 
     <x-admin.dashboard.stats_card
         :image="asset('person.svg')"
