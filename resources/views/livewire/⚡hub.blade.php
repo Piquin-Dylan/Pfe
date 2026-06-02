@@ -88,8 +88,8 @@ new class extends Component {
 
                                 <img
                                     class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset($team->logo) }}"
-                                    srcset="{{ asset($team->logo) }} 96w,{{ asset($team->logo) }} 192w,{{ asset($team->logo) }} 384w "
+                                    src="{{ asset('storage/' . $team->logo) }}"
+                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' . $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
                                     sizes="(max-width: 640px) 64px, 96px"
                                     alt="{{ $team->name }}"
                                     loading="lazy"
