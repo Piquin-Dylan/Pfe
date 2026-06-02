@@ -52,4 +52,9 @@ test('password is hashed', function () {
     expect(
         Hash::check('password123', $user->password)
     )->toBeTrue();
+
+
+
 });
+
+

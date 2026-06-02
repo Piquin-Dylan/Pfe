@@ -81,19 +81,19 @@ new class extends Component {
     @endphp
 
     @if($players->isEmpty())
-        <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
-            <h3 class="text-2xl font-bold text-white mb-4">
+        <div class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
+            <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                 Aucun joueur dans votre équipe
             </h3>
 
-            <p class="text-gray-300 mb-6">
+            <p class="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
                 Partagez ce code avec vos joueurs pour qu'ils puissent rejoindre votre équipe.
             </p>
 
-            <div class="inline-flex items-center gap-4 bg-white/10 px-6 py-4 rounded-2xl">
-                <span class="text-3xl font-bold tracking-widest text-white">
-    {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
-</span>
+            <div class="inline-flex items-center bg-white/10 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl">
+        <span class="text-xl sm:text-3xl font-bold tracking-wide sm:tracking-widest text-white break-all">
+            {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+        </span>
             </div>
         </div>
     @else
