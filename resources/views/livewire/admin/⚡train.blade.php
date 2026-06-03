@@ -26,6 +26,9 @@ new class extends Component {
 ?>
 
 <div>
+    <div class="w-full flex justify-center max-w-[250px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        @livewire('admin.create_train')
+    </div>
     <div>
         @if($trains->isEmpty())
             <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">

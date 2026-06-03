@@ -146,6 +146,7 @@ new class extends Component {
 ?>
 
 <div>
+
     <h3 class="title_section " id="tuto">
         Match du
         {{ \Carbon\Carbon::parse($games->date_match)->locale('fr')->translatedFormat('d F') }}
@@ -158,7 +159,7 @@ new class extends Component {
             <img
                 class="w-24 lg:w-42 mb-6"
                 alt=""
-                src="{{ asset($games->photo_home) }}"
+                src="{{ asset('storage/' . $games->photo_home) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -176,7 +177,7 @@ new class extends Component {
             <img
                 class="w-24 lg:w-42 mb-6"
                 alt=""
-                src="{{ asset($games->photo_away) }}"
+                src="{{ asset('storage/' . $games->photo_away) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
