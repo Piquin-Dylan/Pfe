@@ -48,23 +48,24 @@ new class extends Component {
                         </p>
                     </div>
 
+
                     <div class="flex flex-col sm:flex-row gap-4">
-
-                        <a
-                            href="/profile"
-                            class="px-6 py-3 rounded-xl border border-white/20
+                        @unless(Auth::user()->team)
+                            <a
+                                href="/profile"
+                                class="px-6 py-3 rounded-xl border border-white/20
                             text-white font-semibold hover:bg-white/5 transition text-center">
-                            Rejoindre une équipe
-                        </a>
+                                Rejoindre une équipe
+                            </a>
 
-                        <a href="/create"
-                           class="px-6 py-3 rounded-xl bg-gradient-to-r
+                            <a href="/create"
+                               class="px-6 py-3 rounded-xl bg-gradient-to-r
                             from-blue-600 to-blue-500
                             text-white font-semibold
                             hover:scale-[1.02] transition text-center">
-                            Créer une équipe
-                        </a>
-
+                                Créer une équipe
+                            </a>
+                        @endunless
                     </div>
 
                 </div>

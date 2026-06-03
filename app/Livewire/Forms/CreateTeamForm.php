@@ -26,21 +26,29 @@ class CreateTeamForm extends Form
     #[Validate('required|image|max:2048')]
     public $logo = "";
 
-    public function submit(): void
+    public function submit(): bool
     {
         $this->validate();
 
         $photo = null;
 
         if ($this->logo) {
-
             $photo = $this->logo->store('photos', 'public');
-
         }
 
         $user = auth()->id();
 
         $code = Str::password(16, true, true, false);
+
+        if (\Auth::user()->team) {
+
+            session()->flash(
+                'status',
+                'Vous possédez déjà une équipe. Il n\'est pas possible d\'en créer une seconde.'
+            );
+
+            return false;
+        }
 
         Team::create([
             'user_id' => $user,
@@ -50,5 +58,7 @@ class CreateTeamForm extends Form
             'code' => $code,
             'logo' => $photo,
         ]);
+
+        return true;
     }
 }

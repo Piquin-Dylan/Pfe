@@ -13,9 +13,10 @@ new class extends Component {
     public function save(): void
     {
         $this->form->validate();
-        $this->form->submit();
 
-        $this->redirect('/hub');
+        if ($this->form->submit()) {
+            $this->redirect('/hub');
+        }
     }
 };
 
@@ -29,6 +30,16 @@ new class extends Component {
         text="Vous voulez rejoindre une équipe ?"
         action="Rejoindre une équipe"
         redirection="profile">
+
+
+        @if(session()->has('status'))
+            <div
+                x-data="{ show: true }"
+                x-show="show"
+                class="text-red-500 text-center text-xl p-4 mt-8 mb-4">
+                {{ session('status') }}
+            </div>
+        @endif
 
         <form wire:submit.prevent="save" class="space-y-5">
 
@@ -97,11 +108,11 @@ new class extends Component {
                     @enderror
 
                 </x-form.input>
-                @if($form->logo)
+              {{--  @if($form->logo)
                     <img src="{{ $form->logo->temporaryUrl() }}" alt="">
-                @endif
-
+                @endif--}}
             </div>
+
 
             <div class="flex justify-center items-center">
 
