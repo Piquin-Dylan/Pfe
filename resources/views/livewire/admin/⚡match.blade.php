@@ -83,11 +83,11 @@ new class extends Component {
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
-                            src="{{ asset($game->photo_home) }}"
+                            src="{{ asset('storage/' . $game->photo_home) }}"
                             srcset="
-                    {{ asset($game->photo_home) }} 128w,
-                    {{ asset($game->photo_home) }} 256w,
-                    {{ asset($game->photo_home) }} 512w
+                    {{ asset('storage/' . $game->photo_home) }} 128w,
+                    {{ asset('storage/' . $game->photo_home) }} 256w,
+                   {{ asset('storage/' . $game->photo_home) }} 512w
                 "
                             sizes="(max-width: 640px) 64px,
                        (max-width: 768px) 80px,
@@ -120,11 +120,11 @@ new class extends Component {
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe extérieur"
-                            src="{{ asset($game->photo_away) }}"
+                            src="{{ asset('storage/' . $game->photo_away) }}"
                             srcset="
-                    {{ asset($game->photo_away) }} 128w,
-                    {{ asset($game->photo_away) }} 256w,
-                    {{ asset($game->photo_away) }} 512w
+                    {{ asset('storage/' . $game->photo_away) }}128w,
+                   {{ asset('storage/' . $game->photo_away) }} 256w,
+                    {{ asset('storage/' . $game->photo_away) }} 512w
                 "
                             sizes="(max-width: 640px) 64px,
                        (max-width: 768px) 80px,
@@ -199,8 +199,8 @@ new class extends Component {
 
                                 <img
                                     class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset($game->photo_home) }}"
-                                    srcset="{{ asset($game->photo_home) }} 96w,{{ asset($game->photo_home) }} 192w,{{ asset($game->photo_home) }} 384w"
+                                    src="{{ asset('storage/' . $game->photo_home) }}"
+                                    srcset="{{ asset('storage/' . $game->photo_home) }} 96w,{{ asset('storage/' . $game->photo_home) }} 192w,{{ asset('storage/' . $game->photo_home) }} 384w"
                                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
                                     alt="Logo équipe domicile"
                                     loading="lazy"
@@ -228,8 +228,8 @@ new class extends Component {
                             <div class="flex flex-col items-center gap-4 sm:gap-6">
                                 <img
                                     class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset($game->photo_away) }}"
-                                    srcset="{{ asset($game->photo_away) }} 96w,{{ asset($game->photo_away) }} 192w,{{ asset($game->photo_away) }} 384w"
+                                    src="{{ asset('storage/' . $game->photo_away) }}"
+                                    srcset="{{ asset('storage/' . $game->photo_away) }} 96w,{{ asset('storage/' . $game->photo_away) }} 192w,{{ asset('storage/' . $game->photo_away) }} 384w"
                                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
                                     alt="Logo équipe extérieur" loading="lazy" decoding="async"/>
                                 <span
