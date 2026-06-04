@@ -42,16 +42,18 @@ new class extends Component {
         </span>
 
             <div class="mt-4 flex items-center justify-between gap-3">
-
+                @php
+                    $team = Auth::user()->team ?? Auth::user()->player?->team;
+                @endphp
                 <div class="flex flex-col items-center flex-1">
                     <img
-                        src="{{ asset('storage/'.Auth::user()->team->logo) }}"
-                        alt="{{ Auth::user()->team->name }}"
+                        src="{{ asset('storage/'.$team->logo) }}"
+                        alt="{{ $team->name }}"
                         class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
                     >
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
-                    {{ Auth::user()->team->name }}
+                    {{ $team->name }}
                 </span>
                 </div>
 

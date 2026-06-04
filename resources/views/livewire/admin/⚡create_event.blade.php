@@ -79,7 +79,7 @@ new class extends Component {
                             label_name="Heure du match"
                             for_label="hours"
                             placeholder="Entrez l'heure du match"
-                            type="text"
+                            type="time"
                             id="hours"
                             name="hours"
                             wire:model="form.hours">

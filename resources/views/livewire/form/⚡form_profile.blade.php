@@ -40,8 +40,7 @@ new class extends Component {
         subtitle_form="Compléter toute les infos utile pour le coach"
         text="Vous n'avez pas encore créer d'équipe ?"
         action="Créer mon équipe"
-        redirection="create"
-    >
+        redirection="create">
 
         <form wire:submit.prevent="save" class="space-y-5">
 

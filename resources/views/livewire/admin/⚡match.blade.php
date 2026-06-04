@@ -80,14 +80,17 @@ new class extends Component {
                 <div class="flex flex-col items-center text-center min-w-0">
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
+                        @php
+                            $team = Auth::user()->team ?? Auth::user()->player?->team;
+                        @endphp
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
-                            src="{{ asset('storage/' . Auth::user()->team->logo) }}"
+                            src="{{ asset('storage/' .  $team->logo) }}"
                             srcset="
-                    {{ asset('storage/' . Auth::user()->team->logo) }} 128w,
-                    {{ asset('storage/' . Auth::user()->team->logo) }} 256w,
-                   {{ asset('storage/' . Auth::user()->team->logo) }} 512w
+                    {{ asset('storage/' .  $team->logo) }} 128w,
+                    {{ asset('storage/' .  $team->logo) }} 256w,
+                   {{ asset('storage/' .  $team->logo) }} 512w
                 "
                             sizes="(max-width: 640px) 64px,
                        (max-width: 768px) 80px,
@@ -100,7 +103,7 @@ new class extends Component {
 
                     <span
                         class="text-white text-sm sm:text-base md:text-xl max-w-[100px] sm:max-w-[140px] md:max-w-[220px] break-words leading-tight">
-            {{ Auth::user()->team->name }}
+            {{  $team->name }}
         </span>
                 </div>
 
@@ -199,8 +202,8 @@ new class extends Component {
 
                                 <img
                                     class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset('storage/' . $game->photo_home) }}"
-                                    srcset="{{ asset('storage/' . $game->photo_home) }} 96w,{{ asset('storage/' . $game->photo_home) }} 192w,{{ asset('storage/' . $game->photo_home) }} 384w"
+                                    src="{{ asset('storage/' .  $team->logo) }}"
+                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' .  $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
                                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
                                     alt="Logo équipe domicile"
                                     loading="lazy"
@@ -209,7 +212,7 @@ new class extends Component {
 
                                 <span
                                     class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
-                                    {{ $game->name_home }}
+                                    {{  $team->name }}
                                 </span>
                             </div>
                             <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
