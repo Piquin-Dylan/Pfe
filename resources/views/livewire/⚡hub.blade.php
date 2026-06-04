@@ -85,7 +85,7 @@ new class extends Component {
 
                         <div class="flex items-center gap-4">
                             @php
-                                $logo = $team->logo === 'photos/logo_club.png'
+                                $logo = $team->logo === 'photos/logo.png'
                                     ? asset($team->logo)
                                     : asset('storage/' . $team->logo);
                             @endphp
