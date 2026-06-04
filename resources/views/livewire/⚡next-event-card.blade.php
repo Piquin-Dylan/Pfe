@@ -27,7 +27,7 @@ new class extends Component {
 };
 ?>
 
-<div class=  " pb-8 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
+<div class=" pb-8 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
 
     @if($game)
         <a href="/match/{{ $game->id }}"
@@ -46,11 +46,20 @@ new class extends Component {
                     $team = Auth::user()->team ?? Auth::user()->player?->team;
                 @endphp
                 <div class="flex flex-col items-center flex-1">
+                    @php
+                        $logo = in_array($team->logo, [
+                            'photos/logo.png',
+                            'photos/logo_club.png',
+                        ])
+                            ? asset($team->logo)
+                            : asset('storage/' . $team->logo);
+                    @endphp
+
                     <img
-                        src="{{ asset('storage/'.$team->logo) }}"
+                        src="{{ $logo }}"
                         alt="{{ $team->name }}"
                         class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
-                    >
+                    />
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
                     {{ $team->name }}

@@ -340,11 +340,17 @@
                                     <div
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                         <div class="flex items-center gap-3">
+                                            @php
+                                                $image = $player->user->image === 'photos/person.png'
+                                                    ? asset($player->user->image)
+                                                    : asset('storage/' . $player->user->image);
+                                            @endphp
+
                                             <img
-                                                src="{{ asset('storage/' . $player->user->image) }}"
+                                                src="{{ $image }}"
                                                 alt="{{ $player->firstName }}"
                                                 class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
-                                            >
+                                            />
 
                                             <div>
                                                 <p class="text-white font-semibold">{{ $player->firstName }}</p>

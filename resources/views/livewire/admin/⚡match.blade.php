@@ -82,23 +82,23 @@ new class extends Component {
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
                         @php
                             $team = Auth::user()->team ?? Auth::user()->player?->team;
+
+                            $logo = in_array($team->logo, [
+                                'photos/logo.png',
+                                'photos/logo_club.png',
+                            ])
+                                ? asset($team->logo)
+                                : asset('storage/' . $team->logo);
                         @endphp
+
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
-                            src="{{ asset('storage/' .  $team->logo) }}"
-                            srcset="
-                    {{ asset('storage/' .  $team->logo) }} 128w,
-                    {{ asset('storage/' .  $team->logo) }} 256w,
-                   {{ asset('storage/' .  $team->logo) }} 512w
-                "
-                            sizes="(max-width: 640px) 64px,
-                       (max-width: 768px) 80px,
-                       (max-width: 1024px) 128px,
-                       160px"
-                            loading="lazy"
-                            decoding="async"
-                        >
+                            src="{{ $logo }}"
+                            srcset="  {{ $logo }} 128w,  {{ $logo }} 256w,  {{ $logo }} 512w
+    "
+                            sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px
+    " loading="lazy" decoding="async">
                     </div>
 
                     <span
