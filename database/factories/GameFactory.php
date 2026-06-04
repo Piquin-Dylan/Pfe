@@ -21,7 +21,7 @@ class GameFactory extends Factory
             'address' => fake()->address,
             'hours' => fake()->time('H:i'),
             'name_away' => fake()->company() . ' FC',
-            'photo_away' => 'logo_club.png',
+            'photo_away' => 'photos/logo_club.png',
         ];
     }
 }

@@ -157,15 +157,23 @@ new class extends Component {
 
         <div class="flex flex-col items-center text-center min-w-0">
 
+            @php
+                $team = Auth::user()->team ?? Auth::user()->player?->team;
+
+                $logo = $team->logo === 'photos/logo.png'
+                    ? asset($team->logo)
+                    : asset('storage/' . $team->logo);
+            @endphp
+
             <img
                 class="w-24 lg:w-42 mb-6"
-                alt=""
-                src="{{ asset('storage/' . Auth::user()->team->logo) }}"
+                alt="{{ $team->name }}"
+                src="{{ $logo }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
-            {{ Auth::user()->team->name }}
-        </span>
+    {{ Auth::user()->team?->name ?? Auth::user()->player?->team?->name }}
+</span>
         </div>
 
         <div class="flex items-center justify-center h-full">
@@ -175,10 +183,16 @@ new class extends Component {
         </div>
 
         <div class="flex flex-col items-center text-center min-w-0">
+            @php
+                $photoAway = $games->photo_away === 'photos/logo_club.png'
+                    ? asset($games->photo_away)
+                    : asset('storage/' . $games->photo_away);
+            @endphp
+
             <img
                 class="w-24 lg:w-42 mb-6"
                 alt=""
-                src="{{ asset('storage/' . $games->photo_away) }}"
+                src="{{ $photoAway }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">

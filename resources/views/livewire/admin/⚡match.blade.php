@@ -120,22 +120,30 @@ new class extends Component {
                 <div class="flex flex-col items-center text-center min-w-0">
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
+                        @php
+                            $photoAway = $game->photo_away === 'photos/logo_club.png'
+                                ? asset($game->photo_away)
+                                : asset('storage/' . $game->photo_away);
+                        @endphp
+
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe extérieur"
-                            src="{{ asset('storage/' . $game->photo_away) }}"
+                            src="{{ $photoAway }}"
                             srcset="
-                    {{ asset('storage/' . $game->photo_away) }}128w,
-                   {{ asset('storage/' . $game->photo_away) }} 256w,
-                    {{ asset('storage/' . $game->photo_away) }} 512w
-                "
-                            sizes="(max-width: 640px) 64px,
-                       (max-width: 768px) 80px,
-                       (max-width: 1024px) 128px,
-                       160px"
+        {{ $photoAway }} 128w,
+        {{ $photoAway }} 256w,
+        {{ $photoAway }} 512w
+    "
+                            sizes="
+        (max-width: 640px) 64px,
+        (max-width: 768px) 80px,
+        (max-width: 1024px) 128px,
+        160px
+    "
                             loading="lazy"
                             decoding="async"
-                        >
+                        />
                     </div>
 
                     <span
