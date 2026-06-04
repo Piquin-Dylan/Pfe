@@ -215,16 +215,16 @@
                     <div
                         class="w-20 h-20 mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center"
                     >
-                        <img :src="features[activeFeature].icon" width="60" alt="">
+                        <img :src="features[activeFeature]?.icon" width="60" alt="">
                     </div>
 
                     <span
-                        x-text="features[activeFeature].title"
+                        x-text="features[activeFeature]?.title"
                         class="text-white text-3xl font-bold mb-6"
                     ></span>
 
                     <p
-                        x-text="features[activeFeature].description"
+                        x-text="features[activeFeature]?.title"
                         class="text-white/70 text-lg leading-relaxed"
                     ></p>
 
@@ -244,7 +244,7 @@
                     >
 
                         <img
-                            :src="features[activeFeature].preview"
+                            :src="features[activeFeature]?.preview"
                             alt="Aperçu du dashboard"
                             class="w-full max-h-[500px] object-contain rounded-2xl"
                         >
@@ -272,7 +272,8 @@
                transition-all duration-300"
         >
 
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('calendar.svg') }}" alt="">
             </div>
 
@@ -298,7 +299,8 @@
                transition-all duration-300"
         >
 
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('person.svg') }}" alt="">
             </div>
 
@@ -324,7 +326,8 @@
                transition-all duration-300"
         >
 
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('ball.svg') }}" alt="">
             </div>
 
@@ -350,7 +353,8 @@
                transition-all duration-300"
         >
 
-            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <div
+                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
                 <img width="60" src="{{ asset('stats.svg') }}" alt="">
             </div>
 

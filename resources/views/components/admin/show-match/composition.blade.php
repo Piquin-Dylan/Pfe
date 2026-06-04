@@ -17,27 +17,28 @@
 
             <div class="relative w-full h-[700px] rounded-3xl overflow-hidden">
                 <span class="text-white">
-                    @foreach(config('player_compositions.' . $this->match_composition) as $player)
+                   @foreach(config('player_compositions.' . $this->match_composition) as $player)
                         @php
                             $displayName = $player['poste'];
+                            $displayImage = null;
+
                             if (isset($this->player_position[$player['poste']])) {
                                 $playerId = $this->player_position[$player['poste']];
+
                                 $selectedPlayerData = $this->games->players->firstWhere('id', $playerId);
+
                                 if ($selectedPlayerData) {
                                     $displayName = $selectedPlayerData->firstName;
+                                    $displayImage = $selectedPlayerData->user->image ?? null;
                                 }
                             }
                         @endphp
+
                         <div
                             @click="selectedPlayer = '{{ $player['poste'] }}'"
-                            class="cursor-pointer"
-                        >
-                            <x-player_position
-                                x="{{ $player['x'] }}"
-                                y="{{ $player['y'] }}"
-                                poste="{{ $displayName }}"
-                            />
-                        </div>
+                            class="cursor-pointer">
+                            <x-player_position x="{{ $player['x'] }}" y="{{ $player['y'] }}" poste="{{ $displayName }}"
+                                               :image="$displayImage"/></div>
                     @endforeach
                 </span>
             </div>
@@ -80,11 +81,18 @@
                             <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                 <div
                                     @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
-                                    class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]"
-                                >
-                                    <div>
-                                        <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                        <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                    class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
+                                    <div class="flex items-center gap-3">
+                                        <img
+                                            src="{{ asset('storage/' . $player->user->image) }}"
+                                            alt="{{ $player->firstName }}"
+                                            class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                        >
+
+                                        <div>
+                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        </div>
                                     </div>
                                     <div class="h-4 w-4 rounded-full border border-gray-400"></div>
                                 </div>
@@ -95,9 +103,17 @@
                             <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                 <div
                                     class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
-                                    <div>
-                                        <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                        <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                    <div class="flex items-center gap-3">
+                                        <img
+                                            src="{{ asset('storage/' . $player->user->image) }}"
+                                            alt="{{ $player->firstName }}"
+                                            class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                        >
+
+                                        <div>
+                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        </div>
                                     </div>
                                     <span
                                         class="inline-flex items-center gap-2 rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
@@ -120,11 +136,18 @@
                             <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                 <div
                                     @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
-                                    class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]"
-                                >
-                                    <div>
-                                        <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                        <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                    class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
+                                    <div class="flex items-center gap-3">
+                                        <img
+                                            src="{{ asset('storage/' . $player->user->image) }}"
+                                            alt="{{ $player->firstName }}"
+                                            class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                        >
+
+                                        <div>
+                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        </div>
                                     </div>
                                     <div class="h-4 w-4 rounded-full border border-gray-400"></div>
                                 </div>
@@ -135,15 +158,32 @@
                             <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                 <div
                                     class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
-                                    <div>
-                                        <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                        <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+
+                                    <div class="flex items-center gap-3">
+
+                                        <img
+                                            src="{{ asset('storage/' . $player->user->image) }}"
+                                            alt="{{ $player->firstName }}"
+                                            class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                        >
+
+                                        <div>
+                                            <p class="text-white font-semibold">
+                                                {{ $player->firstName }}
+                                            </p>
+
+                                            <p class="text-xs text-gray-400 uppercase">
+                                                {{ $player->position }}
+                                            </p>
+                                        </div>
+
                                     </div>
+
                                     <span
                                         class="inline-flex items-center gap-2 rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
-                                        <span class="h-2 w-2 rounded-full bg-purple-400"></span>
-                                        Déjà placé
-                                    </span>
+                <span class="h-2 w-2 rounded-full bg-purple-400"></span>
+                Déjà placé
+            </span>
                                 </div>
                             </div>
                         @endforeach
@@ -208,9 +248,17 @@
                                 <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                     <div
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
-                                        <div>
-                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        <div class="flex items-center gap-3">
+                                            <img
+                                                src="{{ asset('storage/' . $player->user->image) }}"
+                                                alt="{{ $player->firstName }}"
+                                                class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                            >
+
+                                            <div>
+                                                <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                                <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            </div>
                                         </div>
                                         <span
                                             class="inline-flex items-center gap-2 rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
@@ -228,16 +276,23 @@
                             Autres joueurs
                         </h3>
                         <div class="space-y-3">
-                            {{-- Disponibles d'abord --}}
                             @foreach($othersAvailable as $player)
                                 <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                     <div
                                         @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
                                         class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]"
                                     >
-                                        <div>
-                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        <div class="flex items-center gap-3">
+                                            <img
+                                                src="{{ asset('storage/' . $player->user->image) }}"
+                                                alt="{{ $player->firstName }}"
+                                                class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                            >
+
+                                            <div>
+                                                <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                                <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            </div>
                                         </div>
                                         <div class="h-4 w-4 rounded-full border border-gray-400"></div>
                                     </div>
@@ -248,9 +303,17 @@
                                 <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                     <div
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
-                                        <div>
-                                            <p class="text-white font-semibold">{{ $player->firstName }}</p>
-                                            <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                        <div class="flex items-center gap-3">
+                                            <img
+                                                src="{{ asset('storage/' . $player->user->image) }}"
+                                                alt="{{ $player->firstName }}"
+                                                class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
+                                            >
+
+                                            <div>
+                                                <p class="text-white font-semibold">{{ $player->firstName }}</p>
+                                                <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            </div>
                                         </div>
                                         <span
                                             class="inline-flex items-center gap-2 rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
