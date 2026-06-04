@@ -71,11 +71,17 @@ new class extends Component {
             </span>
 
                 <div class="flex flex-col items-center flex-1">
+                    @php
+                        $photoAway = $game->photo_away === 'photos/logo.png'
+                            ? asset($game->photo_away)
+                            : asset('storage/' . $game->photo_away);
+                    @endphp
+
                     <img
-                        src="{{ asset('storage/'.$game->photo_away) }}"
+                        src="{{ $photoAway }}"
                         alt="{{ $game->name_away }}"
                         class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
-                    >
+                    />
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
                     {{ $game->name_away }}
