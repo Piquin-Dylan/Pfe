@@ -1517,6 +1517,20 @@
                         Calendrier
                     </a>
                 </li>
+                @php
+                    $image = Auth::user()->image === 'photos/person.png'
+                        ? asset(Auth::user()->image)
+                        : asset('storage/' . Auth::user()->image);
+                @endphp
+
+                <a class="flex justify-center" href="{{ route('settings') }}">
+                    <img
+                        src="{{ $image }}"
+                        alt="Photo de profil"
+                        class="w-28 h-28 rounded-full object-cover border-2 border-white/20 hover:border-purple-400 transition"
+                    >
+                </a>
+
 
                 @livewire('admin.dashboard')
 

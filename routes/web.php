@@ -148,6 +148,16 @@ Route::middleware('auth')->group(function () {
 
     })->name('match');
 
+    Route::get('/settings', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
+        return view('admin.settings');
+
+    })->name('settings');
+
 
     Route::get('/match/{id}', function ($id) {
 
