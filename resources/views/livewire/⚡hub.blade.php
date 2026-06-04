@@ -84,11 +84,15 @@ new class extends Component {
                             max-w-[500px]">
 
                         <div class="flex items-center gap-4">
-
+                            @php
+                                $logo = $team->logo === 'photos/logo_club.png'
+                                    ? asset($team->logo)
+                                    : asset('storage/' . $team->logo);
+                            @endphp
                             <img
                                 class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                src="{{ asset('storage/' . $team->logo) }}"
-                                srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' . $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
+                                src="{{ $logo }}"
+                                srcset="{{ $logo }} 96w, {{ $logo }} 192w, {{ $logo }} 384w"
                                 sizes="(max-width: 640px) 64px, 96px"
                                 alt="{{ $team->name }}"
                                 loading="lazy"
