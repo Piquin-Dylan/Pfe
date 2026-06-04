@@ -68,9 +68,9 @@ new class extends Component {
 
     <div class="pr-5 pl-5">
         <input
-            class="bg-white p-4 rounded-2xl w-full"
-            wire:model.live.debounce="searchPlayer"
-            placeholder="Rechercher un joueur"
+                class="bg-white p-4 rounded-2xl w-full"
+                wire:model.live.debounce="searchPlayer"
+                placeholder="Rechercher un joueur"
         >
     </div>
 
@@ -82,7 +82,7 @@ new class extends Component {
 
     @if($players->isEmpty())
         <div
-            class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
+                class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
             <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                 Aucun joueur dans votre équipe
             </h3>
@@ -104,41 +104,48 @@ new class extends Component {
                 <div class="relative w-[250px] mb-12">
 
         <span
-            class="absolute z-30 text-white font-bold text-xl left-2 top-6">
+                class="absolute z-30 text-white font-bold text-xl left-2 top-6">
             {{ $player->firstName }}
         </span>
 
                     <span
-                        class="absolute z-30 text-white font-bold text-xl left-2 top-80">
+                            class="absolute z-30 text-white font-bold text-xl left-2 top-80">
             {{ $player->position }}
         </span>
+
+                    @php
+                        $image = $player->user->image === 'photos/person.png'
+                            ? asset($player->user->image)
+                            : asset('storage/' . $player->user->image);
+                    @endphp
 
                     <img
                         class="absolute z-20 inset-0 w-full h-full object-cover"
                         style="clip-path: polygon(
-                13% 15%,
-                52% 15%,
-                60% 7%,
-                86% 7%,
-                92% 12%,
-                92% 88%,
-                85% 94%,
-                50% 94%,
-                42% 84%,
-                13% 84%
-            );"
-                        src="{{ asset($player->user->image) }}"
-                        alt="">
+        13% 15%,
+        52% 15%,
+        60% 7%,
+        86% 7%,
+        92% 12%,
+        92% 88%,
+        85% 94%,
+        50% 94%,
+        42% 84%,
+        13% 84%
+    );"
+                        src="{{ $image }}"
+                        alt=""
+                    >
 
                     <div
-                        class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
+                            class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
                         {{ $player->maillot }}
                     </div>
 
                     <img
-                        class="relative z-10 w-full"
-                        src="{{ asset('Component_card_player.svg') }}"
-                        alt=""
+                            class="relative z-10 w-full"
+                            src="{{ asset('Component_card_player.svg') }}"
+                            alt=""
                     >
 
                     @if(isset($player->pivot->status))
