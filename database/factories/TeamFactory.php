@@ -13,8 +13,8 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'     => fake()->company() . ' FC',
-            'ville'    => fake()->city(),
+            'name' => fake()->company() . ' FC',
+            'ville' => fake()->city(),
             'division' => fake()->randomElement([
                 'D1',
                 'D2',
@@ -22,9 +22,9 @@ class TeamFactory extends Factory
                 'Provinciale 1',
                 'Provinciale 2',
             ]),
-            'code'     => strtoupper(fake()->bothify('???###')),
-            'logo'     => 'logo_club.png',
-            'user_id'  => User::factory(),
+            'code' => strtoupper(fake()->bothify('???###')),
+            'logo' => 'photos/logo.png',
+            'user_id' => User::factory(),
         ];
     }
 }
