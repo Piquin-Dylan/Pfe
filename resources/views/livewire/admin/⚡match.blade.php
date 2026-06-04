@@ -83,11 +83,11 @@ new class extends Component {
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
-                            src="{{ asset('storage/' . $game->photo_home) }}"
+                            src="{{ asset('storage/' . Auth::user()->team->logo) }}"
                             srcset="
-                    {{ asset('storage/' . $game->photo_home) }} 128w,
-                    {{ asset('storage/' . $game->photo_home) }} 256w,
-                   {{ asset('storage/' . $game->photo_home) }} 512w
+                    {{ asset('storage/' . Auth::user()->team->logo) }} 128w,
+                    {{ asset('storage/' . Auth::user()->team->logo) }} 256w,
+                   {{ asset('storage/' . Auth::user()->team->logo) }} 512w
                 "
                             sizes="(max-width: 640px) 64px,
                        (max-width: 768px) 80px,
@@ -100,7 +100,7 @@ new class extends Component {
 
                     <span
                         class="text-white text-sm sm:text-base md:text-xl max-w-[100px] sm:max-w-[140px] md:max-w-[220px] break-words leading-tight">
-            {{ $game->name_home }}
+            {{ Auth::user()->team->name }}
         </span>
                 </div>
 

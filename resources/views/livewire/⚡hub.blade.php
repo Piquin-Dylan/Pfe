@@ -76,56 +76,53 @@ new class extends Component {
 
                 @foreach($this->teams as $team)
 
-                    <a href="/dashboard">
-
-                        <div
-                            class="bg-gradient-to-br from-[#0f172a] to-[#020617]
+                    <div
+                        class="bg-gradient-to-br from-[#0f172a] to-[#020617]
                             border border-white/20 rounded-2xl
                             p-5 flex flex-col gap-5
                             transition hover:-translate-y-1
                             max-w-[500px]">
 
-                            <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-4">
 
-                                <img
-                                    class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset('storage/' . $team->logo) }}"
-                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' . $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
-                                    sizes="(max-width: 640px) 64px, 96px"
-                                    alt="{{ $team->name }}"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
+                            <img
+                                class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                                src="{{ asset('storage/' . $team->logo) }}"
+                                srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' . $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
+                                sizes="(max-width: 640px) 64px, 96px"
+                                alt="{{ $team->name }}"
+                                loading="lazy"
+                                decoding="async"
+                            />
 
-                                <span class="text-white text-2xl font-semibold tracking-wide">
+                            <span class="text-white text-2xl font-semibold tracking-wide">
                                     {{ $team->name }}
                                 </span>
 
-                            </div>
+                        </div>
 
-                            <div
-                                class="w-full border border-white/10 bg-white/5
+                        <div
+                            class="w-full border border-white/10 bg-white/5
                                 rounded-xl px-4 py-3 backdrop-blur-sm text-center">
 
                                 <span class="text-gray-300 text-sm tracking-wide">
                                     Code pour rejoindre l'équipe
                                 </span>
 
-                                <div class="text-white font-mono text-base tracking-[0.3em] mt-2">
-                                    {{ $team->code }}
-                                </div>
-
+                            <div class="text-white font-mono text-base tracking-[0.3em] mt-2">
+                                {{ $team->code }}
                             </div>
 
-                            <span
-                                class="w-full text-center px-5 py-3 rounded-xl
-                                bg-gradient-to-r from-blue-600 to-blue-500
-                                text-white font-semibold
-                                transition hover:brightness-110">
-                                Mon dashboard
-                            </span>
                         </div>
-                    </a>
+                        <a href="/dashboard"
+                           class="w-full text-center px-5 py-3 rounded-xl
+   bg-gradient-to-r from-blue-600 to-blue-500
+   text-white font-semibold
+   transition hover:brightness-110 block">
+                            Mon dashboard
+                        </a>
+                    </div>
+
                 @endforeach
             </div>
         </div>

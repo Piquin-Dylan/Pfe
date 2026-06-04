@@ -19,9 +19,7 @@ class Game extends Model
         'date_match',
         'address',
         'hours',
-        'name_home',
         'name_away',
-        'photo_home',
         'photo_away',
         'score_home',
         'score_away'

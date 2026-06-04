@@ -51,7 +51,7 @@ new class extends Component {
             }
         })
             ->when($this->searchPlayer, function ($query) {
-                $query->where('name', 'like', '%' . $this->searchPlayer . '%');
+                $query->where('firstName', 'like', '%' . $this->searchPlayer . '%');
             })
             ->when($this->filters != 'tout', function ($query) {
                 $query->whereIn('players.position', $this->poste[$this->filters]);
@@ -81,7 +81,8 @@ new class extends Component {
     @endphp
 
     @if($players->isEmpty())
-        <div class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
+        <div
+            class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
             <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                 Aucun joueur dans votre équipe
             </h3>
@@ -100,49 +101,62 @@ new class extends Component {
         <div class="flex justify-center gap-12 flex-wrap">
 
             @foreach($players as $player)
-                <div class="relative w-[250px]">
+                <div class="relative w-[250px] mb-12">
+
+        <span
+            class="absolute z-30 text-white font-bold text-xl left-2 top-6">
+            {{ $player->firstName }}
+        </span>
+
                     <span
-                        class="absolute z-30 text-white font-bold text-xl
-                       left-2 top-6">{{ $player->firstName }}</span>
-                    <span
-                        class="absolute z-30 text-white font-bold text-xl
-                       left-2 top-80">{{ $player->position }}</span>
-                    <img class="absolute z-20 inset-0  w-full h-full  object-cover"
-                         style="
-                    clip-path: polygon(
-                        13% 15%,
-                        52% 15%,
-                        60% 7%,
-                        86% 7%,
-                        92% 12%,
-                        92% 88%,
-                        85% 94%,
-                        50% 94%,
-                        42% 84%,
-                        13% 84%
-                    );
-                " src="{{ asset('1000017766.jpg') }}" alt="">
+                        class="absolute z-30 text-white font-bold text-xl left-2 top-80">
+            {{ $player->position }}
+        </span>
+
+                    <img
+                        class="absolute z-20 inset-0 w-full h-full object-cover"
+                        style="clip-path: polygon(
+                13% 15%,
+                52% 15%,
+                60% 7%,
+                86% 7%,
+                92% 12%,
+                92% 88%,
+                85% 94%,
+                50% 94%,
+                42% 84%,
+                13% 84%
+            );"
+                        src="{{ asset('1000017766.jpg') }}"
+                        alt=""
+                    >
+
                     <div
-                        class="absolute z-30 bottom-[60px] right-[28px]  w-[55px] h-[55px  rounded-full  bg-[#A6463A]  flex items-center justify-center text-white text-4xl font-bold">
-                        {{$player->maillot}}
+                        class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
+                        {{ $player->maillot }}
                     </div>
+
                     <img
                         class="relative z-10 w-full"
                         src="{{ asset('Component_card_player.svg') }}"
-                        alt="">
+                        alt=""
+                    >
+
                     @if(isset($player->pivot->status))
-                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 z-30">
-                            <span
-                        @class([
-                            'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border backdrop-blur-md',
-                            'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
-                            'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
-                            'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
-                        ])>
-                        {{ $player->pivot->status }}
-                    </span>
+                        <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30">
+                <span
+                    @class([
+                        'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border backdrop-blur-md whitespace-nowrap',
+                        'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
+                        'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
+                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
+                    ])
+                >
+                    {{ $player->pivot->status }}
+                </span>
                         </div>
                     @endif
+
                 </div>
             @endforeach
         </div>

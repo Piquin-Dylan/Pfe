@@ -17,9 +17,7 @@ return new class extends Migration {
             $table->date('date_match');
             $table->string('address');
             $table->string('hours');
-            $table->string('name_home');
             $table->string('name_away');
-            $table->string('photo_home')->nullable();
             $table->string('photo_away')->nullable();
             $table->integer('score_home')->nullable();
             $table->integer('score_away')->nullable();

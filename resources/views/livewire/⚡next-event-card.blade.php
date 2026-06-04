@@ -14,12 +14,12 @@ new class extends Component {
 
         if ($team) {
             $this->game = $team->games()
-                ->where('date_match', '>=', now())
+                ->whereDate('date_match', '>=', today())
                 ->orderBy('date_match')
                 ->first();
 
             $this->train = $team->trains()
-                ->where('date_train', '>=', now())
+                ->whereDate('date_train', '>=', today())
                 ->orderBy('date_train')
                 ->first();
         }
@@ -45,13 +45,13 @@ new class extends Component {
 
                 <div class="flex flex-col items-center flex-1">
                     <img
-                        src="{{ asset('storage/'.$game->photo_home) }}"
-                        alt="{{ $game->name_home }}"
+                        src="{{ asset('storage/'.Auth::user()->team->logo) }}"
+                        alt="{{ Auth::user()->team->name }}"
                         class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
                     >
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
-                    {{ $game->name_home }}
+                    {{ Auth::user()->team->name }}
                 </span>
                 </div>
 

@@ -24,7 +24,7 @@ class TeamFactory extends Factory
             ]),
             'code'     => strtoupper(fake()->bothify('???###')),
             'logo'     => 'logo_club.png',
-            'user_id'  => User::class,
+            'user_id'  => User::factory(),
         ];
     }
 }

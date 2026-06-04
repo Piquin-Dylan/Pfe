@@ -20,9 +20,7 @@ class GameFactory extends Factory
             'date_match' => fake()->dateTimeBetween('now', '+3 months'),
             'address' => fake()->address,
             'hours' => fake()->time('H:i'),
-            'name_home' => fake()->company() . ' FC',
             'name_away' => fake()->company() . ' FC',
-            'photo_home' => 'logo_club.png',
             'photo_away' => 'logo_club.png',
         ];
     }

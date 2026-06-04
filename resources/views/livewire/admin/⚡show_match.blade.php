@@ -159,11 +159,11 @@ new class extends Component {
             <img
                 class="w-24 lg:w-42 mb-6"
                 alt=""
-                src="{{ asset('storage/' . $games->photo_home) }}"
+                src="{{ asset('storage/' . Auth::user()->team->logo) }}"
             >
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
-            {{ $games->name_home }}
+            {{ Auth::user()->team->name }}
         </span>
         </div>
 

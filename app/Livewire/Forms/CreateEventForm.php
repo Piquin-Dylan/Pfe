@@ -27,16 +27,8 @@ class CreateEventForm extends Form
     #[Validate('required', message: 'Le champs heure de convocation est requis')]
     public string $hours = "";
 
-    #[Validate('required', message: 'Le champs nom équipe a domicile est requis')]
-    public string $name_home = "";
-
     #[Validate('required', message: "Le champs nom équipe a l'extérieur est requis domicile est requis")]
     public string $name_away = "";
-
-
-    #[Validate('required|image|max:2048')]
-    public $photo_home = "";
-
 
     #[Validate('required|image|max:2048')]
     public $photo_away = "";
@@ -45,7 +37,6 @@ class CreateEventForm extends Form
     {
         $this->validate();
 
-        $photoHomePath = $this->photo_home->store('photos', 'public');
         $photoAwayPath = $this->photo_away->store('photos', 'public');
 
         $current_user = Auth::user()->getAuthIdentifier();
@@ -57,9 +48,7 @@ class CreateEventForm extends Form
             'date_match' => $this->date,
             'address' => $this->place,
             'hours' => $this->hours,
-            'name_home' => $this->name_home,
             'name_away' => $this->name_away,
-            'photo_home' => $photoHomePath,
             'photo_away' => $photoAwayPath,
         ]);
 

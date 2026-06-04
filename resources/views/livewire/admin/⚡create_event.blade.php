@@ -76,9 +76,9 @@ new class extends Component {
                     <div class="sm:flex sm:flex-row sm:flex-wrap">
 
                         <x-form.input
-                            label_name="Heure arrivé"
+                            label_name="Heure du match"
                             for_label="hours"
-                            placeholder="Entrez l'heure d'arriver"
+                            placeholder="Entrez l'heure du match"
                             type="text"
                             id="hours"
                             name="hours"
@@ -94,25 +94,8 @@ new class extends Component {
 
                     </div>
 
+
                     <div class="sm:flex sm:flex-row sm:flex-wrap gap-5">
-
-                        <x-form.input
-                            label_name="Nom de l'équipe a domicile"
-                            for_label="name_home"
-                            placeholder="Entrez le nom de l'équipe a domicile"
-                            type="text"
-                            id="name_home"
-                            name="name_home"
-                            wire:model="form.name_home">
-
-                            <div>
-                                @error('form.name_home')
-                                <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                        </x-form.input>
-
                         <x-form.input
                             label_name="Nom de l'équipe a l'extérieur"
                             for_label="name_away"
@@ -124,27 +107,6 @@ new class extends Component {
 
                             <div>
                                 @error('form.name_away')
-                                <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            n
-                        </x-form.input>
-
-                    </div>
-
-                    <div class="sm:flex sm:flex-row sm:flex-wrap gap-5">
-
-                        <x-form.input
-                            label_name="Photo de l'équipe a domicile"
-                            for_label="photo_home"
-                            placeholder=""
-                            type="file"
-                            id="photo_home"
-                            name="photo_home"
-                            wire:model="form.photo_home">
-
-                            <div>
-                                @error('form.photo_home')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
