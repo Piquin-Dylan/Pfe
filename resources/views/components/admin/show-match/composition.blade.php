@@ -250,7 +250,6 @@
                             Joueurs aux poste
                         </h3>
                         <div class="space-y-3">
-                            {{-- Disponibles d'abord --}}
                             @foreach($atPostAvailable as $player)
                                 <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                     <label
@@ -262,8 +261,7 @@
                                         <input
                                             type="checkbox"
                                             class="h-5 w-5 accent-purple-500"
-                                            @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
-                                        >
+                                            @click=" $wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }});  selectedPlayer = null;">
                                     </label>
                                 </div>
                             @endforeach
@@ -309,9 +307,9 @@
                             @foreach($othersAvailable as $player)
                                 <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                     <div
-                                        @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
-                                        class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]"
-                                    >
+                                        @click=" $wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }}); selectedPlayer = null;
+"
+                                        class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                         <div class="flex items-center gap-3">
                                             @php
                                                 $image = $player->user->image === 'photos/person.png'

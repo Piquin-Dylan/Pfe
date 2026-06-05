@@ -19,7 +19,7 @@ new class extends Component {
     }
 };
 ?>
-<section class="pt-12">
+<section class="pt-20 lg:pt-8">
     <h2 class="sr-only">Formulaire - Inscription</h2>
     <x-layout_forms
         title_form="Inscription"
