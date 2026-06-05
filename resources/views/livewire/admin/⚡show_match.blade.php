@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Game;
+use App\Models\MatchComposition;
 use App\Models\Player;
 use App\Models\User;
 use Livewire\Component;
@@ -47,6 +48,11 @@ new class extends Component {
                 'seen' => true
             ]);
             $this->dispatch('start-match-tutorial');
+        }
+        $compositions = MatchComposition::where('match_id', $this->games->id)->get();
+
+        foreach ($compositions as $composition) {
+            $this->player_position[$composition->position] = $composition->player_id;
         }
 
     }
@@ -140,6 +146,22 @@ new class extends Component {
         }
 
         $this->player_position[$poste] = $idPlayer;
+    }
+
+    public function saveComposition()
+    {
+        MatchComposition::where('match_id', $this->games->id)->delete();
+
+        foreach ($this->player_position as $position => $playerId) {
+
+            MatchComposition::create([
+                'match_id' => $this->games->id,
+                'player_id' => $playerId,
+                'position' => $position,
+            ]);
+        }
+
+        session()->flash('success', 'Composition enregistrée.');
     }
 
 };

@@ -372,6 +372,12 @@
                 </div>
             </div>
         </div>
+        <button
+            wire:click="saveComposition"
+            class="btn-primary"
+        >
+            Enregistrer la composition
+        </button>
 
     </div>
 </div>

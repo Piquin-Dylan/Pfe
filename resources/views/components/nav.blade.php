@@ -25,7 +25,7 @@
             class="fixed inset-0 z-40 bg-[#192443] text-white items-center justify-center
                    lg:static lg:bg-transparent lg:justify-end">
 
-            <div class="flex flex-col lg:flex-row items-center gap-6 font-semibold text-3xl">
+            <div class="flex flex-col lg:flex-row items-center gap-6 font-semibold text-2xl lg:text-xl">
                 <li>
                     <a href="{{ route('accueil') }}"
                        class="{{ request()->routeIs('accueil') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
