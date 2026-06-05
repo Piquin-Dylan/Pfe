@@ -82,17 +82,23 @@ new class extends Component {
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
                         @php
                             $team = Auth::user()->team ?? Auth::user()->player?->team;
+
+                            $logo = in_array($team->logo, [
+                                'photos/logo.png',
+                                'photos/logo_club.png',
+                            ])
+                                ? asset($team->logo)
+                                : asset('storage/' . $team->logo);
                         @endphp
 
-                        <x-image
-                            :path="$team->logo"
-                            alt="Logo équipe domicile"
+                        <img
                             class="w-full h-full object-contain"
-                            sizes="(max-width: 640px) 64px,
-           (max-width: 768px) 80px,
-           (max-width: 1024px) 128px,
-           160px"
-                        />
+                            alt="Logo équipe domicile"
+                            src="{{ $logo }}"
+                            srcset="  {{ $logo }} 128w,  {{ $logo }} 256w,  {{ $logo }} 512w
+    "
+                            sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px
+    " loading="lazy" decoding="async">
                     </div>
 
                     <span
@@ -114,14 +120,29 @@ new class extends Component {
                 <div class="flex flex-col items-center text-center min-w-0">
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
-                        <x-image
-                            :path="$game->photo_away"
-                            alt="Logo équipe extérieur"
+                        @php
+                            $photoAway = $game->photo_away === 'photos/logo_club.png'
+                                ? asset($game->photo_away)
+                                : asset('storage/' . $game->photo_away);
+                        @endphp
+
+                        <img
                             class="w-full h-full object-contain"
-                            sizes="(max-width: 640px) 64px,
-           (max-width: 768px) 80px,
-           (max-width: 1024px) 128px,
-           160px"
+                            alt="Logo équipe extérieur"
+                            src="{{ $photoAway }}"
+                            srcset="
+        {{ $photoAway }} 128w,
+        {{ $photoAway }} 256w,
+        {{ $photoAway }} 512w
+    "
+                            sizes="
+        (max-width: 640px) 64px,
+        (max-width: 768px) 80px,
+        (max-width: 1024px) 128px,
+        160px
+    "
+                            loading="lazy"
+                            decoding="async"
                         />
                     </div>
 
@@ -189,12 +210,8 @@ new class extends Component {
 
                                 <img
                                     class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }}"
-                                    srcset="
-        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 96w,
-        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 192w,
-        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 384w
-    "
+                                    src="{{ asset('storage/' .  $team->logo) }}"
+                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' .  $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
                                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
                                     alt="Logo équipe domicile"
                                     loading="lazy"
