@@ -1,185 +1,34 @@
-<div
-    x-data="{
-    currentTab: 'first',
-    visible: false,
-    activeFeature: null,
+<x-client.array-feature>
 
-    features: {
-
-        calendar: {
-            title: 'Convocations',
-            description: 'Envoyez vos convocations et recevez les réponses en temps réel.',
-            icon: '{{ asset('calendar.svg') }}',
-            preview: '{{ asset('calendrier.png') }}'
-        },
-
-        players: {
-            title: 'Joueurs de l’équipe',
-            description: 'Consultez les profils, disponibilités et informations de vos joueurs.',
-            icon: '{{ asset('person.svg') }}',
-            preview: '{{ asset('team.png') }}'
-        },
-
-        matches: {
-            title: 'Matchs & entraînements',
-            description: 'Retrouvez votre calendrier et toutes les informations importantes.',
-            icon: '{{ asset('ball.svg') }}',
-            preview: '{{ asset('match.png') }}'
-        },
-
-        coach_calendar: {
-            title: 'Calendrier complet',
-            description: 'Créez vos matchs et entraînements et retrouvez tous vos événements dans un calendrier centralisé.',
-            icon: '{{ asset('calendar.svg') }}',
-            preview: '{{ asset('calendrier.png') }}'
-        },
-
-        coach_convocations: {
-            title: 'Convocations',
-            description: 'Sélectionnez les joueurs convoqués et suivez leurs réponses en temps réel.',
-            icon: '{{ asset('person.svg') }}',
-            preview: '{{ asset('convoc.png') }}'
-        },
-
-        coach_lineup: {
-            title: 'Composition d’équipe',
-            description: 'Créez votre composition tactique directement après avoir convoqué vos joueurs.',
-            icon: '{{ asset('ball.svg') }}',
-            preview: '{{ asset('compos.png') }}'
-        },
-
-        coach_squad: {
-            title: 'Gestion de l’effectif',
-            description: 'Consultez les profils de vos joueurs, leurs postes, leurs disponibilités et leurs statistiques.',
-            icon: '{{ asset('stats.svg') }}',
-            preview: '{{ asset('team.png') }}'
-        }
-    }
-}"
-    x-intersect.once="visible = true"
->
-
-    <div class="flex gap-10 justify-center pt-6 pb-16">
-
-        <button
-            @click="currentTab = 'first'"
-            :class="currentTab === 'first'
-                ? 'text-white border-b-2 border-violet-500'
-                : 'text-white/70 border-b-2 border-transparent hover:text-white'"
-            class="pb-2 font-semibold transition-all duration-300 text-2xl cursor-pointer"
-        >
-            Joueur
-        </button>
-
-        <button
-            @click="currentTab = 'second'"
-            :class="currentTab === 'second'
-                ? 'text-white border-b-2 border-violet-500'
-                : 'text-white/70 border-b-2 border-transparent hover:text-white'"
-            class="pb-2 font-semibold transition-all duration-300 text-2xl cursor-pointer"
-        >
-            Entraîneur
-        </button>
-
-    </div>
+    <x-client.feature-tabs></x-client.feature-tabs>
 
     <div
         x-show="currentTab === 'first'"
         class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-6xl mx-auto"
     >
 
-        <div
-            @click="activeFeature = 'calendar'"
-            x-show="visible"
-            x-transition:enter="transition ease-out duration-700"
-            x-transition:enter-start="opacity-0 translate-y-10"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-                   p-8 min-h-[340px] h-full flex flex-col
-                   hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-                   transition-all duration-300"
-        >
+        <x-client.feature-card
+            key="calendar"
+            icon="calendar.svg"
+            title="Convocations"
+            description="Envoyez vos convocations et recevez les réponses en temps réel."
+        />
 
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('calendar.svg') }}" alt="">
-            </div>
+        <x-client.feature-card
+            key="players"
+            icon="person.svg"
+            title="Joueurs de l’équipe"
+            description="Consultez les profils, disponibilités et informations de vos joueurs."
+            delay="delay-150"
+        />
 
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Convocations
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Envoyez vos convocations et recevez les réponses en temps réel.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
-
-        <div
-            @click="activeFeature = 'players'"
-            x-show="visible"
-            x-transition:enter="transition ease-out duration-700 delay-150"
-            x-transition:enter-start="opacity-0 translate-y-10"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-                   p-8 min-h-[340px] h-full flex flex-col
-                   hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-                   transition-all duration-300"
-        >
-
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('person.svg') }}" alt="">
-            </div>
-
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Joueurs de l’équipe
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Consultez les profils, disponibilités et informations de vos joueurs.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
-
-        <div
-            @click="activeFeature = 'matches'"
-            x-show="visible"
-            x-transition:enter="transition ease-out duration-700 delay-300"
-            x-transition:enter-start="opacity-0 translate-y-10"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-                   p-8 min-h-[340px] h-full flex flex-col
-                   hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-                   transition-all duration-300"
-        >
-
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('ball.svg') }}" alt="">
-            </div>
-
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Matchs & entraînements
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Retrouvez votre calendrier et toutes les informations importantes.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
+        <x-client.feature-card
+            key="matches"
+            icon="ball.svg"
+            title="Matchs & entraînements"
+            description="Retrouvez votre calendrier et toutes les informations importantes."
+            delay="delay-300"
+        />
 
     </div>
 
@@ -261,117 +110,32 @@
 
     <div
         x-show="currentTab === 'second'"
-        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 max-w-7xl mx-auto"
-    >
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <x-client.feature-card
+            key="coach_calendar"
+            icon="calendar.svg"
+            title="Calendrier complet"
+            description="Créez vos matchs et entraînements et retrouvez tous vos événements dans un calendrier centralisé."/>
 
-        <div
-            @click="activeFeature = 'coach_calendar'"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-               p-8 min-h-[340px] h-full flex flex-col
-               hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-               transition-all duration-300"
-        >
+        <x-client.feature-card
+            key="coach_convocations"
+            icon="person.svg"
+            title="Convocations"
+            description="Sélectionnez les joueurs convoqués et suivez leurs réponses en temps réel."/>
 
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('calendar.svg') }}" alt="">
-            </div>
+        <x-client.feature-card
+            key="coach_lineup"
+            icon="ball.svg"
+            title="Composition d’équipe"
+            description="Créez votre composition tactique directement après avoir convoqué vos joueurs."/>
 
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Calendrier complet
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Créez vos matchs et entraînements et retrouvez tous vos événements dans un calendrier centralisé.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
-
-        <div
-            @click="activeFeature = 'coach_convocations'"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-               p-8 min-h-[340px] h-full flex flex-col
-               hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-               transition-all duration-300"
-        >
-
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('person.svg') }}" alt="">
-            </div>
-
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Convocations
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Sélectionnez les joueurs convoqués et suivez leurs réponses en temps réel.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
-
-        <div
-            @click="activeFeature = 'coach_lineup'"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-               p-8 min-h-[340px] h-full flex flex-col
-               hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-               transition-all duration-300"
-        >
-
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('ball.svg') }}" alt="">
-            </div>
-
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Composition d’équipe
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Créez votre composition tactique directement après avoir convoqué vos joueurs.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
-
-        <div
-            @click="activeFeature = 'coach_squad'"
-            class="cursor-pointer bg-white/5 border border-white/10 rounded-3xl
-               p-8 min-h-[340px] h-full flex flex-col
-               hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
-               transition-all duration-300"
-        >
-
-            <div
-                class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                <img width="60" src="{{ asset('stats.svg') }}" alt="">
-            </div>
-
-            <h3 class="text-white text-xl font-semibold text-center mb-3">
-                Gestion de l’effectif
-            </h3>
-
-            <p class="text-white/70 text-center text-sm leading-relaxed flex-grow">
-                Consultez les profils de vos joueurs, leurs postes, leurs disponibilités et leurs statistiques.
-            </p>
-
-            <p class="text-violet-400 text-sm text-center mt-6 font-medium">
-                Cliquez pour découvrir →
-            </p>
-
-        </div>
+        <x-client.feature-card
+            key="coach_squad"
+            icon="stats.svg"
+            title="Gestion de l’effectif"
+            description="Consultez les profils de vos joueurs, leurs postes, leurs disponibilités et leurs statistiques."/>
 
     </div>
 
-</div>
+
+</x-client.array-feature>

@@ -5,6 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
 import {matchTuto} from './matchTuto.js'
 import {matchListTuto} from './matchListTuto.js'
+import {dashboardTuto} from "./dashboardTuto.js";
 import {settings} from './settings.js'
 
 document.addEventListener('livewire:init', () => {
@@ -21,6 +22,14 @@ document.addEventListener('livewire:init', () => {
 
         if (document.querySelector(settings.match_list.selector)) {
             matchListTuto()
+        }
+
+    })
+
+    Livewire.on('start-dashboard-tutorial', () => {
+
+        if (document.querySelector(settings.dashboard.selector)) {
+            dashboardTuto()
         }
 
     })

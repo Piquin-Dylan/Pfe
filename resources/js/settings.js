@@ -9,4 +9,9 @@ export const settings = {
         event: 'start-match-list-tutorial',
         selector: '#address',
     },
+
+    dashboard: {
+        event: 'start-dashboard-tutorial',
+        selector: '#stats',
+    },
 }

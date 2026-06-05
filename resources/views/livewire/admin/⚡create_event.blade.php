@@ -15,6 +15,7 @@ new class extends Component {
         $this->form->validate();
         $this->form->submit();
 
+        $this->dispatch('refresh-calendar');
         $this->dispatch('match-created');
     }
 };

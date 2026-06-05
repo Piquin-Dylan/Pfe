@@ -19,7 +19,7 @@ new class extends Component {
     }
 };
 ?>
-<section>
+<section class="pt-12">
     <h2 class="sr-only">Formulaire - Inscription</h2>
     <x-layout_forms
         title_form="Inscription"
@@ -98,7 +98,7 @@ new class extends Component {
             <div>
 
                 <x-form.input
-                    label_name="image"
+                    label_name="Photo de profile"
                     for_label="photo"
                     placeholder=""
                     type="file"

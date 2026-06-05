@@ -21,7 +21,7 @@ new class extends Component {
 };
 
 ?>
-<section>
+<section class="pt-12">
     <h2 class="sr-only">Formulaire - Créer votre équipe</h2>
 
     <x-layout_forms
