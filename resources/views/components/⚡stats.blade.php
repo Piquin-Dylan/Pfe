@@ -50,4 +50,10 @@ new class extends Component {
         voir="Voir les entraînements "
         link="{{route('train')}}"/>
 
+
+    <div class="col-span-1 md:col-span-2 xl:col-span-3 flex justify-center mt-2">
+        <a class="btn-form" href="{{ route('statistiques') }}">
+            Voir statistiques joueurs
+        </a>
+    </div>
 </div>
