@@ -210,8 +210,12 @@ new class extends Component {
 
                                 <img
                                     class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset('storage/' .  $team->logo) }}"
-                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' .  $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
+                                    src="{{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }}"
+                                    srcset="
+        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 96w,
+        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 192w,
+        {{ $team->logo ? asset('storage/' . $team->logo) : asset('photos/logo_club.png') }} 384w
+    "
                                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
                                     alt="Logo équipe domicile"
                                     loading="lazy"

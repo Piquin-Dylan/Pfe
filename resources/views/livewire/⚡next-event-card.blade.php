@@ -30,31 +30,30 @@ new class extends Component {
 <div id="next-event" class=" pb-8 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
 
     @if($game)
-        <a href="/match/{{ $game->id }}"
-           class="group block bg-gradient-to-br from-[#0f172a] to-[#020617]
-              border border-white/10 rounded-3xl p-5 text-white
-              transition-all duration-300
-              hover:-translate-y-1
-              hover:border-blue-400/40">
-
-        <span class="text-xs uppercase tracking-widest text-blue-400">
-            Prochain match
-        </span>
+        <x-admin.dashboard.event-card
+            :href="'/match/' . $game->id"
+            title="Prochain match"
+            color="blue"
+        >
 
             <div class="mt-4 flex items-center justify-between gap-3">
+
                 @php
                     $team = Auth::user()->team ?? Auth::user()->player?->team;
-                @endphp
-                <div class="flex flex-col items-center flex-1">
-                    @php
-                        $logo = in_array($team->logo, [
-                            'photos/logo.png',
-                            'photos/logo_club.png',
-                        ])
-                            ? asset($team->logo)
-                            : asset('storage/' . $team->logo);
-                    @endphp
 
+                    $logo = in_array($team->logo, [
+                        'photos/logo.png',
+                        'photos/logo_club.png',
+                    ])
+                        ? asset($team->logo)
+                        : asset('storage/' . $team->logo);
+
+                    $photoAway = $game->photo_away === 'photos/logo.png'
+                        ? asset($game->photo_away)
+                        : asset('storage/' . $game->photo_away);
+                @endphp
+
+                <div class="flex flex-col items-center flex-1">
                     <img
                         src="{{ $logo }}"
                         alt="{{ $team->name }}"
@@ -71,12 +70,6 @@ new class extends Component {
             </span>
 
                 <div class="flex flex-col items-center flex-1">
-                    @php
-                        $photoAway = $game->photo_away === 'photos/logo.png'
-                            ? asset($game->photo_away)
-                            : asset('storage/' . $game->photo_away);
-                    @endphp
-
                     <img
                         src="{{ $photoAway }}"
                         alt="{{ $game->name_away }}"
@@ -96,47 +89,16 @@ new class extends Component {
                 <p class="text-gray-300">{{ $game->address }}</p>
             </div>
 
-            <div class="mt-5 flex justify-center">
-            <span
-                class="inline-flex items-center gap-2 text-blue-400 font-semibold
-                       transition-all duration-300
-                       group-hover:text-blue-300
-                       group-hover:translate-x-1">
-
-                Voir les détails
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-5 h-5"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M9 5l7 7-7 7"/>
-                </svg>
-            </span>
-            </div>
-
-        </a>
+        </x-admin.dashboard.event-card>
     @else
-        <div
-            class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
-
-        <span class="text-blue-400 text-lg font-semibold">
-            Aucun match programmé
-        </span>
-
-            <p class="text-gray-300 mt-3">
-                Créez un match depuis le calendrier.
-            </p>
-
-            <a href="{{ route('calendrier') }}"
-               class="mt-5 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition">
-                Créer un match
-            </a>
-
-        </div>
+        <x-admin.dashboard.empty-state
+            title="Aucun match programmé"
+            description="Créez un match depuis le calendrier."
+            button-text="Créer un match"
+            :href="route('calendrier')"
+            text-color="text-blue-400"
+            button-color="bg-blue-500 hover:bg-blue-600"
+        />
     @endif
 
     @if($train)
@@ -210,23 +172,13 @@ new class extends Component {
 
         </a>
     @else
-        <div
-            class="bg-gradient-to-br from-[#0f172a] to-[#020617] border border-white/10 rounded-3xl p-5 text-white flex flex-col items-center justify-center text-center min-h-[200px]">
-
-        <span class="text-green-400 text-lg font-semibold">
-            Aucun entraînement programmé
-        </span>
-
-            <p class="text-gray-300 mt-3">
-                Créez un entraînement depuis le calendrier.
-            </p>
-
-            <a href="{{ route('calendrier') }}"
-               class="mt-5 px-4 py-2 rounded-xl bg-green-500 hover:bg-green-600 transition">
-                Créer un entraînement
-            </a>
-
-        </div>
+        <x-admin.dashboard.empty-state
+            title="Aucun entraînement programmé"
+            description="Créez un entraînement depuis le calendrier."
+            button-text="Créer un entraînement"
+            :href="route('calendrier')"
+            text-color="text-green-400"
+            button-color="bg-green-500 hover:bg-green-600"/>
     @endif
 
 </div>

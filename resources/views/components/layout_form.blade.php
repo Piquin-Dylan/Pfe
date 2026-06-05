@@ -1471,43 +1471,160 @@
 <body class="bg-[var(--color-mint-500)] overflow-hidden">
 <h1 class="hidden">Pfe - SportTeams</h1>
 <header>
-    <div>
-        {{--<nav x-data="{ open:false}" @keydown.escape="isOpen = false">
-            <div class="">
-                <button class="sm:hidden" @click="open = !open">
-                    <svg x-show="!open" class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         width="56"
-                         height="56" fill="none" viewBox="0 0 24 24">
+    <body x-data="{ open: false }" :class="{ 'overflow-hidden': open }">
+    <h1 class="hidden">Pfe - SportTeams</h1>
+    <body x-data="{ open: false }" class="bg-[#0F172A] text-white">
+
+    <div class="flex min-h-screen">
+
+        <aside
+            :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
+            class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0">
+
+            <nav class="h-full flex flex-col items-center justify-center ">
+                <ul class="flex flex-col gap-6 text-2xl font-semibold text-white w-full px-6">
+
+                    <li>
+                        <a href="/dashboard"
+                           class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('dashboard') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                            Accueil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="match" href="/match"
+                           class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('match') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                            Match
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="train"  href="/train"
+                           class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('train') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                            Entrainement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="team" href="/team"
+                           class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('team') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                            Equipe
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="calendrier" href="/calendrier"
+                           class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
+                   {{ request()->is('calendrier') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
+                            Calendrier
+                        </a>
+                    </li>
+                    @php
+                        $image = Auth::user()->image === 'photos/person.png'
+                            ? asset(Auth::user()->image)
+                            : asset('storage/' . Auth::user()->image);
+                    @endphp
+
+                    <a id="settings" class="flex justify-center" href="{{ route('settings') }}">
+                        <img
+                            src="{{ $image }}"
+                            alt="Photo de profil"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-white/20 hover:border-purple-400 transition"
+                        >
+                    </a>
+
+
+                    @livewire('admin.dashboard')
+
+                </ul>
+            </nav>
+        </aside>
+        <div
+            x-show="open"
+            @click="open = false"
+            class="fixed inset-0  z-30 lg:hidden"
+        ></div>
+
+        <div class="flex-1 flex flex-col lg:ml-64">
+
+            <header class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
+
+                <button class="relative z-50 lg:hidden shrink-0 text-white" @click="open = !open">
+                    <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
+                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                               d="M5 7h14M5 12h14M5 17h14"/>
                     </svg>
-                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="56"
-                         height="56"
-                         strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"/>
+
+                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
+                         viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                              d="M6 18 18 6M6 6l12 12"/>
                     </svg>
+
                 </button>
-            </div>
 
-            <h2 class="hidden">Navigation principale</h2>
-            <ul
-                :class="{ 'hidden': !open }"
-                class=" text-white flex  sm:flex flex-col sm:flex-row sm:justify-end sm:p-5 justify-center items-center gap-5">
-                <li><a title="vers la page d'accueil" href="">Accueil</a></li>
-                <li><a title="vers la page de contact" href="">Contact</a></li>
-                <li><a title="vers la page d'inscription" href="/inscription">Inscription</a></li>
-                <li><a title="vers la page de connexion" href="/login">Connexion</a></li>
-                <li><a title="vers la page de création d'équipe" href="/create">Créer une équipe</a></li>
-                <li><a title="vers la page rejoindre une équipe" href="/profile">Rejoindre une équipe</a></li>
+                <div class="ml-2 lg:ml-4 flex items-center w-full text-white">
 
-            </ul>
-        </nav>--}}
+                    <div class="font-semibold text-lg hidden lg:block">
+                        <a href="{{ route('dashboard') }}">SportTeams</a>
+                    </div>
+
+                    <div class="flex-1 flex justify-center">
+
+                <span class="text-[11px] sm:text-sm lg:text-base text-center break-all lg:break-normal">
+                    <span class="lg:hidden">
+                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+                    </span>
+
+                    <span id="code" class="hidden lg:inline">
+                        Code pour rejoindre l'équipe :
+                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+                    </span>
+                </span>
+
+                    </div>
+
+                </div>
+
+                <div class="ml-2 lg:ml-4 relative inline-flex shrink-0">
+                    <a href="/message">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-5 h-5 lg:w-6 lg:h-6"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="white"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+
+                        <span
+                            class="absolute -top-2 -right-2 min-w-5 h-5 px-1
+                    flex items-center justify-center
+                    rounded-full bg-red-500 text-white
+                    text-[10px] font-bold leading-none shadow-md">
+                    {{ Auth::user()->unreadNotifications()->count() }}
+                </span>
+                    </a>
+                </div>
+
+            </header>
+
+            <main class="flex-1 p-3 sm:p-6 overflow-y-auto">
+                {{ $slot }}
+            </main>
+
+        </div>
     </div>
 
+    </body>
+    @livewireScripts
 </header>
-<main>
-    {{ $slot  }}
-</main>
-@livewireScripts
 </body>
 </html>

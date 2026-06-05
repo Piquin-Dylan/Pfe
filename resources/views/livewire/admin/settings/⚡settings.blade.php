@@ -61,9 +61,9 @@ new class extends Component {
             <livewire:admin.settings.team-settings/>
         @endif
 
-        {{-- @if($activeTab === 'security')
-             <livewire:admin.security-settings />
-         @endif--}}
+         @if($activeTab === 'security')
+             <livewire:admin.settings.reset-password />
+         @endif
 
     </div>
 </div>
