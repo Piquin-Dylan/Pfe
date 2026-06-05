@@ -1,4 +1,4 @@
-@props(['players'])
+@props(['players', 'totalTrains', 'totalMatchs'])
 
 @foreach($players as $player)
 
@@ -35,11 +35,15 @@
                 class="rounded-2xl bg-[#25284B] p-3 text-center"
             >
                 <p class="text-xs text-gray-400 uppercase">
-                    Sélections
+                    Matchs joués
                 </p>
 
                 <p class="text-white text-xl font-bold">
-                    {{ $player->matches_played ?? 0 }}
+                    {{ $player->matches_percentage }}%
+                </p>
+
+                <p class="text-xs text-gray-400 mt-1">
+                    {{ $player->matchs_joues }} / {{ $totalMatchs }}
                 </p>
             </div>
 
@@ -47,7 +51,7 @@
                 class="rounded-2xl bg-[#25284B] p-3 text-center"
             >
                 <p class="text-xs text-gray-400 uppercase">
-                    Présence
+                    Présence aux entraînements
                 </p>
 
                 <p class="text-white text-xl font-bold">
@@ -55,7 +59,7 @@
                 </p>
 
                 <p class="text-xs text-gray-400 mt-1">
-                    {{ $player->presences }}
+                    {{ $player->presences }} / {{ $totalTrains }}
                 </p>
             </div>
 
