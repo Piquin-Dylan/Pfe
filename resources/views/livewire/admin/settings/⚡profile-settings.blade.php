@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
 
     public EditFormProfile $form;
 
@@ -36,23 +37,23 @@ new class extends Component {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
             <x-form.input
-                label_name="Prénom"
-                for_label="firstName"
-                placeholder="Jean"
-                type="text"
-                id="firstName"
-                name="firstName"
-                wire:model="form.firstName">
+                    label_name="Prénom"
+                    for_label="firstName"
+                    placeholder="Jean"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    wire:model="form.firstName">
             </x-form.input>
 
             <x-form.input
-                label_name="Nom"
-                for_label="lastName"
-                placeholder="Dupont"
-                type="text"
-                id="lastName"
-                name="lastName"
-                wire:model="form.lastName">
+                    label_name="Nom"
+                    for_label="lastName"
+                    placeholder="Dupont"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    wire:model="form.lastName">
             </x-form.input>
 
         </div>
@@ -60,22 +61,22 @@ new class extends Component {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
             <x-form.input
-                label_name="Email"
-                for_label="email"
-                placeholder="jean.dupont@gmail.com"
-                type="email"
-                id="email"
-                name="email"
-                wire:model="form.email">
+                    label_name="Email"
+                    for_label="email"
+                    placeholder="jean.dupont@gmail.com"
+                    type="email"
+                    id="email"
+                    name="email"
+                    wire:model="form.email">
             </x-form.input>
 
             <x-form.input
-                label_name="Photo de profil"
-                for_label="photo"
-                type="file"
-                id="photo"
-                name="photo"
-                wire:model="form.image">
+                    label_name="Photo de profil"
+                    for_label="photo"
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    wire:model="form.image">
             </x-form.input>
 
         </div>
@@ -83,9 +84,9 @@ new class extends Component {
         @if($form->image)
             <div class="flex justify-center">
                 <img
-                    src="{{ $form->image->temporaryUrl() }}"
-                    alt="Prévisualisation"
-                    class="w-24 h-24 rounded-full object-cover"
+                        src="{{ $form->image->temporaryUrl() }}"
+                        alt="Prévisualisation"
+                        class="w-24 h-24 rounded-full object-cover"
                 >
             </div>
         @endif

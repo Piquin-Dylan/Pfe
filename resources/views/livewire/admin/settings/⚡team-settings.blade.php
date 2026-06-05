@@ -6,6 +6,8 @@ use Livewire\Component;
 
 new class extends Component {
 
+    use \Livewire\WithFileUploads;
+
     public EditFormTeam $form;
 
     public function mount(): void
