@@ -74,13 +74,11 @@ new class extends Component {
                 }else {
                     $type = 'match';
                     $id = $notification->data['match_id'];
-
-
                 }
             @endphp
 
             <div
-                class="relative mx-6 mb-8 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-blue-500/40 rounded-2xl p-6 flex flex-col gap-5 text-white transition hover:translate-y-[-2px] hover:border-blue-400/60 max-w-3xl w-full">
+                class="relative mb-8 bg-gradient-to-br from-[#0f172a] to-[#020617] border border-blue-500/40 rounded-2xl p-6 flex flex-col gap-5 text-white transition hover:translate-y-[-2px] hover:border-blue-400/60 w-full">
 
                 <div class="absolute top-4 right-4 flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>

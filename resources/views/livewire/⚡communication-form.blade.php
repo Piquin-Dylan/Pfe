@@ -60,7 +60,7 @@ new class extends Component {
         }, 3000)
     "
 
-    class="flex justify-center"
+    class="flex justify-center mb-8"
 >
     @unless(Auth::user()->player)
     <button
@@ -72,8 +72,7 @@ new class extends Component {
 
     <template x-if="openModal">
         <div
-            class="fixed inset-0 z-50 flex items-center justify-center p-4"
-        >
+            class="fixed inset-0 z-50 flex items-center justify-center p-4">
 
             <div
                 @click="openModal = false"
@@ -82,38 +81,31 @@ new class extends Component {
 
             <div
                 @click.stop
-                class="relative z-10 w-full max-w-[95vw] sm:max-w-xl lg:max-w-2xl rounded-3xl border border-violet-500/20 bg-[#1F2243] p-5 sm:p-7 lg:p-8 shadow-2xl"
-            >
+                class="relative z-10 w-full max-w-[95vw] sm:max-w-xl lg:max-w-2xl rounded-3xl border border-violet-500/20 bg-[#1F2243] p-5 sm:p-7 lg:p-8 shadow-2xl">
 
                 <button
                     type="button"
                     @click="openModal = false"
-                    class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none transition"
-                >
+                    class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none transition">
                     &times;
                 </button>
 
                 <div class="pr-10">
-                    <h2 class="text-white text-2xl sm:text-3xl font-bold">
+                    <span class="text-white text-2xl sm:text-3xl font-bold">
                         Message général
-                    </h2>
+                    </span>
 
                     <p class="text-violet-300 mt-2 text-sm sm:text-base">
                         Envoyer un message à toute votre équipe
                     </p>
                 </div>
-
                 <form
                     wire:submit.prevent="save"
-                    class="space-y-6 mt-8"
-                >
-
+                    class="space-y-6 mt-8">
                     <div>
-
                         <label
                             for="message"
-                            class="block text-white font-medium mb-3"
-                        >
+                            class="block text-white font-medium mb-3">
                             Contenu du message
                         </label>
 
@@ -122,9 +114,7 @@ new class extends Component {
                             id="message"
                             rows="6"
                             placeholder="Entrez votre message..."
-                            class="w-full rounded-2xl border border-violet-500/20 bg-[#25284B] px-4 sm:px-5 py-4 text-white placeholder:text-gray-400 outline-none resize-none focus:border-violet-500 text-sm sm:text-base"
-                        ></textarea>
-
+                            class="w-full rounded-2xl border border-violet-500/20 bg-[#25284B] px-4 sm:px-5 py-4 text-white placeholder:text-gray-400 outline-none resize-none focus:border-violet-500 text-sm sm:text-base"></textarea>
                         <div class="pt-2">
                             @error('message')
                             <span class="text-red-400 text-sm">
@@ -132,30 +122,21 @@ new class extends Component {
                             </span>
                             @enderror
                         </div>
-
                     </div>
-
                     <div class="flex flex-col-reverse sm:flex-row justify-end gap-3">
-
                         <button
                             type="button"
                             @click="openModal = false"
-                            class="btn-secondary w-full sm:w-auto"
-                        >
+                            class="btn-secondary w-full sm:w-auto">
                             Annuler
                         </button>
-
                         <button
                             type="submit"
-                            class="btn-primary w-full sm:w-auto"
-                        >
+                            class="btn-primary w-full sm:w-auto">
                             Envoyer
                         </button>
-
                     </div>
-
                 </form>
-
             </div>
         </div>
     </template>

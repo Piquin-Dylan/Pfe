@@ -158,6 +158,16 @@ Route::middleware('auth')->group(function () {
 
     })->name('settings');
 
+    Route::get('/statistiques', function () {
+
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
+        return view('admin.statistiques');
+
+    })->name('statistiques');
+
 
     Route::get('/match/{id}', function ($id) {
 
