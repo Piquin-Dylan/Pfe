@@ -33,8 +33,8 @@
                 SportTeams
             </a>
 
-            <div class="relative shrink-0">
-                <a href="/message">
+            <div  class="relative shrink-0">
+                <a id="message" href="/message">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="w-6 h-6"
                          viewBox="0 0 24 24"

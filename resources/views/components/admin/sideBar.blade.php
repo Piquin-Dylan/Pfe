@@ -1487,7 +1487,7 @@
                 </li>
 
                 <li>
-                    <a href="/match"
+                    <a id="match" href="/match"
                        class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
                    {{ request()->is('match') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
                         Match
@@ -1495,7 +1495,7 @@
                 </li>
 
                 <li>
-                    <a href="/train"
+                    <a id="train"  href="/train"
                        class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
                    {{ request()->is('train') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
                         Entrainement
@@ -1503,7 +1503,7 @@
                 </li>
 
                 <li>
-                    <a href="/team"
+                    <a id="team" href="/team"
                        class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
                    {{ request()->is('team') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
                         Equipe
@@ -1511,7 +1511,7 @@
                 </li>
 
                 <li>
-                    <a href="/calendrier"
+                    <a id="calendrier" href="/calendrier"
                        class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
                    {{ request()->is('calendrier') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
                         Calendrier
@@ -1523,7 +1523,7 @@
                         : asset('storage/' . Auth::user()->image);
                 @endphp
 
-                <a class="flex justify-center" href="{{ route('settings') }}">
+                <a id="settings" class="flex justify-center" href="{{ route('settings') }}">
                     <img
                         src="{{ $image }}"
                         alt="Photo de profil"
@@ -1575,7 +1575,7 @@
                         {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
                     </span>
 
-                    <span class="hidden lg:inline">
+                    <span id="code" class="hidden lg:inline">
                         Code pour rejoindre l'équipe :
                         {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
                     </span>

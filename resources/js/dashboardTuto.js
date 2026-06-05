@@ -10,6 +10,26 @@ export function dashboardTuto() {
 
         steps: [
             {
+                element: '#code',
+                popover: {
+                    title: 'Partager le code d’équipe',
+                    description: 'Partagez ce code avec vos joueurs afin qu’ils puissent rejoindre facilement votre équipe.',
+                    side: "left",
+                    align: 'start'
+                }
+            },
+
+            {
+                element: '#message',
+                popover: {
+                    title: 'Messagerie',
+                    description: 'Communiquez facilement avec les membres de votre équipe et partagez les informations importantes en temps réel.',
+                    side: "left",
+                    align: 'start'
+                }
+            },
+
+            {
                 element: '#stats',
                 popover: {
                     title: 'Statistiques générales',
@@ -20,41 +40,57 @@ export function dashboardTuto() {
             },
 
             {
-                element: '#affiche',
+                element: '#next-event',
                 popover: {
-                    title: 'Affiche du match',
-                    description: 'Vous trouverez ici l heure du match ainsi que l équipe adverse contre lequel vous jouez prochainement',
+                    title: 'Prochains événements',
+                    description: 'Retrouvez ici vos prochains matchs et entraînements, avec les dates, horaires et informations importantes à venir.',
                     side: "bottom",
                     align: 'start'
                 }
             },
 
             {
-                element: '#convocation',
+                element: '#match',
                 popover: {
-                    title: 'Convocation pour le match',
-                    description: 'Dans cette partie de la page vous pourrez convoqué les joueurs que vous souhaitez prendre',
+                    title: 'Gestion des matchs',
+                    description: 'Consultez les matchs de votre équipe, ajoutez de nouvelles rencontres et enregistrez les résultats une fois les matchs terminés.',
                     side: "bottom",
                     align: 'start'
                 }
             },
-
             {
-                element: '#feuille_de_match',
+                element: '#train',
                 popover: {
-                    title: 'Feuille de match',
-                    description: 'Dans la partie feuille de match vous pourrez retrouver tout les joueurs convoqué avec leur status',
-                    side: "left",
+                    title: 'Gestion des entraînements',
+                    description: 'Planifiez les séances d’entraînement de votre équipe, consultez les entraînements à venir et gérez les informations associées.',
+                    side: "bottom",
                     align: 'start'
                 }
             },
-
             {
-                element: '#composition',
+                element: '#team',
                 popover: {
-                    title: "Composition d'équipe",
-                    description: 'Dans cette partie vous pourrez créer directement votre compos pour le match avec les joueur présent',
-                    side: "top",
+                    title: 'Équipe',
+                    description: 'Retrouvez tous les membres de votre équipe, gérez les informations du groupe et invitez de nouveaux joueurs.',
+                    side: "bottom",
+                    align: 'start'
+                }
+            },
+            {
+                element: '#calendrier',
+                popover: {
+                    title: 'Calendrier',
+                    description: 'Consultez l’ensemble des événements de votre équipe, notamment les matchs et les entraînements à venir.',
+                    side: "bottom",
+                    align: 'start'
+                }
+            },
+            {
+                element: '#settings',
+                popover: {
+                    title: 'Mon profil',
+                    description: 'Consultez et modifiez vos informations personnelles afin de maintenir votre profil à jour.',
+                    side: "bottom",
                     align: 'start'
                 }
             },
