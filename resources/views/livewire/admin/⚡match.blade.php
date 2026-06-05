@@ -56,17 +56,12 @@ new class extends Component {
         @livewire('admin.create_event')
     </div>
     @if($games->isEmpty())
-        <div class="max-w-2xl mx-auto mt-10 p-6 sm:p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
-            <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">
-                Aucun match n'a encore été créer pour le moment
-            </h3>
-
-            <p class="text-sm sm:text-base text-gray-300 mb-6">
-                créer dés maintenant votre premier match dans la page calendrier
-            </p>
-
-            <a href="{{route('calendrier')}}" class="btn-primary">Créer mon premier match</a>
-        </div>
+        <x-match.empy-match
+            title="Aucun match n'a encore été créé pour le moment"
+            description="Créez dès maintenant votre premier match dans la page calendrier"
+            :href="route('calendrier')"
+            button="Créer mon premier match"
+        />
     @else
         @foreach($games as $game)
 
@@ -183,80 +178,34 @@ new class extends Component {
                     @endunless
                 </div>
 
-                <div
-                    x-show="openScoreModal"
-                    x-transition
-                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-                    style="display: none;">
+                <x-match.modal-score
+                    show="openScoreModal"
+                    close="openScoreModal = false"
+                    :home-logo="$team->logo"
+                    :home-name="$team->name"
+                    :away-logo="$game->photo_away"
+                    :away-name="$game->name_away"
+                >
+                    <input
+                        wire:model="score_home"
+                        type="number"
+                        min="0"
+                        class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
 
-                    <div
-                        @click.away="openScoreModal = false"
-                        class="relative w-full max-w-md lg:max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/20 bg-[#141B34] px-4 py-6 sm:px-8 sm:py-8 shadow-[0_0_80px_rgba(79,70,229,0.15)]">
+                    <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white">-</span>
 
-                        <button
-                            @click="openScoreModal = false"
-                            class="absolute right-4 top-4 text-3xl sm:text-5xl font-light text-white transition hover:scale-110">
-                            ×
+                    <input
+                        wire:model="score_away"
+                        type="number"
+                        min="0"
+                        class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
+
+                    <x-slot:footer>
+                        <button wire:click="updateScore({{ $game->id }})" class="btn-form">
+                            Confirmer
                         </button>
-
-                        <h2 class="pb-8 sm:pb-12 text-center text-2xl sm:text-3xl font-black text-white">
-                            Résultat du match
-                        </h2>
-
-                        <div
-                            class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 pb-10 sm:pb-14">
-
-                            <div class="flex flex-col items-center gap-4 sm:gap-6">
-
-                                <img
-                                    class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset('storage/' .  $team->logo) }}"
-                                    srcset="{{ asset('storage/' . $team->logo) }} 96w,{{ asset('storage/' .  $team->logo) }} 192w,{{ asset('storage/' . $team->logo) }} 384w"
-                                    sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
-                                    alt="Logo équipe domicile"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-
-                                <span
-                                    class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
-                                    {{  $team->name }}
-                                </span>
-                            </div>
-                            <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
-                                <input
-                                    wire:model="score_home"
-                                    type="number"
-                                    min="0"
-                                    class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
-                                <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white">-</span>
-                                <input
-                                    wire:model="score_away"
-                                    type="number"
-                                    min="0"
-                                    class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
-                            </div>
-                            <div class="flex flex-col items-center gap-4 sm:gap-6">
-                                <img
-                                    class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                                    src="{{ asset('storage/' . $game->photo_away) }}"
-                                    srcset="{{ asset('storage/' . $game->photo_away) }} 96w,{{ asset('storage/' . $game->photo_away) }} 192w,{{ asset('storage/' . $game->photo_away) }} 384w"
-                                    sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
-                                    alt="Logo équipe extérieur" loading="lazy" decoding="async"/>
-                                <span
-                                    class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
-                                    {{ $game->name_away }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex justify-center">
-                            <button wire:click="updateScore({{$game->id}})" class="btn-form">
-                                Confirmer
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
+                    </x-slot:footer>
+                </x-match.modal-score>
             </div>
         @endforeach
     @endif

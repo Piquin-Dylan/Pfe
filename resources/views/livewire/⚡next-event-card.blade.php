@@ -31,9 +31,9 @@ new class extends Component {
 
     @if($game)
         <x-admin.dashboard.event-card
-            :href="'/match/' . $game->id"
-            title="Prochain match"
-            color="blue"
+                :href="'/match/' . $game->id"
+                title="Prochain match"
+                color="blue"
         >
 
             <div class="mt-4 flex items-center justify-between gap-3">
@@ -41,23 +41,20 @@ new class extends Component {
                 @php
                     $team = Auth::user()->team ?? Auth::user()->player?->team;
 
-                    $logo = in_array($team->logo, [
-                        'photos/logo.png',
-                        'photos/logo_club.png',
-                    ])
-                        ? asset($team->logo)
+                    $logo = $team->logo === 'photos/logo_club.png'
+                        ? asset('photos/logo_club.png')
                         : asset('storage/' . $team->logo);
 
-                    $photoAway = $game->photo_away === 'photos/logo.png'
-                        ? asset($game->photo_away)
+                    $photoAway = $game->photo_away === 'photos/logo_club.png'
+                        ? asset('photos/logo_club.png')
                         : asset('storage/' . $game->photo_away);
                 @endphp
 
                 <div class="flex flex-col items-center flex-1">
                     <img
-                        src="{{ $logo }}"
-                        alt="{{ $team->name }}"
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
+                            src="{{ $logo }}"
+                            alt="{{ $team->name }}"
+                            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
                     />
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
@@ -71,9 +68,9 @@ new class extends Component {
 
                 <div class="flex flex-col items-center flex-1">
                     <img
-                        src="{{ $photoAway }}"
-                        alt="{{ $game->name_away }}"
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
+                            src="{{ $photoAway }}"
+                            alt="{{ $game->name_away }}"
+                            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
                     />
 
                     <span class="mt-2 text-center font-semibold text-sm sm:text-base">
@@ -92,12 +89,12 @@ new class extends Component {
         </x-admin.dashboard.event-card>
     @else
         <x-admin.dashboard.empty-state
-            title="Aucun match programmé"
-            description="Créez un match depuis le calendrier."
-            button-text="Créer un match"
-            :href="route('calendrier')"
-            text-color="text-blue-400"
-            button-color="bg-blue-500 hover:bg-blue-600"
+                title="Aucun match programmé"
+                description="Créez un match depuis le calendrier."
+                button-text="Créer un match"
+                :href="route('calendrier')"
+                text-color="text-blue-400"
+                button-color="bg-blue-500 hover:bg-blue-600"
         />
     @endif
 
@@ -116,7 +113,7 @@ new class extends Component {
             <div class="flex flex-col items-center justify-center mt-6">
 
                 <div
-                    class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 flex flex-col items-center justify-center">
+                        class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 flex flex-col items-center justify-center">
 
                 <span class="text-3xl sm:text-4xl font-bold leading-none">
                     {{ \Carbon\Carbon::parse($train->date_train)->format('d') }}
@@ -150,7 +147,7 @@ new class extends Component {
 
             <div class="mt-6 flex justify-center">
             <span
-                class="inline-flex items-center gap-2 text-green-400 font-semibold
+                    class="inline-flex items-center gap-2 text-green-400 font-semibold
                        transition-all duration-300
                        group-hover:text-green-300
                        group-hover:translate-x-1">
@@ -173,12 +170,12 @@ new class extends Component {
         </a>
     @else
         <x-admin.dashboard.empty-state
-            title="Aucun entraînement programmé"
-            description="Créez un entraînement depuis le calendrier."
-            button-text="Créer un entraînement"
-            :href="route('calendrier')"
-            text-color="text-green-400"
-            button-color="bg-green-500 hover:bg-green-600"/>
+                title="Aucun entraînement programmé"
+                description="Créez un entraînement depuis le calendrier."
+                button-text="Créer un entraînement"
+                :href="route('calendrier')"
+                text-color="text-green-400"
+                button-color="bg-green-500 hover:bg-green-600"/>
     @endif
 
 </div>

@@ -5,14 +5,23 @@
     'image' => null,
 ])
 
+@php
+    $imageUrl = null;
+
+    if ($image) {
+        $imageUrl = $image === 'photos/person.png'
+            ? asset($image)
+            : asset('storage/' . $image);
+    }
+@endphp
+
 <div
     class="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
     style="left: {{ $x }}%; top: {{ $y }}%;"
 >
-
     @if($image)
         <img
-            src="{{ asset('storage/' . $image) }}"
+            src="{{ $imageUrl }}"
             alt="{{ $poste }}"
             class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-lg"
         >
@@ -23,5 +32,4 @@
     <span class="text-white text-sm mt-1 text-center font-medium">
         {{ $poste }}
     </span>
-
 </div>
