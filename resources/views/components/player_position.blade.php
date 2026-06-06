@@ -1,5 +1,6 @@
 @props([
     'poste',
+    'activePoste',
     'x',
     'y',
     'image' => null,
@@ -23,10 +24,18 @@
         <img
             src="{{ $imageUrl }}"
             alt="{{ $poste }}"
-            class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-lg"
+            class="w-14 h-14 rounded-full object-cover shadow-lg transition-all duration-200 border-2"
+            :class="selectedPlayer === '{{ $activePoste }}'
+                ? 'border-purple-500 ring-2 ring-purple-500'
+                : 'border-white'"
         >
     @else
-        <span class="player_circle"></span>
+        <span
+            class="player_circle border-2 transition-all duration-200"
+            :class="selectedPlayer === '{{ $activePoste }}'
+                ? 'border-purple-500 ring-2 ring-purple-500'
+                : 'border-white'"
+        ></span>
     @endif
 
     <span class="text-white text-sm mt-1 text-center font-medium">

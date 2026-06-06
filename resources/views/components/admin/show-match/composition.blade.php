@@ -36,9 +36,19 @@
 
                         <div
                             @click="selectedPlayer = '{{ $player['poste'] }}'"
-                            class="cursor-pointer">
-                            <x-player_position x="{{ $player['x'] }}" y="{{ $player['y'] }}" poste="{{ $displayName }}"
-                                               :image="$displayImage"/></div>
+                            :class="selectedPlayer === '{{ $player['poste'] }}'
+        ? '[&_img]:border-purple-500'
+        : '[&_img]:border-white'"
+                            class="cursor-pointer"
+                        >
+    <x-player_position
+        x="{{ $player['x'] }}"
+        y="{{ $player['y'] }}"
+        poste="{{ $displayName }}"
+        activePoste="{{ $player['poste'] }}"
+        :image="$displayImage"
+    />
+</div>
                     @endforeach
                 </span>
             </div>

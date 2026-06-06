@@ -1609,8 +1609,7 @@
                         </svg>
 
                         <span class="hidden lg:inline text-sm">
-                            Revoir tutoriel
-    </span>
+                            Revoir tutoriel</span>
                     </button>
 
                     <div class="relative inline-flex">
