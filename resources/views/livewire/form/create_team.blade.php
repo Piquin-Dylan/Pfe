@@ -79,20 +79,44 @@ new class extends Component {
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                <x-form.input
-                    label_name="Division de l'équipe"
-                    for_label="division"
-                    placeholder="Ex : D1"
-                    type="text"
-                    id="division"
-                    name="division"
-                    wire:model.live="form.division">
+                <div class="mb-4 flex flex-col pt-3 justify-center sm:flex-1">
+
+                    <label
+                        class="pb-2 font-bold text-[20px] text-white"
+                        for="division"
+                    >
+                        Division de l'équipe
+                    </label>
+
+                    <div class="relative">
+
+                        <select
+                            id="division"
+                            name="division"
+                            wire:model.live="form.division"
+                            class="input-dark"
+                        >
+                            <option value="">Sélectionnez une division</option>
+
+                            @foreach(\App\Enums\DivisionEnum::cases() as $division)
+                                <option
+                                    value="{{ $division->value }}"
+                                    class="bg-[#25284B] text-white"
+                                >
+                                    {{ $division->value }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                    </div>
 
                     @error('form.division')
-                    <span class="error">{{ $message }}</span>
+                    <small class="text-red-500 pt-2">
+                        {{ $message }}
+                    </small>
                     @enderror
 
-                </x-form.input>
+                </div>
 
                 <x-form.input
                     label_name="Logo du club"
@@ -108,9 +132,7 @@ new class extends Component {
                     @enderror
 
                 </x-form.input>
-              {{--  @if($form->logo)
-                    <img src="{{ $form->logo->temporaryUrl() }}" alt="">
-                @endif--}}
+
             </div>
 
 

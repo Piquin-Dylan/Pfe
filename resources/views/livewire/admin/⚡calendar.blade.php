@@ -54,6 +54,7 @@ new class extends Component {
         $this->showChoiceModal = true;
     }
 
+
     public function createGame(): void
     {
         $this->dispatch('open-create-game-modal', date: $this->selectedDate);

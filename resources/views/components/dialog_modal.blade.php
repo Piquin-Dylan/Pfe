@@ -119,20 +119,12 @@
                                     Voir
                                 </a>
 
-
                                 <button
-                                    @click="$wire.deleteEvent(selectedEvent.id, selectedEvent.type)"
+                                    @click="Livewire.dispatch('delete-event', { id: selectedEvent.id, type: selectedEvent.type })"
                                     class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-medium transition"
                                 >
                                     Supprimer l'événement
                                 </button>
-
-                                {{--<button
-                                    @click="$wire.updateEvent(selectedEvent.id, selectedEvent.type)"
-                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-medium transition"
-                                >
-                                    Modifier l'événement
-                                </button>--}}
 
                             </div>
 
