@@ -78,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         dateClick(info) {
-            console.log('Date cliquée :', info.dateStr)
+            Livewire.dispatch('date-selected', {
+                date: info.dateStr
+            })
         },
     })
 

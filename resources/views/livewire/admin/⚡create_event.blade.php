@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Forms\CreateEventForm;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -18,6 +19,14 @@ new class extends Component {
         $this->dispatch('refresh-calendar');
         $this->dispatch('match-created');
     }
+
+    #[On('open-create-game-modal')]
+    public function openModal($date = null): void
+    {
+        $this->form->date = $date;
+
+        $this->dispatch('open-drawer');
+    }
 };
 
 ?>
@@ -26,7 +35,10 @@ new class extends Component {
 
     @unless(Auth::user()->player)
 
-        <x-drawer event="Création d'un match">
+        <x-drawer
+            event="Création d'un match"
+            openEvent="open-create-game-modal"
+        >
 
             <x-layout_forms
                 title_form="Création d'un match"

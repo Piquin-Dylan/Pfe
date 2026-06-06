@@ -19,7 +19,10 @@ new class extends Component {
 <div>
     @unless(Auth::user()->player)
 
-        <x-drawer event="Création d'un entrainement">
+        <x-drawer
+            event="Création d'un entraînement"
+            openEvent="open-create-train-modal"
+        >
             <x-layout_forms
                 title_form="Création d'un entrainement"
                 subtitle_form="Créer votre première entrainement"

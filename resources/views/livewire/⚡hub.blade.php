@@ -40,11 +40,11 @@ new class extends Component {
 
                     <div>
                         <h3 class="text-white text-2xl lg:text-3xl font-bold mb-3">
-                            Mes équipes
+                            Mon équipe
                         </h3>
 
                         <p class="text-gray-400 text-lg lg:text-xl">
-                            Gérez vos équipes ou rejoignez une équipe existante.
+                            Gérez votre équipes ou rejoignez une équipe existante.
                         </p>
                     </div>
 
