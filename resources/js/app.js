@@ -90,3 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
         window.calendar.refetchEvents()
     })
 })
+document.addEventListener('click', (e) => {
+
+    const button = e.target.closest('#tutorial-button');
+
+    if (!button) return;
+
+    if (document.querySelector(settings.dashboard.selector)) {
+        dashboardTuto();
+        return;
+    }
+
+    if (document.querySelector(settings.match.selector)) {
+        matchTuto();
+        return;
+    }
+
+    if (document.querySelector(settings.match_list.selector)) {
+        matchListTuto();
+
+    }
+
+});

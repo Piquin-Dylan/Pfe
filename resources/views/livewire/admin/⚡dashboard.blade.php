@@ -3,7 +3,7 @@
 use Livewire\Component;
 
 new class extends Component {
-
+    public string $tutorial = 'dashboard';
 
     //Permet de pouvoir déconnecter un utilisateur qui est sur le hub en appuyant sur le bouton deconnexion
     public function logout(): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse

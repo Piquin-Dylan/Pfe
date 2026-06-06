@@ -1501,7 +1501,7 @@
                     </li>
 
                     <li>
-                        <a id="train"  href="/train"
+                        <a id="train" href="/train"
                            class="block w-full px-4 py-3 rounded-xl transition-all duration-200 text-center
                    {{ request()->is('train') ? 'bg-[#7C3AED]' : 'hover:bg-[#8B5CF6] active:bg-[#6D28D9]' }}">
                             Entrainement
@@ -1565,7 +1565,6 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                               d="M6 18 18 6M6 6l12 12"/>
                     </svg>
-
                 </button>
 
                 <div class="ml-2 lg:ml-4 flex items-center w-full text-white">
@@ -1575,43 +1574,68 @@
                     </div>
 
                     <div class="flex-1 flex justify-center">
-
-                <span class="text-[11px] sm:text-sm lg:text-base text-center break-all lg:break-normal">
-                    <span class="lg:hidden">
-                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
-                    </span>
-
-                    <span id="code" class="hidden lg:inline">
-                        Code pour rejoindre l'équipe :
-                        {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
-                    </span>
+            <span class="text-[11px] sm:text-sm lg:text-base text-center break-all lg:break-normal">
+                <span class="lg:hidden">
+                    {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
                 </span>
 
+                <span id="code" class="hidden lg:inline">
+                    Code pour rejoindre l'équipe :
+                    {{ Auth::user()->team?->code ?? Auth::user()->player?->team?->code }}
+                </span>
+            </span>
                     </div>
 
                 </div>
 
-                <div class="ml-2 lg:ml-4 relative inline-flex shrink-0">
-                    <a href="/message">
+                <div class="ml-2 lg:ml-4 flex items-center gap-4 shrink-0">
+
+                    <button
+                        id="tutorial-button"
+                        title="Revoir le tutoriel"
+                        class="cursor-pointer flex items-center gap-2 text-white hover:text-purple-400 transition-colors">
+
                         <svg xmlns="http://www.w3.org/2000/svg"
                              class="w-5 h-5 lg:w-6 lg:h-6"
                              viewBox="0 0 24 24"
                              fill="none"
-                             stroke="white"
+                             stroke="currentColor"
                              stroke-width="2"
                              stroke-linecap="round"
                              stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
+                            <path d="M12 17h.01"/>
                         </svg>
 
-                        <span
-                            class="absolute -top-2 -right-2 min-w-5 h-5 px-1
+                        <span class="hidden lg:inline text-sm">
+                            Revoir tutoriel
+    </span>
+                    </button>
+
+                    <div class="relative inline-flex">
+                        <a href="/message">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="w-5 h-5 lg:w-6 lg:h-6"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="white"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+
+                            <span
+                                class="absolute -top-2 -right-2 min-w-5 h-5 px-1
                     flex items-center justify-center
                     rounded-full bg-red-500 text-white
                     text-[10px] font-bold leading-none shadow-md">
                     {{ Auth::user()->unreadNotifications()->count() }}
                 </span>
-                    </a>
+                        </a>
+                    </div>
+
                 </div>
 
             </header>
