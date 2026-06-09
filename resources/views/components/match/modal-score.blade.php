@@ -1,3 +1,13 @@
+@php
+    $homeLogoUrl = str_starts_with($homeLogo, 'photos/')
+        ? asset($homeLogo)
+        : asset('storage/' . $homeLogo);
+
+    $awayLogoUrl = str_starts_with($awayLogo, 'photos/')
+        ? asset($awayLogo)
+        : asset('storage/' . $awayLogo);
+@endphp
+
 <div
     x-show="{{ $show }}"
     x-transition
@@ -21,11 +31,12 @@
         <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 pb-10 sm:pb-14">
 
             <div class="flex flex-col items-center gap-4 sm:gap-6">
-                <img
-                    class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                    src="{{ asset('storage/' . $homeLogo) }}"
-                    alt="{{ $homeName }}"
-                >
+                <div class="w-32 h-32 flex items-center justify-center">
+                    <img
+                        class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                        src="{{ $homeLogoUrl }}"
+                        alt="{{ $homeName }}">
+                </div>
 
                 <span class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
                     {{ $homeName }}
@@ -37,16 +48,18 @@
             </div>
 
             <div class="flex flex-col items-center gap-4 sm:gap-6">
-                <img
-                    class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                    src="{{ asset('storage/' . $awayLogo) }}"
-                    alt="{{ $awayName }}"
-                >
+                <div class="w-32 h-32 flex items-center justify-center">
+                    <img
+                        class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                        src="{{ $awayLogoUrl }}"
+                        alt="{{ $awayName }}">
+                </div>
 
                 <span class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
                     {{ $awayName }}
                 </span>
             </div>
+
         </div>
 
         <div class="flex justify-center">
