@@ -1,4 +1,6 @@
-<x-client.array-feature>
+<x-client.array-feature
+    itemscope
+    itemtype="https://schema.org/ItemList">
 
     <div x-cloak>
         <x-client.feature-tabs/>
@@ -22,25 +24,37 @@
         x-show="currentTab === 'first'"
         class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-6xl mx-auto">
 
-        <x-client.feature-card
-            key="calendar"
-            icon="calendar.svg"
-            title="Convocations"
-            description="Envoyez vos convocations et recevez les réponses en temps réel."/>
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Convocations">
 
-        <x-client.feature-card
-            key="players"
-            icon="person.svg"
-            title="Joueurs de l’équipe"
-            description="Consultez les profils, disponibilités et informations de vos joueurs."
-            delay="delay-150"/>
+            <x-client.feature-card
+                key="calendar"
+                icon="calendar.svg"
+                title="Convocations"
+                description="Envoyez vos convocations et recevez les réponses en temps réel."/>
+        </div>
 
-        <x-client.feature-card
-            key="matches"
-            icon="ball.svg"
-            title="Matchs & entraînements"
-            description="Retrouvez votre calendrier et toutes les informations importantes."
-            delay="delay-300"/>
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Joueurs de l’équipe">
+
+            <x-client.feature-card
+                key="players"
+                icon="person.svg"
+                title="Joueurs de l’équipe"
+                description="Consultez les profils, disponibilités et informations de vos joueurs."
+                delay="delay-150"/>
+        </div>
+
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Matchs et entraînements">
+
+            <x-client.feature-card
+                key="matches"
+                icon="ball.svg"
+                title="Matchs & entraînements"
+                description="Retrouvez votre calendrier et toutes les informations importantes."
+                delay="delay-300"/>
+        </div>
 
     </div>
 
@@ -58,35 +72,53 @@
             </div>
         </div>
     </noscript>
+
     <div
         x-show="currentTab === 'second'"
         class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 max-w-7xl mx-auto mt-16">
 
-        <x-client.feature-card
-            key="coach_calendar"
-            icon="calendar.svg"
-            title="Calendrier complet"
-            description="Créez vos matchs et entraînements et retrouvez tous vos événements dans un calendrier centralisé."/>
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Calendrier complet">
 
-        <x-client.feature-card
-            key="coach_convocations"
-            icon="person.svg"
-            title="Convocations"
-            description="Sélectionnez les joueurs convoqués et suivez leurs réponses en temps réel."/>
+            <x-client.feature-card
+                key="coach_calendar"
+                icon="calendar.svg"
+                title="Calendrier complet"
+                description="Créez vos matchs et entraînements et retrouvez tous vos événements dans un calendrier centralisé."/>
+        </div>
 
-        <x-client.feature-card
-            key="coach_lineup"
-            icon="ball.svg"
-            title="Composition d’équipe"
-            description="Créez votre composition tactique directement après avoir convoqué vos joueurs."/>
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Convocations">
 
-        <x-client.feature-card
-            key="coach_squad"
-            icon="stats.svg"
-            title="Gestion de l’effectif"
-            description="Consultez les profils de vos joueurs, leurs postes, leurs disponibilités et leurs statistiques."/>
+            <x-client.feature-card
+                key="coach_convocations"
+                icon="person.svg"
+                title="Convocations"
+                description="Sélectionnez les joueurs convoqués et suivez leurs réponses en temps réel."/>
+        </div>
+
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Composition d’équipe">
+
+            <x-client.feature-card
+                key="coach_lineup"
+                icon="ball.svg"
+                title="Composition d’équipe"
+                description="Créez votre composition tactique directement après avoir convoqué vos joueurs."/>
+        </div>
+
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/Thing">
+            <meta itemprop="name" content="Gestion de l’effectif">
+
+            <x-client.feature-card
+                key="coach_squad"
+                icon="stats.svg"
+                title="Gestion de l’effectif"
+                description="Consultez les profils de vos joueurs, leurs postes, leurs disponibilités et leurs statistiques."/>
+        </div>
 
     </div>
+
     <div
         x-show="activeFeature"
         x-cloak
@@ -120,31 +152,31 @@
                     <span
                         x-text="features[activeFeature]?.title"
                         class="block text-white text-3xl font-bold mb-6">
-                </span>
+                    </span>
 
                     <p
                         x-text="features[activeFeature]?.description"
                         class="text-white/70 text-lg leading-relaxed">
                     </p>
 
-                    <ul class="mt-6 space-y-3 text-white/70">
-                        <li>✓ Interface intuitive et rapide</li>
-                        <li>✓ Données mises à jour en temps réel</li>
-                        <li>✓ Accessible sur mobile et ordinateur</li>
-                    </ul>
-
                 </div>
+
                 <div class="flex justify-center">
 
                     <div class="rounded-3xl border border-violet-500/20 bg-violet-500/5 p-4 w-full">
                         <img
                             :src="features[activeFeature]?.preview"
-                            alt="Aperçu du dashboard"
+                            alt="Aperçu d'une fonctionnalité"
+                            itemprop="image"
                             class="w-full max-h-[500px] object-contain rounded-2xl">
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
 </x-client.array-feature>
