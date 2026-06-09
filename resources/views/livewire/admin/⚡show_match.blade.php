@@ -188,11 +188,12 @@ new class extends Component {
                     : asset('storage/' . $team->logo);
             @endphp
 
-            <img
-                    class="w-24 lg:w-42 mb-6"
+            <div class="w-40 h-40 flex items-center justify-center mb-6">
+                <img
+                    class="max-w-full max-h-full object-contain"
                     alt="{{ $team->name }}"
-                    src="{{ $logo }}"
-            >
+                    src="{{ $logo }}">
+            </div>
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
     {{ Auth::user()->team?->name ?? Auth::user()->player?->team?->name }}
@@ -212,11 +213,12 @@ new class extends Component {
                     : asset('storage/' . $games->photo_away);
             @endphp
 
-            <img
-                    class="w-24 lg:w-42 mb-6"
-                    alt=""
-                    src="{{ $photoAway }}"
-            >
+            <div class="w-40 h-40 flex items-center justify-center mb-6">
+                <img
+                    class="max-w-full max-h-full object-contain"
+                    alt="{{ $games->name_away }}"
+                    src="{{ $photoAway }}">
+            </div>
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
             {{ $games->name_away }}
@@ -241,7 +243,6 @@ new class extends Component {
                 @else
 
                     {{ count($checked) }} / {{ $newValue }}
-
                 @endif
             </div>
 
@@ -251,8 +252,7 @@ new class extends Component {
                     <button
                             wire:click="saveConvocation"
                             @disabled(count($checked) > $newValue)
-                            class="btn-form disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
+                            class="btn-form disabled:opacity-50 disabled:cursor-not-allowed">
                         Enregistrer les convocations
                     </button>
 
