@@ -1470,20 +1470,6 @@
             }
         </style>
     @endif
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Football Team Manager",
-  "applicationCategory": "SportsApplication",
-  "operatingSystem": "Web",
-  "author": {
-    "@type": "Person",
-    "name": "Dylan Piquin"
-  },
-  "description": "Application web permettant de gérer les joueurs, les convocations, les entraînements, les compositions d'équipe et la communication entre entraîneurs et joueurs."
-}
-    </script>
 </head>
 <body x-data="{ open: false }" :class="{ 'overflow-hidden': open }">
 <h1 class="sr-only">Pfe - SportTeams</h1>
