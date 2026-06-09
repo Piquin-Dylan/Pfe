@@ -1,9 +1,14 @@
 @php
-    $homeLogoUrl = str_starts_with($homeLogo, 'photos/')
+    $defaultLogos = [
+        'photos/logo.png',
+        'photos/logo_club.png',
+    ];
+
+    $homeLogoUrl = in_array($homeLogo, $defaultLogos)
         ? asset($homeLogo)
         : asset('storage/' . $homeLogo);
 
-    $awayLogoUrl = str_starts_with($awayLogo, 'photos/')
+    $awayLogoUrl = in_array($awayLogo, $defaultLogos)
         ? asset($awayLogo)
         : asset('storage/' . $awayLogo);
 @endphp
@@ -31,6 +36,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 pb-10 sm:pb-14">
 
             <div class="flex flex-col items-center gap-4 sm:gap-6">
+
                 <div class="w-32 h-32 flex items-center justify-center">
                     <img
                         class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
@@ -41,6 +47,7 @@
                 <span class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
                     {{ $homeName }}
                 </span>
+
             </div>
 
             <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
@@ -48,6 +55,7 @@
             </div>
 
             <div class="flex flex-col items-center gap-4 sm:gap-6">
+
                 <div class="w-32 h-32 flex items-center justify-center">
                     <img
                         class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
@@ -58,6 +66,7 @@
                 <span class="text-center text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
                     {{ $awayName }}
                 </span>
+
             </div>
 
         </div>
@@ -67,4 +76,5 @@
         </div>
 
     </div>
+
 </div>
