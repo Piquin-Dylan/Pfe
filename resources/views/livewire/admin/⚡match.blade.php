@@ -90,10 +90,9 @@ new class extends Component {
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
                             src="{{ $logo }}"
-                            srcset="  {{ $logo }} 128w,  {{ $logo }} 256w,  {{ $logo }} 512w
-    "
-                            sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px
-    " loading="lazy" decoding="async">
+                            srcset="  {{ $logo }} 128w,  {{ $logo }} 256w,  {{ $logo }} 512w"
+                            sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px"
+                            loading="lazy" decoding="async">
                     </div>
 
                     <span
@@ -125,58 +124,34 @@ new class extends Component {
                             class="w-full h-full object-contain"
                             alt="Logo équipe extérieur"
                             src="{{ $photoAway }}"
-                            srcset="
-        {{ $photoAway }} 128w,
-        {{ $photoAway }} 256w,
-        {{ $photoAway }} 512w
-    "
-                            sizes="
-        (max-width: 640px) 64px,
-        (max-width: 768px) 80px,
-        (max-width: 1024px) 128px,
-        160px
-    "
+                            srcset="  {{ $photoAway }} 128w,  {{ $photoAway }} 256w,  {{ $photoAway }} 512w "
+                            sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px "
                             loading="lazy"
-                            decoding="async"
-                        />
+                            decoding="async"/>
                     </div>
-
                     <span
                         class="text-white text-sm sm:text-base md:text-xl max-w-[100px] sm:max-w-[140px] md:max-w-[220px] break-words leading-tight">
-            {{ $game->name_away }}
-        </span>
+                {{ $game->name_away }}</span>
                 </div>
 
             </div>
 
-            <div
-                x-data="{openScoreModal: false,
+            <div x-data="{openScoreModal: false,
        showToast: false
     }"
 
-                x-on:score-updated.window="
+                 x-on:score-updated.window="
         openScoreModal = false;
 
         showToast = true;
 
         setTimeout(() => {
             showToast = false
-        }, 3000)
-    ">
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-10">
-
-                    @unless(Auth::user()->player)
-
-                        <a id="cta_convocation" class="btn-primary" href="match/{{ $game->id }}">
-                            Convocation
-                        </a>
-
-                        <button @click="openScoreModal = true" class="btn-secondary">
-                            Score du match
-                        </button>
-
-                    @endunless
-                </div>
+        }, 3000)">
+                @unless(Auth::user()->player)
+                    <x-match.score
+                        :game-id="$game->id"/>
+                @endunless
 
                 <x-match.modal-score
                     show="openScoreModal"
@@ -184,14 +159,9 @@ new class extends Component {
                     :home-logo="$team->logo"
                     :home-name="$team->name"
                     :away-logo="$game->photo_away"
-                    :away-name="$game->name_away"
-                >
-                    <input
-                        wire:model="score_home"
-                        type="number"
-                        min="0"
-                        class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
-
+                    :away-name="$game->name_away">
+                    <input wire:model="score_home" type="number" min="0"
+                           class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
                     <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white">-</span>
 
                     <input

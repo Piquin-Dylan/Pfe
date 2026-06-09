@@ -125,18 +125,18 @@
         x-transition.opacity
         @click.self="activeFeature = null"
         @keydown.escape.window="activeFeature = null"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-overlay)] backdrop-blur-sm p-4">
 
         <div
             x-show="activeFeature"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-95"
             x-transition:enter-end="opacity-100 scale-100"
-            class="relative w-full max-w-6xl rounded-3xl border border-white/10 bg-[#111827] p-6 md:p-8 shadow-2xl">
+            class="relative w-full max-w-6xl rounded-3xl border border-[var(--color-border)] bg-[var(--color-background)] p-6 md:p-8 shadow-2xl">
 
             <button
                 @click="activeFeature = null"
-                class="absolute top-4 right-4 text-white/60 hover:text-white text-3xl leading-none">
+                class="absolute top-4 right-4 text-[var(--color-text-muted)] hover:text-[var(--color-white)] text-3xl leading-none">
                 &times;
             </button>
 
@@ -145,30 +145,33 @@
                 <div>
 
                     <div
-                        class="w-20 h-20 mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+                        class="w-20 h-20 mb-6 rounded-2xl bg-[var(--color-primary-medium)] border border-[var(--color-primary-border)] flex items-center justify-center">
                         <img :src="features[activeFeature]?.icon" width="60" alt="">
                     </div>
 
                     <span
                         x-text="features[activeFeature]?.title"
-                        class="block text-white text-3xl font-bold mb-6">
-                    </span>
+                        class="block text-[var(--color-white)] text-3xl font-bold mb-6">
+                </span>
 
                     <p
                         x-text="features[activeFeature]?.description"
-                        class="text-white/70 text-lg leading-relaxed">
+                        class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
                     </p>
 
                 </div>
 
                 <div class="flex justify-center">
 
-                    <div class="rounded-3xl border border-violet-500/20 bg-violet-500/5 p-4 w-full">
+                    <div
+                        class="rounded-3xl border border-[var(--color-primary-border)] bg-[var(--color-primary-light)] p-4 w-full">
+
                         <img
                             :src="features[activeFeature]?.preview"
                             alt="Aperçu d'une fonctionnalité"
                             itemprop="image"
                             class="w-full max-h-[500px] object-contain rounded-2xl">
+
                     </div>
 
                 </div>

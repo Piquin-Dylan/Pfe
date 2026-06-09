@@ -1,3 +1,4 @@
+<div class="max-w-7xl mx-auto">
 <section class=" lg:mr-8 lg-ml-8  lg:py-20 lg:px-8">
     <h2 class="title_section pl-4 pr-4 mb-12">Présentation fonctionnalité création de compos</h2>
     <div
@@ -249,8 +250,7 @@
 
                     <template
                         x-for="player in players"
-                        :key="player.id"
-                    >
+                        :key="player.id">
 
                         <div
                             @click="
@@ -271,16 +271,9 @@
                                         class="w-full h-full object-cover"
                                         alt="">
                                 </div>
-
                                 <div>
-
-                                    <p
-                                        class="text-white font-semibold"
-                                        x-text="player.name"></p>
-
-                                    <p
-                                        class="text-xs text-gray-400 uppercase"
-                                        x-text="player.position"
+                                    <p class="text-white font-semibold" x-text="player.name"></p>
+                                    <p class="text-xs text-gray-400 uppercase" x-text="player.position"
                                     ></p>
 
                                 </div>
@@ -302,5 +295,6 @@
         </div>
 
     </div>
-  <x-client.noscript-game></x-client.noscript-game>
+    <x-client.noscript-game></x-client.noscript-game>
 </section>
+</div>
