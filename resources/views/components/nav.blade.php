@@ -28,6 +28,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-6 font-semibold text-2xl lg:text-xl">
                 <li>
                     <a href="{{ route('accueil') }}"
+                       title="Retourner à la page d'accueil"
                        class="{{ request()->routeIs('accueil') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Accueil
                     </a>
@@ -35,6 +36,7 @@
 
                 <li>
                     <a href="#form-contact"
+                       title="Accéder au formulaire de contact"
                        class="{{ request()->routeIs('contact') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Contact
                     </a>
@@ -43,6 +45,7 @@
                 @guest
                     <li>
                         <a href="{{ route('register') }}"
+                           title="Créer un nouveau compte"
                            class="{{ request()->routeIs('register') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                             Inscription
                         </a>
@@ -50,6 +53,7 @@
 
                     <li>
                         <a href="{{ route('login') }}"
+                           title="Se connecter à son compte"
                            class="{{ request()->routeIs('login') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                             Connexion
                         </a>
@@ -59,6 +63,7 @@
                 @auth
                     <li>
                         <a href="{{ route('hub') }}"
+                           title="Accéder à l'espace équipe"
                            class="{{ request()->routeIs('hub') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                             Espace équipe
                         </a>
@@ -67,6 +72,7 @@
 
                 <li>
                     <a href="{{ route('create') }}"
+                       title="Créer une nouvelle équipe"
                        class="{{ request()->routeIs('create') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Créer une équipe
                     </a>
@@ -74,6 +80,7 @@
 
                 <li>
                     <a href="{{ route('profile') }}"
+                       title="Rejoindre une équipe existante"
                        class="{{ request()->routeIs('profile') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Rejoindre une équipe
                     </a>

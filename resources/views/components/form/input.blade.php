@@ -14,15 +14,11 @@
 
         <label
             class="pb-2 font-bold text-[20px] text-white"
-            for="{{ $for_label }}"
-        >
+            for="{{ $for_label }}">
             {{ $label_name }}
         </label>
-
         <div class="relative">
-
             @if($type === 'password')
-
                 <input
                     :type="showPassword ? 'text' : 'password'"
                     placeholder="{{ $placeholder }}"
@@ -30,14 +26,11 @@
                     id="{{ $id }}"
                     {{ $attributes->merge([
                         'class' => 'input-dark pr-12'
-                    ]) }}
-                >
-
+                    ]) }}>
                 <button
                     type="button"
                     @click="showPassword = !showPassword"
-                    class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition"
-                >
+                    class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition">
 
                     <svg
                         x-show="!showPassword"

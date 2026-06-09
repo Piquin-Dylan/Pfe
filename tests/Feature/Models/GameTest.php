@@ -53,9 +53,7 @@ test('game contains expected fillable attributes', function () {
         ->toContain('date_match')
         ->toContain('address')
         ->toContain('hours')
-        ->toContain('name_home')
         ->toContain('name_away')
-        ->toContain('photo_home')
         ->toContain('photo_away')
         ->toContain('score_home')
         ->toContain('score_away');

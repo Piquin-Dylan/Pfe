@@ -4,6 +4,10 @@
     @livewireStyles
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Application de gestion d'équipes sportives permettant la gestion des joueurs, entraînements, matchs et présences.">
+    <meta name="author" content="Dylan Piquin">
+    <meta name="keywords" content="football, équipe, entraînement, match, gestion">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -1466,6 +1470,20 @@
             }
         </style>
     @endif
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Football Team Manager",
+  "applicationCategory": "SportsApplication",
+  "operatingSystem": "Web",
+  "author": {
+    "@type": "Person",
+    "name": "Dylan Piquin"
+  },
+  "description": "Application web permettant de gérer les joueurs, les convocations, les entraînements, les compositions d'équipe et la communication entre entraîneurs et joueurs."
+}
+    </script>
 </head>
 <body x-data="{ open: false }" :class="{ 'overflow-hidden': open }">
 <h1 class="sr-only">Pfe - SportTeams</h1>

@@ -12,7 +12,8 @@
            hover:border-violet-500/70 hover:bg-white/10 hover:-translate-y-2
            transition-all duration-300"
 >
-    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+    <div
+        class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
         <img width="60" src="{{ asset($icon) }}" alt="{{ $title }}">
     </div>
 
@@ -24,7 +25,7 @@
         {{ $description }}
     </p>
 
-    <p class="text-violet-400 text-sm text-center mt-6 font-medium">
+    <p class="text-[#C5ACEC] text-sm text-center mt-6 font-medium">
         Cliquez pour découvrir →
     </p>
 </div>

@@ -182,7 +182,20 @@ Route::middleware('auth')->group(function () {
         return view('admin.show_match', [
             'id' => $id,
         ]);
+    });
+    Route::get('/match/{id}/live', function ($id) {
 
+        if (!Auth::user()->team && !Auth::user()->player) {
+            return redirect('/hub');
+        }
+
+        if (Auth::user()->player) {
+            return redirect('/matchF');
+        }
+
+        return view('admin.match_live', [
+            'id' => $id,
+        ]);
     });
 
 

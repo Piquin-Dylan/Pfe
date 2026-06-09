@@ -94,10 +94,9 @@ new class extends Component {
                                 src="{{ $logo }}"
                                 srcset="{{ $logo }} 96w, {{ $logo }} 192w, {{ $logo }} 384w"
                                 sizes="(max-width: 640px) 64px, 96px"
-                                alt="{{ $team->name }}"
+                                alt="Photo du logo de {{ $team->name }}"
                                 loading="lazy"
-                                decoding="async"
-                            />
+                                decoding="async"/>
 
                             <span class="text-white text-2xl font-semibold tracking-wide">
                                     {{ $team->name }}

@@ -68,7 +68,7 @@
                             href="tel:+32492844521"
                             class="hover:text-white transition"
                         >
-                            04 92 84 45 21
+                            +32 04 92 84 45 21
                         </a>
                     </li>
                     <li>
