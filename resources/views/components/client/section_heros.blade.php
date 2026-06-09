@@ -1,5 +1,11 @@
 <section
+    itemscope
+    itemtype="https://schema.org/SoftwareApplication"
     class="px-4 py-12 lg:pb-20 pt-40 overflow-hidden lg:px-8">
+
+    <meta itemprop="applicationCategory" content="SportsApplication">
+    <meta itemprop="operatingSystem" content="Web">
+
     <h2 class="sr-only">
         Section présentation application
     </h2>
@@ -13,11 +19,14 @@
             class="flex flex-col justify-center
                    text-center lg:text-left">
 
-            <span class="title_section max-w-[650px]">
+            <span
+                itemprop="name"
+                class="title_section max-w-[650px]">
                 Gérez votre équipe de football simplement et efficacement
             </span>
 
             <p
+                itemprop="description"
                 class="subtitle_section mt-6 max-w-[620px]
                        mx-auto lg:mx-0">
                 Une application dédiée aux entraîneurs et aux joueurs pour améliorer la
@@ -30,12 +39,20 @@
                        justify-center lg:justify-start
                        items-center gap-5 mt-10">
 
-                <a href="/profile" class="btn-primary">
+                <a
+                    href="/profile"
+                    itemprop="url"
+                    class="btn-primary">
                     Rejoindre une équipe
                 </a>
-                <a href="/create" class="btn-secondary">
+
+                <a
+                    href="/create"
+                    itemprop="url"
+                    class="btn-secondary">
                     Créer une équipe
                 </a>
+
             </div>
 
         </div>
@@ -79,7 +96,8 @@
                             class="absolute inset-0
                                    w-full h-full
                                    object-cover"
-                            alt="">
+                            alt="Capture d'écran de l'application"
+                            itemprop="screenshot">
 
                     </template>
 
@@ -87,7 +105,7 @@
 
                 <img
                     src="{{ asset('pc.png') }}"
-                    alt="Image d'un ordinateur"
+                    alt="Présentation de l'application sur ordinateur"
                     class="relative z-20 w-full h-auto">
 
             </div>
