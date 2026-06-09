@@ -47,12 +47,7 @@ Pour cela, il devra au préalable posséder un compte sur l’application.
 ## Statistiques personnelles
 
 * Nombre de matchs joués
-* Nombre de buts
-* Nombre d’absences
 * Nombre de présences aux entraînements
-* Graphique de progression
-
-Le joueur pourra encoder lui-même ses statistiques à la fin de chaque match et le graphique sera mis à jour automatiquement.
 
 ## Communication interne
 
@@ -60,10 +55,6 @@ Le joueur pourra encoder lui-même ses statistiques à la fin de chaque match et
 * Convocations
 * Changements d’horaire
 * Annulations
-* Fil d’actualité
-* Notifications par e-mail
-
-Toutes les informations importantes seront également envoyées par e-mail afin d’éviter qu’un joueur ne manque une information importante.
 
 ## Gestion des événements
 
@@ -71,13 +62,8 @@ Toutes les informations importantes seront également envoyées par e-mail afin 
 * Liste des entraînements
 * Calendrier des événements
 * Indication de disponibilité
-* Ajout d’une note à l’entraîneur
 
 À chaque création d’un match ou d’un entraînement, le joueur recevra une notification sur le site ainsi qu’un e-mail.
-
-## Classement
-
-Le joueur pourra consulter le classement de son équipe.
 
 ## Calendrier
 
@@ -86,7 +72,6 @@ Le calendrier permettra de :
 * Consulter les entraînements
 * Consulter les matchs
 * Différencier les événements grâce à plusieurs couleurs
-* Exporter les événements vers un calendrier personnel
 
 ## Historique des présences
 
@@ -95,18 +80,6 @@ Le joueur pourra consulter :
 * Ses présences aux entraînements
 * Ses présences aux matchs
 
-Un filtre mensuel permettra d’obtenir une vue détaillée.
-
-## Gamification
-
-* Badges
-* Récompenses
-
-## Export PDF
-
-Le joueur pourra télécharger ses statistiques personnelles au format PDF.
-
-## Notifications par e-mail
 
 Le joueur sera informé lorsqu’un :
 
@@ -117,11 +90,6 @@ Le joueur sera informé lorsqu’un :
 * Il est convoqué
 * Il n’est pas convoqué
 
-## Historique des résultats
-
-Le joueur pourra consulter les résultats de son équipe mois par mois afin d’obtenir une vue globale de la saison.
-
----
 
 # Fonctionnalités côté entraîneur
 
@@ -153,10 +121,6 @@ L’entraîneur pourra :
 * Voir les réponses des joueurs
 * Modifier ou supprimer un événement
 
-## Suivi des performances
-
-L’entraîneur pourra consulter l’ensemble des statistiques de ses joueurs avec une vue globale mois par mois.
-
 ## Communication
 
 L’entraîneur pourra publier des annonces afin d’informer ses joueurs :
@@ -165,21 +129,12 @@ L’entraîneur pourra publier des annonces afin d’informer ses joueurs :
 * D’une annulation
 * D’une information importante
 
-Les joueurs recevront une notification ainsi qu’un e-mail.
-
 ## Gestion des convocations
 
 L’entraîneur pourra :
 
 * Sélectionner les joueurs convoqués
-* Ajouter une note
 * Informer les joueurs de leur statut
-
-Un e-mail sera envoyé automatiquement aux joueurs concernés.
-
-## Notes de match
-
-L’entraîneur pourra rédiger ses consignes et ses plans tactiques puis exporter le document au format PDF.
 
 ## Composition d’équipe
 
@@ -197,8 +152,6 @@ L’entraîneur pourra publier des actualités concernant son équipe.
 
 ## Gestion des blessures
 
-Un suivi des joueurs blessés sera disponible avec leur date de retour estimée.
-
 ## Gestion des joueurs
 
 L’entraîneur pourra :
@@ -214,13 +167,3 @@ Le calendrier regroupera :
 
 * Tous les matchs
 * Tous les entraînements
-
-## Match en direct
-
-Pendant le match, l’entraîneur pourra enregistrer :
-
-* Les buteurs
-* Les cartons jaunes
-* Les cartons rouges
-* Les remplacements
-* Les événements importants du match
