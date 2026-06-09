@@ -10,7 +10,9 @@
 ])
 
 <a href="{{ $url }}"
-   class="group block bg-gradient-to-br from-[#0f172a] to-[#020617]
+   class="group flex flex-col justify-between
+          min-h-[430px]
+          bg-gradient-to-br from-[#0f172a] to-[#020617]
           border border-white/10 rounded-3xl p-5 text-white
           transition-all duration-300
           hover:-translate-y-1
@@ -58,10 +60,11 @@
     <div class="mt-6 flex justify-center">
 
         <span
-            class="inline-flex items-center gap-2 font-semibold
-                   transition-all duration-300
-                   group-hover:translate-x-1
-                   text-{{ $color }}-400">
+            class="inline-flex items-center gap-2 whitespace-nowrap
+           font-semibold
+           transition-all duration-300
+           group-hover:translate-x-1
+           text-{{ $color }}-400">
 
             Voir les détails
 

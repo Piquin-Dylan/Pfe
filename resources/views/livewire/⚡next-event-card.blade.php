@@ -36,48 +36,62 @@ new class extends Component {
             title="Prochain match"
             color="blue">
 
-            <div class="mt-4 flex items-center justify-between gap-3">
+            <div class="flex-1 flex flex-col justify-center">
 
-                @php
-                    $team = Auth::user()->team ?? Auth::user()->player?->team;
+                <div class="mt-4 flex items-center justify-between gap-3">
 
-                    $logo = $team->logo === 'photos/logo_club.png'
-                        ? asset('photos/logo_club.png')
-                        : asset('storage/' . $team->logo);
+                    @php
+                        $team = Auth::user()->team ?? Auth::user()->player?->team;
 
-                    $photoAway = $game->photo_away === 'photos/logo_club.png'
-                        ? asset('photos/logo_club.png')
-                        : asset('storage/' . $game->photo_away);
-                @endphp
+                        $logo = $team->logo === 'photos/logo_club.png'
+                            ? asset('photos/logo_club.png')
+                            : asset('storage/' . $team->logo);
 
-                <div class="flex flex-col items-center flex-1">
-                    <img src="{{ $logo }}" alt="{{ $team->name }}"
-                         class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"/>
-                    <span class="mt-2 text-center font-semibold text-sm sm:text-base">
+                        $photoAway = $game->photo_away === 'photos/logo_club.png'
+                            ? asset('photos/logo_club.png')
+                            : asset('storage/' . $game->photo_away);
+                    @endphp
+
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-20 h-20 flex items-center justify-center">
+                            <img
+                                src="{{ $logo }}"
+                                alt="{{ $team->name }}"
+                                class="w-full h-full object-contain">
+                        </div>
+
+                        <span class="mt-2 text-center font-semibold text-sm sm:text-base">
                     {{ $team->name }}
                 </span>
-                </div>
+                    </div>
 
-                <span class="text-xl sm:text-3xl font-bold text-blue-400">VS</span>
+                    <span class="text-xl sm:text-3xl font-bold text-blue-400">
+                VS
+            </span>
 
-                <div class="flex flex-col items-center flex-1">
-                    <img
-                        src="{{ $photoAway }}"
-                        alt="{{ $game->name_away }}"
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"
-                    />
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-20 h-20 flex items-center justify-center">
+                            <img
+                                src="{{ $photoAway }}"
+                                alt="{{ $game->name_away }}"
+                                class="w-full h-full object-contain">
+                        </div>
 
-                    <span class="mt-2 text-center font-semibold text-sm sm:text-base">
+                        <span class="mt-2 text-center font-semibold text-sm sm:text-base">
                     {{ $game->name_away }}
                 </span>
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="mt-8 space-y-3 text-center">
+                    <p>{{ \Carbon\Carbon::parse($game->date_match)->format('d/m/Y') }}</p>
+                    <p>{{ $game->hours }}</p>
+                    <p class="text-gray-300 break-words">
+                        {{ $game->address }}
+                    </p>
+                </div>
 
-            <div class="mt-5 space-y-2 text-center">
-                <p>{{ \Carbon\Carbon::parse($game->date_match)->format('d/m/Y') }}</p>
-                <p>{{ $game->hours }}</p>
-                <p class="text-gray-300">{{ $game->address }}</p>
             </div>
 
         </x-admin.dashboard.event-card>

@@ -6,11 +6,10 @@
 
 <a
     href="{{ $href }}"
-    class="group block bg-gradient-to-br from-[#0f172a] to-[#020617]
-           border border-white/10 rounded-3xl p-5 text-white
-           transition-all duration-300 hover:-translate-y-1
-           hover:border-{{ $color }}-400/40"
->
+    class="group flex flex-col justify-between
+           h-full min-h-[250px]
+           bg-gradient-to-br from-[#0f172a] to-[#020617]
+           border border-white/10 rounded-3xl p-5 text-white">
 
     <span class="text-xs uppercase tracking-widest text-{{ $color }}-400">
         {{ $title }}
@@ -20,10 +19,11 @@
 
     <div class="mt-5 flex justify-center">
         <span
-            class="inline-flex items-center gap-2 text-{{ $color }}-400 font-semibold
-                   transition-all duration-300
-                   group-hover:text-{{ $color }}-300
-                   group-hover:translate-x-1">
+            class="inline-flex items-center gap-2 whitespace-nowrap
+       text-{{ $color }}-400 font-semibold
+       transition-all duration-300
+       group-hover:text-{{ $color }}-300
+       group-hover:translate-x-1">
 
             Voir les détails
 
