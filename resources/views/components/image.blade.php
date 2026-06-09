@@ -1,38 +1,28 @@
 @props([
     'path',
     'alt' => '',
-    'class' => '',
-    'sizes' => '(max-width: 768px) 50vw, 20vw',
+    'contain' => false,
 ])
 
 @php
-    $isSeeded = str_starts_with($path ?? '', 'photos/');
+    $url = str_starts_with($path, 'photos/')
+        ? asset($path)
+        : asset('storage/' . $path);
 @endphp
 
-@if($isSeeded)
-
-    <img
-        src="{{ asset($path) }}"
-        alt="{{ $alt }}"
-        class="{{ $class }}"
-        loading="lazy"
-        decoding="async"
-    >
-
-@else
-
-    <img
-        src="{{ Storage::url('pictures/originals/' . $path) }}"
-        srcset="
-            {{ Storage::url('pictures/variants/300x300/' . $path) }} 300w,
-            {{ Storage::url('pictures/variants/600x600/' . $path) }} 600w,
-            {{ Storage::url('pictures/variants/900x900/' . $path) }} 900w
-        "
-        sizes="{{ $sizes }}"
-        alt="{{ $alt }}"
-        class="{{ $class }}"
-        loading="lazy"
-        decoding="async"
-    >
-
-@endif
+<img
+    src="{{ $url }}"
+    srcset="
+        {{ $url }} 128w,
+        {{ $url }} 256w,
+        {{ $url }} 512w
+    "
+    sizes="(max-width: 640px) 128px, (max-width: 1024px) 256px, 512px"
+    alt="{{ $alt }}"
+    loading="lazy"
+    decoding="async"
+    {{ $attributes->class([
+        'object-cover' => !$contain,
+        'object-contain' => $contain,
+    ]) }}
+>
