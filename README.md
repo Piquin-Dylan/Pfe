@@ -328,3 +328,115 @@ Lucas reçoit une notification sur l'application. En l'ouvrant, il découvre qu'
 Depuis la page de la convocation, il peut indiquer s'il sera présent ou absent et ajouter un commentaire destiné à son entraîneur si nécessaire.
 
 Une fois sa réponse envoyée, il retrouve directement le match dans son tableau de bord avec toutes les informations importantes telles que l'heure et le lieu de la rencontre.
+
+# Procédure d'installation
+
+1. Cloner le projet :
+
+```bash
+git clone <url-du-projet>
+```
+
+2. Se placer dans le dossier du projet :
+
+```bash
+cd nom-du-projet
+```
+
+3. Installer les dépendances PHP :
+
+```bash
+composer install
+```
+
+4. Installer les dépendances JavaScript :
+
+```bash
+npm install
+```
+
+5. Copier le fichier d'environnement :
+
+```bash
+cp .env.example .env
+```
+
+6. Générer la clé de l'application :
+
+```bash
+php artisan key:generate
+```
+
+7. Créer la base de données et injecter les données de test :
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+8. Lancer le projet :
+
+```bash
+composer run dev
+```
+
+L'application est maintenant accessible depuis le navigateur à l'adresse indiquée dans le terminal.
+
+# Stack technique
+
+## Backend
+
+* **PHP 8.2**
+* **Laravel 12**
+* **Eloquent ORM**
+* **Laravel Notifications**
+* **Laravel Queues**
+
+## Frontend
+
+* **Blade**
+* **Livewire 4**
+* **Alpine.js**
+* **Tailwind CSS**
+* **Vite**
+
+## Base de données
+
+Mysql
+
+## Bibliothèques et packages
+
+### Gestion du calendrier
+
+* **act-training/livewire-calendar**
+
+Permet l'affichage et la gestion des événements dans le calendrier de l'application.
+
+### Génération de données de test
+
+* **FakerPHP**
+
+Utilisé pour générer des données fictives lors du développement et des tests.
+
+## Tests
+
+### Tests unitaires et fonctionnels
+
+* **Pest PHP**
+* **Pest Laravel Plugin**
+
+### Tests navigateur (Browser Testing)
+
+* **Pest Browser Plugin**
+* **Laravel Dusk**
+
+Permettent de tester les interactions utilisateur directement dans le navigateur.
+
+## Outils de développement
+
+* **Laravel Debugbar**
+
+## Gestion de version
+
+* **Git**
+* **GitHub**
+
