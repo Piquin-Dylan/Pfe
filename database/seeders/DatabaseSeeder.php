@@ -10,52 +10,82 @@ use App\Models\User;
 use App\Notifications\NewMatchNotification;
 use App\Notifications\NewTrainNotification;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $teams = collect();
+        for ($coachNumber = 1; $coachNumber <= 5; $coachNumber++) {
 
-        $coachUsers = User::factory()->count(2)->create();
+            $coach = User::create([
+                'firstName' => 'Coach',
+                'lastName' => $coachNumber,
+                'email' => "coach{$coachNumber}@test.com",
+                'password' => Hash::make('password'),
+                'image' => 'photos/person.png',
+            ]);
 
-        foreach ($coachUsers as $coachUser) {
             $team = Team::factory()->create([
-                'user_id' => $coachUser->id,
+                'user_id' => $coach->id,
             ]);
 
-            $teams->push($team);
-        }
+            $trains = Train::factory()
+                ->count(5)
+                ->create([
+                    'team_id' => $team->id,
+                    'user_id' => $coach->id,
+                ]);
 
-        foreach ($teams as $team) {
-            $train = Train::factory()->create([
-                'team_id' => $team->id,
-                'user_id' => $team->user_id,
-            ]);
+            $games = Game::factory()
+                ->count(5)
+                ->create([
+                    'team_id' => $team->id,
+                    'user_id' => $coach->id,
+                ]);
 
-            $game = Game::factory()->create([
-                'team_id' => $team->id,
-                'user_id' => $team->user_id,
-            ]);
+            for ($playerNumber = 1; $playerNumber <= 15; $playerNumber++) {
 
-            $playerUsers = User::factory()->count(18)->create();
+                $user = User::create([
+                    'firstName' => 'Joueur',
+                    'lastName' => $playerNumber,
+                    'email' => "coach{$coachNumber}_joueur{$playerNumber}@test.com",
+                    'password' => Hash::make('password'),
+                    'image' => 'photos/person.png',
+                ]);
 
-            foreach ($playerUsers as $playerUser) {
                 $player = Player::factory()->create([
-                    'user_id' => $playerUser->id,
+                    'user_id' => $user->id,
                     'team_id' => $team->id,
                 ]);
 
-                $player->trains()->attach($train->id, [
-                    'status' => 'en attente',
-                ]);
+                foreach ($trains as $train) {
+                    $player->trains()->attach($train->id, [
+                        'status' => fake()->randomElement([
+                            'present',
+                            'absent',
+                            'en attente',
+                        ]),
+                    ]);
+                }
 
-                $player->games()->attach($game->id, [
-                    'status' => 'present',
-                ]);
+                foreach ($games as $game) {
+                    $player->games()->attach($game->id, [
+                        'status' => fake()->randomElement([
+                            'present',
+                            'absent',
+                            'en attente',
+                        ]),
+                    ]);
+                }
 
-                $playerUser->notify(new NewTrainNotification($train));
-                $playerUser->notify(new NewMatchNotification($game));
+                $user->notify(
+                    new NewTrainNotification($trains->first())
+                );
+
+                $user->notify(
+                    new NewMatchNotification($games->first())
+                );
             }
         }
     }

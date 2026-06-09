@@ -73,28 +73,29 @@ new class extends Component {
 
     public function getPlayersProperty()
     {
-        $current_user = Auth::id();
+        $user = Auth::user();
 
-        return Player::where(function ($query) use ($current_user) {
+        return Player::where(function ($query) use ($user) {
 
-            $query->whereHas('team', function ($q) use ($current_user) {
-                $q->where('user_id', $current_user);
+            $query->whereHas('team', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
             });
 
-            if (Auth::user()->player) {
-                $teamId = Auth::user()->player->team->id;
-
-                $query->orWhere('team_id', $teamId);
-
+            if ($user->player) {
+                $query->orWhere('team_id', $user->player->team_id);
             }
 
         })
             ->when($this->searchPlayer, function ($query) {
-                $query->where('name', 'like', '%' . $this->searchPlayer . '%');
+                $query->where('firstName', 'like', '%' . $this->searchPlayer . '%');
             })
-            ->when($this->filters != "tout", function ($query) {
-                $query->where('players.position', '=', $this->filters);
+            ->when($this->filters !== 'tout', function ($query) {
+                $query->where('players.position', $this->filters);
             })
+            ->with([
+                'user',
+                'team',
+            ])
             ->get();
     }
 
@@ -167,7 +168,7 @@ new class extends Component {
 };
 ?>
 
-<div>
+<div class="max-w-7xl mx-auto">
 
     <h3 class="title_section " id="tuto">
         Match du

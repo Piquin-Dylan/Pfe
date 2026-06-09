@@ -104,7 +104,7 @@
                 </div>
 
                 <img
-                    src="{{ asset('pc.png') }}"
+                    src="{{ asset('pc.webp') }}"
                     alt="Présentation de l'application sur ordinateur"
                     class="relative z-20 w-full h-auto">
 

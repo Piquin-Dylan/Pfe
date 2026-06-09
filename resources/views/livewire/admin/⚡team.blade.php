@@ -33,37 +33,45 @@ new class extends Component {
     }
 
     //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
-    public function getPlayersProperty(): \Illuminate\Support\Collection
+    public function getPlayersProperty(): Collection
     {
-        $current_user = Auth::id();
+        $user = Auth::user();
 
+        return Player::where(function ($query) use ($user) {
 
-        return Player::where(function ($query) use ($current_user) {
-
-            $query->whereHas('team', function ($q) use ($current_user) {
-                $q->where('user_id', $current_user);
+            $query->whereHas('team', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
             });
 
-            if (Auth::user()->player) {
-                $teamId = Auth::user()->player->team->id;
-
-                $query->orWhere('team_id', $teamId);
+            if ($user->player) {
+                $query->orWhere('team_id', $user->player->team_id);
             }
         })
             ->when($this->searchPlayer, function ($query) {
-                $query->where('firstName', 'like', '%' . $this->searchPlayer . '%');
+                $query->where(
+                    'firstName',
+                    'like',
+                    '%' . $this->searchPlayer . '%'
+                );
             })
-            ->when($this->filters != 'tout', function ($query) {
-                $query->whereIn('players.position', $this->poste[$this->filters]);
+            ->when($this->filters !== 'tout', function ($query) {
+                $query->whereIn(
+                    'players.position',
+                    $this->poste[$this->filters]
+                );
             })
-            ->with('team:id,user_id', 'trains')
+            ->with([
+                'user',
+                'team:id,user_id',
+                'trains'
+            ])
             ->get();
     }
-
 };
 ?>
 
-<div class="grow">
+<div class="max-w-7xl mx-auto grow">
+
     <h2 class="title_section p-5">Mon équipe</h2>
 
     <div class="pr-5 pl-5">

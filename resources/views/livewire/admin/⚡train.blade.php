@@ -25,7 +25,7 @@ new class extends Component {
 };
 ?>
 
-<div>
+<div class="max-w-7xl mx-auto">
     <div class="w-full flex justify-center max-w-[250px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         @livewire('admin.create_train')
     </div>

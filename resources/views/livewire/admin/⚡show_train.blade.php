@@ -30,7 +30,7 @@ new class extends Component {
 };
 ?>
 
-<div>
+<div class="max-w-7xl mx-auto">
     <div class="mb-4 px-4">
         <h2 class="text-white text-lg font-semibold leading-tight">
             Joueurs présents

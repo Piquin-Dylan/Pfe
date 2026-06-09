@@ -26,7 +26,7 @@ new class extends Component {
     }
 };
 ?>
-
+<div class="max-w-7xl mx-auto">
 <div id="stats" class=" pb-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:pb-20">
 
     <x-admin.dashboard.stats_card
@@ -56,4 +56,5 @@ new class extends Component {
             Voir statistiques joueurs
         </a>
     </div>
+</div>
 </div>

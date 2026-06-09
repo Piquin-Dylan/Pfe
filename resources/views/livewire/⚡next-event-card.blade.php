@@ -26,6 +26,7 @@ new class extends Component {
     }
 };
 ?>
+<div class="max-w-7xl mx-auto">
 
 <div id="next-event" class=" pb-8 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pb-20">
 
@@ -110,4 +111,5 @@ new class extends Component {
             button-color="bg-green-500 hover:bg-green-600"/>
     @endif
 
+</div>
 </div>

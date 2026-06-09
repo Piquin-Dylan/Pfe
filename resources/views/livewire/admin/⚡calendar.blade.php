@@ -71,7 +71,8 @@ new class extends Component {
 };
 ?>
 
-<div>
+<div class="max-w-7xl mx-auto">
+
     <div class="flex flex-col flex-wrap gap-4 justify-center items-center sm:flex-row">
         <livewire:admin.create_event/>
         <livewire:admin.create_train/>
