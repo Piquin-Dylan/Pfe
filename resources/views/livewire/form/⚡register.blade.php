@@ -83,7 +83,6 @@ new class extends Component {
                 <x-form.input
                     label_name="Mot de passe"
                     for_label="password"
-                    placeholder=""
                     type="password"
                     id="password"
                     name="password"
