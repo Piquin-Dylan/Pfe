@@ -7,7 +7,7 @@
     <meta itemprop="operatingSystem" content="Web">
 
     <h2 class="sr-only">
-        Section présentation application
+        Présentation de l'application
     </h2>
 
     <div
@@ -19,11 +19,11 @@
             class="flex flex-col justify-center
                    text-center lg:text-left">
 
-            <span
+            <h3
                 itemprop="name"
                 class="title_section max-w-[650px]">
                 Gérez votre équipe de football simplement et efficacement
-            </span>
+            </h3>
 
             <p
                 itemprop="description"
@@ -41,14 +41,12 @@
 
                 <a
                     href="/profile"
-                    itemprop="url"
                     class="btn-primary">
                     Rejoindre une équipe
                 </a>
 
                 <a
                     href="/create"
-                    itemprop="url"
                     class="btn-secondary">
                     Créer une équipe
                 </a>
@@ -83,21 +81,24 @@
                        md:max-w-[620px]
                        lg:max-w-[760px]">
 
-                <div class="absolute overflow-hidden rounded-[2px] top-[8.4%] left-[15.9%] w-[67.8%] h-[63.8%] z-10">
+                <div
+                    class="absolute overflow-hidden rounded-[2px]
+                           top-[8.4%] left-[15.9%]
+                           w-[67.8%] h-[63.8%] z-10">
 
                     <template
                         x-for="(image,index) in images"
                         :key="index">
 
                         <img
+                            src="{{ asset('team.png') }}"
+                            :src="image"
                             x-show="current === index"
                             x-transition.opacity.duration.700ms
-                            :src="image"
                             class="absolute inset-0
                                    w-full h-full
                                    object-cover"
-                            alt="Capture d'écran de l'application"
-                            itemprop="screenshot">
+                            alt="Capture d'écran de l'application">
 
                     </template>
 
@@ -106,6 +107,7 @@
                 <img
                     src="{{ asset('pc.webp') }}"
                     alt="Présentation de l'application sur ordinateur"
+                    itemprop="screenshot"
                     class="relative z-20 w-full h-auto">
 
             </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @livewireStyles
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @livewireStyles
     <meta name="description"
           content="Application de gestion d'équipes sportives permettant la gestion des joueurs, entraînements, matchs et présences.">
     <meta name="author" content="Dylan Piquin">

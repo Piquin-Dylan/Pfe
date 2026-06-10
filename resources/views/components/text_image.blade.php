@@ -146,7 +146,11 @@
 
                     <div
                         class="w-20 h-20 mb-6 rounded-2xl bg-[var(--color-primary-medium)] border border-[var(--color-primary-border)] flex items-center justify-center">
-                        <img :src="features[activeFeature]?.icon" width="60" alt="">
+                        <img
+                            src="/public/team.png"
+                            :src="features[activeFeature]?.icon"
+                            width="60"
+                            alt="Appercu de la fonctionnalité dans le dashboard">
                     </div>
 
                     <span
@@ -162,16 +166,14 @@
                 </div>
 
                 <div class="flex justify-center">
-
-                    <div
-                        class="rounded-3xl border border-[var(--color-primary-border)] bg-[var(--color-primary-light)] p-4 w-full">
+                    <div class="rounded-3xl border border-[var(--color-primary-border)] bg-[var(--color-primary-light)] p-4 w-full">
 
                         <img
+                            src="/public/team.png"
                             :src="features[activeFeature]?.preview"
                             alt="Aperçu d'une fonctionnalité"
                             itemprop="image"
                             class="w-full max-h-[500px] object-contain rounded-2xl">
-
                     </div>
 
                 </div>
