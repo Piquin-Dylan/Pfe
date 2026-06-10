@@ -120,8 +120,17 @@
                                 </a>
 
                                 <button
-                                    @click="Livewire.dispatch('delete-event', { id: selectedEvent.id, type: selectedEvent.type })"
-                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-medium transition"
+                                    @click="
+        console.log('delete');
+        console.log(selectedEvent.id);
+        console.log(selectedEvent.type);
+
+        Livewire.dispatch('delete-event', {
+            id: selectedEvent.id,
+            type: selectedEvent.type
+        });
+    "
+                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500"
                                 >
                                     Supprimer l'événement
                                 </button>

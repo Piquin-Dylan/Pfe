@@ -34,6 +34,7 @@ new class extends Component {
         }
     }
 
+    #[On('delete-event')]
     public function deleteEvent($id, $type): void
     {
         if ($type === 'train') {
@@ -50,6 +51,7 @@ new class extends Component {
     #[On('date-selected')]
     public function dateSelected($date): void
     {
+        dd($id, $type);
         $this->selectedDate = $date;
         $this->showChoiceModal = true;
     }

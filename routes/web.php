@@ -21,7 +21,6 @@ Route::get('/logout', function () {
 })->name('hub');
 
 
-
 Route::get('/calendar/events', function () {
 
     $current_user = Auth::user();
@@ -45,6 +44,7 @@ Route::get('/calendar/events', function () {
             'address' => $game->address,
             'hours' => $game->hours,
             'id' => $game->id,
+            'type' => 'game',
         ];
     });
 
@@ -57,6 +57,7 @@ Route::get('/calendar/events', function () {
             'hours_start' => $train->hours_start,
             'hours_end' => $train->hours_end,
             'id' => $train->id,
+            'type' => 'train',
         ];
     });
 

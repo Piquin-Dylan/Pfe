@@ -46,7 +46,7 @@ new class extends Component {
 };
 ?>
 
-<section>
+<section class="pt-20 lg:pt-8">
     <h2 class="sr-only">Formulaire - Compléter votre profile</h2>
 
     <x-layout_forms

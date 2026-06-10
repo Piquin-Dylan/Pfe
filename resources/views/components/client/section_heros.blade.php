@@ -1,6 +1,7 @@
 <section
-    class="px-4 py-12 lg:pb-20 pt-40 overflow-hidden lg:px-8">
-
+    class="px-4 pt-28 pb-12 overflow-hidden
+           sm:pt-32
+           lg:pt-40 lg:pb-20 lg:px-8">
 
     <h2 class="sr-only">
         Présentation de l'application
@@ -9,14 +10,15 @@
     <div
         class="max-w-7xl mx-auto
                grid grid-cols-1 lg:grid-cols-2
-               items-center gap-14 lg:gap-20">
+               items-center gap-12 lg:gap-20">
 
         <div
             class="flex flex-col justify-center
-                   text-center lg:text-left">
+                   text-center lg:text-left
+                   order-2 lg:order-1">
 
             <h3
-                class="title_section max-w-[650px]">
+                class="title_section max-w-[650px] mx-auto lg:mx-0">
                 Gérez votre équipe de football simplement et efficacement
             </h3>
 
@@ -31,17 +33,17 @@
             <div
                 class="flex flex-col sm:flex-row
                        justify-center lg:justify-start
-                       items-center gap-5 mt-10">
+                       items-center gap-4 sm:gap-5 mt-8 lg:mt-10">
 
                 <a
                     href="/profile"
-                    class="btn-primary">
+                    class="btn-primary w-full sm:w-auto">
                     Rejoindre une équipe
                 </a>
 
                 <a
                     href="/create"
-                    class="btn-secondary">
+                    class="btn-secondary w-full sm:w-auto">
                     Créer une équipe
                 </a>
 
@@ -49,7 +51,9 @@
 
         </div>
 
-        <div class="flex justify-center w-full">
+        <div
+            class="flex justify-center w-full
+                   order-1 lg:order-2">
 
             <div
                 x-data="{
@@ -71,7 +75,7 @@
                 }"
                 class="relative w-full
                        max-w-[320px]
-                       sm:max-w-[500px]
+                       sm:max-w-[480px]
                        md:max-w-[620px]
                        lg:max-w-[760px]">
 

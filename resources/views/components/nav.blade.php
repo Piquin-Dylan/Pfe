@@ -8,7 +8,7 @@
         </a>
 
         <button
-            class="relative z-50 sm:hidden text-white"
+            class="relative z-50 text-white lg:hidden"
             @click="open = !open">
 
             <svg x-show="!open"
@@ -25,6 +25,7 @@
             </svg>
 
             <svg x-show="open"
+                 x-cloak
                  xmlns="http://www.w3.org/2000/svg"
                  fill="none"
                  viewBox="0 0 24 24"
@@ -40,17 +41,24 @@
         </button>
 
         <ul
-            :class="{ 'hidden lg:flex': !open, 'flex': open }"
-            class="fixed inset-0 z-40 bg-[#192443] text-white
-           items-center justify-center
-           lg:static lg:bg-transparent lg:justify-end lg:flex-1
-           flex-col lg:flex-row
-           gap-4 xl:gap-6
-           font-semibold text-2xl lg:text-xl
-           whitespace-nowrap">
+            :class="{ 'hidden': !open, 'flex': open }"
+            class="hidden
+                   fixed inset-0 z-40 bg-[#192443] text-white
+                   items-center justify-center
+                   flex-col
+                   gap-4
+                   font-semibold text-2xl
+
+                   lg:flex lg:static lg:bg-transparent
+                   lg:flex-row lg:justify-end lg:flex-1
+                   lg:text-xl
+
+                   xl:gap-6
+                   whitespace-nowrap">
 
             <li>
                 <a href="{{ route('accueil') }}"
+                   @click="open = false"
                    title="Retourner à la page d'accueil"
                    class="{{ request()->routeIs('accueil') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                     Accueil
@@ -59,6 +67,7 @@
 
             <li>
                 <a href="#form-contact"
+                   @click="open = false"
                    title="Accéder au formulaire de contact"
                    class="{{ request()->routeIs('contact') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                     Contact
@@ -68,6 +77,7 @@
             @guest
                 <li>
                     <a href="{{ route('register') }}"
+                       @click="open = false"
                        title="Créer un nouveau compte"
                        class="{{ request()->routeIs('register') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Inscription
@@ -76,6 +86,7 @@
 
                 <li>
                     <a href="{{ route('login') }}"
+                       @click="open = false"
                        title="Se connecter à son compte"
                        class="{{ request()->routeIs('login') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Connexion
@@ -86,6 +97,7 @@
             @auth
                 <li>
                     <a href="{{ route('hub') }}"
+                       @click="open = false"
                        title="Accéder à l'espace équipe"
                        class="{{ request()->routeIs('hub') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                         Espace équipe
@@ -95,6 +107,7 @@
 
             <li>
                 <a href="{{ route('create') }}"
+                   @click="open = false"
                    title="Créer une nouvelle équipe"
                    class="{{ request()->routeIs('create') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                     Créer une équipe
@@ -103,6 +116,7 @@
 
             <li>
                 <a href="{{ route('profile') }}"
+                   @click="open = false"
                    title="Rejoindre une équipe existante"
                    class="{{ request()->routeIs('profile') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                     Rejoindre une équipe

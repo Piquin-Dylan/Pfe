@@ -65,7 +65,7 @@ new class extends Component {
     @else
         @foreach($games as $game)
 
-            <h2 id="address" class="title_section px-4 text-center break-words lg:text-left">
+            <h2 id="address" class="title_section px-4 pt-6 lg:pt-10 text-center break-words lg:text-left">
                 Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F Y') }}
                 : {{ $game->address }}
             </h2>

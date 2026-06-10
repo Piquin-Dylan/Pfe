@@ -123,13 +123,14 @@ new class extends Component {
                             @enderror
                         </div>
                     </div>
-                    <div class="flex flex-col-reverse sm:flex-row justify-end gap-3">
+                    <div class="flex flex-col-reverse sm:flex-row justify-center lg:justify-end items-center gap-3">
                         <button
                             type="button"
                             @click="openModal = false"
                             class="btn-secondary w-full sm:w-auto">
                             Annuler
                         </button>
+
                         <button
                             type="submit"
                             class="btn-primary w-full sm:w-auto">

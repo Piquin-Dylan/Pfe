@@ -91,7 +91,7 @@ new class extends Component {
                     </span>
                 </div>
 
-                <div class="text-lg lg:text-xl font-semibold tracking-wide pr-24">
+                <div class="text-lg lg:text-xl font-semibold tracking-wide lg:pr-24">
                     {{ $notification->data['message'] ?? '' }}
                 </div>
 
