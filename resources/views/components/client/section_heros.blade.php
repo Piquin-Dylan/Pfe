@@ -1,10 +1,6 @@
 <section
-    itemscope
-    itemtype="https://schema.org/SoftwareApplication"
     class="px-4 py-12 lg:pb-20 pt-40 overflow-hidden lg:px-8">
 
-    <meta itemprop="applicationCategory" content="SportsApplication">
-    <meta itemprop="operatingSystem" content="Web">
 
     <h2 class="sr-only">
         Présentation de l'application
@@ -20,13 +16,11 @@
                    text-center lg:text-left">
 
             <h3
-                itemprop="name"
                 class="title_section max-w-[650px]">
                 Gérez votre équipe de football simplement et efficacement
             </h3>
 
             <p
-                itemprop="description"
                 class="subtitle_section mt-6 max-w-[620px]
                        mx-auto lg:mx-0">
                 Une application dédiée aux entraîneurs et aux joueurs pour améliorer la
@@ -107,7 +101,6 @@
                 <img
                     src="{{ asset('pc.webp') }}"
                     alt="Présentation de l'application sur ordinateur"
-                    itemprop="screenshot"
                     class="relative z-20 w-full h-auto">
 
             </div>
