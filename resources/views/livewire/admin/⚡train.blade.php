@@ -25,7 +25,8 @@ new class extends Component {
 };
 ?>
 
-<div class="max-w-7xl mx-auto">
+<section class="max-w-7xl mx-auto">
+    <h2 class="sr-only">Entrainements</h2>
     <div class="w-full flex justify-center max-w-[250px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         @livewire('admin.create_train')
     </div>
@@ -43,9 +44,10 @@ new class extends Component {
                 <a href="/calendrier" class="btn-primary">Créer mon premier entrainement</a>
             </div>
         @else
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 px-4 sm:px-6">
+            <article class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 px-4 sm:px-6">
 
                 @foreach($trains as $train)
+                    <h3 class="sr-only">Entrainement du : {{$train->date_train}}</h3>
                     <a
                         href="/train/{{ $train->id }}"
                         class="group w-full overflow-hidden bg-gradient-to-br from-[#0f172a] to-[#020617]
@@ -119,7 +121,7 @@ new class extends Component {
 
                     </a>
                 @endforeach
-            </div>
+            </article>
         @endif
     </div>
-</div>
+</section>

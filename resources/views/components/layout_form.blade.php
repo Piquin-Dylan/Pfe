@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @livewireStyles
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @livewireStyles
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -1468,20 +1468,23 @@
         </style>
     @endif
 </head>
-<body class="bg-[var(--color-mint-500)] overflow-hidden">
-<h1 class="hidden">Pfe - SportTeams</h1>
-<header>
-    <body x-data="{ open: false }" :class="{ 'overflow-hidden': open }">
-    <h1 class="hidden">Pfe - SportTeams</h1>
-    <body x-data="{ open: false }" class="bg-[#0F172A] text-white">
-
+<body
+    x-data="{ open: false }"
+    :class="{ 'overflow-hidden': open }"
+    class="bg-[#0F172A] text-white">
+    <h1 class="sr-only">Pfe - SportTeams</h1>
     <div class="flex min-h-screen">
 
         <aside
             :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
             class="fixed top-0 left-0 h-full w-64 bg-[#192443] z-40 transform transition duration-300 lg:translate-x-0">
-
+            <h2 class="sr-only">
+                Navigation principale
+            </h2>
             <nav class="h-full flex flex-col items-center justify-center ">
+                <h3 class="sr-only">
+                    Menu de navigation
+                </h3>
                 <ul class="flex flex-col gap-6 text-2xl font-semibold text-white w-full px-6">
 
                     <li>
@@ -1529,29 +1532,30 @@
                             : asset('storage/' . Auth::user()->image);
                     @endphp
 
-                    <a id="settings" class="flex justify-center" href="{{ route('settings') }}">
-                        <img
-                            src="{{ $image }}"
-                            alt="Photo de profil"
-                            class="w-28 h-28 rounded-full object-cover border-2 border-white/20 hover:border-purple-400 transition"
-                        >
-                    </a>
+                    <li class="flex justify-center">
+                        <a id="settings" href="{{ route('settings') }}">
+                            <img
+                                src="{{ $image }}"
+                                alt="Photo de profil"
+                                class="w-28 h-28 rounded-full object-cover border-2 border-white/20 hover:border-purple-400 transition">
+                        </a>
+                    </li>
 
 
-                    @livewire('admin.dashboard')
-
+                    <li>
+                        @livewire('admin.dashboard')
+                    </li>
                 </ul>
             </nav>
         </aside>
         <div
             x-show="open"
             @click="open = false"
-            class="fixed inset-0  z-30 lg:hidden"
-        ></div>
+            class="fixed inset-0  z-30 lg:hidden"></div>
 
         <div class="flex-1 flex flex-col lg:ml-64">
 
-            <header class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
+            <div class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
 
                 <button class="relative z-50 lg:hidden shrink-0 text-white" @click="open = !open">
                     <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
@@ -1637,7 +1641,7 @@
 
                 </div>
 
-            </header>
+            </div>
 
             <main class="flex-1 p-3 sm:p-6 overflow-y-auto">
                 {{ $slot }}
@@ -1646,8 +1650,6 @@
         </div>
     </div>
 
-    </body>
     @livewireScripts
-</header>
 </body>
 </html>

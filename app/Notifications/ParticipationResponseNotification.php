@@ -44,8 +44,8 @@ class ParticipationResponseNotification extends Notification
     public function toArray(object $notifiable): array
     {
         $date = $this->type === 'match'
-            ? $this->event->date_match
-            : $this->event->date_train;
+            ? \Carbon\Carbon::parse($this->event->date_match)->format('d/m/Y')
+            : \Carbon\Carbon::parse($this->event->date_train)->format('d/m/Y');
 
         return [
             'type' => $this->type,

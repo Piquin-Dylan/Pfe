@@ -73,14 +73,32 @@ new class extends Component {
 
 <div class="max-w-7xl mx-auto">
 
-    <div class="flex flex-col flex-wrap gap-4 justify-center items-center sm:flex-row">
-        <livewire:admin.create_event/>
-        <livewire:admin.create_train/>
-    </div>
+    <section
+        aria-labelledby="calendar-title"
+        class="pb-8 lg:pb-20">
 
-    <div wire:ignore>
-        <x-calendar-test/>
-    </div>
+        <div class="mb-8">
+            <h2
+                id="calendar-title"
+                class="text-2xl font-bold text-white">
+                Calendrier de l'équipe
+            </h2>
+
+            <p class="text-gray-400 mt-1">
+                Consultez et gérez les matchs ainsi que les entraînements de votre équipe.
+            </p>
+        </div>
+
+        <div class="flex flex-col flex-wrap gap-4 justify-center items-center sm:flex-row">
+            <livewire:admin.create_event/>
+            <livewire:admin.create_train/>
+        </div>
+
+        <div wire:ignore class="mt-6">
+            <x-calendar-test/>
+        </div>
+
+    </section>
 
     @if($showChoiceModal)
         <div
@@ -88,11 +106,13 @@ new class extends Component {
             x-on:keydown.escape.window="$wire.set('showChoiceModal', false)"
             wire:click.self="$set('showChoiceModal', false)"
             class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+
             <div
                 class="w-full max-w-lg rounded-[24px]
-                   border border-slate-700/50
-                   bg-gradient-to-br from-[#0f172a] via-[#0b1735] to-[#020617]
-                   shadow-2xl p-8">
+                       border border-slate-700/50
+                       bg-gradient-to-br from-[#0f172a] via-[#0b1735] to-[#020617]
+                       shadow-2xl p-8">
+
                 <x-calendrier.modal-header
                     title="Créer un événement"
                     :subtitle="\Carbon\Carbon::parse($selectedDate)->format('d/m/Y')"
@@ -106,6 +126,7 @@ new class extends Component {
                         title="Match"
                         description="Organiser une rencontre sportive"
                         color="blue"/>
+
                     <x-calendrier.event-choice-card
                         action="createTrain"
                         icon="🏃"
@@ -114,8 +135,12 @@ new class extends Component {
                         color="green"/>
 
                 </div>
+
             </div>
+
         </div>
     @endif
+
     <x-dialog_modal/>
+
 </div>

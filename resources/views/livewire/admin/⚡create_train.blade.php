@@ -43,10 +43,10 @@ new class extends Component {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <x-form.input
                             label_name="Date"
-                            for_label="date"
+                            for_label="training_date"
                             placeholder="Choisissez une date"
                             type="date"
-                            id="date"
+                            id="training_date"
                             name="date"
                             wire:model.live="form.date">
                             <div>

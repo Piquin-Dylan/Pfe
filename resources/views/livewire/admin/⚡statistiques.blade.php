@@ -52,9 +52,9 @@ new class extends Component {
 <div class="space-y-4">
 
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-white">
+        <h2 class="text-2xl font-bold text-white">
             Statistiques des joueurs
-        </h1>
+        </h2>
 
         <p class="text-gray-400 mt-1">
             Consultez les statistiques de l'ensemble des joueurs de votre équipe.

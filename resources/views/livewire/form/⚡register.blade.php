@@ -68,7 +68,6 @@ new class extends Component {
                 <x-form.input
                     label_name="Adresse email"
                     for_label="email"
-                    placeholder="jean.dupont@gmail.com"
                     type="email"
                     id="email"
                     name="email"

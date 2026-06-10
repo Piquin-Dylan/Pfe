@@ -15,17 +15,17 @@
                 </span>
             </div>
 
-            <div class="flex-1 min-w-0">
+            <article class="flex-1 min-w-0">
 
-                <h2 class="text-white font-semibold truncate">
+                <h3 class="text-white font-semibold truncate">
                     {{ $player->firstName }} {{ $player->name }}
-                </h2>
+                </h3>
 
                 <p class="text-purple-400 text-sm">
                     {{ $player->position }}
                 </p>
 
-            </div>
+            </article>
 
         </div>
 

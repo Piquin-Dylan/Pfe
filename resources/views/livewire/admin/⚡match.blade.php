@@ -70,8 +70,9 @@ new class extends Component {
                 : {{ $game->address }}
             </h2>
 
-            <div id="affiche" class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 md:gap-8 pt-4 pb-8">
+            <article id="affiche" class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 md:gap-8 pt-4 pb-8">
 
+                <h3 class="sr-only">Détail du match</h3>
                 <div class="flex flex-col items-center text-center min-w-0">
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
@@ -134,7 +135,7 @@ new class extends Component {
                 {{ $game->name_away }}</span>
                 </div>
 
-            </div>
+            </article>
 
             <div x-data="{openScoreModal: false,
        showToast: false

@@ -40,6 +40,10 @@ class NewMatchConvocation extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        $date = \Carbon\Carbon::parse(
+            $this->match->date_match
+        )->format('d/m/Y');
+
         return [
             'type' => 'convocation_match',
             'match_id' => $this->match->id,
@@ -48,6 +52,7 @@ class NewMatchConvocation extends Notification
             'hours' => $this->match->hours,
             'name_home' => $this->match->name_home,
             'name_away' => $this->match->name_away,
-            'message' => "Vous avez été sélectionner pour le match du  {$this->match->date_match} à {$this->match->hours}"];
+            'message' => "Vous avez été sélectionné pour le match du {$date} à {$this->match->hours}",
+        ];
     }
 }

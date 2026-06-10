@@ -52,10 +52,10 @@ new class extends Component {
 
                         <x-form.input
                             label_name="Date"
-                            for_label="date"
-                            placeholder="Choissisez une date"
+                            for_label="match_date"
+                            placeholder="Choisissez une date"
                             type="date"
-                            id="date"
+                            id="match_date"
                             name="date"
                             wire:model="form.date">
 
