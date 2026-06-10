@@ -1,4 +1,4 @@
-<x-client.array-feature
+<x-client.array-feature>
 
 <div x-cloak>
     <x-client.feature-tabs/>
