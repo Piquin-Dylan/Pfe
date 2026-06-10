@@ -88,12 +88,12 @@ new class extends Component {
                     class="w-24 h-24 rounded-full object-cover">
             </div>
         @endif
-
-        <button
-            type="submit"
-            class="w-full text-white btn-primary">
-            Modifier
-        </button>
-
+        <div class="flex justify-center">
+            <button
+                type="submit"
+                class="w-full text-white btn-primary">
+                Modifier
+            </button>
+        </div>
     </form>
 </div>

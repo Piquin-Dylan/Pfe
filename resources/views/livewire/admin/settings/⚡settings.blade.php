@@ -12,7 +12,7 @@ new class extends Component {
     }
 };
 ?>
-<div class="border-b border-white/10">
+<div>
     <nav class="flex gap-8">
 
         <button
