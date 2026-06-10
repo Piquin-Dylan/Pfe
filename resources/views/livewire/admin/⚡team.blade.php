@@ -76,7 +76,7 @@ new class extends Component {
 
     <div class="pr-5 pl-5">
         <input
-            class="bg-white p-4 rounded-2xl w-full"
+            class="bg-white p-4 text-black rounded-2xl w-full"
             wire:model.live.debounce="searchPlayer"
             placeholder="Rechercher un joueur"
         >
