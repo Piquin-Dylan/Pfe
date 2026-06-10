@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'BU',
         ];
 
-        for ($coachNumber = 1; $coachNumber <= 15; $coachNumber++) {
+        for ($coachNumber = 1; $coachNumber <= 25; $coachNumber++) {
 
             $coach = User::create([
                 'firstName' => 'Coach',
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 $user = User::create([
                     'firstName' => $firstName,
                     'lastName' => $lastName,
-                    'email' => fake()->unique()->safeEmail(),
+                    'email' => "joueur" . ($index + 1) . "_team{$coachNumber}@test.com",
                     'password' => Hash::make('password'),
                     'image' => 'photos/person.png',
                 ]);
@@ -70,6 +70,7 @@ class DatabaseSeeder extends Seeder
 
                 $players->push($player);
             }
+            $playerNumber = 11;
 
             while ($players->count() < 20) {
 
@@ -79,7 +80,7 @@ class DatabaseSeeder extends Seeder
                 $user = User::create([
                     'firstName' => $firstName,
                     'lastName' => $lastName,
-                    'email' => fake()->unique()->safeEmail(),
+                    'email' => "joueur{$playerNumber}_team{$coachNumber}@test.com",
                     'password' => Hash::make('password'),
                     'image' => 'photos/person.png',
                 ]);
@@ -94,6 +95,7 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 $players->push($player);
+                $playerNumber++;
             }
 
             $trains = Train::factory()
