@@ -162,7 +162,7 @@ new class extends Component {
                     :away-logo="$game->photo_away"
                     :away-name="$game->name_away">
                     <input wire:model="score_home" type="number" min="0"
-                           class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
+                           class=" text-black h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
                     <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white">-</span>
 
                     <input
