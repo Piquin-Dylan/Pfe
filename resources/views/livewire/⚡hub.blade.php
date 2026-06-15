@@ -85,7 +85,7 @@ new class extends Component {
 
                         <div class="flex items-center gap-4">
                             @php
-                                $logo = str_starts_with($team->logo, 'photos/')
+                                $logo = file_exists(public_path($team->logo))
                                     ? asset($team->logo)
                                     : asset('storage/' . $team->logo);
                             @endphp
@@ -93,9 +93,7 @@ new class extends Component {
                             <img
                                 src="{{ $logo }}"
                                 alt="Logo de {{ $team->name }}"
-                                class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                            >
-
+                                class="w-full max-w-24 min-w-32 h-32 object-contain ">
                             <span class="text-white text-2xl font-semibold tracking-wide">
                                     {{ $team->name }}
                                 </span>
