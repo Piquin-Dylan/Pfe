@@ -84,12 +84,17 @@ new class extends Component {
                             max-w-[500px]">
 
                         <div class="flex items-center gap-4">
-                            <x-image
-                                :path="$team->logo"
-                                :alt="'Logo de ' . $team->name"
-                                contain
-                                class="w-full max-w-24 min-w-32 h-32 drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                            />
+                            @php
+                                $logo = str_starts_with($team->logo, 'photos/')
+                                    ? asset($team->logo)
+                                    : asset('storage/' . $team->logo);
+                            @endphp
+
+                            <img
+                                src="{{ $logo }}"
+                                alt="Logo de {{ $team->name }}"
+                                class="w-full max-w-24 min-w-32 h-32 object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                            >
 
                             <span class="text-white text-2xl font-semibold tracking-wide">
                                     {{ $team->name }}
