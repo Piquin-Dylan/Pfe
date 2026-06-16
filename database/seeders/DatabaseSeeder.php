@@ -30,6 +30,28 @@ class DatabaseSeeder extends Seeder
             'AG',
             'BU',
         ];
+        $photos = [
+            'photos/hazard.webp',
+            'photos/lukaku.jpg',
+            'photos/raskin.png',
+            'photos/kdb.png',
+            'photos/ngoy.jpg',
+            'photos/theate.jpg',
+            'photos/meunier.jpg',
+            'photos/theate.jpg',
+            'photos/courtois.jpg',
+            'photos/tros.jpg',
+            'photos/cast.jpg',
+            'photos/wit.jpg',
+            'photos/onana.jpg',
+            'photos/van.jpg',
+            'photos/mechele.jpg',
+            'photos/tiel.jpg',
+            'photos/seys.jpg',
+            'photos/dec.jpg',
+            'photos/de.jpg',
+            'photos/onana.jpg',
+        ];
 
         for ($coachNumber = 1; $coachNumber <= 25; $coachNumber++) {
 
@@ -46,6 +68,8 @@ class DatabaseSeeder extends Seeder
             ]);
 
             $players = collect();
+            $teamPhotos = collect($photos)->shuffle()->values();
+            $photoIndex = 0;
             foreach ($positions as $index => $position) {
 
                 $firstName = fake()->firstName();
@@ -56,7 +80,7 @@ class DatabaseSeeder extends Seeder
                     'lastName' => $lastName,
                     'email' => "joueur" . ($index + 1) . "_team{$coachNumber}@test.com",
                     'password' => Hash::make('password'),
-                    'image' => 'photos/person.png',
+                    'image' => $teamPhotos[$photoIndex++],
                 ]);
 
                 $player = Player::create([
@@ -82,7 +106,7 @@ class DatabaseSeeder extends Seeder
                     'lastName' => $lastName,
                     'email' => "joueur{$playerNumber}_team{$coachNumber}@test.com",
                     'password' => Hash::make('password'),
-                    'image' => 'photos/person.png',
+                    'image' => $teamPhotos[$photoIndex++],
                 ]);
 
                 $player = Player::create([

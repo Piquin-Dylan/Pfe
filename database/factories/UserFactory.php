@@ -21,7 +21,28 @@ class UserFactory extends Factory
             'email' => $faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
 
-            'image' => 'photos/person.png',
+            'image' => $faker->unique()->randomElement([
+                'photos/hazard.webp',
+                'photos/lukaku.jpg',
+                'photos/raskin.png',
+                'photos/kdb.png',
+                'photos/ngoy.jpg',
+                'photos/theate.jpg',
+                'photos/meunier.jpg',
+                'photos/theate.jpg',
+                'photos/courtois.jpg',
+                'photos/tros.jpg',
+                'photos/cast.jpg',
+                'photos/wit.jpg',
+                'photos/onana.jpg',
+                'photos/van.jpg',
+                'photos/mechele.jpg',
+                'photos/tiel.jpg',
+                'photos/seys.jpg',
+                'photos/dec.jpg',
+                'photos/de.jpg',
+                'photos/onana.jpg',
+            ]),
         ];
     }
 }
