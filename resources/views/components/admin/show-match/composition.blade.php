@@ -94,9 +94,9 @@
                                     class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                     <div class="flex items-center gap-3">
                                         @php
-                                            $image = $player->user->image === 'photos/person.png'
+                                            $image = str_starts_with($player->user->image, 'photos/')
                                                 ? asset($player->user->image)
-                                                : asset('storage/' . $player->user->image);
+                                                : Storage::url($player->user->image);
                                         @endphp
 
                                         <img
@@ -121,9 +121,9 @@
                                     class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                     <div class="flex items-center gap-3">
                                         @php
-                                            $image = $player->user->image === 'photos/person.png'
+                                            $image = str_starts_with($player->user->image, 'photos/')
                                                 ? asset($player->user->image)
-                                                : asset('storage/' . $player->user->image);
+                                                : Storage::url($player->user->image);
                                         @endphp
 
                                         <img
@@ -161,9 +161,9 @@
                                     class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                     <div class="flex items-center gap-3">
                                         @php
-                                            $image = $player->user->image === 'photos/person.png'
+                                            $image = str_starts_with($player->user->image, 'photos/')
                                                 ? asset($player->user->image)
-                                                : asset('storage/' . $player->user->image);
+                                                : Storage::url($player->user->image);
                                         @endphp
 
                                         <img
@@ -190,9 +190,9 @@
                                     <div class="flex items-center gap-3">
 
                                         @php
-                                            $image = $player->user->image === 'photos/person.png'
+                                            $image = str_starts_with($player->user->image, 'photos/')
                                                 ? asset($player->user->image)
-                                                : asset('storage/' . $player->user->image);
+                                                : Storage::url($player->user->image);
                                         @endphp
 
                                         <img
@@ -282,9 +282,9 @@
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                         <div class="flex items-center gap-3">
                                             @php
-                                                $image = $player->user->image === 'photos/person.png'
+                                                $image = str_starts_with($player->user->image, 'photos/')
                                                     ? asset($player->user->image)
-                                                    : asset('storage/' . $player->user->image);
+                                                    : Storage::url($player->user->image);
                                             @endphp
 
                                             <img
@@ -322,9 +322,9 @@
                                         class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                         <div class="flex items-center gap-3">
                                             @php
-                                                $image = $player->user->image === 'photos/person.png'
+                                                $image = str_starts_with($player->user->image, 'photos/')
                                                     ? asset($player->user->image)
-                                                    : asset('storage/' . $player->user->image);
+                                                    : Storage::url($player->user->image);
                                             @endphp
 
                                             <img
@@ -349,9 +349,9 @@
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                         <div class="flex items-center gap-3">
                                             @php
-                                                $image = $player->user->image === 'photos/person.png'
+                                                $image = str_starts_with($player->user->image, 'photos/')
                                                     ? asset($player->user->image)
-                                                    : asset('storage/' . $player->user->image);
+                                                    : Storage::url($player->user->image);
                                             @endphp
 
                                             <img

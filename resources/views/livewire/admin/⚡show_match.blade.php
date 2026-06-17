@@ -386,9 +386,9 @@ new class extends Component {
                                 class="absolute z-30 text-white font-bold text-xl left-2 top-80">{{ $player->position }}</span>
 
                             @php
-                                $image = $player->user->image === 'photos/person.png'
+                                $image = str_starts_with($player->user->image, 'photos/')
                                     ? asset($player->user->image)
-                                    : asset('storage/' . $player->user->image);
+                                    : Storage::url($player->user->image);
                             @endphp
 
                             <img
