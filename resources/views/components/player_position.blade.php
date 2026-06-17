@@ -6,23 +6,12 @@
     'image' => null,
 ])
 
-@php
-    $imageUrl = null;
-
-    if ($image) {
-        $imageUrl = $image === 'photos/person.png'
-            ? asset($image)
-            : asset('storage/' . $image);
-    }
-@endphp
-
 <div
     class="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-    style="left: {{ $x }}%; top: {{ $y }}%;"
->
+    style="left: {{ $x }}%; top: {{ $y }}%;">
     @if($image)
         <img
-            src="{{ $imageUrl }}"
+            src="{{ $image }}"
             alt="{{ $poste }}"
             class="w-14 h-14 rounded-full object-cover shadow-lg transition-all duration-200 border-2"
             :class="selectedPlayer === '{{ $activePoste }}'

@@ -27,10 +27,13 @@
 
                                 $selectedPlayerData = $this->games->players->firstWhere('id', $playerId);
 
-                                if ($selectedPlayerData) {
-                                    $displayName = $selectedPlayerData->firstName;
-                                    $displayImage = $selectedPlayerData->user->image ?? null;
-                                }
+                               if ($selectedPlayerData) {
+    $displayName = $selectedPlayerData->firstName;
+
+    $displayImage = str_starts_with($selectedPlayerData->user->image, 'photos/')
+        ? asset($selectedPlayerData->user->image)
+        : Storage::url($selectedPlayerData->user->image);
+}
                             }
                         @endphp
 
