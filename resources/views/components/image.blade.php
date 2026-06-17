@@ -5,9 +5,7 @@
 ])
 
 @php
-    $url = str_starts_with($path, 'photos/')
-        ? asset($path)
-        : asset('storage/' . $path);
+    $url = asset('storage/' . $path);
 @endphp
 
 <img
