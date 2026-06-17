@@ -121,10 +121,16 @@ new class extends Component {
             {{ $player->position }}
         </span>
 
-                    <x-image
-                        :path="$player->user->image"
-                        :alt="$player->firstName"
-                        class="absolute z-20 inset-0 w-full h-full"
+                    @php
+                        $image = str_starts_with($player->user->image, 'photos/')
+                            ? asset($player->user->image)
+                            : asset('storage/' . $player->user->image);
+                    @endphp
+
+                    <img
+                        src="{{ $image }}"
+                        alt="{{ $player->firstName }}"
+                        class="absolute z-20 inset-0 w-full h-full object-cover"
                         style="clip-path: polygon(
         13% 15%,
         52% 15%,
@@ -138,7 +144,6 @@ new class extends Component {
         13% 84%
     );"
                     />
-
                     <div
                         class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
                         {{ $player->maillot }}
