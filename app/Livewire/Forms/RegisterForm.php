@@ -49,7 +49,7 @@ class RegisterForm extends Form
 
         if ($this->image) {
 
-            $photo = $this->image->store('photos', 'public');
+            $photo = $this->image->store('uploads', 'public');
 
         }
 
