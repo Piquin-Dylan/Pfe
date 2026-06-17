@@ -5,7 +5,9 @@
 ])
 
 @php
-    $url = asset('storage/' . $path);
+    $url = $path === 'photos/person.png'
+        ? asset($path)
+        : asset('storage/' . $path);
 @endphp
 
 <img
