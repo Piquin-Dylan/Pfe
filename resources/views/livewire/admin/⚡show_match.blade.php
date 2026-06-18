@@ -114,6 +114,7 @@ new class extends Component {
 
     public function assignPlayerToPosition($poste, $idPlayer)
     {
+
         $alreadyAssigned = collect($this->player_position)
             ->contains($idPlayer);
 
@@ -484,7 +485,7 @@ new class extends Component {
                                         wire:model.live="checkedSecondConvocation"
                                         type="checkbox"
                                         value="{{ $player->id }}"
-                                        class="h-6 w-6 accent-violet-500 shrink-0">
+                                        class=" h-6 w-6 accent-violet-500 shrink-0">
 
                                 </label>
 

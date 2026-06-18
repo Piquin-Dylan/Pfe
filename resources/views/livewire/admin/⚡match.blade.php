@@ -169,7 +169,7 @@ new class extends Component {
                         wire:model="score_away"
                         type="number"
                         min="0"
-                        class="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
+                        class="text-black h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">
 
                     <x-slot:footer>
                         <button wire:click="updateScore({{ $game->id }})" class="btn-form">

@@ -22,7 +22,6 @@ new class extends Component {
                 $notification->markAsRead();
             }
         }
-
     }
 
     public function changeStatus($string, $type, $id, $notificationId): void

@@ -28,7 +28,7 @@
                                 $selectedPlayerData = $this->games->players->firstWhere('id', $playerId);
 
                                if ($selectedPlayerData) {
-    $displayName = $selectedPlayerData->firstName;
+                                   $displayName = $selectedPlayerData->firstName;
 
     $displayImage = str_starts_with($selectedPlayerData->user->image, 'photos/')
         ? asset($selectedPlayerData->user->image)

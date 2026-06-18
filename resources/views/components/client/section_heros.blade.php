@@ -63,7 +63,6 @@
                         '{{ asset('team.png') }}',
                         '{{ asset('convoc.png') }}',
                         '{{ asset('compos.png') }}',
-                        '{{ asset('calendar.png') }}',
                     ],
 
                     init() {
