@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'has_team_or_player' => \App\Http\Middleware\EnsureHasTeamOrPlayer::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

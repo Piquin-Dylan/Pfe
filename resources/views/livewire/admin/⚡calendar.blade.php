@@ -96,7 +96,7 @@ new class extends Component {
         </div>
 
         <div wire:ignore class="mt-6">
-            <x-calendar-test/>
+            <x-calendar/>
         </div>
 
     </section>

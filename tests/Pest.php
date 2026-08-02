@@ -31,17 +31,3 @@ pest()
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
-
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-|
-| Here you may define project specific helper functions.
-|
-*/
-
-function something()
-{
-    // ..
-}

@@ -4,8 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Game;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class NewMatchConvocation extends Notification
@@ -50,7 +48,6 @@ class NewMatchConvocation extends Notification
             'date_match' => $this->match->date_match,
             'address' => $this->match->address,
             'hours' => $this->match->hours,
-            'name_home' => $this->match->name_home,
             'name_away' => $this->match->name_away,
             'message' => "Vous avez été sélectionné pour le match du {$date} à {$this->match->hours}",
         ];

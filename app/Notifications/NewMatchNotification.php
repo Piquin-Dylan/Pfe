@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use App\Models\Game;
-use App\Models\Train;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
@@ -45,7 +44,6 @@ class NewMatchNotification extends Notification
             'date_match' => $this->match->date_match,
             'address' => $this->match->address,
             'hours' => $this->match->hours,
-            'name_home' => $this->match->name_home,
             'name_away' => $this->match->name_away,
             'message' => "L'entraîneur a créé un match le " .
                 \Carbon\Carbon::parse($this->match->date_match)->format('d/m/Y') .

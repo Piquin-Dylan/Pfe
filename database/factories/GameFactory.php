@@ -15,8 +15,8 @@ class GameFactory extends Factory
     public function definition(): array
     {
         return [
-            'team_id' => Team::class,
-            'user_id' => User::class,
+            'team_id' => Team::factory(),
+            'user_id' => User::factory(),
             'date_match' => fake()->dateTimeBetween('now', '+3 months'),
             'address' => fake()->address,
             'hours' => fake()->time('H:i'),

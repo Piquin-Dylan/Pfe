@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('trains', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
+            $table->foreignId('team_id')->constrained('team')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->date('date_train');
             $table->string('address');
             $table->string('hours_start');

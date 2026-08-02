@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\Game;
 use App\Models\Train;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

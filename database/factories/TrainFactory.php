@@ -14,8 +14,8 @@ class TrainFactory extends Factory
     public function definition(): array
     {
         return [
-            'team_id' => Team::class,
-            'user_id' => User::class,
+            'team_id' => Team::factory(),
+            'user_id' => User::factory(),
             'date_train' => fake()->dateTimeBetween('now', '+1 months'),
             'address' => fake()->address,
             'hours_start' => fake()->time('H:i'),

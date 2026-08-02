@@ -24,7 +24,6 @@ class ContactForm extends Form
     {
         $this->validate();
 
-        dd($this->email);
 
     }
 }

@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Notifications\NewMatchNotification;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -39,12 +38,11 @@ class CreateEventForm extends Form
 
         $photoAwayPath = $this->photo_away->store('photos', 'public');
 
-        $current_user = Auth::user()->getAuthIdentifier();
-        $teams_id = DB::table('team')->where('user_id', $current_user)->value('id');
+        $team = Auth::user()->team;
 
         $match = Game::create([
-            'team_id' => $teams_id,
-            'user_id' => $current_user,
+            'team_id' => $team->id,
+            'user_id' => Auth::id(),
             'date_match' => $this->date,
             'address' => $this->place,
             'hours' => $this->hours,
@@ -52,11 +50,7 @@ class CreateEventForm extends Form
             'photo_away' => $photoAwayPath,
         ]);
 
-        $players_list = DB::table('players')
-            ->where('team_id', $teams_id)
-            ->pluck('user_id');
-        $users = User::whereIn('users.id', $players_list)->get();
-
+        $users = User::whereIn('id', $team->players()->pluck('user_id'))->get();
 
         Notification::send($users, new NewMatchNotification($match));
     }

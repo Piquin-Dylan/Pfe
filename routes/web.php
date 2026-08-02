@@ -16,57 +16,6 @@ Route::get('/login', function () {
     return view('client/auth.login');
 })->name('login');
 
-Route::get('/logout', function () {
-    return view('client.hub');
-})->name('hub');
-
-
-Route::get('/calendar/events', function () {
-
-    $current_user = Auth::user();
-
-    if ($current_user->player) {
-
-        $teamId = \App\Models\Player::where('user_id', $current_user->id)
-            ->value('team_id');
-
-    } else {
-
-        $teamId = \App\Models\Team::where('user_id', $current_user->id)
-            ->value('id');
-    }
-
-    $games = Game::where('team_id', $teamId)->get()->map(function ($game) {
-        return [
-            'title' => '⚽ Match',
-            'start' => $game->date_match,
-            'color' => '#ef4444',
-            'address' => $game->address,
-            'hours' => $game->hours,
-            'id' => $game->id,
-            'type' => 'game',
-        ];
-    });
-
-    $trains = Train::where('team_id', $teamId)->get()->map(function ($train) {
-        return [
-            'title' => '🏃 Entraînement',
-            'start' => $train->date_train,
-            'color' => '#22c55e',
-            'address' => $train->address,
-            'hours_start' => $train->hours_start,
-            'hours_end' => $train->hours_end,
-            'id' => $train->id,
-            'type' => 'train',
-        ];
-    });
-
-    $events = $games->concat($trains)->values();
-
-    return response()->json($events);
-});
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/create', function () {
@@ -89,137 +38,112 @@ Route::middleware('auth')->group(function () {
         return view('client/auth/update_profile');
     });
 
+    Route::get('/calendar/events', function () {
 
-    Route::get('/dashboard', function () {
+        $current_user = Auth::user();
 
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
+        if ($current_user->player) {
+
+            $teamId = \App\Models\Player::where('user_id', $current_user->id)
+                ->value('team_id');
+
+        } else {
+
+            $teamId = \App\Models\Team::where('user_id', $current_user->id)
+                ->value('id');
         }
 
-        return view('admin.dashboard');
+        $games = Game::where('team_id', $teamId)->get()->map(function ($game) {
+            return [
+                'title' => '⚽ Match',
+                'start' => $game->date_match,
+                'color' => '#ef4444',
+                'address' => $game->address,
+                'hours' => $game->hours,
+                'id' => $game->id,
+                'type' => 'game',
+            ];
+        });
 
-    })->name('dashboard');
+        $trains = Train::where('team_id', $teamId)->get()->map(function ($train) {
+            return [
+                'title' => '🏃 Entraînement',
+                'start' => $train->date_train,
+                'color' => '#22c55e',
+                'address' => $train->address,
+                'hours_start' => $train->hours_start,
+                'hours_end' => $train->hours_end,
+                'id' => $train->id,
+                'type' => 'train',
+            ];
+        });
 
+        $events = $games->concat($trains)->values();
 
-    Route::get('/team', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.team');
-
-    })->name('team');
-
-
-    /* Route::get('/calendar-test', function () {
-         return view('calendar-test');
-     });*/
-
-
-    Route::get('/calendrier', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.calendrier');
-
-    })->name('calendrier');
-
-
-    Route::get('/message', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.message');
-
-    })->name('message');
-
-
-    Route::get('/match', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.match');
-
-    })->name('match');
-
-    Route::get('/settings', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.settings');
-
-    })->name('settings');
-
-    Route::get('/statistiques', function () {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        return view('admin.statistiques');
-
-    })->name('statistiques');
-
-
-    Route::get('/match/{id}', function ($id) {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        if (Auth::user()->player) {
-            return redirect('/matchF');
-        }
-
-        return view('admin.show_match', [
-            'id' => $id,
-        ]);
-    });
-    Route::get('/match/{id}/live', function ($id) {
-
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
-
-        if (Auth::user()->player) {
-            return redirect('/matchF');
-        }
-
-        return view('admin.match_live', [
-            'id' => $id,
-        ]);
+        return response()->json($events);
     });
 
+    Route::middleware('has_team_or_player')->group(function () {
 
-    Route::get('/train', function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
+        Route::get('/team', function () {
+            return view('admin.team');
+        })->name('team');
 
-        return view('admin.train');
+        Route::get('/calendrier', function () {
+            return view('admin.calendrier');
+        })->name('calendrier');
 
-    })->name('train');
+        Route::get('/message', function () {
+            return view('admin.message');
+        })->name('message');
 
+        Route::get('/match', function () {
+            return view('admin.match');
+        })->name('match');
 
-    Route::get('/train/{id}', function ($id) {
+        Route::get('/settings', function () {
+            return view('admin.settings');
+        })->name('settings');
 
-        if (!Auth::user()->team && !Auth::user()->player) {
-            return redirect('/hub');
-        }
+        Route::get('/statistiques', function () {
+            return view('admin.statistiques');
+        })->name('statistiques');
 
-        return view('admin.show_train', [
-            'id' => $id
-        ]);
+        Route::get('/match/{id}', function ($id) {
+
+            if (Auth::user()->player) {
+                return redirect('/matchF');
+            }
+
+            return view('admin.show_match', [
+                'id' => $id,
+            ]);
+        });
+
+        Route::get('/match/{id}/live', function ($id) {
+
+            if (Auth::user()->player) {
+                return redirect('/matchF');
+            }
+
+            return view('admin.match_live', [
+                'id' => $id,
+            ]);
+        });
+
+        Route::get('/train', function () {
+            return view('admin.train');
+        })->name('train');
+
+        Route::get('/train/{id}', function ($id) {
+            return view('admin.show_train', [
+                'id' => $id
+            ]);
+        });
 
     });
 

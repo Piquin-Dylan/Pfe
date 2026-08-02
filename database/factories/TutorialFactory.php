@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tutorial;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TutorialFactory extends Factory
@@ -12,7 +13,9 @@ class TutorialFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'user_id' => User::factory(),
+            'tutorial_name' => $this->faker->word(),
+            'seen' => false,
         ];
     }
 }
