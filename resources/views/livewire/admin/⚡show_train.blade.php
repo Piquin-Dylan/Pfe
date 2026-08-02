@@ -13,6 +13,7 @@ new class extends Component {
     public function mount($id): void
     {
         $this->trains = Train::findOrFail($id);
+        $this->authorize('view', $this->trains);
 
         $this->trains->players()->get();
 

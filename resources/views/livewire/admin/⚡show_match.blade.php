@@ -32,6 +32,7 @@ new class extends Component {
 
     {
         $this->games = Game::findOrFail($id);
+        $this->authorize('view', $this->games);
         $this->countPresentPlayers();
 
 
