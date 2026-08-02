@@ -13,7 +13,6 @@ new class extends Component {
 
         $current_user = Auth::user()->id;
 
-
         if (Auth::user()->player) {
             $player = Player::where('user_id', $current_user)->select('team_id')->value('team_id');
             $this->trains = Train::where('team_id', $player)->orderby('date_train', 'asc')->get();

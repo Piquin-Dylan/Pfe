@@ -15,7 +15,7 @@ new class extends Component {
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 };
 ?>

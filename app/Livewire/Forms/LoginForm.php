@@ -20,7 +20,5 @@ class LoginForm extends Form
     public function submit(): void
     {
         $this->validate();
-
-
     }
 }

@@ -55,7 +55,7 @@ new class extends Component {
                 );
             })
             ->when($this->filters !== 'tout', function ($query) {
-                $query->whereIn(
+                $query->where(
                     'players.position',
                     $this->poste[$this->filters]
                 );

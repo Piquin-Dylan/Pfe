@@ -21,6 +21,7 @@ new class extends Component {
     public array $player_position = [];
 
 
+
     public int $count_player = 0;
 
 
@@ -61,19 +62,19 @@ new class extends Component {
             }
     }
 
-    public function getPlayersProperty()
-    {
-        $team = Auth::user()->team;
+        public function getPlayersProperty()
+        {
+            $team = Auth::user()->team;
 
-        if (!$team) {
-            return collect();
+            if (!$team) {
+                return collect();
+            }
+
+            return $team
+                ->players()
+                ->with('user')
+                ->get();
         }
-
-        return $team
-            ->players()
-            ->with('user')
-            ->get();
-    }
 
     public function saveConvocation(): void
     {
@@ -302,8 +303,7 @@ new class extends Component {
 
                 <div
                     class="bg-[#23294A] border border-violet-500/30
-            shadow-2xl rounded-2xl px-6 py-4 backdrop-blur-md"
-                >
+            shadow-2xl rounded-2xl px-6 py-4 backdrop-blur-md">
 
                     <div class="flex items-center gap-4">
 
@@ -429,8 +429,7 @@ new class extends Component {
                     'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
                     'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
                     'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
-                ])
-            >
+                ])>
                 {{ $player->pivot->status }}
             </span>
                         </div>
