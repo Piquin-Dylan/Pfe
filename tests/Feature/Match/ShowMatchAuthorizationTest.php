@@ -15,7 +15,7 @@ it('forbids a coach from viewing another team\'s match', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.show_match', [
-        'id' => $otherGame->id,
+        'id' => $otherGame->uuid,
     ])->assertForbidden();
 });
 
@@ -28,6 +28,6 @@ it('allows a coach to view their own team\'s match', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.show_match', [
-        'id' => $game->id,
+        'id' => $game->uuid,
     ])->assertOk();
 });

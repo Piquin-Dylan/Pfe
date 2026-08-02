@@ -15,7 +15,7 @@ it('forbids a coach from viewing another team\'s training', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.show_train', [
-        'id' => $otherTrain->id,
+        'id' => $otherTrain->uuid,
     ])->assertForbidden();
 });
 
@@ -28,6 +28,6 @@ it('allows a coach to view their own team\'s training', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.show_train', [
-        'id' => $train->id,
+        'id' => $train->uuid,
     ])->assertOk();
 });

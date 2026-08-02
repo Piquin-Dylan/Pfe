@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
                 'color' => '#ef4444',
                 'address' => $game->address,
                 'hours' => $game->hours,
-                'id' => $game->id,
+                'id' => $game->uuid,
                 'type' => 'game',
             ];
         });
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
                 'address' => $train->address,
                 'hours_start' => $train->hours_start,
                 'hours_end' => $train->hours_end,
-                'id' => $train->id,
+                'id' => $train->uuid,
                 'type' => 'train',
             ];
         });

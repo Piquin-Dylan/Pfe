@@ -48,7 +48,7 @@ new class extends Component {
                 @foreach($trains as $train)
                     <h3 class="sr-only">Entrainement du : {{$train->date_train}}</h3>
                     <a
-                        href="/train/{{ $train->id }}"
+                        href="/train/{{ $train->uuid }}"
                         class="group w-full overflow-hidden bg-gradient-to-br from-[#0f172a] to-[#020617]
                border border-white/10 rounded-[2rem] p-4 sm:p-5
                flex flex-col sm:flex-row items-center gap-5

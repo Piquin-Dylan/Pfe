@@ -12,4 +12,9 @@ class TrainPolicy
         return $train->team_id === $user->team?->id
             || $train->team_id === $user->player?->team_id;
     }
+
+    public function delete(User $user, Train $train): bool
+    {
+        return $train->team_id === $user->team?->id;
+    }
 }

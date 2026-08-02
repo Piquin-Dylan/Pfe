@@ -49,7 +49,7 @@ new class extends Component {
 
             @if($game)
                 <x-admin.dashboard.event-card
-                    :href="'/match/' . $game->id"
+                    :href="'/match/' . $game->uuid"
                     title="Prochain match"
                     color="blue">
 
@@ -125,7 +125,7 @@ new class extends Component {
 
             @if($train)
                 <x-dashboard.event-card
-                    :url="'/train/' . $train->id"
+                    :url="'/train/' . $train->uuid"
                     label="Prochain entraînement"
                     :date="$train->date_train"
                     title="Entraînement collectif"

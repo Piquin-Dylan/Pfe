@@ -25,7 +25,7 @@ it('saves a match composition', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.show_match', [
-        'id' => $game->id,
+        'id' => $game->uuid,
     ])
         ->set('player_position', [
             'gardien' => $player->id,

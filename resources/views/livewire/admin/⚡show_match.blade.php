@@ -31,7 +31,7 @@ new class extends Component {
     public function mount($id): void
 
     {
-        $this->games = Game::findOrFail($id);
+        $this->games = Game::where('uuid', $id)->firstOrFail();
         $this->authorize('view', $this->games);
         $this->countPresentPlayers();
 

@@ -38,11 +38,15 @@ new class extends Component {
     public function deleteEvent($id, $type): void
     {
         if ($type === 'train') {
-            Train::destroy($id);
+            $train = Train::where('uuid', $id)->firstOrFail();
+            $this->authorize('delete', $train);
+            $train->delete();
         }
 
         if ($type === 'game') {
-            Game::destroy($id);
+            $game = Game::where('uuid', $id)->firstOrFail();
+            $this->authorize('delete', $game);
+            $game->delete();
         }
 
         $this->dispatch('event-deleted', id: $id);

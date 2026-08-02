@@ -12,7 +12,7 @@ new class extends Component {
 
     public function mount($id): void
     {
-        $this->trains = Train::findOrFail($id);
+        $this->trains = Train::where('uuid', $id)->firstOrFail();
         $this->authorize('view', $this->trains);
 
         $this->trains->players()->get();
