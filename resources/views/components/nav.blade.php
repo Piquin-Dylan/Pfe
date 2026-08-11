@@ -66,10 +66,10 @@
             </li>
 
             <li>
-                <a href="#form-contact"
+                <a href="{{ route('accueil') }}#form-contact"
                    @click="open = false"
                    title="Accéder au formulaire de contact"
-                   class="{{ request()->routeIs('contact') ? 'text-[#BDAEF4] border-b-2 border-[#BDAEF4] font-bold' : '' }} transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
+                   class="transition-all duration-300 hover:text-[#BDAEF4] hover:-translate-y-0.5">
                     Contact
                 </a>
             </li>

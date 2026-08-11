@@ -18,7 +18,9 @@ new class extends Component {
         'gardien' => ['G'],
     ];
 
-    public Collection $playersWithStatus;
+    public ?Collection $playersWithStatus = null;
+
+    public array $playerStatuses = [];
 
     public bool $isMatch = false;
 
@@ -26,6 +28,16 @@ new class extends Component {
 
     public array $checked = [];
 
+    public function mount(?Collection $playersWithStatus = null): void
+    {
+        $this->playersWithStatus = $playersWithStatus;
+
+        if ($playersWithStatus) {
+            $this->playerStatuses = $playersWithStatus
+                ->mapWithKeys(fn ($player) => [$player->id => $player->pivot->status])
+                ->all();
+        }
+    }
 
     public function filter($string): void
     {
@@ -155,16 +167,16 @@ new class extends Component {
                         alt=""
                     >
 
-                    @if(isset($player->pivot->status))
+                    @if(isset($this->playerStatuses[$player->id]))
                         <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30">
                 <span
                     @class([
                         'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border backdrop-blur-md whitespace-nowrap',
-                        'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
-                        'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
-                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
+                        'bg-green-500/20 text-green-400 border-green-500/40' => $this->playerStatuses[$player->id] === 'present',
+                        'bg-red-500/20 text-red-400 border-red-500/40' => $this->playerStatuses[$player->id] === 'absent',
+                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $this->playerStatuses[$player->id] === 'en attente',
                     ])>
-                    {{ $player->pivot->status }}
+                    {{ $this->playerStatuses[$player->id] }}
                 </span>
                         </div>
                     @endif

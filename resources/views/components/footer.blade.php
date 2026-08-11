@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/contact" class="hover:text-white transition">
+                        <a href="{{ route('accueil') }}#form-contact" class="hover:text-white transition">
                             Contact
                         </a>
                     </li>
