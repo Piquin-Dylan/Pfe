@@ -1,9 +1,7 @@
 <?php
 
 use App\Livewire\Forms\ContactForm;
-use Illuminate\Http\Request;
-use JetBrains\PhpStorm\NoReturn;
-use Livewire\Attributes\Validate;
+use App\Mail\ContactFormSubmitted;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
 
@@ -11,17 +9,23 @@ new class extends Component {
 
     public ContactForm $form;
 
+    public bool $sent = false;
 
-    #[NoReturn] public function save(): void
+    public function save(): void
     {
         $this->form->validate();
         $form = $this->form;
-        Mail::raw($form->message, function ($message) use ($form) {
-            $message->to($form->email)
-                ->subject($form->subject)
-                ->from($form->email, 'Test');
-        });
-        dd('mail envoyé');
+
+        Mail::to(config('mail.contact_form_recipient'))
+            ->send(new ContactFormSubmitted(
+                $form->name,
+                $form->email,
+                $form->subject,
+                $form->message,
+            ));
+
+        $this->form->reset();
+        $this->sent = true;
     }
 
 };
@@ -33,6 +37,11 @@ new class extends Component {
     <h2 class="title_section">Formulaire de contact</h2>
 
     <div class=" ">
+        @if ($sent)
+            <div class="mb-6 rounded-lg bg-green-600/20 border border-green-500 text-green-300 px-4 py-3 text-center">
+                Votre message a bien été envoyé, merci ! Nous vous répondrons rapidement.
+            </div>
+        @endif
         <form wire:submit.prevent="save">
 
             <div class="sm:flex sm:gap-5 sm:flex-row sm:flex-wrap ">

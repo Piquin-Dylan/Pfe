@@ -7,23 +7,15 @@ use Livewire\Form;
 
 class ContactForm extends Form
 {
-    #[Validate('required')]
+    #[Validate('required|string|max:255')]
     public string $name = '';
 
-    #[Validate('required')]
+    #[Validate('required|email:rfc|max:255')]
     public string $email = "";
 
-    #[Validate('required')]
+    #[Validate('required|string|max:255')]
     public string $subject = "";
 
-    #[Validate('required')]
+    #[Validate('required|string|max:5000')]
     public string $message = "";
-
-
-    public function submit(): void
-    {
-        $this->validate();
-
-
-    }
 }

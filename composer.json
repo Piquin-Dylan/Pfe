@@ -11,10 +11,11 @@
     "require": {
         "php": "^8.2",
         "act-training/livewire-calendar": "^0.3.0",
+        "fakerphp/faker": "^1.23",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^4.1",
-        "fakerphp/faker": "^1.23"
+        "resend/resend-php": "*"
     },
     "require-dev": {
         "fruitcake/laravel-debugbar": "^4.2",
