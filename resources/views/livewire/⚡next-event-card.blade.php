@@ -8,9 +8,7 @@ new class extends Component {
 
     public function mount(): void
     {
-        $team = Auth::user()->player
-            ? Auth::user()->player->team
-            : Auth::user()->team;
+        $team = Auth::user()->currentTeam();
 
         if ($team) {
             $this->game = $team->games()
@@ -58,21 +56,13 @@ new class extends Component {
                         <div class="mt-4 flex items-center justify-between gap-3">
 
                             @php
-                                $team = Auth::user()->team ?? Auth::user()->player?->team;
-
-                                $logo = $team->logo === 'photos/logo_club.png'
-                                    ? asset('photos/logo_club.png')
-                                    : asset('storage/' . $team->logo);
-
-                                $photoAway = $game->photo_away === 'photos/logo_club.png'
-                                    ? asset('photos/logo_club.png')
-                                    : asset('storage/' . $game->photo_away);
+                                $team = Auth::user()->currentTeam();
                             @endphp
 
                             <div class="flex flex-col items-center flex-1">
                                 <div class="w-20 h-20 flex items-center justify-center">
                                     <img
-                                        src="{{ $logo }}"
+                                        src="{{ $team->logo_url }}"
                                         alt="{{ $team->name }}"
                                         class="w-full h-full object-contain">
                                 </div>
@@ -89,7 +79,7 @@ new class extends Component {
                             <div class="flex flex-col items-center flex-1">
                                 <div class="w-20 h-20 flex items-center justify-center">
                                     <img
-                                        src="{{ $photoAway }}"
+                                        src="{{ $game->photo_away_url }}"
                                         alt="{{ $game->name_away }}"
                                         class="w-full h-full object-contain">
                                 </div>

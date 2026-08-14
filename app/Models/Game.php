@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasMediaUrl;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Game extends Model
 {
-    use HasFactory;
+    use HasFactory, HasMediaUrl;
 
     protected $table = "matches";
 
@@ -54,5 +56,10 @@ class Game extends Model
     public function players(): BelongsToMany
     {
         return $this->belongsToMany(Player::class, 'player_game', 'match_id', 'player_id')->withPivot('status');
+    }
+
+    protected function photoAwayUrl(): Attribute
+    {
+        return Attribute::get(fn () => $this->resolveMediaUrl($this->photo_away));
     }
 }

@@ -11,15 +11,9 @@ new class extends Component {
     public function mount(): void
     {
 
-        $current_user = Auth::user()->id;
+        $teamId = Auth::user()->currentTeam()?->id;
 
-        if (Auth::user()->player) {
-            $player = Player::where('user_id', $current_user)->select('team_id')->value('team_id');
-            $this->trains = Train::where('team_id', $player)->orderby('date_train', 'asc')->get();
-        } else {
-            $team = Team::where('user_id', $current_user)->select('id')->value('id');
-            $this->trains = Train::where('team_id', $team)->orderby('date_train', 'asc')->get();
-        }
+        $this->trains = Train::where('team_id', $teamId)->orderby('date_train', 'asc')->get();
     }
 };
 ?>

@@ -11,7 +11,7 @@ class EnsureHasTeamOrPlayer
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::user()->team && !Auth::user()->player) {
+        if (!Auth::user()->currentTeam()) {
             return redirect('/hub');
         }
 

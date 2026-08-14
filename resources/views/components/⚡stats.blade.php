@@ -13,12 +13,12 @@ new class extends Component {
     public function mount()
     {
         if (Auth::user()->player) {
-            $this->player = Auth::user()->player->team->players()->count();
+            $this->player = Auth::user()->currentTeam()->players()->count();
             $this->match = Auth::user()->player->games()->count();
             $this->train = Auth::user()->player->trains()->count();
 
         } else {
-            $this->player = Auth::user()->team->players()->count();
+            $this->player = Auth::user()->currentTeam()->players()->count();
             $this->match = Auth::user()->games()->count();
             $this->train = Auth::user()->trains()->count();
         }

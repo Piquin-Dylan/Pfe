@@ -84,14 +84,8 @@ new class extends Component {
                             max-w-[500px]">
 
                         <div class="flex items-center gap-4">
-                            @php
-                                $logo = file_exists(public_path($team->logo))
-                                    ? asset($team->logo)
-                                    : asset('storage/' . $team->logo);
-                            @endphp
-
                             <img
-                                src="{{ $logo }}"
+                                src="{{ $team->logo_url }}"
                                 alt="Logo de {{ $team->name }}"
                                 class="w-full max-w-24 min-w-32 h-32 object-contain ">
                             <span class="text-white text-2xl font-semibold tracking-wide">

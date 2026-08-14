@@ -38,7 +38,7 @@ class CreateEventForm extends Form
 
         $photoAwayPath = $this->photo_away->store('photos', 'public');
 
-        $team = Auth::user()->team;
+        $team = Auth::user()->currentTeam();
 
         $match = Game::create([
             'team_id' => $team->id,

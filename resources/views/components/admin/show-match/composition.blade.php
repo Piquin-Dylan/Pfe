@@ -29,11 +29,8 @@
 
                                if ($selectedPlayerData) {
                                    $displayName = $selectedPlayerData->firstName;
-
-    $displayImage = str_starts_with($selectedPlayerData->user->image, 'photos/')
-        ? asset($selectedPlayerData->user->image)
-        : Storage::url($selectedPlayerData->user->image);
-}
+                                   $displayImage = $selectedPlayerData->user->image_url;
+                               }
                             }
                         @endphp
 
@@ -79,10 +76,8 @@
                 @php
                     $assignedIds = array_values($this->player_position ?? []);
                     $playersAtPost = $this->games->players->filter(fn($p) => $p->pivot->status === 'present');
-                    $atPostAvailable = $playersAtPost->filter(fn($p) => !in_array($p->id, $assignedIds));
-                    $atPostPlaced    = $playersAtPost->filter(fn($p) =>  in_array($p->id, $assignedIds));
-                    $othersAvailable = $playersAtPost->filter(fn($p) => !in_array($p->id, $assignedIds));
-                    $othersPlaced    = $playersAtPost->filter(fn($p) =>  in_array($p->id, $assignedIds));
+                    $available = $playersAtPost->filter(fn($p) => !in_array($p->id, $assignedIds));
+                    $placed    = $playersAtPost->filter(fn($p) =>  in_array($p->id, $assignedIds));
                 @endphp
 
                 <div>
@@ -90,20 +85,14 @@
                         Joueurs aux poste
                     </h3>
                     <div class="space-y-3">
-                        @foreach($atPostAvailable as $player)
+                        @foreach($available as $player)
                             <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                 <div
                                     @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
                                     class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                     <div class="flex items-center gap-3">
-                                        @php
-                                            $image = str_starts_with($player->user->image, 'photos/')
-                                                ? asset($player->user->image)
-                                                : Storage::url($player->user->image);
-                                        @endphp
-
                                         <img
-                                            src="{{ $image }}"
+                                            src="{{ $player->user->image_url }}"
                                             alt="{{ $player->firstName }}"
                                             class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                         />
@@ -118,19 +107,13 @@
                             </div>
                         @endforeach
 
-                        @foreach($atPostPlaced as $player)
+                        @foreach($placed as $player)
                             <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                 <div
                                     class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                     <div class="flex items-center gap-3">
-                                        @php
-                                            $image = str_starts_with($player->user->image, 'photos/')
-                                                ? asset($player->user->image)
-                                                : Storage::url($player->user->image);
-                                        @endphp
-
                                         <img
-                                            src="{{ $image }}"
+                                            src="{{ $player->user->image_url }}"
                                             alt="{{ $player->firstName }}"
                                             class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                         />
@@ -157,20 +140,14 @@
                     </h3>
                     <div class="space-y-3">
                         {{-- Disponibles d'abord --}}
-                        @foreach($othersAvailable as $player)
+                        @foreach($available as $player)
                             <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                 <div
                                     @click="$wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }})"
                                     class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                     <div class="flex items-center gap-3">
-                                        @php
-                                            $image = str_starts_with($player->user->image, 'photos/')
-                                                ? asset($player->user->image)
-                                                : Storage::url($player->user->image);
-                                        @endphp
-
                                         <img
-                                            src="{{ $image }}"
+                                            src="{{ $player->user->image_url }}"
                                             alt="{{ $player->firstName }}"
                                             class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                         />
@@ -185,21 +162,15 @@
                             </div>
                         @endforeach
 
-                        @foreach($othersPlaced as $player)
+                        @foreach($placed as $player)
                             <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                 <div
                                     class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
 
                                     <div class="flex items-center gap-3">
 
-                                        @php
-                                            $image = str_starts_with($player->user->image, 'photos/')
-                                                ? asset($player->user->image)
-                                                : Storage::url($player->user->image);
-                                        @endphp
-
                                         <img
-                                            src="{{ $image }}"
+                                            src="{{ $player->user->image_url }}"
                                             alt="{{ $player->firstName }}"
                                             class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                         />
@@ -263,7 +234,7 @@
                             Joueurs aux poste
                         </h3>
                         <div class="space-y-3">
-                            @foreach($atPostAvailable as $player)
+                            @foreach($available as $player)
                                 <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                     <label
                                         class="flex items-center justify-between rounded-2xl border border-purple-500/20 bg-[#25284B] p-4 cursor-pointer hover:bg-[#2D315D] transition">
@@ -279,19 +250,13 @@
                                 </div>
                             @endforeach
 
-                            @foreach($atPostPlaced as $player)
+                            @foreach($placed as $player)
                                 <div x-show="selectedPlayer === '{{ $player->position }}'" x-cloak>
                                     <div
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                         <div class="flex items-center gap-3">
-                                            @php
-                                                $image = str_starts_with($player->user->image, 'photos/')
-                                                    ? asset($player->user->image)
-                                                    : Storage::url($player->user->image);
-                                            @endphp
-
                                             <img
-                                                src="{{ $image }}"
+                                                src="{{ $player->user->image_url }}"
                                                 alt="{{ $player->firstName }}"
                                                 class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                             />
@@ -317,21 +282,15 @@
                             Autres joueurs
                         </h3>
                         <div class="space-y-3">
-                            @foreach($othersAvailable as $player)
+                            @foreach($available as $player)
                                 <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                     <div
                                         @click=" $wire.assignPlayerToPosition(selectedPlayer, {{ $player->pivot->player_id }}); selectedPlayer = null;
 "
                                         class="flex items-center justify-between rounded-2xl border border-purple-500/10 bg-[#222547] p-4 cursor-pointer transition hover:bg-[#2A2E57]">
                                         <div class="flex items-center gap-3">
-                                            @php
-                                                $image = str_starts_with($player->user->image, 'photos/')
-                                                    ? asset($player->user->image)
-                                                    : Storage::url($player->user->image);
-                                            @endphp
-
                                             <img
-                                                src="{{ $image }}"
+                                                src="{{ $player->user->image_url }}"
                                                 alt="{{ $player->firstName }}"
                                                 class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                             />
@@ -346,19 +305,13 @@
                                 </div>
                             @endforeach
 
-                            @foreach($othersPlaced as $player)
+                            @foreach($placed as $player)
                                 <div x-show="selectedPlayer !== '{{ $player->position }}'" x-cloak>
                                     <div
                                         class="flex items-center justify-between rounded-2xl border border-purple-400/30 bg-[#222547]/70 opacity-80 cursor-not-allowed p-4">
                                         <div class="flex items-center gap-3">
-                                            @php
-                                                $image = str_starts_with($player->user->image, 'photos/')
-                                                    ? asset($player->user->image)
-                                                    : Storage::url($player->user->image);
-                                            @endphp
-
                                             <img
-                                                src="{{ $image }}"
+                                                src="{{ $player->user->image_url }}"
                                                 alt="{{ $player->firstName }}"
                                                 class="w-12 h-12 rounded-full object-cover border border-purple-400/30"
                                             />

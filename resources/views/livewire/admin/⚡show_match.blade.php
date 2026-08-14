@@ -65,7 +65,7 @@ new class extends Component {
 
         public function getPlayersProperty()
         {
-            $team = Auth::user()->team;
+            $team = Auth::user()->currentTeam();
 
             if (!$team) {
                 return collect();
@@ -159,22 +159,18 @@ new class extends Component {
         <div class="flex flex-col items-center text-center min-w-0">
 
             @php
-                $team = Auth::user()->team ?? Auth::user()->player?->team;
-
-                $logo = $team->logo === 'photos/logo.png'
-                    ? asset($team->logo)
-                    : asset('storage/' . $team->logo);
+                $team = Auth::user()->currentTeam();
             @endphp
 
             <div class="w-40 h-40 flex items-center justify-center mb-6">
                 <img
                     class="max-w-full max-h-full object-contain"
                     alt="{{ $team->name }}"
-                    src="{{ $logo }}">
+                    src="{{ $team->logo_url }}">
             </div>
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
-    {{ Auth::user()->team?->name ?? Auth::user()->player?->team?->name }}
+    {{ $team->name }}
 </span>
         </div>
 
@@ -185,17 +181,11 @@ new class extends Component {
         </div>
 
         <div class="flex flex-col items-center text-center min-w-0">
-            @php
-                $photoAway = $games->photo_away === 'photos/logo_club.png'
-                    ? asset($games->photo_away)
-                    : asset('storage/' . $games->photo_away);
-            @endphp
-
             <div class="w-40 h-40 flex items-center justify-center mb-6">
                 <img
                     class="max-w-full max-h-full object-contain"
                     alt="{{ $games->name_away }}"
-                    src="{{ $photoAway }}">
+                    src="{{ $games->photo_away_url }}">
             </div>
 
             <span class="text-white text-2xl max-w-[220px] break-words leading-tight">
@@ -254,31 +244,7 @@ new class extends Component {
                     <label class="cursor-pointer group flex flex-col items-center">
 
                         <div class="relative w-[250px]">
-                    <span
-                        class="absolute z-30 text-white font-bold text-xl
-                       left-2 top-6">{{ $player->firstName }}</span>
-                            <span
-                                class="absolute z-30 text-white font-bold text-xl
-                       left-2 top-80">{{ $player->position }}</span>
-                            @php
-                                $image = str_starts_with($player->user->image, 'photos/')
-                                    ? asset($player->user->image)
-                                    : Storage::url($player->user->image);
-                            @endphp
-
-                            <img
-                                class="absolute z-20 inset-0 w-full h-full object-cover"
-                                style="clip-path: polygon(13% 15%,52% 15%,60% 7%,86% 7%,92% 12%,92% 88%,85% 94%,50% 94%,42% 84%,13% 84%);"
-                                src="{{ $image }}"
-                                alt="">
-                            <div
-                                class="absolute z-30 bottom-[60px] right-[28px]  w-[55px] h-[55px  rounded-full  bg-[#A6463A]  flex items-center justify-center text-white text-4xl font-bold">
-                                {{$player->maillot}}
-                            </div>
-                            <img
-                                class="relative z-10 w-full"
-                                src="{{ asset('Component_card_player.svg') }}"
-                                alt="">
+                            <x-player-card :player="$player" />
                         </div>
 
 
@@ -382,57 +348,11 @@ new class extends Component {
                     <label class="cursor-pointer group flex flex-col items-center">
 
                         <div class="relative w-[250px]">
-                            <span
-                                class="absolute z-30 text-white font-bold text-xl left-2 top-6">{{ $player->firstName }}</span>
-                            <span
-                                class="absolute z-30 text-white font-bold text-xl left-2 top-80">{{ $player->position }}</span>
-
-                            @php
-                                $image = str_starts_with($player->user->image, 'photos/')
-                                    ? asset($player->user->image)
-                                    : Storage::url($player->user->image);
-                            @endphp
-
-                            <img
-                                class="absolute z-20 inset-0 w-full h-full object-cover"
-                                style="clip-path: polygon(
-                    13% 15%,
-                    52% 15%,
-                    60% 7%,
-                    86% 7%,
-                    92% 12%,
-                    92% 88%,
-                    85% 94%,
-                    50% 94%,
-                    42% 84%,
-                    13% 84%
-                );"
-                                src="{{ $image }}"
-                                alt=""
-                            >
-
-                            <div
-                                class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
-                                {{$player->maillot}}
-                            </div>
-
-                            <img
-                                class="relative z-10 w-full"
-                                src="{{ asset('Component_card_player.svg') }}"
-                                alt=""
-                            >
+                            <x-player-card :player="$player" />
                         </div>
 
                         <div class="flex justify-center mt-2">
-            <span
-                @class([
-                    'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border',
-                    'bg-green-500/20 text-green-400 border-green-500/40' => $player->pivot->status === 'present',
-                    'bg-red-500/20 text-red-400 border-red-500/40' => $player->pivot->status === 'absent',
-                    'bg-orange-500/20 text-orange-400 border-orange-500/40' => $player->pivot->status === 'en attente',
-                ])>
-                {{ $player->pivot->status }}
-            </span>
+                            <x-status-badge :status="$player->pivot->status" />
                         </div>
 
                     </label>

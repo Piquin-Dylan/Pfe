@@ -15,23 +15,11 @@ new class extends Component {
 
     public function mount(): void
     {
-        $current_user = Auth::id();
+        $teamId = Auth::user()->currentTeam()?->id;
 
-        if (Auth::user()->player) {
-            $player = Player::where('user_id', $current_user)
-                ->value('team_id');
-
-            $this->trains = Train::where('team_id', $player)
-                ->orderBy('date_train')
-                ->get();
-        } else {
-            $team = Team::where('user_id', $current_user)
-                ->value('id');
-
-            $this->trains = Train::where('team_id', $team)
-                ->orderBy('date_train')
-                ->get();
-        }
+        $this->trains = Train::where('team_id', $teamId)
+            ->orderBy('date_train')
+            ->get();
     }
 
     #[On('delete-event')]

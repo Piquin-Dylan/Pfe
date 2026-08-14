@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/complete-profile" class="hover:text-white transition">
+                        <a href="/profile" class="hover:text-white transition">
                             Rejoindre une équipe
                         </a>
                     </li>

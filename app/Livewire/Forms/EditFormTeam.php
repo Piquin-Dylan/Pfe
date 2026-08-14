@@ -27,7 +27,7 @@ class EditFormTeam extends Form
 
     public function mount(): void
     {
-        $team = Auth::user()->team;
+        $team = Auth::user()->currentTeam();
 
         $this->name = $team->name;
         $this->ville = $team->ville;
@@ -38,7 +38,7 @@ class EditFormTeam extends Form
     {
         $this->validate();
 
-        $team = Auth::user()->team;
+        $team = Auth::user()->currentTeam();
 
         $data = [
             'name' => $this->name,

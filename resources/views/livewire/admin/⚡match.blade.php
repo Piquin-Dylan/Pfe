@@ -14,16 +14,9 @@ new class extends Component {
     public function mount(): void
     {
 
-        $current_user = Auth::user()->id;
+        $teamId = Auth::user()->currentTeam()?->id;
 
-
-        if (Auth::user()->player) {
-            $player = \App\Models\Player::where('user_id', $current_user)->select('team_id')->value('team_id');
-            $this->games = Game::where('team_id', $player)->orderBy('date_match', 'asc')->get();
-        } else {
-            $team = \App\Models\Team::where('user_id', $current_user)->select('id')->value('id');
-            $this->games = Game::where('team_id', $team)->orderBy('date_match', 'asc')->get();
-        }
+        $this->games = Game::where('team_id', $teamId)->orderBy('date_match', 'asc')->get();
 
 
         //code sur le tuto
@@ -77,21 +70,14 @@ new class extends Component {
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
                         @php
-                            $team = Auth::user()->team ?? Auth::user()->player?->team;
-
-                            $logo = in_array($team->logo, [
-                                'photos/logo.png',
-                                'photos/logo_club.png',
-                            ])
-                                ? asset($team->logo)
-                                : asset('storage/' . $team->logo);
+                            $team = Auth::user()->currentTeam();
                         @endphp
 
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe domicile"
-                            src="{{ $logo }}"
-                            srcset="  {{ $logo }} 128w,  {{ $logo }} 256w,  {{ $logo }} 512w"
+                            src="{{ $team->logo_url }}"
+                            srcset="  {{ $team->logo_url }} 128w,  {{ $team->logo_url }} 256w,  {{ $team->logo_url }} 512w"
                             sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px"
                             loading="lazy" decoding="async">
                     </div>
@@ -115,17 +101,11 @@ new class extends Component {
                 <div class="flex flex-col items-center text-center min-w-0">
                     <div
                         class="flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-3 sm:mb-6">
-                        @php
-                            $photoAway = $game->photo_away === 'photos/logo_club.png'
-                                ? asset($game->photo_away)
-                                : asset('storage/' . $game->photo_away);
-                        @endphp
-
                         <img
                             class="w-full h-full object-contain"
                             alt="Logo équipe extérieur"
-                            src="{{ $photoAway }}"
-                            srcset="  {{ $photoAway }} 128w,  {{ $photoAway }} 256w,  {{ $photoAway }} 512w "
+                            src="{{ $game->photo_away_url }}"
+                            srcset="  {{ $game->photo_away_url }} 128w,  {{ $game->photo_away_url }} 256w,  {{ $game->photo_away_url }} 512w "
                             sizes=" (max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 128px, 160px "
                             loading="lazy"
                             decoding="async"/>
@@ -157,9 +137,9 @@ new class extends Component {
                 <x-match.modal-score
                     show="openScoreModal"
                     close="openScoreModal = false"
-                    :home-logo="$team->logo"
+                    :home-logo="$team->logo_url"
                     :home-name="$team->name"
-                    :away-logo="$game->photo_away"
+                    :away-logo="$game->photo_away_url"
                     :away-name="$game->name_away">
                     <input wire:model="score_home" type="number" min="0"
                            class=" text-black h-16 w-16 sm:h-20 sm:w-20 rounded-full border-4 border-transparent bg-white text-center text-2xl sm:text-3xl font-black outline-none transition focus:border-violet-500">

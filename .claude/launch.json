@@ -3,7 +3,8 @@
   "configurations": [
     {
       "name": "laravel",
-      "url": "http://localhost:8000",
+      "runtimeExecutable": "C:\\Users\\Asus computer\\.config\\herd\\bin\\php.bat",
+      "runtimeArgs": ["artisan", "serve", "--port=8000"],
       "port": 8000
     }
   ]

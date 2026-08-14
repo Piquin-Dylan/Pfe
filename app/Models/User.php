@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasMediaUrl;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasMediaUrl;
 
     protected $table = 'users';
 
@@ -53,5 +55,15 @@ class User extends Authenticatable
     public function tutorial(): HasMany
     {
         return $this->hasMany(Tutorial::class);
+    }
+
+    public function currentTeam(): ?Team
+    {
+        return $this->team ?? $this->player?->team;
+    }
+
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(fn () => $this->resolveMediaUrl($this->image));
     }
 }

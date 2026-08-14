@@ -1,18 +1,3 @@
-@php
-    $defaultLogos = [
-        'photos/logo.png',
-        'photos/logo_club.png',
-    ];
-
-    $homeLogoUrl = in_array($homeLogo, $defaultLogos)
-        ? asset($homeLogo)
-        : asset('storage/' . $homeLogo);
-
-    $awayLogoUrl = in_array($awayLogo, $defaultLogos)
-        ? asset($awayLogo)
-        : asset('storage/' . $awayLogo);
-@endphp
-
 <div
     x-show="{{ $show }}"
     x-transition
@@ -40,7 +25,7 @@
                 <div class="w-32 h-32 flex items-center justify-center">
                     <img
                         class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                        src="{{ $homeLogoUrl }}"
+                        src="{{ $homeLogo }}"
                         alt="{{ $homeName }}">
                 </div>
 
@@ -59,7 +44,7 @@
                 <div class="w-32 h-32 flex items-center justify-center">
                     <img
                         class="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
-                        src="{{ $awayLogoUrl }}"
+                        src="{{ $awayLogo }}"
                         alt="{{ $awayName }}">
                 </div>
 

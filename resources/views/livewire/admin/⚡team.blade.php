@@ -123,61 +123,13 @@ new class extends Component {
             @foreach($players as $player)
                 <div class="relative w-[250px] mb-12">
 
-        <span
-            class="absolute z-30 text-white font-bold text-xl left-2 top-6">
-            {{ $player->firstName }}
-        </span>
-
-                    <span
-                        class="absolute z-30 text-white font-bold text-xl left-2 top-80">
-            {{ $player->position }}
-        </span>
-
-                    @php
-                        $image = str_starts_with($player->user->image, 'photos/')
-                            ? asset($player->user->image)
-                            : asset('storage/' . $player->user->image);
-                    @endphp
-
-                    <img
-                        src="{{ $image }}"
-                        alt="{{ $player->firstName }}"
-                        class="absolute z-20 inset-0 w-full h-full object-cover"
-                        style="clip-path: polygon(
-        13% 15%,
-        52% 15%,
-        60% 7%,
-        86% 7%,
-        92% 12%,
-        92% 88%,
-        85% 94%,
-        50% 94%,
-        42% 84%,
-        13% 84%
-    );"
-                    />
-                    <div
-                        class="absolute z-30 bottom-[60px] right-[28px] w-[55px] h-[55px] rounded-full bg-[#A6463A] flex items-center justify-center text-white text-4xl font-bold">
-                        {{ $player->maillot }}
-                    </div>
-
-                    <img
-                        class="relative z-10 w-full"
-                        src="{{ asset('Component_card_player.svg') }}"
-                        alt=""
-                    >
+                    <x-player-card :player="$player" />
 
                     @if(isset($this->playerStatuses[$player->id]))
                         <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30">
-                <span
-                    @class([
-                        'px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide border backdrop-blur-md whitespace-nowrap',
-                        'bg-green-500/20 text-green-400 border-green-500/40' => $this->playerStatuses[$player->id] === 'present',
-                        'bg-red-500/20 text-red-400 border-red-500/40' => $this->playerStatuses[$player->id] === 'absent',
-                        'bg-orange-500/20 text-orange-400 border-orange-500/40' => $this->playerStatuses[$player->id] === 'en attente',
-                    ])>
-                    {{ $this->playerStatuses[$player->id] }}
-                </span>
+                            <x-status-badge
+                                :status="$this->playerStatuses[$player->id]"
+                                class="backdrop-blur-md whitespace-nowrap" />
                         </div>
                     @endif
 

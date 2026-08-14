@@ -31,7 +31,7 @@ class CreateTrainForm extends Form
     {
         $this->validate();
 
-        $team = Auth::user()->team;
+        $team = Auth::user()->currentTeam();
 
         $train = Train::create([
             'team_id' => $team->id,

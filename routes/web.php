@@ -22,10 +22,6 @@ Route::middleware('auth')->group(function () {
         return view('client/auth.create_team');
     })->name('create');
 
-    Route::get('/join', function () {
-        return view('client/auth.join_team');
-    })->name('join');
-
     Route::get('/profile', function () {
         return view('client/auth.form_profile');
     })->name('profile');
@@ -40,18 +36,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/calendar/events', function () {
 
-        $current_user = Auth::user();
-
-        if ($current_user->player) {
-
-            $teamId = \App\Models\Player::where('user_id', $current_user->id)
-                ->value('team_id');
-
-        } else {
-
-            $teamId = \App\Models\Team::where('user_id', $current_user->id)
-                ->value('id');
-        }
+        $teamId = Auth::user()->currentTeam()?->id;
 
         $games = Game::where('team_id', $teamId)->get()->map(function ($game) {
             return [
