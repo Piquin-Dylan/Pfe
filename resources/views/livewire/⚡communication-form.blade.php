@@ -60,7 +60,7 @@ new class extends Component {
         }, 3000)
     "
 
-    class="flex justify-center mb-8"
+    class="shrink-0"
 >
     @unless(Auth::user()->player)
     <button

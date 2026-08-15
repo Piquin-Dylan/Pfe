@@ -28,12 +28,10 @@ new class extends Component {
 
     public array $checked = [];
 
-    public function mount(?Collection $playersWithStatus = null): void
+    public function mount(): void
     {
-        $this->playersWithStatus = $playersWithStatus;
-
-        if ($playersWithStatus) {
-            $this->playerStatuses = $playersWithStatus
+        if ($this->playersWithStatus) {
+            $this->playerStatuses = $this->playersWithStatus
                 ->mapWithKeys(fn ($player) => [$player->id => $player->pivot->status])
                 ->all();
         }
@@ -67,7 +65,7 @@ new class extends Component {
                 );
             })
             ->when($this->filters !== 'tout', function ($query) {
-                $query->where(
+                $query->whereIn(
                     'players.position',
                     $this->poste[$this->filters]
                 );
@@ -78,6 +76,22 @@ new class extends Component {
                 'trains'
             ])
             ->get();
+    }
+
+    public function getFilteredPlayersProperty(): Collection
+    {
+        if (!$this->playersWithStatus) {
+            return $this->players;
+        }
+
+        return $this->playersWithStatus
+            ->when($this->searchPlayer, fn ($players) => $players->filter(
+                fn ($player) => str_contains(strtolower($player->firstName), strtolower($this->searchPlayer))
+            ))
+            ->when($this->filters !== 'tout', fn ($players) => $players->filter(
+                fn ($player) => in_array($player->position, $this->poste[$this->filters])
+            ))
+            ->values();
     }
 };
 ?>
@@ -97,7 +111,7 @@ new class extends Component {
     <x-admin.filter_position/>
 
     @php
-        $players = $playersWithStatus ?? $this->players;
+        $players = $this->filteredPlayers;
     @endphp
 
     @if($players->isEmpty())

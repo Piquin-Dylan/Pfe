@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/match/{id}', function ($id) {
 
             if (Auth::user()->player) {
-                return redirect('/matchF');
+                return redirect('/match');
             }
 
             return view('admin.show_match', [
@@ -112,7 +112,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/match/{id}/live', function ($id) {
 
             if (Auth::user()->player) {
-                return redirect('/matchF');
+                return redirect('/match');
             }
 
             return view('admin.match_live', [

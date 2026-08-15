@@ -9,7 +9,7 @@
     @endphp
 
     <a
-        href="{{ url('match/' . $gameId) }}"
+        href="{{ url('match/' . $game->uuid) }}"
         class="btn-primary">
 
         {{ $game->score_home !== null && $game->score_away !== null
