@@ -12,6 +12,11 @@ class TrainPolicy
         return $train->team_id === $user->currentTeam()?->id;
     }
 
+    public function update(User $user, Train $train): bool
+    {
+        return $train->team_id === $user->team?->id;
+    }
+
     public function delete(User $user, Train $train): bool
     {
         return $train->team_id === $user->team?->id;

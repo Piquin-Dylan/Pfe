@@ -1,14 +1,22 @@
+@props([
+    'event' => null,
+    'openEvent' => null,
+    'showButton' => true,
+])
+
 <div
     x-data="{ open: false }"
     @keydown.escape.window="open = false"
 
     x-on:{{ $openEvent }}.window="open = true"
 >
-    <button
-        class="btn-form"
-        @click="open = true">
-        {{ $event }}
-    </button>
+    @if($showButton)
+        <button
+            class="btn-form"
+            @click="open = true">
+            {{ $event }}
+        </button>
+    @endif
 
     <div
         x-show="open"

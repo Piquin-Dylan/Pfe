@@ -121,10 +121,19 @@
 
                                 <button
                                     @click="
-        console.log('delete');
-        console.log(selectedEvent.id);
-        console.log(selectedEvent.type);
+        Livewire.dispatch('edit-event', {
+            id: selectedEvent.id,
+            type: selectedEvent.type
+        });
+        close();
+    "
+                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium transition"
+                                >
+                                    Modifier l'événement
+                                </button>
 
+                                <button
+                                    @click="
         Livewire.dispatch('delete-event', {
             id: selectedEvent.id,
             type: selectedEvent.type

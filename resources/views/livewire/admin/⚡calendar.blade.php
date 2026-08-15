@@ -40,6 +40,18 @@ new class extends Component {
         $this->dispatch('event-deleted', id: $id);
     }
 
+    #[On('edit-event')]
+    public function editEvent($id, $type): void
+    {
+        if ($type === 'train') {
+            $this->dispatch('open-edit-train-modal', id: $id);
+        }
+
+        if ($type === 'game') {
+            $this->dispatch('open-edit-game-modal', id: $id);
+        }
+    }
+
     #[On('date-selected')]
     public function dateSelected($date): void
     {
@@ -86,6 +98,9 @@ new class extends Component {
             <livewire:admin.create_event/>
             <livewire:admin.create_train/>
         </div>
+
+        <livewire:admin.edit_event/>
+        <livewire:admin.edit_train/>
 
         <div wire:ignore class="mt-6">
             <x-calendar/>
