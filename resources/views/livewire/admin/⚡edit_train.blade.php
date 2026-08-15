@@ -26,6 +26,7 @@ new class extends Component {
 
         $this->dispatch('refresh-calendar');
         $this->dispatch('train-updated');
+        $this->dispatch('close-drawer');
     }
 };
 
@@ -124,10 +125,6 @@ new class extends Component {
             setTimeout(() => {
                 show = false
             }, 4000)
-
-            document.dispatchEvent(
-                new CustomEvent('close-drawer')
-            )
         "
         x-show="show"
         x-transition:enter="transition ease-out duration-300"

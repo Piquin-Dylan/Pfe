@@ -9,6 +9,7 @@
     @keydown.escape.window="open = false"
 
     x-on:{{ $openEvent }}.window="open = true"
+    x-on:close-drawer.window="open = false"
 >
     @if($showButton)
         <button
