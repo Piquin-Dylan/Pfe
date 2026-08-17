@@ -15,6 +15,7 @@ class CreateTrainForm extends Form
 
 
     #[Validate('required', message: 'Le champs date est requis')]
+    #[Validate('after_or_equal:today', message: "La date de l'entraînement ne peut pas être dans le passé")]
     public string $date = "";
 
     #[Validate('required', message: 'Le champs lieux  est requis')]

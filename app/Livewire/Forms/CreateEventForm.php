@@ -18,6 +18,7 @@ class CreateEventForm extends Form
 
 
     #[Validate('required', message: 'Le champs date est requis')]
+    #[Validate('after_or_equal:today', message: 'La date du match ne peut pas être dans le passé')]
     public string $date = "";
 
     #[Validate('required', message: 'Le champs lieux est requis')]

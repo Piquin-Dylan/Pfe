@@ -49,6 +49,7 @@ new class extends Component {
                             type="date"
                             id="training_date"
                             name="date"
+                            min="{{ now()->format('Y-m-d') }}"
                             wire:model.live="form.date">
                             <div>
                                 @error('form.date')

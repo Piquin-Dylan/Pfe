@@ -58,6 +58,7 @@ new class extends Component {
                             type="date"
                             id="match_date"
                             name="date"
+                            min="{{ now()->format('Y-m-d') }}"
                             wire:model="form.date">
 
                             <div>
