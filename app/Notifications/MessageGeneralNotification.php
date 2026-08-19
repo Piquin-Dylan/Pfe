@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class MessageGeneralNotification extends Notification
@@ -26,7 +27,19 @@ class MessageGeneralNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'mail'];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->subject('Nouveau message général')
+            ->greeting("Bonjour {$notifiable->firstName},")
+            ->line($this->message)
+            ->action('Voir mes messages', route('message'));
     }
 
     /**

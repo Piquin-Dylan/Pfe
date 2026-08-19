@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Game;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class NewMatchConvocation extends Notification
@@ -27,9 +28,25 @@ class NewMatchConvocation extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        $date = \Carbon\Carbon::parse($this->match->date_match)->format('d/m/Y');
+
+        return (new MailMessage)
+            ->subject("Convocation - Match du {$date}")
+            ->greeting("Bonjour {$notifiable->firstName},")
+            ->line("Vous avez été sélectionné(e) pour le match du {$date} à {$this->match->hours}.")
+            ->line("Adversaire : {$this->match->name_away}")
+            ->line("Lieu : {$this->match->address}")
+            ->action('Voir mes convocations', route('match'))
+            ->line("Merci de confirmer votre présence depuis l'application.");
+    }
 
     /**
      * Get the array representation of the notification.
