@@ -6,6 +6,7 @@ use App\Models\Game;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
 
 class NewMatchConvocation extends Notification
 {
@@ -37,6 +38,19 @@ class NewMatchConvocation extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $date = \Carbon\Carbon::parse($this->match->date_match)->format('d/m/Y');
+        $expiresAt = \Carbon\Carbon::parse($this->match->date_match)->endOfDay();
+
+        $presentUrl = URL::temporarySignedRoute('convocation.respond', $expiresAt, [
+            'match' => $this->match->uuid,
+            'player' => $notifiable->player->id,
+            'status' => 'present',
+        ]);
+
+        $absentUrl = URL::temporarySignedRoute('convocation.respond', $expiresAt, [
+            'match' => $this->match->uuid,
+            'player' => $notifiable->player->id,
+            'status' => 'absent',
+        ]);
 
         return (new MailMessage)
             ->subject("Convocation - Match du {$date}")
@@ -44,8 +58,8 @@ class NewMatchConvocation extends Notification
             ->line("Vous avez été sélectionné(e) pour le match du {$date} à {$this->match->hours}.")
             ->line("Adversaire : {$this->match->name_away}")
             ->line("Lieu : {$this->match->address}")
-            ->action('Voir mes convocations', route('match'))
-            ->line("Merci de confirmer votre présence depuis l'application.");
+            ->action('✅ Je suis présent(e)', $presentUrl)
+            ->line("Vous ne pourrez pas venir ? [Cliquez ici pour signaler votre absence]({$absentUrl}).");
     }
 
     /**

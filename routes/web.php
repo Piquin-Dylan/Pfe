@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConvocationResponseController;
 use App\Models\Game;
 use App\Models\Train;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,11 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('client/auth.login');
 })->name('login');
+
+Route::get('/convocation/{match}/{player}/{status}', ConvocationResponseController::class)
+    ->name('convocation.respond')
+    ->middleware('signed')
+    ->where('status', 'present|absent');
 
 Route::middleware('auth')->group(function () {
 
