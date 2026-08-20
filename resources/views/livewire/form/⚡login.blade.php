@@ -33,6 +33,14 @@ new class extends Component {
                     text="Vous n'avez pas encore de compte ?"
                     action="Inscription" redirection="register">
 
+        @if  (session()->has('success'))
+            <div
+                x-data="{ show: true }"
+                x-show="show"
+                class=" text-green-500 text-center text-xl p-4 mt-8 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
         @if  (session()->has('status'))
             <div
                 x-data="{ show: true }"

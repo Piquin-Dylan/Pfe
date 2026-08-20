@@ -51,8 +51,8 @@ new class extends Component {
 
             <div class="flex justify-center items-center">
                 <button type="submit"
-                        class="w-full text-white btn-primary">
-                    Envoyer le lien de réinitialisation
+                        class="w-full text-white btn-primary !max-w-full whitespace-nowrap">
+                    Envoyer le lien
                 </button>
             </div>
         </form>

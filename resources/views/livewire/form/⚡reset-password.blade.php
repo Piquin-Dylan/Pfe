@@ -37,7 +37,7 @@ new class extends Component {
         );
 
         if ($status === Password::PASSWORD_RESET) {
-            session()->flash('status', 'Votre mot de passe a été réinitialisé avec succès, vous pouvez vous connecter.');
+            session()->flash('success', 'Votre mot de passe a été réinitialisé avec succès, vous pouvez vous connecter.');
             return $this->redirect('/login');
         }
 
@@ -100,8 +100,8 @@ new class extends Component {
 
             <div class="flex justify-center items-center">
                 <button type="submit"
-                        class="w-full text-white btn-primary">
-                    Réinitialiser le mot de passe
+                        class="w-full text-white btn-primary !max-w-full whitespace-nowrap">
+                    Réinitialiser
                 </button>
             </div>
         </form>
