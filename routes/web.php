@@ -17,6 +17,17 @@ Route::get('/login', function () {
     return view('client/auth.login');
 })->name('login');
 
+Route::get('/forgot-password', function () {
+    return view('client/auth.forgot-password');
+})->name('password.request');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('client/auth.reset-password', [
+        'token' => $token,
+        'email' => request('email', ''),
+    ]);
+})->name('password.reset');
+
 Route::get('/convocation/{match}/{player}/{status}', ConvocationResponseController::class)
     ->name('convocation.respond')
     ->middleware('signed')

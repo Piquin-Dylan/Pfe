@@ -67,6 +67,11 @@ new class extends Component {
                     @error('form.password') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </x-form.input>
+            <div class="text-right -mt-2 mb-4">
+                <a href="/forgot-password" class="text-purple-400 text-sm hover:underline">
+                    Mot de passe oublié ?
+                </a>
+            </div>
             <div class="flex justify-center items-center">
 
             <button type="submit"
