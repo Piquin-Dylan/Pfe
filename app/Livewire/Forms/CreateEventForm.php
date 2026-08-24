@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\NewMatchNotification;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -35,6 +36,8 @@ class CreateEventForm extends Form
 
     public function submit(): void
     {
+        Gate::authorize('manage-team');
+
         $this->validate();
 
         $photoAwayPath = $this->photo_away->store('photos', 'public');

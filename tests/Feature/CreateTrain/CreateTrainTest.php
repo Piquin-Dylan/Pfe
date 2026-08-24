@@ -88,6 +88,29 @@ it('sends notification to players', function () {
 
 
 
+it('prevents players from creating a training', function () {
+
+    $player = User::factory()->create();
+
+    Player::factory()->create([
+        'user_id' => $player->id,
+    ]);
+
+    $this->actingAs($player);
+
+    Livewire::test('admin.create_train')
+        ->set('form.date', '2026-06-15')
+        ->set('form.places', 'Liège')
+        ->set('form.hours_start', '18:00')
+        ->set('form.hours_end', '20:00')
+        ->call('save')
+        ->assertForbidden();
+
+    $this->assertDatabaseCount('trains', 0);
+});
+
+
+
 it('attaches players to training with pending status', function () {
 
     $coach = User::factory()->create();

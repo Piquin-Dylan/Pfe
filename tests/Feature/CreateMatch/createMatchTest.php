@@ -117,6 +117,8 @@ it('sends notification to players', function () {
 });
 it('prevents players from creating a match', function () {
 
+    Storage::fake('public');
+
     $player = User::factory()->create();
 
     Player::factory()->create([
@@ -126,7 +128,13 @@ it('prevents players from creating a match', function () {
     $this->actingAs($player);
 
     Livewire::test('admin.create_event')
-        ->call('save');
+        ->set('form.date', '2026-06-15')
+        ->set('form.place', 'Liège')
+        ->set('form.hours', '18:00')
+        ->set('form.name_away', 'Anderlecht')
+        ->set('form.photo_away', UploadedFile::fake()->image('team.jpg'))
+        ->call('save')
+        ->assertForbidden();
 
     $this->assertDatabaseCount('matches', 0);
 });

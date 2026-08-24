@@ -6,6 +6,7 @@ use App\Models\Train;
 use App\Models\User;
 use App\Notifications\NewTrainNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -30,6 +31,8 @@ class CreateTrainForm extends Form
 
     public function submit(): void
     {
+        Gate::authorize('manage-team');
+
         $this->validate();
 
         $team = Auth::user()->currentTeam();

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Seul le coach (propriétaire de l'équipe) peut gérer les matchs/entraînements de son équipe,
+        // pas un joueur simplement rattaché à celle-ci.
+        Gate::define('manage-team', fn (User $user) => $user->team !== null);
+
         ResetPassword::toMailUsing(function (object $notifiable, string $token) {
             $url = url(route('password.reset', [
                 'token' => $token,
