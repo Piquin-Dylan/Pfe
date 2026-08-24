@@ -133,10 +133,10 @@ new class extends Component {
         setTimeout(() => {
             showToast = false
         }, 3000)">
-                @unless(Auth::user()->player)
+                @can('manage-team')
                     <x-match.score
                         :game-id="$game->id"/>
-                @endunless
+                @endcan
 
                 <x-match.modal-score
                     show="openScoreModal"

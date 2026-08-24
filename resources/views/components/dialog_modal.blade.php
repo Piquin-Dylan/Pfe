@@ -106,7 +106,7 @@
 
                         </ul>
 
-                        @unless(Auth::user()->player)
+                        @can('manage-team')
 
                             <div class="flex flex-wrap gap-3 mt-8">
 
@@ -146,7 +146,7 @@
 
                             </div>
 
-                        @endunless
+                        @endcan
 
                     </div>
 

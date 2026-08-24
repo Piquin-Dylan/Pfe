@@ -18,7 +18,7 @@ new class extends Component {
 ?>
 
 <div>
-    @unless(Auth::user()->player)
+    @can('manage-team')
 
         <x-drawer
             event="Création d'un entraînement"
@@ -111,7 +111,7 @@ new class extends Component {
                 </form>
             </x-layout_forms>
         </x-drawer>
-    @endunless
+    @endcan
         <div
             x-data="{ show: false }"
 

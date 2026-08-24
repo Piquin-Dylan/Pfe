@@ -62,13 +62,13 @@ new class extends Component {
 
     class="shrink-0"
 >
-    @unless(Auth::user()->player)
+    @can('manage-team')
     <button
         @click="openModal = true"
         class="btn-primary">
         Message général
     </button>
-    @endunless
+    @endcan
 
     <template x-if="openModal">
         <div
