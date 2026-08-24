@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Livewire\WithFileUploads;
@@ -36,6 +37,8 @@ class EditFormTeam extends Form
 
     public function update(): void
     {
+        Gate::authorize('manage-team');
+
         $this->validate();
 
         $team = Auth::user()->currentTeam();
