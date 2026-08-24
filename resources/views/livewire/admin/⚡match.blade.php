@@ -35,7 +35,11 @@ new class extends Component {
 
     public function updateScore($id)
     {
-        Game::where('id', $id)->update([
+        $game = Game::findOrFail($id);
+
+        $this->authorize('update', $game);
+
+        $game->update([
             'score_home' => $this->score_home,
             'score_away' => $this->score_away
         ]);

@@ -41,3 +41,29 @@ test('user cannot login with wrong password', function () {
     $this->assertGuest();
 });
 
+test('login is throttled after too many failed attempts', function () {
+
+    User::create([
+        'firstName' => 'Dylan',
+        'lastName' => 'Piquin',
+        'email' => 'dylan@test.com',
+        'password' => Hash::make('password123'),
+    ]);
+
+    $component = Livewire::test('form.login')
+        ->set('form.email', 'dylan@test.com')
+        ->set('form.password', 'mauvaismotdepasse');
+
+    for ($i = 0; $i < 5; $i++) {
+        $component->call('save');
+    }
+
+    $this->assertGuest();
+
+    $component->set('form.password', 'password123')
+        ->call('save');
+
+    $this->assertGuest('web');
+    $component->assertSessionHas('status', fn ($status) => str_contains($status, 'Trop de tentatives'));
+});
+

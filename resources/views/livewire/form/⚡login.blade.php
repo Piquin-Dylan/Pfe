@@ -3,6 +3,8 @@
 use App\Livewire\Forms\LoginForm;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -14,14 +16,36 @@ new class extends Component {
     {
         $this->form->submit();
 
+        if ($this->tooManyLoginAttempts()) {
+            $seconds = RateLimiter::availableIn($this->throttleKey());
+
+            session()->flash('status', "Trop de tentatives de connexion. Réessayez dans {$seconds} secondes.");
+
+            return;
+        }
+
         if (Auth::attempt(["email" => $this->form->email, "password" => $this->form->password
         ])) {
+            RateLimiter::clear($this->throttleKey());
+
             return $this->redirect('/hub');
         } else {
+
+            RateLimiter::hit($this->throttleKey(), 60);
 
             session()->flash('status', "Le mot de passe ou l'adresse email est incorrect");
         }
 
+    }
+
+    protected function tooManyLoginAttempts(): bool
+    {
+        return RateLimiter::tooManyAttempts($this->throttleKey(), 5);
+    }
+
+    protected function throttleKey(): string
+    {
+        return Str::transliterate(Str::lower($this->form->email) . '|' . request()->ip());
     }
 
 }
