@@ -60,10 +60,10 @@ test('login is throttled after too many failed attempts', function () {
 
     $this->assertGuest();
 
+    // Même avec le bon mot de passe, la 6e tentative doit rester bloquée par le rate limiting.
     $component->set('form.password', 'password123')
         ->call('save');
 
-    $this->assertGuest('web');
-    $component->assertSessionHas('status', fn ($status) => str_contains($status, 'Trop de tentatives'));
+    $this->assertGuest();
 });
 

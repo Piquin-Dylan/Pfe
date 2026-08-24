@@ -39,7 +39,7 @@ it('dispatches events after match creation', function () {
     $this->actingAs($user);
 
     Livewire::test('admin.create_event')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.place', 'Liège')
         ->set('form.hours', '18:00')
         ->set('form.name_away', 'Anderlecht')
@@ -64,7 +64,7 @@ it('creates a game', function () {
     $this->actingAs($user);
 
     Livewire::test('admin.create_event')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.place', 'Liège')
         ->set('form.hours', '18:00')
         ->set('form.name_away', 'Anderlecht')
@@ -73,7 +73,7 @@ it('creates a game', function () {
 
     $this->assertDatabaseHas('matches', [
         'user_id' => $user->id,
-        'date_match' => '2026-06-15',
+        'date_match' => now()->addMonth()->format('Y-m-d'),
         'address' => 'Liège',
         'hours' => '18:00',
         'name_away' => 'Anderlecht',
@@ -103,7 +103,7 @@ it('sends notification to players', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.create_event')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.place', 'Liège')
         ->set('form.hours', '18:00')
         ->set('form.name_away', 'Anderlecht')
@@ -128,7 +128,7 @@ it('prevents players from creating a match', function () {
     $this->actingAs($player);
 
     Livewire::test('admin.create_event')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.place', 'Liège')
         ->set('form.hours', '18:00')
         ->set('form.name_away', 'Anderlecht')

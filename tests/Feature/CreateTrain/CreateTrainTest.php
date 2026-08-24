@@ -37,7 +37,7 @@ it('creates a training', function () {
     $this->actingAs($user);
 
     Livewire::test('admin.create_train')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.places', 'Liège')
         ->set('form.hours_start', '18:00')
         ->set('form.hours_end', '20:00')
@@ -45,7 +45,7 @@ it('creates a training', function () {
 
     $this->assertDatabaseHas('trains', [
         'user_id' => $user->id,
-        'date_train' => '2026-06-15',
+        'date_train' => now()->addMonth()->format('Y-m-d'),
         'address' => 'Liège',
         'hours_start' => '18:00',
         'hours_end' => '20:00',
@@ -74,7 +74,7 @@ it('sends notification to players', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.create_train')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.places', 'Liège')
         ->set('form.hours_start', '18:00')
         ->set('form.hours_end', '20:00')
@@ -99,7 +99,7 @@ it('prevents players from creating a training', function () {
     $this->actingAs($player);
 
     Livewire::test('admin.create_train')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.places', 'Liège')
         ->set('form.hours_start', '18:00')
         ->set('form.hours_end', '20:00')
@@ -126,7 +126,7 @@ it('attaches players to training with pending status', function () {
     $this->actingAs($coach);
 
     Livewire::test('admin.create_train')
-        ->set('form.date', '2026-06-15')
+        ->set('form.date', now()->addMonth()->format('Y-m-d'))
         ->set('form.places', 'Liège')
         ->set('form.hours_start', '18:00')
         ->set('form.hours_end', '20:00')
