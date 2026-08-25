@@ -11,6 +11,7 @@ class MatchComposition extends Model
         'match_id',
         'player_id',
         'position',
+        'formation',
     ];
 
     public function match(): BelongsTo

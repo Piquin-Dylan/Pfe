@@ -58,6 +58,11 @@ class Game extends Model
         return $this->belongsToMany(Player::class, 'player_game', 'match_id', 'player_id')->withPivot('status');
     }
 
+    public function matchCompositions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(MatchComposition::class, 'match_id');
+    }
+
     protected function photoAwayUrl(): Attribute
     {
         return Attribute::get(fn () => $this->resolveMediaUrl($this->photo_away));
