@@ -118,7 +118,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/match/{id}', function ($id) {
 
             if (Auth::user()->player) {
-                return redirect('/match');
+                return view('client.show_match', [
+                    'id' => $id,
+                ]);
             }
 
             return view('admin.show_match', [
