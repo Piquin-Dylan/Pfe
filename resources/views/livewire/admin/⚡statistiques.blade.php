@@ -96,11 +96,11 @@ new class extends Component {
 
     <div class="mb-6">
         <h2 class="text-2xl font-bold text-white">
-            Statistiques des joueurs
+            Statistiques
         </h2>
 
         <p class="text-gray-400 mt-1">
-            Consultez les statistiques de l'ensemble des joueurs de votre équipe.
+            Consultez les statistiques du club et de vos joueurs.
         </p>
     </div>
     <x-admin.statistiques.club-stats-card
