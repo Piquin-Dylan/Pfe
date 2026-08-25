@@ -3,22 +3,6 @@
         class="grid grid-cols-1 xl:grid-cols-[1fr_400px] gap-6"
         x-data="{ selectedPlayer: null }">
         <div class="rounded-3xl p-6">
-            @if($this->previousCompositions->isNotEmpty())
-                <div class="flex justify-center mb-4">
-                    <select
-                        wire:change="loadPreviousComposition($event.target.value)"
-                        class="w-fit min-w-[280px] rounded-2xl px-4 py-3 text-center text-white outline-none transition hover:border-purple-500 focus:border-purple-500 bg-[#25284B]">
-                        <option value="" class="bg-[#25284B] text-white">Réutiliser une composition précédente...</option>
-                        @foreach($this->previousCompositions as $previousMatch)
-                            <option value="{{ $previousMatch->id }}" class="bg-[#25284B] text-white">
-                                {{ \Carbon\Carbon::parse($previousMatch->date_match)->locale('fr')->translatedFormat('d F Y') }}
-                                vs {{ $previousMatch->name_away }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            @endif
-
             <div class="flex justify-center mb-6">
                 <select
                     wire:model.live="match_composition"

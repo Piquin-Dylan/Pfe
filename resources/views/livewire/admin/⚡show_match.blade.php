@@ -127,46 +127,6 @@ new class extends Component {
         $this->player_position[$poste] = $idPlayer;
     }
 
-    public function getPreviousCompositionsProperty()
-    {
-        return Game::where('team_id', $this->games->team_id)
-            ->where('id', '!=', $this->games->id)
-            ->whereHas('matchCompositions')
-            ->with('matchCompositions')
-            ->orderByDesc('date_match')
-            ->get();
-    }
-
-    public function loadPreviousComposition($matchId)
-    {
-        $previousMatch = Game::where('team_id', $this->games->team_id)
-            ->where('id', $matchId)
-            ->firstOrFail();
-
-        $compositions = MatchComposition::where('match_id', $previousMatch->id)->get();
-
-        if ($compositions->isEmpty()) {
-            return;
-        }
-
-        $formation = $compositions->first()->formation;
-
-        $presentPlayerIds = $this->games->players
-            ->filter(fn ($player) => $player->pivot->status === 'present')
-            ->pluck('id');
-
-        $newPositions = [];
-
-        foreach ($compositions as $composition) {
-            if ($presentPlayerIds->contains($composition->player_id)) {
-                $newPositions[$composition->position] = $composition->player_id;
-            }
-        }
-
-        $this->match_composition = $formation;
-        $this->player_position = $newPositions;
-    }
-
     public function saveComposition()
     {
         MatchComposition::where('match_id', $this->games->id)->delete();
@@ -177,7 +137,6 @@ new class extends Component {
                 'match_id' => $this->games->id,
                 'player_id' => $playerId,
                 'position' => $position,
-                'formation' => $this->match_composition,
             ]);
         }
 
