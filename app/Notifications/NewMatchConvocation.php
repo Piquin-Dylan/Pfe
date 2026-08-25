@@ -29,6 +29,10 @@ class NewMatchConvocation extends Notification
      */
     public function via(object $notifiable): array
     {
+        if (app()->runningInConsole()) {
+            return ['database'];
+        }
+
         return ['database', 'mail'];
     }
 
