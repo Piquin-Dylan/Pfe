@@ -121,6 +121,12 @@ new class extends Component {
 
             </article>
 
+            <div class="flex justify-center pb-8">
+                <a href="/match/{{ $game->uuid }}" class="btn-primary">
+                    Voir les détails
+                </a>
+            </div>
+
             <div x-data="{openScoreModal: false,
        showToast: false
     }"
