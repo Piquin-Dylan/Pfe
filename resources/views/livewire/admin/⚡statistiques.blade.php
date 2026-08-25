@@ -7,10 +7,53 @@ new class extends Component {
     public int $totalTrains = 0;
     public int $totalMatchs = 0;
 
+    public int $wins = 0;
+    public int $draws = 0;
+    public int $losses = 0;
+    public int $goalsFor = 0;
+    public int $goalsAgainst = 0;
+    public int $winRate = 0;
+    public array $recentForm = [];
+
     public function mount(): void
     {
         $this->totalTrains = Auth::user()->team->trains()->count();
         $this->totalMatchs = Auth::user()->team->games()->count();
+
+        $this->computeClubStats();
+    }
+
+    public function computeClubStats(): void
+    {
+        $finishedGames = Auth::user()->team->games()
+            ->whereNotNull('score_home')
+            ->whereNotNull('score_away')
+            ->orderByDesc('date_match')
+            ->get();
+
+        foreach ($finishedGames as $game) {
+            if ($game->score_home > $game->score_away) {
+                $this->wins++;
+            } elseif ($game->score_home < $game->score_away) {
+                $this->losses++;
+            } else {
+                $this->draws++;
+            }
+
+            $this->goalsFor += $game->score_home;
+            $this->goalsAgainst += $game->score_away;
+        }
+
+        $played = $finishedGames->count();
+        $this->winRate = $played > 0 ? (int) round($this->wins / $played * 100) : 0;
+
+        $this->recentForm = $finishedGames->take(5)->map(function ($game) {
+            return match (true) {
+                $game->score_home > $game->score_away => 'V',
+                $game->score_home < $game->score_away => 'D',
+                default => 'N',
+            };
+        })->all();
     }
 
     public function getFilteredPlayersProperty()
@@ -60,6 +103,16 @@ new class extends Component {
             Consultez les statistiques de l'ensemble des joueurs de votre équipe.
         </p>
     </div>
+    <x-admin.statistiques.club-stats-card
+        :wins="$wins"
+        :draws="$draws"
+        :losses="$losses"
+        :goals-for="$goalsFor"
+        :goals-against="$goalsAgainst"
+        :win-rate="$winRate"
+        :recent-form="$recentForm"
+    />
+
     <div class="mb-4">
         <input
             type="text"
