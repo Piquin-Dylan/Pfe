@@ -2,7 +2,7 @@
 
 use App\Models\Player;
 use App\Models\Team;
-use App\Notifications\NewMatchNotification;
+use App\Notifications\NewMatchConvocation;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use App\Models\User;
@@ -82,7 +82,7 @@ it('creates a game', function () {
 
 
 
-it('sends notification to players', function () {
+it('does not notify players when a match is created', function () {
 
     Notification::fake();
     Storage::fake('public');
@@ -110,9 +110,9 @@ it('sends notification to players', function () {
         ->set('form.photo_away', UploadedFile::fake()->image('team.jpg'))
         ->call('save');
 
-    Notification::assertSentTo(
+    Notification::assertNotSentTo(
         $playerUser,
-        NewMatchNotification::class
+        NewMatchConvocation::class
     );
 });
 it('prevents players from creating a match', function () {
