@@ -2,23 +2,25 @@
 
 use App\Models\Game;
 use App\Models\Team;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 new class extends Component {
 
-    public \Illuminate\Support\Collection $games;
+    use WithPagination;
 
     public int $score_home;
     public int $score_away;
 
+    public bool $showTutorial = true;
+
+    public string $searchMatch = '';
+
+    public string $matchFilter = 'tous';
+
     public function mount(): void
     {
-
-        $teamId = Auth::user()->currentTeam()?->id;
-
-        $this->games = Game::where('team_id', $teamId)->orderBy('date_match', 'asc')->get();
-
-
         //code sur le tuto
         if (Auth::user()->tutorial()->where('tutorial_name', 'match_list')->exists()) {
             $this->showTutorial = false;
@@ -33,6 +35,34 @@ new class extends Component {
         }
     }
 
+    public function updatedSearchMatch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function filterMatch(string $value): void
+    {
+        $this->matchFilter = $value;
+        $this->resetPage();
+    }
+
+    public function getGamesProperty(): LengthAwarePaginator
+    {
+        $teamId = Auth::user()->currentTeam()?->id;
+
+        return Game::where('team_id', $teamId)
+            ->when($this->searchMatch, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('name_away', 'like', '%' . $this->searchMatch . '%')
+                        ->orWhere('address', 'like', '%' . $this->searchMatch . '%');
+                });
+            })
+            ->when($this->matchFilter === 'a_venir', fn ($query) => $query->whereDate('date_match', '>=', now()))
+            ->when($this->matchFilter === 'joues', fn ($query) => $query->whereDate('date_match', '<', now()))
+            ->orderBy('date_match', 'asc')
+            ->paginate(6);
+    }
+
     public function updateScore($id)
     {
         $game = Game::findOrFail($id);
@@ -44,6 +74,7 @@ new class extends Component {
             'score_away' => $this->score_away
         ]);
         $this->dispatch('score-updated');
+        $this->dispatch('notify', message: 'Score mis à jour avec succès.', type: 'success');
     }
 };
 ?>
@@ -52,7 +83,46 @@ new class extends Component {
     <div class="w-full flex justify-center max-w-[250px] mx-auto px-4 sm:px-6 lg:px-8">
         @livewire('admin.create_event')
     </div>
-    @if($games->isEmpty())
+
+    <div class="px-4 sm:px-6 lg:px-8 pt-6">
+        <input
+            class="bg-white p-4 text-black rounded-2xl w-full"
+            wire:model.live.debounce="searchMatch"
+            placeholder="Rechercher un match (adversaire, lieu)"
+        >
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-8 pt-6 pb-2">
+        <span
+            class="filter_position text-sm md:text-base {{ $matchFilter === 'tous' ? 'active' : '' }}"
+            wire:click="filterMatch('tous')">
+            Tous
+        </span>
+
+        <span
+            class="filter_position text-sm md:text-base {{ $matchFilter === 'a_venir' ? 'active' : '' }}"
+            wire:click="filterMatch('a_venir')">
+            À venir
+        </span>
+
+        <span
+            class="filter_position text-sm md:text-base {{ $matchFilter === 'joues' ? 'active' : '' }}"
+            wire:click="filterMatch('joues')">
+            Joués
+        </span>
+    </div>
+
+    @if($this->games->isEmpty() && ($searchMatch !== '' || $matchFilter !== 'tous'))
+        <div class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
+            <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
+                Aucun match ne correspond à votre recherche
+            </h3>
+
+            <p class="text-sm sm:text-base text-gray-300">
+                Essayez un autre nom ou réinitialisez les filtres.
+            </p>
+        </div>
+    @elseif($this->games->isEmpty())
         <x-match.empy-match
             title="Aucun match n'a encore été créé pour le moment"
             description="Créez dès maintenant votre premier match dans la page calendrier"
@@ -60,7 +130,7 @@ new class extends Component {
             button="Créer mon premier match"
         />
     @else
-        @foreach($games as $game)
+        @foreach($this->games as $game)
 
             <h2 id="address" class="title_section px-4 pt-6 lg:pt-10 text-center break-words lg:text-left">
                 Match du {{ \Carbon\Carbon::parse($game->date_match)->locale('fr')->translatedFormat('d F Y') }}
@@ -127,18 +197,9 @@ new class extends Component {
                 </a>
             </div>
 
-            <div x-data="{openScoreModal: false,
-       showToast: false
-    }"
+            <div x-data="{openScoreModal: false}"
 
-                 x-on:score-updated.window="
-        openScoreModal = false;
-
-        showToast = true;
-
-        setTimeout(() => {
-            showToast = false
-        }, 3000)">
+                 x-on:score-updated.window="openScoreModal = false">
                 @can('manage-team')
                     <x-match.score
                         :game-id="$game->id"/>
@@ -169,5 +230,9 @@ new class extends Component {
                 </x-match.modal-score>
             </div>
         @endforeach
+
+        <div class="px-4 sm:px-6 lg:px-8 pb-10">
+            {{ $this->games->links() }}
+        </div>
     @endif
 </div>

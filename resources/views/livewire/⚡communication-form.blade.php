@@ -40,26 +40,14 @@ new class extends Component {
         $this->reset('message');
 
         $this->dispatch('message-sent');
+        $this->dispatch('notify', message: 'Message envoyé avec succès.', type: 'success');
     }
 };
 ?>
 
 <div
-    x-data="{
-        openModal: false,
-        toast: false
-    }"
-
-    x-on:message-sent.window="
-        openModal = false;
-
-        toast = true;
-
-        setTimeout(() => {
-            toast = false
-        }, 3000)
-    "
-
+    x-data="{ openModal: false }"
+    x-on:message-sent.window="openModal = false"
     class="shrink-0"
 >
     @can('manage-team')
@@ -141,15 +129,5 @@ new class extends Component {
             </div>
         </div>
     </template>
-
-    <div
-        x-show="toast"
-        x-transition
-        class="fixed bottom-5 right-5 z-[9999] rounded-2xl border border-green-500/30 bg-[#1F2243] px-5 py-4 shadow-2xl"
-    >
-        <p class="text-white font-medium">
-            ✅ Message envoyé avec succès
-        </p>
-    </div>
 
 </div>

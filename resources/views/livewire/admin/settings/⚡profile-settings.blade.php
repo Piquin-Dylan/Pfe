@@ -20,18 +20,12 @@ new class extends Component {
     {
         $this->form->update();
 
-        session()->flash('success', 'Profil mis à jour avec succès.');
+        $this->dispatch('notify', message: 'Profil mis à jour avec succès.', type: 'success');
     }
 };
 ?>
 
 <div>
-    @if (session()->has('success'))
-        <div class="p-4 rounded-xl bg-green-500/20 border border-green-500/30 text-green-400">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <form wire:submit.prevent="updateProfile" class="space-y-5">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 

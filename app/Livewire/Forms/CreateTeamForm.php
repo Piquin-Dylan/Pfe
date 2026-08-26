@@ -43,7 +43,7 @@ class CreateTeamForm extends Form
         if (\Auth::user()->team) {
 
             session()->flash(
-                'status',
+                'error',
                 'Vous possédez déjà une équipe. Il n\'est pas possible d\'en créer une seconde.'
             );
 

@@ -28,7 +28,7 @@ new class extends Component {
         $this->form->update();
 
         $this->dispatch('refresh-calendar');
-        $this->dispatch('match-updated');
+        $this->dispatch('notify', message: 'Match modifié avec succès.', type: 'success');
         $this->dispatch('close-drawer');
     }
 };
@@ -150,31 +150,5 @@ new class extends Component {
             </x-layout_forms>
         </x-drawer>
     @endcan
-
-    <div
-        x-data="{ show: false }"
-
-        x-on:match-updated.window="
-            show = true;
-
-            setTimeout(() => {
-                show = false
-            }, 4000)
-        "
-        x-show="show"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-4"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-4"
-        class="fixed bottom-5 right-5 z-[9999]"
-        style="display: none;">
-
-        <div class="bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl font-semibold">
-            ✅ Match modifié avec succès
-        </div>
-
-    </div>
 
 </div>

@@ -10,7 +10,7 @@ new class extends Component {
         $this->form->validate();
         $this->form->submit();
         $this->dispatch('refresh-calendar');
-        $this->dispatch('match-created');
+        $this->dispatch('notify', message: 'Entrainement créé avec succès.', type: 'success');
         $this->dispatch('close-drawer');
 
     }
@@ -30,16 +30,6 @@ new class extends Component {
                 button="Connexion"
                 containerClass="">
                 <form class="w-full" wire:submit.prevent="save">
-                    @if (session()->has('status'))
-                        <div
-                            x-data="{ show: true }"
-                            x-init="setTimeout(() => show = false, 4000)"
-                            x-show="show"
-                            class="text-green-500 text-2xl p-4 mt-8 mb-4"
-                        >
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <x-form.input
@@ -112,29 +102,4 @@ new class extends Component {
             </x-layout_forms>
         </x-drawer>
     @endcan
-        <div
-            x-data="{ show: false }"
-
-            x-on:match-created.window="
-            show = true;
-
-            setTimeout(() => {
-                show = false
-            }, 4000)
-        "
-            x-show="show"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 translate-y-4"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 translate-y-4"
-            class="fixed bottom-5 right-5 z-[9999]"
-            style="display: none;">
-
-            <div class="bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl font-semibold">
-                ✅ Entrainement créer avec succès
-            </div>
-
-        </div>
 </div>

@@ -1,11 +1,15 @@
 <?php
 
 use App\Models\Player;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 new class extends Component {
+
+    use WithPagination;
 
     public string $searchPlayer = "";
 
@@ -40,10 +44,16 @@ new class extends Component {
     public function filter($string): void
     {
         $this->filters = $string;
+        $this->resetPage();
+    }
+
+    public function updatedSearchPlayer(): void
+    {
+        $this->resetPage();
     }
 
     //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
-    public function getPlayersProperty(): Collection
+    public function getPlayersProperty(): LengthAwarePaginator
     {
         $user = Auth::user();
 
@@ -75,10 +85,10 @@ new class extends Component {
                 'team:id,user_id',
                 'trains'
             ])
-            ->get();
+            ->paginate(12);
     }
 
-    public function getFilteredPlayersProperty(): Collection
+    public function getFilteredPlayersProperty(): Collection|LengthAwarePaginator
     {
         if (!$this->playersWithStatus) {
             return $this->players;
@@ -114,7 +124,18 @@ new class extends Component {
         $players = $this->filteredPlayers;
     @endphp
 
-    @if($players->isEmpty())
+    @if($players->isEmpty() && ($searchPlayer !== '' || $filters !== 'tout'))
+        <div
+            class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
+            <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
+                Aucun joueur ne correspond à votre recherche
+            </h3>
+
+            <p class="text-sm sm:text-base text-gray-300">
+                Essayez un autre nom ou réinitialisez les filtres.
+            </p>
+        </div>
+    @elseif($players->isEmpty())
         <div
             class="max-w-2xl mx-4 sm:mx-auto mt-6 sm:mt-10 p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 text-center">
             <h3 class="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-4">
@@ -150,5 +171,11 @@ new class extends Component {
                 </div>
             @endforeach
         </div>
+
+        @if($players instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
+            <div class="px-5 pb-10">
+                {{ $players->links() }}
+            </div>
+        @endif
     @endif
 </div>

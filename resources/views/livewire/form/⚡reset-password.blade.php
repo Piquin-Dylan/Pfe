@@ -41,7 +41,7 @@ new class extends Component {
             return $this->redirect('/login');
         }
 
-        session()->flash('status', "Ce lien de réinitialisation est invalide ou a expiré.");
+        session()->flash('error', "Ce lien de réinitialisation est invalide ou a expiré.");
     }
 
 }
@@ -53,14 +53,6 @@ new class extends Component {
                     text="Vous vous souvenez de votre mot de passe ?"
                     action="Connexion" redirection="login">
 
-        @if (session()->has('status'))
-            <div
-                x-data="{ show: true }"
-                x-show="show"
-                class="text-red-500 text-center text-xl p-4 mt-8 mb-4">
-                {{ session('status') }}
-            </div>
-        @endif
         <form wire:submit.prevent="save">
             <x-form.input
                 label_name="Adresse mail"

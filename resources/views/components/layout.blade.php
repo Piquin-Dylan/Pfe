@@ -29,6 +29,7 @@
 <main>
     {{ $slot  }}
 </main>
+<x-toast />
 @livewireScripts
 </body>
 </html>

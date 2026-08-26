@@ -15,6 +15,7 @@ new class extends Component {
         $this->form->validate();
 
         if ($this->form->submit()) {
+            session()->flash('success', 'Équipe créée avec succès, bienvenue !');
             $this->redirect('/hub');
         }
     }
@@ -30,16 +31,6 @@ new class extends Component {
         text="Vous voulez rejoindre une équipe ?"
         action="Rejoindre une équipe"
         redirection="profile">
-
-
-        @if(session()->has('status'))
-            <div
-                x-data="{ show: true }"
-                x-show="show"
-                class="text-red-500 text-center text-xl p-4 mt-8 mb-4">
-                {{ session('status') }}
-            </div>
-        @endif
 
         <form wire:submit.prevent="save" class="space-y-5">
 

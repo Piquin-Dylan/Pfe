@@ -32,18 +32,12 @@ new class extends Component
             'password_confirmation',
         ]);
 
-        session()->flash('success', 'Mot de passe modifié avec succès.');
+        $this->dispatch('notify', message: 'Mot de passe modifié avec succès.', type: 'success');
     }
 };
 ?>
 
 <div class="space-y-6">
-
-    @if (session()->has('success'))
-        <div class="p-4 text-green-700 bg-green-100 rounded-lg">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <x-form.input
         label_name="Mot de passe actuel"

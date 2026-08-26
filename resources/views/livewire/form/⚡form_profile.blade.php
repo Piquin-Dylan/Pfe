@@ -41,6 +41,7 @@ new class extends Component {
             'maillot'   => $this->form->maillot,
         ]);
 
+        session()->flash('success', 'Vous avez rejoint l\'équipe avec succès !');
         $this->redirect('/hub');
     }
 };

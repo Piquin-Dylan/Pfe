@@ -3,17 +3,39 @@
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\Train;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 new class extends Component {
-    public \Illuminate\Support\Collection $trains;
 
-    public function mount(): void
+    use WithPagination;
+
+    public string $searchTrain = '';
+
+    public string $trainFilter = 'tous';
+
+    public function updatedSearchTrain(): void
     {
+        $this->resetPage();
+    }
 
+    public function filterTrain(string $value): void
+    {
+        $this->trainFilter = $value;
+        $this->resetPage();
+    }
+
+    public function getTrainsProperty(): LengthAwarePaginator
+    {
         $teamId = Auth::user()->currentTeam()?->id;
 
-        $this->trains = Train::where('team_id', $teamId)->orderby('date_train', 'asc')->get();
+        return Train::where('team_id', $teamId)
+            ->when($this->searchTrain, fn ($query) => $query->where('address', 'like', '%' . $this->searchTrain . '%'))
+            ->when($this->trainFilter === 'a_venir', fn ($query) => $query->whereDate('date_train', '>=', now()))
+            ->when($this->trainFilter === 'passes', fn ($query) => $query->whereDate('date_train', '<', now()))
+            ->orderby('date_train', 'asc')
+            ->paginate(8);
     }
 };
 ?>
@@ -23,8 +45,47 @@ new class extends Component {
     <div class="w-full flex justify-center max-w-[250px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         @livewire('admin.create_train')
     </div>
+
+    <div class="px-4 sm:px-6 lg:px-8">
+        <input
+            class="bg-white p-4 text-black rounded-2xl w-full"
+            wire:model.live.debounce="searchTrain"
+            placeholder="Rechercher un entraînement (lieu)"
+        >
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-8 pt-6 pb-2">
+        <span
+            class="filter_position text-sm md:text-base {{ $trainFilter === 'tous' ? 'active' : '' }}"
+            wire:click="filterTrain('tous')">
+            Tous
+        </span>
+
+        <span
+            class="filter_position text-sm md:text-base {{ $trainFilter === 'a_venir' ? 'active' : '' }}"
+            wire:click="filterTrain('a_venir')">
+            À venir
+        </span>
+
+        <span
+            class="filter_position text-sm md:text-base {{ $trainFilter === 'passes' ? 'active' : '' }}"
+            wire:click="filterTrain('passes')">
+            Passés
+        </span>
+    </div>
+
     <div>
-        @if($trains->isEmpty())
+        @if($this->trains->isEmpty() && ($searchTrain !== '' || $trainFilter !== 'tous'))
+            <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
+                <h3 class="text-2xl font-bold text-white mb-4">
+                    Aucun entraînement ne correspond à votre recherche
+                </h3>
+
+                <p class="text-gray-300">
+                    Essayez un autre lieu ou réinitialisez les filtres.
+                </p>
+            </div>
+        @elseif($this->trains->isEmpty())
             <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
                 <h3 class="text-2xl font-bold text-white mb-4">
                     Aucun entrainement n'a encore été créer pour le moment
@@ -39,7 +100,7 @@ new class extends Component {
         @else
             <article class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 px-4 sm:px-6">
 
-                @foreach($trains as $train)
+                @foreach($this->trains as $train)
                     <h3 class="sr-only">Entrainement du : {{$train->date_train}}</h3>
                     <a
                         href="/train/{{ $train->uuid }}"
@@ -115,6 +176,10 @@ new class extends Component {
                     </a>
                 @endforeach
             </article>
+
+            <div class="px-4 sm:px-6">
+                {{ $this->trains->links() }}
+            </div>
         @endif
     </div>
 </section>

@@ -93,6 +93,8 @@ new class extends Component {
 
         $users = User::whereIn('users.id', $players_list)->get();
         Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
+
+        $this->dispatch('notify', message: 'Convocations enregistrées avec succès.', type: 'success');
     }
 
     public function saveSecondConvocation(): void
@@ -112,6 +114,7 @@ new class extends Component {
         $users = User::whereIn('users.id', $players_list)->get();
         Notification::send($users, new \App\Notifications\NewMatchConvocation($this->games));
 
+        $this->dispatch('notify', message: 'Reconvocation enregistrée avec succès.', type: 'success');
     }
 
     public function assignPlayerToPosition($poste, $idPlayer)
@@ -140,7 +143,7 @@ new class extends Component {
             ]);
         }
 
-        $this->dispatch('composition-saved');
+        $this->dispatch('notify', message: 'Composition enregistrée avec succès.', type: 'success');
     }
 
 };

@@ -14,6 +14,7 @@ new class extends Component {
     public function save(): void
     {
         $this->form->submit();
+        session()->flash('success', 'Compte créé avec succès, bienvenue !');
         $this->redirect('/hub');
 
     }

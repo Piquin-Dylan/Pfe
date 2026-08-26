@@ -19,18 +19,12 @@ new class extends Component {
     {
         $this->form->update();
 
-        session()->flash('success', 'Équipe mise à jour avec succès.');
+        $this->dispatch('notify', message: 'Équipe mise à jour avec succès.', type: 'success');
     }
 };
 ?>
 
 <div>
-
-    @if(session()->has('success'))
-        <div class="p-4 rounded-xl bg-green-500/20 border border-green-500/30 text-green-400 mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <form wire:submit.prevent="updateTeam" class="space-y-5">
 

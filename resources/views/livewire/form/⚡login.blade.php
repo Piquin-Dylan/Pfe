@@ -19,7 +19,7 @@ new class extends Component {
         if ($this->tooManyLoginAttempts()) {
             $seconds = RateLimiter::availableIn($this->throttleKey());
 
-            session()->flash('status', "Trop de tentatives de connexion. Réessayez dans {$seconds} secondes.");
+            session()->flash('error', "Trop de tentatives de connexion. Réessayez dans {$seconds} secondes.");
 
             return;
         }
@@ -33,7 +33,7 @@ new class extends Component {
 
             RateLimiter::hit($this->throttleKey(), 60);
 
-            session()->flash('status', "Le mot de passe ou l'adresse email est incorrect");
+            session()->flash('error', "Le mot de passe ou l'adresse email est incorrect");
         }
 
     }
@@ -57,22 +57,6 @@ new class extends Component {
                     text="Vous n'avez pas encore de compte ?"
                     action="Inscription" redirection="register">
 
-        @if  (session()->has('success'))
-            <div
-                x-data="{ show: true }"
-                x-show="show"
-                class=" text-green-500 text-center text-xl p-4 mt-8 mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if  (session()->has('status'))
-            <div
-                x-data="{ show: true }"
-                x-show="show"
-                class=" text-red-500 text-center text-xl p-4 mt-8 mb-4">
-                {{ session('status') }}
-            </div>
-        @endif
         <form wire:submit.prevent="save">
             <x-form.input
 
