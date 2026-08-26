@@ -3,29 +3,21 @@
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\Train;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 new class extends Component {
 
-    use WithPagination;
-
     public string $searchTrain = '';
 
-    public function updatedSearchTrain(): void
-    {
-        $this->resetPage();
-    }
-
-    public function getTrainsProperty(): LengthAwarePaginator
+    public function getTrainsProperty(): Collection
     {
         $teamId = Auth::user()->currentTeam()?->id;
 
         return Train::where('team_id', $teamId)
             ->when($this->searchTrain, fn ($query) => $query->where('address', 'like', '%' . $this->searchTrain . '%'))
             ->orderby('date_train', 'asc')
-            ->paginate(8);
+            ->get();
     }
 };
 ?>
@@ -36,7 +28,7 @@ new class extends Component {
         @livewire('admin.create_train')
     </div>
 
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8 pb-8">
         <input
             class="bg-white p-4 text-black rounded-2xl w-full"
             wire:model.live.debounce="searchTrain"
@@ -146,10 +138,6 @@ new class extends Component {
                     </a>
                 @endforeach
             </article>
-
-            <div class="px-4 sm:px-6">
-                {{ $this->trains->links() }}
-            </div>
         @endif
     </div>
 </section>

@@ -2,13 +2,10 @@
 
 use App\Models\Game;
 use App\Models\Team;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 new class extends Component {
-
-    use WithPagination;
 
     public int $score_home;
     public int $score_away;
@@ -35,18 +32,12 @@ new class extends Component {
         }
     }
 
-    public function updatedSearchMatch(): void
-    {
-        $this->resetPage();
-    }
-
     public function filterMatch(string $value): void
     {
         $this->matchFilter = $value;
-        $this->resetPage();
     }
 
-    public function getGamesProperty(): LengthAwarePaginator
+    public function getGamesProperty(): Collection
     {
         $teamId = Auth::user()->currentTeam()?->id;
 
@@ -60,7 +51,7 @@ new class extends Component {
             ->when($this->matchFilter === 'a_venir', fn ($query) => $query->where(fn ($q) => $q->whereNull('score_home')->orWhereNull('score_away')))
             ->when($this->matchFilter === 'joues', fn ($query) => $query->whereNotNull('score_home')->whereNotNull('score_away'))
             ->orderBy('date_match', 'asc')
-            ->paginate(6);
+            ->get();
     }
 
     public function updateScore($id)
@@ -232,9 +223,5 @@ new class extends Component {
                 </x-match.modal-score>
             </div>
         @endforeach
-
-        <div class="px-4 sm:px-6 lg:px-8 pb-10">
-            {{ $this->games->links() }}
-        </div>
     @endif
 </div>

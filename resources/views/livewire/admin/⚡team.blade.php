@@ -1,15 +1,11 @@
 <?php
 
 use App\Models\Player;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 new class extends Component {
-
-    use WithPagination;
 
     public string $searchPlayer = "";
 
@@ -44,16 +40,10 @@ new class extends Component {
     public function filter($string): void
     {
         $this->filters = $string;
-        $this->resetPage();
-    }
-
-    public function updatedSearchPlayer(): void
-    {
-        $this->resetPage();
     }
 
     //Fonction qui permet de pouvoir afficher les joueurs appartenant a un club de l"utilisateur connecter qui est donc le coach du club
-    public function getPlayersProperty(): LengthAwarePaginator
+    public function getPlayersProperty(): Collection
     {
         $user = Auth::user();
 
@@ -85,10 +75,10 @@ new class extends Component {
                 'team:id,user_id',
                 'trains'
             ])
-            ->paginate(12);
+            ->get();
     }
 
-    public function getFilteredPlayersProperty(): Collection|LengthAwarePaginator
+    public function getFilteredPlayersProperty(): Collection
     {
         if (!$this->playersWithStatus) {
             return $this->players;
@@ -171,11 +161,5 @@ new class extends Component {
                 </div>
             @endforeach
         </div>
-
-        @if($players instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
-            <div class="px-5 pb-10">
-                {{ $players->links() }}
-            </div>
-        @endif
     @endif
 </div>
