@@ -40,7 +40,7 @@ new class extends Component {
             $train->players()->updateExistingPivot($playerId, [
                 'status' => $string,
             ]);
-            $train_coach->notify(new \App\Notifications\ParticipationResponseNotification($type, $string, $id, $train));
+            $train_coach->notify(new \App\Notifications\ParticipationResponseNotification($type, $string, $playerId, $train));
 
 
         } else {
