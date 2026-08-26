@@ -77,6 +77,21 @@ new class extends Component {
                 ->get();
         }
 
+    public function getPlayerAttendanceProperty(): array
+    {
+        $totalTrains = Auth::user()->currentTeam()?->trains()->count() ?? 0;
+
+        return $this->games->players->mapWithKeys(function ($player) use ($totalTrains) {
+            $presences = $player->trains()
+                ->wherePivot('status', 'present')
+                ->count();
+
+            $rate = $totalTrains > 0 ? (int) round($presences / $totalTrains * 100) : 0;
+
+            return [$player->id => $rate];
+        })->all();
+    }
+
     public function saveConvocation(): void
     {
         $players_array = [];

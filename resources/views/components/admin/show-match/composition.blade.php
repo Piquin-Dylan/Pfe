@@ -100,6 +100,7 @@
                                         <div>
                                             <p class="text-white font-semibold">{{ $player->firstName }}</p>
                                             <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            <x-admin.show-match.attendance-badge :rate="$this->playerAttendance[$player->id] ?? 0" />
                                         </div>
                                     </div>
                                     <div class="h-4 w-4 rounded-full border border-gray-400"></div>
@@ -155,6 +156,7 @@
                                         <div>
                                             <p class="text-white font-semibold">{{ $player->firstName }}</p>
                                             <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            <x-admin.show-match.attendance-badge :rate="$this->playerAttendance[$player->id] ?? 0" />
                                         </div>
                                     </div>
                                     <div class="h-4 w-4 rounded-full border border-gray-400"></div>
@@ -241,6 +243,7 @@
                                         <div>
                                             <p class="text-white font-semibold">{{ $player->firstName }}</p>
                                             <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                            <x-admin.show-match.attendance-badge :rate="$this->playerAttendance[$player->id] ?? 0" />
                                         </div>
                                         <input
                                             type="checkbox"
@@ -298,6 +301,7 @@
                                             <div>
                                                 <p class="text-white font-semibold">{{ $player->firstName }}</p>
                                                 <p class="text-xs text-gray-400 uppercase">{{ $player->position }}</p>
+                                                <x-admin.show-match.attendance-badge :rate="$this->playerAttendance[$player->id] ?? 0" />
                                             </div>
                                         </div>
                                         <div class="h-4 w-4 rounded-full border border-gray-400"></div>
