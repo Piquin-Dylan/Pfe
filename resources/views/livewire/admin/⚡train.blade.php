@@ -13,16 +13,8 @@ new class extends Component {
 
     public string $searchTrain = '';
 
-    public string $trainFilter = 'tous';
-
     public function updatedSearchTrain(): void
     {
-        $this->resetPage();
-    }
-
-    public function filterTrain(string $value): void
-    {
-        $this->trainFilter = $value;
         $this->resetPage();
     }
 
@@ -32,8 +24,6 @@ new class extends Component {
 
         return Train::where('team_id', $teamId)
             ->when($this->searchTrain, fn ($query) => $query->where('address', 'like', '%' . $this->searchTrain . '%'))
-            ->when($this->trainFilter === 'a_venir', fn ($query) => $query->whereDate('date_train', '>=', now()))
-            ->when($this->trainFilter === 'passes', fn ($query) => $query->whereDate('date_train', '<', now()))
             ->orderby('date_train', 'asc')
             ->paginate(8);
     }
@@ -54,28 +44,8 @@ new class extends Component {
         >
     </div>
 
-    <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-8 pt-6 pb-2">
-        <span
-            class="filter_position text-sm md:text-base {{ $trainFilter === 'tous' ? 'active' : '' }}"
-            wire:click="filterTrain('tous')">
-            Tous
-        </span>
-
-        <span
-            class="filter_position text-sm md:text-base {{ $trainFilter === 'a_venir' ? 'active' : '' }}"
-            wire:click="filterTrain('a_venir')">
-            À venir
-        </span>
-
-        <span
-            class="filter_position text-sm md:text-base {{ $trainFilter === 'passes' ? 'active' : '' }}"
-            wire:click="filterTrain('passes')">
-            Passés
-        </span>
-    </div>
-
     <div>
-        @if($this->trains->isEmpty() && ($searchTrain !== '' || $trainFilter !== 'tous'))
+        @if($this->trains->isEmpty() && $searchTrain !== '')
             <div class="max-w-2xl mx-auto mt-10 p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
                 <h3 class="text-2xl font-bold text-white mb-4">
                     Aucun entraînement ne correspond à votre recherche

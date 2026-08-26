@@ -57,8 +57,8 @@ new class extends Component {
                         ->orWhere('address', 'like', '%' . $this->searchMatch . '%');
                 });
             })
-            ->when($this->matchFilter === 'a_venir', fn ($query) => $query->whereDate('date_match', '>=', now()))
-            ->when($this->matchFilter === 'joues', fn ($query) => $query->whereDate('date_match', '<', now()))
+            ->when($this->matchFilter === 'a_venir', fn ($query) => $query->where(fn ($q) => $q->whereNull('score_home')->orWhereNull('score_away')))
+            ->when($this->matchFilter === 'joues', fn ($query) => $query->whereNotNull('score_home')->whereNotNull('score_away'))
             ->orderBy('date_match', 'asc')
             ->paginate(6);
     }
@@ -191,11 +191,13 @@ new class extends Component {
 
             </article>
 
-            <div class="flex justify-center pb-8">
-                <a href="/match/{{ $game->uuid }}" class="btn-primary">
-                    Voir les détails
-                </a>
-            </div>
+            @cannot('manage-team')
+                <div class="flex justify-center pb-8">
+                    <a href="/match/{{ $game->uuid }}" class="btn-primary">
+                        Voir les détails
+                    </a>
+                </div>
+            @endcannot
 
             <div x-data="{openScoreModal: false}"
 
