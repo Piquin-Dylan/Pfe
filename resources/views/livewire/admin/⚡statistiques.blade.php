@@ -17,15 +17,17 @@ new class extends Component {
 
     public function mount(): void
     {
-        $this->totalTrains = Auth::user()->team->trains()->count();
-        $this->totalMatchs = Auth::user()->team->games()->count();
+        $team = Auth::user()->currentTeam();
+
+        $this->totalTrains = $team->trains()->count();
+        $this->totalMatchs = $team->games()->count();
 
         $this->computeClubStats();
     }
 
     public function computeClubStats(): void
     {
-        $finishedGames = Auth::user()->team->games()
+        $finishedGames = Auth::user()->currentTeam()->games()
             ->whereNotNull('score_home')
             ->whereNotNull('score_away')
             ->orderByDesc('date_match')
@@ -58,29 +60,9 @@ new class extends Component {
 
     public function getFilteredPlayersProperty()
     {
-        $players = Auth::user()->team->players()->get();
+        $players = Auth::user()->currentTeam()->players()->get();
 
-        $players->each(function ($player) {
-
-            $presences = $player->trains()
-                ->wherePivot('status', 'present')
-                ->count();
-
-            $matchsJoues = $player->games()
-                ->wherePivot('status', 'present')
-                ->count();
-
-            $player->attendance_percentage = $this->totalTrains > 0
-                ? round(($presences / $this->totalTrains) * 100)
-                : 0;
-
-            $player->matches_percentage = $this->totalMatchs > 0
-                ? round(($matchsJoues / $this->totalMatchs) * 100)
-                : 0;
-
-            $player->presences = $presences;
-            $player->matchs_joues = $matchsJoues;
-        });
+        $players->each(fn ($player) => $this->applyAttendance($player));
 
         return $players->filter(function ($player) {
             return str_contains(
@@ -88,6 +70,41 @@ new class extends Component {
                 strtolower($this->search)
             );
         });
+    }
+
+    public function getMyStatsProperty(): ?\Illuminate\Support\Collection
+    {
+        $player = Auth::user()->player;
+
+        if (!$player) {
+            return null;
+        }
+
+        $this->applyAttendance($player);
+
+        return collect([$player]);
+    }
+
+    private function applyAttendance(\App\Models\Player $player): void
+    {
+        $presences = $player->trains()
+            ->wherePivot('status', 'present')
+            ->count();
+
+        $matchsJoues = $player->games()
+            ->wherePivot('status', 'present')
+            ->count();
+
+        $player->attendance_percentage = $this->totalTrains > 0
+            ? round(($presences / $this->totalTrains) * 100)
+            : 0;
+
+        $player->matches_percentage = $this->totalMatchs > 0
+            ? round(($matchsJoues / $this->totalMatchs) * 100)
+            : 0;
+
+        $player->presences = $presences;
+        $player->matchs_joues = $matchsJoues;
     }
 };
 ?>
@@ -100,7 +117,11 @@ new class extends Component {
         </h2>
 
         <p class="text-gray-400 mt-1">
-            Consultez les statistiques du club et de vos joueurs.
+            @if(Auth::user()->player)
+                Consultez les statistiques du club et vos statistiques personnelles.
+            @else
+                Consultez les statistiques du club et de vos joueurs.
+            @endif
         </p>
     </div>
     <x-admin.statistiques.club-stats-card
@@ -113,17 +134,31 @@ new class extends Component {
         :recent-form="$recentForm"
     />
 
-    <div class="mb-4">
-        <input
-            type="text"
-            wire:model.live.debounce.300ms="search"
-            placeholder="Rechercher un joueur..."
-            class="w-full rounded-2xl border border-purple-500/20 bg-white px-4 py-3 text-black placeholder:text-gray-400 outline-none focus:border-purple-500"
-        >
-    </div>
-    <x-admin.statistiques.player-stats-card
-        :players="$this->filteredPlayers"
-        :total-trains="$totalTrains"
-        :total-matchs="$totalMatchs"
-    />
+    @if(Auth::user()->player)
+        <div class="mb-4">
+            <h3 class="text-xl font-bold text-white">
+                Mes statistiques
+            </h3>
+        </div>
+
+        <x-admin.statistiques.player-stats-card
+            :players="$this->myStats"
+            :total-trains="$totalTrains"
+            :total-matchs="$totalMatchs"
+        />
+    @else
+        <div class="mb-4">
+            <input
+                type="text"
+                wire:model.live.debounce.300ms="search"
+                placeholder="Rechercher un joueur..."
+                class="w-full rounded-2xl border border-purple-500/20 bg-white px-4 py-3 text-black placeholder:text-gray-400 outline-none focus:border-purple-500"
+            >
+        </div>
+        <x-admin.statistiques.player-stats-card
+            :players="$this->filteredPlayers"
+            :total-trains="$totalTrains"
+            :total-matchs="$totalMatchs"
+        />
+    @endif
 </div>
