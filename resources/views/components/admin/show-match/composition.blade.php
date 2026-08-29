@@ -64,6 +64,24 @@
                 ></p>
             </div>
 
+            @php
+                $assignedIds = array_values($this->player_position ?? []);
+                $playersAtPost = $this->games->players->filter(fn($p) => $p->pivot->status === 'present');
+                $available = $playersAtPost->filter(fn($p) => !in_array($p->id, $assignedIds));
+                $placed    = $playersAtPost->filter(fn($p) =>  in_array($p->id, $assignedIds));
+            @endphp
+
+            @if($playersAtPost->isEmpty())
+
+                <div class="flex-1 flex items-center justify-center text-center px-4">
+                    <p class="text-sm text-gray-400">
+                        Aucun joueur n'a encore confirmé sa présence pour ce match.<br>
+                        La composition sera disponible dès qu'un joueur aura répondu "présent" à sa convocation.
+                    </p>
+                </div>
+
+            @else
+
             <div class="mb-4">
                 <input
                     wire:model.live.debounce.300ms="searchPlayer"
@@ -73,12 +91,6 @@
             </div>
 
             <div class="flex-1 overflow-y-auto space-y-6 pr-2">
-                @php
-                    $assignedIds = array_values($this->player_position ?? []);
-                    $playersAtPost = $this->games->players->filter(fn($p) => $p->pivot->status === 'present');
-                    $available = $playersAtPost->filter(fn($p) => !in_array($p->id, $assignedIds));
-                    $placed    = $playersAtPost->filter(fn($p) =>  in_array($p->id, $assignedIds));
-                @endphp
 
                 <div>
                     <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-3">
@@ -200,6 +212,8 @@
                     </div>
                 </div>
             </div>
+
+            @endif
         </div>
 
         <div
@@ -221,6 +235,17 @@
                     </div>
                     <button @click="selectedPlayer = null" class="text-white text-xl hover:opacity-70">✕</button>
                 </div>
+
+                @if($playersAtPost->isEmpty())
+
+                    <div class="px-6 pb-6">
+                        <p class="text-sm text-gray-400 text-center">
+                            Aucun joueur n'a encore confirmé sa présence pour ce match.<br>
+                            La composition sera disponible dès qu'un joueur aura répondu "présent" à sa convocation.
+                        </p>
+                    </div>
+
+                @else
 
                 <div class="px-6 pb-4">
                     <input
@@ -336,6 +361,8 @@
                         </div>
                     </div>
                 </div>
+
+                @endif
 
                 <div class="p-6 pt-0 flex justify-center">
                     <button @click="selectedPlayer = null" class="btn-primary">Valider</button>

@@ -244,13 +244,27 @@ new class extends Component {
 
                 @else
 
-                    <button
-                        disabled
-                        class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
+                    <div class="flex flex-col items-center gap-3">
+
+                        <button
+                            disabled
+                            class="bg-gray-500/30 text-gray-300 px-6 py-3 rounded-2xl
         cursor-not-allowed border border-gray-500/30"
-                    >
-                        Convocation déjà enregistrée
-                    </button>
+                        >
+                            Convocation déjà enregistrée
+                        </button>
+
+                        <p class="text-white/70 text-sm text-center">
+                            Pour convoquer d'autres joueurs, rendez-vous dans l'onglet
+                            <button
+                                type="button"
+                                @click="currentTab = 'second'"
+                                class="text-violet-300 underline hover:text-violet-200 cursor-pointer">
+                                Feuille de match
+                            </button>.
+                        </p>
+
+                    </div>
 
                 @endif
             </div>
