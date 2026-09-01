@@ -1,3 +1,4 @@
+@props(['title' => null])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @livewireStyles
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ? $title . ' - ' . config('app.name', 'SportTeams') : config('app.name', 'SportTeams') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

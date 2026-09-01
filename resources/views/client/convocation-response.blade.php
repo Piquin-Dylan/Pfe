@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Réponse à la convocation">
     <livewire:client.convocation-response
         :match="$match ?? null"
         :train="$train ?? null"

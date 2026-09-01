@@ -36,7 +36,6 @@ class Player extends Model
     }
 
     //  Le joueur peut participer  à plusieurs matchs
-    // App\Models\Player.php
     public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class, 'player_game', 'player_id', 'match_id')
