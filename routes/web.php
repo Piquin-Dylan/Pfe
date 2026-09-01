@@ -132,27 +132,27 @@ Route::middleware('auth')->group(function () {
             return view('admin.statistiques');
         })->name('statistiques');
 
-        Route::get('/match/{id}', function ($id) {
+        Route::get('/match/{match}', function (Game $match) {
 
             if (Auth::user()->player) {
                 return view('client.show_match', [
-                    'id' => $id,
+                    'match' => $match,
                 ]);
             }
 
             return view('admin.show_match', [
-                'id' => $id,
+                'match' => $match,
             ]);
         });
 
-        Route::get('/match/{id}/live', function ($id) {
+        Route::get('/match/{match}/live', function (Game $match) {
 
             if (Auth::user()->player) {
                 return redirect('/match');
             }
 
             return view('admin.match_live', [
-                'id' => $id,
+                'match' => $match,
             ]);
         });
 
@@ -160,16 +160,16 @@ Route::middleware('auth')->group(function () {
             return view('admin.train');
         })->name('train');
 
-        Route::get('/train/{id}', function ($id) {
+        Route::get('/train/{train}', function (Train $train) {
 
             if (Auth::user()->player) {
                 return view('client.show_train', [
-                    'id' => $id,
+                    'train' => $train,
                 ]);
             }
 
             return view('admin.show_train', [
-                'id' => $id
+                'train' => $train,
             ]);
         });
 

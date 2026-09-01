@@ -10,9 +10,9 @@ new class extends Component {
     public int $count_player = 0;
 
 
-    public function mount($id): void
+    public function mount(Train $train): void
     {
-        $this->trains = Train::where('uuid', $id)->firstOrFail();
+        $this->trains = $train;
         $this->authorize('view', $this->trains);
 
         $this->trains->players()->get();

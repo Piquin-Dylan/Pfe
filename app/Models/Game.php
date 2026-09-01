@@ -23,10 +23,10 @@ class Game extends Model
         });
     }
 
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
-    }
+        public function getRouteKeyName(): string
+        {
+            return 'uuid';
+        }
 
     protected $fillable = [
         'team_id',

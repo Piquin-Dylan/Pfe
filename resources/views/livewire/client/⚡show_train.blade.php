@@ -10,9 +10,9 @@ new class extends Component {
 
     public ?string $myStatus = null;
 
-    public function mount($id): void
+    public function mount(Train $train): void
     {
-        $this->trains = Train::where('uuid', $id)->firstOrFail();
+        $this->trains = $train;
         $this->authorize('view', $this->trains);
 
         $myPlayer = Auth::user()->player;

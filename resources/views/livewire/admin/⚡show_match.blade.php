@@ -28,10 +28,10 @@ new class extends Component {
     public bool $showTutorial = true;
 
 
-    public function mount($id): void
+    public function mount(Game $match): void
 
     {
-        $this->games = Game::where('uuid', $id)->firstOrFail();
+        $this->games = $match;
         $this->authorize('view', $this->games);
         $this->countPresentPlayers();
 

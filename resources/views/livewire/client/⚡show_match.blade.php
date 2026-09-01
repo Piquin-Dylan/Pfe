@@ -17,9 +17,9 @@ new class extends Component {
 
     public ?string $myPosition = null;
 
-    public function mount($id): void
+    public function mount(Game $match): void
     {
-        $this->games = Game::where('uuid', $id)->firstOrFail();
+        $this->games = $match;
         $this->authorize('view', $this->games);
 
         $myPlayer = Auth::user()->player;
