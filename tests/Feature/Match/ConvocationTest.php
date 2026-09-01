@@ -26,8 +26,8 @@ it('creates match convocation with pending status', function () {
 
     $this->actingAs($coach);
 
-    Livewire::test('admin.show_match', [
-        'id' => $game->uuid,
+    Livewire::test('admin.show_match.convocation', [
+        'match' => $game,
     ])
         ->set('checked', [$player->id])
         ->call('saveConvocation');
@@ -59,8 +59,8 @@ it('adds a player during a second convocation', function () {
 
     $this->actingAs($coach);
 
-    Livewire::test('admin.show_match', [
-        'id' => $game->uuid,
+    Livewire::test('admin.show_match.sheet', [
+        'match' => $game,
     ])
         ->set('checkedSecondConvocation', [$player->id])
         ->call('saveSecondConvocation');

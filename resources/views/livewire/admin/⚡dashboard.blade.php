@@ -1,8 +1,12 @@
 <?php
 
+use App\Livewire\Concerns\HandlesTutorial;
 use Livewire\Component;
 
 new class extends Component {
+
+    use HandlesTutorial;
+
     public string $tutorial = 'dashboard';
 
     public function logout(\Illuminate\Http\Request $request): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
@@ -16,21 +20,9 @@ new class extends Component {
         return redirect('/');
     }
 
-
     public function mount()
     {
-        //code sur le tuto
-        if (Auth::user()->tutorial()->where('tutorial_name', 'dashboard')->exists()) {
-            $this->showTutorial = false;
-        } else {
-            $this->showTutorial = true;
-            \App\Models\Tutorial::create([
-                'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
-                'tutorial_name' => "dashboard",
-                'seen' => true
-            ]);
-            $this->dispatch('start-dashboard-tutorial');
-        }
+        $this->initializeTutorial('dashboard', 'start-dashboard-tutorial');
     }
 };
 ?>

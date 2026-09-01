@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Concerns\HandlesTutorial;
 use App\Models\Game;
 use App\Models\Team;
 use Illuminate\Support\Collection;
@@ -7,10 +8,10 @@ use Livewire\Component;
 
 new class extends Component {
 
+    use HandlesTutorial;
+
     public int $score_home;
     public int $score_away;
-
-    public bool $showTutorial = true;
 
     public string $searchMatch = '';
 
@@ -18,18 +19,7 @@ new class extends Component {
 
     public function mount(): void
     {
-        //code sur le tuto
-        if (Auth::user()->tutorial()->where('tutorial_name', 'match_list')->exists()) {
-            $this->showTutorial = false;
-        } else {
-            $this->showTutorial = true;
-            \App\Models\Tutorial::create([
-                'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
-                'tutorial_name' => "match_list",
-                'seen' => true
-            ]);
-            $this->dispatch('start-match-list-tutorial');
-        }
+        $this->initializeTutorial('match_list', 'start-match-list-tutorial');
     }
 
     public function filterMatch(string $value): void

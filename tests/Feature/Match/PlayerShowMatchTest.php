@@ -18,7 +18,7 @@ it('allows a player to view their own team\'s match', function () {
     $this->actingAs($player->user);
 
     Livewire::test('client.show_match', [
-        'id' => $game->uuid,
+        'match' => $game,
     ])->assertOk();
 });
 
@@ -33,7 +33,7 @@ it('forbids a player from viewing another team\'s match', function () {
     $this->actingAs($player->user);
 
     Livewire::test('client.show_match', [
-        'id' => $otherGame->uuid,
+        'match' => $otherGame,
     ])->assertForbidden();
 });
 
@@ -51,7 +51,7 @@ it('lets a convoked player respond present and notifies the coach', function () 
     $this->actingAs($player->user);
 
     Livewire::test('client.show_match', [
-        'id' => $game->uuid,
+        'match' => $game,
     ])
         ->assertSet('myStatus', 'en attente')
         ->call('respondConvocation', 'present')
@@ -77,7 +77,7 @@ it('ignores a response from a player who was never convoked', function () {
     $this->actingAs($player->user);
 
     Livewire::test('client.show_match', [
-        'id' => $game->uuid,
+        'match' => $game,
     ])
         ->assertSet('myStatus', null)
         ->call('respondConvocation', 'present')
@@ -107,6 +107,6 @@ it('shows the player their assigned position in the composition', function () {
     $this->actingAs($player->user);
 
     Livewire::test('client.show_match', [
-        'id' => $game->uuid,
+        'match' => $game,
     ])->assertSet('myPosition', 'gardien');
 });
