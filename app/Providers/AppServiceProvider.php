@@ -23,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Seul le coach (propriétaire de l'équipe) peut gérer les matchs/entraînements de son équipe,
-        // pas un joueur simplement rattaché à celle-ci.
         Gate::define('manage-team', fn (User $user) => $user->team !== null);
 
         ResetPassword::toMailUsing(function (object $notifiable, string $token) {
