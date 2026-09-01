@@ -127,7 +127,7 @@
 
         <button
             @click="activeFeature = null"
-            class="absolute top-4 right-4 text-[var(--color-text-muted)] hover:text-[var(--color-white)] text-3xl leading-none">
+            class="absolute top-4 right-4 text-[var(--color-text-muted)] hover:text-[var(--color-white)] text-3xl leading-none cursor-pointer">
             &times;
         </button>
 

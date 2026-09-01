@@ -20,7 +20,7 @@
 
     <button
         wire:click="{{ $closeAction }}"
-        class="text-slate-400 hover:text-white text-3xl leading-none transition">
+        class="text-slate-400 hover:text-white text-3xl leading-none transition cursor-pointer">
         ×
     </button>
 

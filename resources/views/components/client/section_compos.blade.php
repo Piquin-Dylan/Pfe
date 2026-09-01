@@ -206,7 +206,7 @@
 
                         <button
                             @click="selectedPlayer = null"
-                            class="text-white text-xl hover:opacity-70">
+                            class="text-white text-xl hover:opacity-70 cursor-pointer">
                             ✕
                         </button>
 

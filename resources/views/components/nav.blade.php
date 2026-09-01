@@ -8,7 +8,7 @@
         </a>
 
         <button
-            class="relative z-50 text-white lg:hidden"
+            class="relative z-50 text-white lg:hidden cursor-pointer"
             @click="open = !open">
 
             <svg x-show="!open"

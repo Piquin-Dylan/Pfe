@@ -410,7 +410,7 @@ new class extends Component {
 
                             <button
                                 @click="openModal = false"
-                                class="text-white text-2xl hover:text-violet-400 transition">
+                                class="text-white text-2xl hover:text-violet-400 transition cursor-pointer">
                                 ✕
                             </button>
                         </div>

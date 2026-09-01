@@ -33,7 +33,7 @@
                    px-6 pt-16 pb-6 overflow-y-auto">
 
             <button
-                class="absolute top-4 right-4 text-3xl"
+                class="absolute top-4 right-4 text-3xl cursor-pointer"
                 @click="open = false">
                 ×
             </button>

@@ -10,7 +10,7 @@
 
         <button
             @click="{{ $close }}"
-            class="absolute right-4 top-4 text-3xl sm:text-5xl font-light text-white transition hover:scale-110">
+            class="absolute right-4 top-4 text-3xl sm:text-5xl font-light text-white transition hover:scale-110 cursor-pointer">
             ×
         </button>
 

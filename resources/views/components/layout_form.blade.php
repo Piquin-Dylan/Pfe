@@ -104,7 +104,7 @@
 
             <div class="bg-[#192443] h-16 lg:h-16 flex items-center px-3 lg:px-4 border-b border-white/10">
 
-                <button class="relative z-50 lg:hidden shrink-0 text-white" @click="open = !open">
+                <button class="relative z-50 lg:hidden shrink-0 text-white cursor-pointer" @click="open = !open">
                     <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
                          viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"

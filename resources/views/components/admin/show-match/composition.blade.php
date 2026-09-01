@@ -233,7 +233,7 @@
                             Poste : <span class="text-purple-400 font-semibold" x-text="selectedPlayer"></span>
                         </p>
                     </div>
-                    <button @click="selectedPlayer = null" class="text-white text-xl hover:opacity-70">✕</button>
+                    <button @click="selectedPlayer = null" class="text-white text-xl hover:opacity-70 cursor-pointer">✕</button>
                 </div>
 
                 @if($playersAtPost->isEmpty())

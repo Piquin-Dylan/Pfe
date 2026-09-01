@@ -18,7 +18,7 @@ new class extends Component {
         <button
             wire:click="switchTab('profile')"
             @class([
-                'pb-3 text-lg font-semibold transition border-b-2',
+                'pb-3 text-lg font-semibold transition border-b-2 cursor-pointer',
                 'text-white border-white' => $activeTab === 'profile',
                 'text-gray-400 border-transparent hover:text-white' => $activeTab !== 'profile',
             ])
@@ -30,7 +30,7 @@ new class extends Component {
             <button
                 wire:click="switchTab('team')"
                 @class([
-                    'pb-3 text-lg font-semibold transition border-b-2',
+                    'pb-3 text-lg font-semibold transition border-b-2 cursor-pointer',
                     'text-white border-white' => $activeTab === 'team',
                     'text-gray-400 border-transparent hover:text-white' => $activeTab !== 'team',
                 ])
@@ -42,7 +42,7 @@ new class extends Component {
         <button
             wire:click="switchTab('security')"
             @class([
-                'pb-3 text-lg font-semibold transition border-b-2',
+                'pb-3 text-lg font-semibold transition border-b-2 cursor-pointer',
                 'text-white border-white' => $activeTab === 'security',
                 'text-gray-400 border-transparent hover:text-white' => $activeTab !== 'security',
             ])

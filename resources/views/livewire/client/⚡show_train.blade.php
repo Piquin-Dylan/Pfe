@@ -85,7 +85,7 @@ new class extends Component {
                 <button
                     wire:click="respondConvocation('absent')"
                     @disabled($myStatus === 'absent')
-                    class="bg-red-500/20 text-red-400 border border-red-500/40 px-6 py-3 rounded-2xl font-semibold hover:bg-red-500/30 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                    class="bg-red-500/20 text-red-400 border border-red-500/40 px-6 py-3 rounded-2xl font-semibold hover:bg-red-500/30 transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
                     Je ne serai pas présent
                 </button>
             </div>

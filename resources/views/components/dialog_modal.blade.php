@@ -64,7 +64,7 @@
 
                 <button
                     @click="close()"
-                    class="absolute top-6 right-6 text-white/60 hover:text-white text-3xl leading-none"
+                    class="absolute top-6 right-6 text-white/60 hover:text-white text-3xl leading-none cursor-pointer"
                 >
                     &times;
                 </button>
@@ -127,7 +127,7 @@
         });
         close();
     "
-                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium transition"
+                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium transition cursor-pointer"
                                 >
                                     Modifier l'événement
                                 </button>
@@ -139,7 +139,7 @@
             type: selectedEvent.type
         });
     "
-                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500"
+                                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-500 cursor-pointer"
                                 >
                                     Supprimer l'événement
                                 </button>

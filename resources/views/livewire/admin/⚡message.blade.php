@@ -129,13 +129,13 @@ new class extends Component {
                             <div class="flex gap-3 mt-4">
                                 <button
                                     wire:click="changeStatus('present', '{{ $type }}', {{ $eventId }},'{{ $notification->id }}')"
-                                    class="px-5 py-2 rounded-xl bg-green-500/20 text-green-400 border border-green-500/40 text-sm font-semibold transition hover:bg-green-500/30">
+                                    class="px-5 py-2 rounded-xl bg-green-500/20 text-green-400 border border-green-500/40 text-sm font-semibold transition hover:bg-green-500/30 cursor-pointer">
                                     Présent
                                 </button>
 
                                 <button
                                     wire:click="changeStatus('absent', '{{ $type }}', {{ $eventId }},'{{ $notification->id }}')"
-                                    class="px-5 py-2 rounded-xl bg-red-500/20 text-red-400 border border-red-500/40 text-sm font-semibold transition hover:bg-red-500/30">
+                                    class="px-5 py-2 rounded-xl bg-red-500/20 text-red-400 border border-red-500/40 text-sm font-semibold transition hover:bg-red-500/30 cursor-pointer">
                                     Absent
                                 </button>
                             </div>

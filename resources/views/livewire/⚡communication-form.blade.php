@@ -74,7 +74,7 @@ new class extends Component {
                 <button
                     type="button"
                     @click="openModal = false"
-                    class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none transition">
+                    class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none transition cursor-pointer">
                     &times;
                 </button>
 

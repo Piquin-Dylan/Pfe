@@ -30,7 +30,7 @@
                 <button
                     type="button"
                     @click="showPassword = !showPassword"
-                    class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition">
+                    class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition cursor-pointer">
 
                     <svg
                         x-show="!showPassword"

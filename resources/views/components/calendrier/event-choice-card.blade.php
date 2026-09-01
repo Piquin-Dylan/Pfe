@@ -10,7 +10,7 @@
     wire:click="{{ $action }}"
     class="group rounded-2xl border
            transition-all duration-200
-           p-5 text-left
+           p-5 text-left cursor-pointer
            {{ $color === 'blue'
                 ? 'border-blue-500/20 bg-blue-500/10 hover:bg-blue-500/20'
                 : 'border-green-500/20 bg-green-500/10 hover:bg-green-500/20' }}"
