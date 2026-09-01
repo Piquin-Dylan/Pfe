@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ConvocationResponseController;
 use App\Models\Game;
+use App\Models\Player;
 use App\Models\Train;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +28,25 @@ Route::get('/reset-password/{token}', function (string $token) {
     ]);
 })->name('password.reset');
 
-Route::get('/convocation/{match}/{player}/{status}', ConvocationResponseController::class)
+Route::get('/convocation/{match}/{player}/{status}', function (Game $match, Player $player, string $status) {
+    return view('client.convocation-response', [
+        'match' => $match,
+        'player' => $player,
+        'status' => $status,
+    ]);
+})
     ->name('convocation.respond')
+    ->middleware('signed')
+    ->where('status', 'present|absent');
+
+Route::get('/convocation/train/{train}/{player}/{status}', function (Train $train, Player $player, string $status) {
+    return view('client.convocation-response', [
+        'train' => $train,
+        'player' => $player,
+        'status' => $status,
+    ]);
+})
+    ->name('convocation.train.respond')
     ->middleware('signed')
     ->where('status', 'present|absent');
 
@@ -144,6 +161,13 @@ Route::middleware('auth')->group(function () {
         })->name('train');
 
         Route::get('/train/{id}', function ($id) {
+
+            if (Auth::user()->player) {
+                return view('client.show_train', [
+                    'id' => $id,
+                ]);
+            }
+
             return view('admin.show_train', [
                 'id' => $id
             ]);

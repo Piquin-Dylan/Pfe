@@ -4,7 +4,9 @@ namespace App\Notifications;
 
 use App\Models\Train;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
 
 class NewTrainNotification extends Notification
 {
@@ -27,9 +29,41 @@ class NewTrainNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        if (app()->runningInConsole()) {
+            return ['database'];
+        }
+
+        return ['database', 'mail'];
     }
 
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        $date = \Carbon\Carbon::parse($this->train->date_train)->format('d/m/Y');
+        $expiresAt = \Carbon\Carbon::parse($this->train->date_train)->endOfDay();
+
+        $presentUrl = URL::temporarySignedRoute('convocation.train.respond', $expiresAt, [
+            'train' => $this->train->uuid,
+            'player' => $notifiable->player->id,
+            'status' => 'present',
+        ]);
+
+        $absentUrl = URL::temporarySignedRoute('convocation.train.respond', $expiresAt, [
+            'train' => $this->train->uuid,
+            'player' => $notifiable->player->id,
+            'status' => 'absent',
+        ]);
+
+        return (new MailMessage)
+            ->subject("Convocation - Entraînement du {$date}")
+            ->greeting("Bonjour {$notifiable->firstName},")
+            ->line("Un entraînement a été programmé le {$date} de {$this->train->hours_start} à {$this->train->hours_end}.")
+            ->line("Lieu : {$this->train->address}")
+            ->action('✅ Je suis présent(e)', $presentUrl)
+            ->line("Vous ne pourrez pas venir ? [Cliquez ici pour signaler votre absence]({$absentUrl}).");
+    }
 
     /**
      * Get the array representation of the notification.
