@@ -20,11 +20,9 @@ new class extends Component {
     {
         $this->match = $match;
 
-        MatchComposition::where('match_id', $this->match->id)
-            ->get()
-            ->each(function ($composition) {
-                $this->player_position[$composition->position] = $composition->player_id;
-            });
+        $this->player_position = MatchComposition::where('match_id', $this->match->id)
+            ->pluck('player_id', 'position')
+            ->toArray();
     }
 
     public function getPlayerAttendanceProperty(): array
@@ -34,7 +32,7 @@ new class extends Component {
         return $this->match->players->mapWithKeys(function ($player) use ($totalTrains) {
             $presences = $player->trains()->wherePivot('status', 'present')->count();
 
-            $rate = $totalTrains > 0 ? (int) round($presences / $totalTrains * 100) : 0;
+            $rate = $totalTrains > 0 ? (int)round($presences / $totalTrains * 100) : 0;
 
             return [$player->id => $rate];
         })->all();
@@ -42,11 +40,11 @@ new class extends Component {
 
     public function getPlayersAtPostProperty(): Collection
     {
-        $players = $this->match->players->filter(fn ($player) => $player->pivot->status === 'present');
+        $players = $this->match->players->filter(fn($player) => $player->pivot->status === 'present');
 
         if ($this->searchPlayer !== '') {
             $players = $players->filter(
-                fn ($player) => str_contains(strtolower($player->firstName), strtolower($this->searchPlayer))
+                fn($player) => str_contains(strtolower($player->firstName), strtolower($this->searchPlayer))
             );
         }
 
@@ -57,14 +55,14 @@ new class extends Component {
     {
         $assignedIds = array_values($this->player_position);
 
-        return $this->playersAtPost->reject(fn ($player) => in_array($player->id, $assignedIds));
+        return $this->playersAtPost->reject(fn($player) => in_array($player->id, $assignedIds));
     }
 
     public function getPlacedPlayersProperty(): Collection
     {
         $assignedIds = array_values($this->player_position);
 
-        return $this->playersAtPost->filter(fn ($player) => in_array($player->id, $assignedIds));
+        return $this->playersAtPost->filter(fn($player) => in_array($player->id, $assignedIds));
     }
 
     public function assignPlayerToPosition($poste, $idPlayer): void
@@ -164,62 +162,62 @@ new class extends Component {
 
             @else
 
-            <div class="mb-4">
-                <input
-                    wire:model.live.debounce.300ms="searchPlayer"
-                    placeholder="Rechercher un joueur..."
-                    class="w-full rounded-2xl border border-purple-500/20 bg-[#25284B] px-4 py-3 text-white placeholder:text-gray-400 outline-none"
-                >
-            </div>
-
-            <div class="flex-1 overflow-y-auto space-y-6 pr-2">
-
-                <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-3">
-                        Joueurs aux poste
-                    </h3>
-                    <div class="space-y-3">
-                        @foreach($this->availablePlayers as $player)
-                            <x-admin.show-match.player-slot
-                                :player="$player"
-                                :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
-                                :when-selected="true"
-                            />
-                        @endforeach
-
-                        @foreach($this->placedPlayers as $player)
-                            <x-admin.show-match.player-slot
-                                :player="$player"
-                                :when-selected="true"
-                                :placed="true"
-                            />
-                        @endforeach
-                    </div>
+                <div class="mb-4">
+                    <input
+                        wire:model.live.debounce.300ms="searchPlayer"
+                        placeholder="Rechercher un joueur..."
+                        class="w-full rounded-2xl border border-purple-500/20 bg-[#25284B] px-4 py-3 text-white placeholder:text-gray-400 outline-none"
+                    >
                 </div>
 
-                <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-                        Autres joueurs
-                    </h3>
-                    <div class="space-y-3">
-                        @foreach($this->availablePlayers as $player)
-                            <x-admin.show-match.player-slot
-                                :player="$player"
-                                :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
-                                :when-selected="false"
-                            />
-                        @endforeach
+                <div class="flex-1 overflow-y-auto space-y-6 pr-2">
 
-                        @foreach($this->placedPlayers as $player)
-                            <x-admin.show-match.player-slot
-                                :player="$player"
-                                :when-selected="false"
-                                :placed="true"
-                            />
-                        @endforeach
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-3">
+                            Joueurs aux poste
+                        </h3>
+                        <div class="space-y-3">
+                            @foreach($this->availablePlayers as $player)
+                                <x-admin.show-match.player-slot
+                                    :player="$player"
+                                    :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
+                                    :when-selected="true"
+                                />
+                            @endforeach
+
+                            @foreach($this->placedPlayers as $player)
+                                <x-admin.show-match.player-slot
+                                    :player="$player"
+                                    :when-selected="true"
+                                    :placed="true"
+                                />
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                            Autres joueurs
+                        </h3>
+                        <div class="space-y-3">
+                            @foreach($this->availablePlayers as $player)
+                                <x-admin.show-match.player-slot
+                                    :player="$player"
+                                    :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
+                                    :when-selected="false"
+                                />
+                            @endforeach
+
+                            @foreach($this->placedPlayers as $player)
+                                <x-admin.show-match.player-slot
+                                    :player="$player"
+                                    :when-selected="false"
+                                    :placed="true"
+                                />
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
 
             @endif
         </div>
@@ -241,7 +239,9 @@ new class extends Component {
                             Poste : <span class="text-purple-400 font-semibold" x-text="selectedPlayer"></span>
                         </p>
                     </div>
-                    <button @click="selectedPlayer = null" class="text-white text-xl hover:opacity-70 cursor-pointer">✕</button>
+                    <button @click="selectedPlayer = null" class="text-white text-xl hover:opacity-70 cursor-pointer">
+                        ✕
+                    </button>
                 </div>
 
                 @if($this->playersAtPost->isEmpty())
@@ -255,61 +255,61 @@ new class extends Component {
 
                 @else
 
-                <div class="px-6 pb-4">
-                    <input
-                        wire:model.live.debounce.300ms="searchPlayer"
-                        placeholder="Rechercher un joueur..."
-                        class="w-full rounded-2xl border border-purple-500/20 bg-[#2A2D55] px-4 py-3 text-white placeholder:text-gray-400 outline-none"
-                    >
-                </div>
-
-                <div class="px-6 pb-6 overflow-y-auto max-h-[500px] space-y-6">
-                    <div>
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-3">
-                            Joueurs aux poste
-                        </h3>
-                        <div class="space-y-3">
-                            @foreach($this->availablePlayers as $player)
-                                <x-admin.show-match.player-slot-mobile
-                                    :player="$player"
-                                    :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
-                                    :when-selected="true"
-                                />
-                            @endforeach
-
-                            @foreach($this->placedPlayers as $player)
-                                <x-admin.show-match.player-slot-mobile
-                                    :player="$player"
-                                    :when-selected="true"
-                                    :placed="true"
-                                />
-                            @endforeach
-                        </div>
+                    <div class="px-6 pb-4">
+                        <input
+                            wire:model.live.debounce.300ms="searchPlayer"
+                            placeholder="Rechercher un joueur..."
+                            class="w-full rounded-2xl border border-purple-500/20 bg-[#2A2D55] px-4 py-3 text-white placeholder:text-gray-400 outline-none"
+                        >
                     </div>
 
-                    <div>
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-                            Autres joueurs
-                        </h3>
-                        <div class="space-y-3">
-                            @foreach($this->availablePlayers as $player)
-                                <x-admin.show-match.player-slot-mobile
-                                    :player="$player"
-                                    :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
-                                    :when-selected="false"
-                                />
-                            @endforeach
+                    <div class="px-6 pb-6 overflow-y-auto max-h-[500px] space-y-6">
+                        <div>
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-3">
+                                Joueurs aux poste
+                            </h3>
+                            <div class="space-y-3">
+                                @foreach($this->availablePlayers as $player)
+                                    <x-admin.show-match.player-slot-mobile
+                                        :player="$player"
+                                        :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
+                                        :when-selected="true"
+                                    />
+                                @endforeach
 
-                            @foreach($this->placedPlayers as $player)
-                                <x-admin.show-match.player-slot-mobile
-                                    :player="$player"
-                                    :when-selected="false"
-                                    :placed="true"
-                                />
-                            @endforeach
+                                @foreach($this->placedPlayers as $player)
+                                    <x-admin.show-match.player-slot-mobile
+                                        :player="$player"
+                                        :when-selected="true"
+                                        :placed="true"
+                                    />
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                                Autres joueurs
+                            </h3>
+                            <div class="space-y-3">
+                                @foreach($this->availablePlayers as $player)
+                                    <x-admin.show-match.player-slot-mobile
+                                        :player="$player"
+                                        :attendance-rate="$this->playerAttendance[$player->id] ?? 0"
+                                        :when-selected="false"
+                                    />
+                                @endforeach
+
+                                @foreach($this->placedPlayers as $player)
+                                    <x-admin.show-match.player-slot-mobile
+                                        :player="$player"
+                                        :when-selected="false"
+                                        :placed="true"
+                                    />
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 @endif
 
