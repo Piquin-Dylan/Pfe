@@ -11,7 +11,7 @@ return new class extends Migration {
 
             $table->id();
             $table->foreignId('user_id')
-                ->constrained()
+                ->constrained('users')
                 ->onDelete('cascade');
             $table->string('tutorial_name');
             $table->boolean('seen')->default(false);

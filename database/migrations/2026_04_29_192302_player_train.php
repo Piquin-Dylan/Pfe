@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('player_train', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('train_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('player_id')->constrained('players')->cascadeOnDelete();
+            $table->foreignId('train_id')->constrained('trains')->cascadeOnDelete();
             $table->string('status');
         });
     }
