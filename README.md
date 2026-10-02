@@ -1,5 +1,24 @@
 # Plateforme de gestion d’équipe (joueurs - entraîneur)
 
+## Note d'intention
+
+Je vais réaliser ce projet grâce aux technologies Inertia/Laravel pour me permettre de pouvoir apprendre une nouvelle technologie et me permettre de pouvoir apprendre d'autres choses qui pourraient m'être utiles par après pour trouver du travail. Beaucoup de choses vont changer pour ce projet par rapport à celui de l'année passée car il y avait pas mal de choses qui n'allaient pas et qui n'étaient pas optimisées surtout au niveau du design et de l'expérience utilisateur.
+
+Parmi les fonctionnalités que j'aimerais notamment revoir et améliorer :
+
+La création de composition d'équipe car je pense qu'elle n'était pas vraiment super intuitive et le design de cette partie ne l'était pas non plus et elle était très limitée et n'aidait pas forcément les coachs pour réaliser leur composition d'équipe --> Ajouter plus de statistiques pour l'aider à faire ses choix, possibilité de retrouver une composition qu'il a déjà faite auparavant.
+
+J'aimerais aussi pouvoir permettre de mieux différencier les 2 rôles qui sont joueur et coach en mettant plus en avant les fonctionnalités de chacun pour leur permettre de ne pas se mélanger entre eux et de n'avoir vraiment que les fonctionnalités dont ils ont besoin.
+
+Revoir la partie publique du site ainsi que de la création d'une équipe qui pouvait être assez longue, ainsi que de supprimer le hub. Pour la création d'une équipe, le mieux serait si j'arrive à pouvoir communiquer avec l'API de la RBFA, de pouvoir récupérer toutes les équipes par division et permettre du coup de pouvoir directement choisir son équipe sans devoir lui donner un nom, etc. ce qui ferait gagner pas mal de temps et qui rendrait l'application un peu plus professionnelle.
+
+Revoir totalement la gestion des matchs pour supprimer le fait de devoir créer un match mais plutôt pouvoir les récupérer directement. Lien du GitHub de la RBFA qui pourrait m'aider à réaliser cela et de pouvoir communiquer avec l'API : https://github.com/rgerbranda/rbfa
+
+Améliorer la partie sur les entraînements. Pour le moment, elle est trop limitée et on peut juste consulter un entraînement et voir qui est présent ou absent, mais on ne peut rien faire comme action alors qu'on pourrait peut-être déjà préparer tous les exercices que l'entraîneur prévoit en assignant un nombre de joueurs, etc. ce qui pourrait lui faire gagner du temps le jour J.
+
+Du côté du joueur, essayer de lui permettre de pouvoir rentrer des statistiques personnelles car pour le moment, il ne peut pas faire beaucoup d'actions à part avoir une vue d'ensemble sur les matchs, entraînements, etc. et ce n'est que de la consultation d'informations pour le moment.
+
+
 ## Contexte
 
 Ce projet a pour objectif de permettre aux joueurs et à l’entraîneur d’un club de football de suivre leurs performances, leur présence aux entraînements ainsi que le suivi des matchs et des convocations.
