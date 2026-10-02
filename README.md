@@ -412,8 +412,9 @@ L'application est maintenant accessible depuis le navigateur à l'adresse indiqu
 
 ## Frontend
 
-* **Blade**
-* **Livewire 4**
+
+* **Vue.js 3**
+* **Inertia.js**
 * **Alpine.js**
 * **Tailwind CSS**
 * **Vite**
